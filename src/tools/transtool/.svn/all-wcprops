@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/planeshift/!svn/ver/7706/trunk/src/tools/transtool
+END
+transtool.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svnroot/planeshift/!svn/ver/7706/trunk/src/tools/transtool/transtool.cpp
+END
+Jamfile
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svnroot/planeshift/!svn/ver/7706/trunk/src/tools/transtool/Jamfile
+END
+transtool.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svnroot/planeshift/!svn/ver/7706/trunk/src/tools/transtool/transtool.h
+END

@@ -1,0 +1,317 @@
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation
+END
+DetourNavMeshBuilder.h
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/DetourNavMeshBuilder.h
+END
+RecastRasterization.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/RecastRasterization.cpp
+END
+RecastAlloc.h
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/RecastAlloc.h
+END
+DetourProximityGrid.h
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/DetourProximityGrid.h
+END
+DebugDraw.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/DebugDraw.cpp
+END
+RecastDump.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/RecastDump.cpp
+END
+DetourNode.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/DetourNode.cpp
+END
+DetourTileCache.h
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/DetourTileCache.h
+END
+DetourNavMeshQuery.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/DetourNavMeshQuery.cpp
+END
+RecastArea.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/RecastArea.cpp
+END
+DetourTileCacheBuilder.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/DetourTileCacheBuilder.cpp
+END
+DetourStatus.h
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/DetourStatus.h
+END
+DetourCommon.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/DetourCommon.cpp
+END
+RecastDebugDraw.h
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/RecastDebugDraw.h
+END
+InputGeom.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/InputGeom.h
+END
+Recast.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/Recast.cpp
+END
+RecastMeshDetail.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/RecastMeshDetail.cpp
+END
+DetourAlloc.h
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/DetourAlloc.h
+END
+MeshLoaderObj.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/planeshift/!svn/ver/6811/trunk/src/plugins/common/recast/recastnavigation/MeshLoaderObj.h
+END
+DetourLocalBoundary.h
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/DetourLocalBoundary.h
+END
+RecastFilter.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/RecastFilter.cpp
+END
+DetourPathCorridor.h
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/DetourPathCorridor.h
+END
+DetourAssert.h
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/DetourAssert.h
+END
+DetourNavMesh.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/DetourNavMesh.h
+END
+DetourNavMeshBuilder.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/DetourNavMeshBuilder.cpp
+END
+DetourDebugDraw.h
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/DetourDebugDraw.h
+END
+RecastAlloc.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/RecastAlloc.cpp
+END
+DetourObstacleAvoidance.h
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/DetourObstacleAvoidance.h
+END
+RecastMesh.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/RecastMesh.cpp
+END
+RecastLayers.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/RecastLayers.cpp
+END
+ChunkyTriMesh.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/ChunkyTriMesh.h
+END
+DetourTileCache.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/DetourTileCache.cpp
+END
+DetourCrowd.h
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/DetourCrowd.h
+END
+RecastDebugDraw.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/RecastDebugDraw.cpp
+END
+InputGeom.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/InputGeom.cpp
+END
+RecastAssert.h
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/RecastAssert.h
+END
+DebugDraw.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/DebugDraw.h
+END
+RecastDump.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/RecastDump.h
+END
+DetourNode.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/DetourNode.h
+END
+DetourAlloc.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/planeshift/!svn/ver/6811/trunk/src/plugins/common/recast/recastnavigation/DetourAlloc.cpp
+END
+MeshLoaderObj.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/MeshLoaderObj.cpp
+END
+DetourNavMeshQuery.h
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/DetourNavMeshQuery.h
+END
+License.txt
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/planeshift/!svn/ver/6811/trunk/src/plugins/common/recast/recastnavigation/License.txt
+END
+DetourTileCacheBuilder.h
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/DetourTileCacheBuilder.h
+END
+DetourCommon.h
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/DetourCommon.h
+END
+DetourNavMesh.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/DetourNavMesh.cpp
+END
+RecastRegion.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/RecastRegion.cpp
+END
+Recast.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/Recast.h
+END
+DetourDebugDraw.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/DetourDebugDraw.cpp
+END
+DetourPathQueue.h
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/DetourPathQueue.h
+END
+RecastContour.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/RecastContour.cpp
+END
+ChunkyTriMesh.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svnroot/planeshift/!svn/ver/8427/trunk/src/plugins/common/recast/recastnavigation/ChunkyTriMesh.cpp
+END

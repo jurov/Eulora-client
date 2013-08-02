@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/planeshift/!svn/ver/8563/trunk/src/common/sound
+END
+data.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svnroot/planeshift/!svn/ver/8333/trunk/src/common/sound/data.h
+END
+manager.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/planeshift/!svn/ver/8563/trunk/src/common/sound/manager.h
+END
+control.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/planeshift/!svn/ver/8333/trunk/src/common/sound/control.cpp
+END
+handle.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/planeshift/!svn/ver/8333/trunk/src/common/sound/handle.h
+END
+queue.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/planeshift/!svn/ver/8333/trunk/src/common/sound/queue.cpp
+END
+system.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svnroot/planeshift/!svn/ver/8333/trunk/src/common/sound/system.cpp
+END
+control.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/planeshift/!svn/ver/8333/trunk/src/common/sound/control.h
+END
+Jamfile
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svnroot/planeshift/!svn/ver/8333/trunk/src/common/sound/Jamfile
+END
+data.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/planeshift/!svn/ver/8333/trunk/src/common/sound/data.cpp
+END
+queue.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svnroot/planeshift/!svn/ver/8333/trunk/src/common/sound/queue.h
+END
+system.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/planeshift/!svn/ver/8333/trunk/src/common/sound/system.h
+END
+manager.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/planeshift/!svn/ver/8333/trunk/src/common/sound/manager.cpp
+END
+handle.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svnroot/planeshift/!svn/ver/8333/trunk/src/common/sound/handle.cpp
+END
+sound.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svnroot/planeshift/!svn/ver/8333/trunk/src/common/sound/sound.h
+END

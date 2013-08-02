@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svnroot/planeshift/!svn/ver/8207/trunk/src/tools/fparser
+END
+fpconfig.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/planeshift/!svn/ver/8207/trunk/src/tools/fparser/fpconfig.h
+END
+fparser.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svnroot/planeshift/!svn/ver/8207/trunk/src/tools/fparser/fparser.cpp
+END
+fparser_gmpint.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svnroot/planeshift/!svn/ver/8207/trunk/src/tools/fparser/fparser_gmpint.h
+END
+Jamfile
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svnroot/planeshift/!svn/ver/20/trunk/src/tools/fparser/Jamfile
+END
+fparser.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svnroot/planeshift/!svn/ver/8207/trunk/src/tools/fparser/fparser.h
+END
+fpoptimizer.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svnroot/planeshift/!svn/ver/8207/trunk/src/tools/fparser/fpoptimizer.cpp
+END
+fparser_mpfr.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svnroot/planeshift/!svn/ver/8207/trunk/src/tools/fparser/fparser_mpfr.h
+END
