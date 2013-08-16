@@ -1,7 +1,7 @@
 /*
  * sectormngr.h, Author: Andrea Rizzi <88whacko@gmail.com>
  *
- * Copyright (C) 2001-2012 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2001-2012 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -65,7 +65,7 @@ public:
 
     /**
      * Load all sound sectors defined in XML files stored in the areas folder. Its
-     * path is defined in the option Planshift.Sound.AreasPath of the configuration
+     * path is defined in the option Planeshift.Sound.AreasPath of the configuration
      * file.
      * @param objectReg the object registry.
      * @return true if sectors could be loaded, false otherwise.

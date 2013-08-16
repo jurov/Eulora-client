@@ -102,6 +102,7 @@ void pawsCreationMain::Reset()
 
     pawsRadioButtonGroup* raceBox = (pawsRadioButtonGroup*)FindWidget("RaceBox");
     raceBox->TurnAllOff();
+    
 
     pawsEditTextBox* firstname = (pawsEditTextBox*)FindWidget("charfirstnametext");
     firstname->SetText("");
@@ -745,7 +746,7 @@ bool pawsCreationMain::OnButtonPressed(int /*mouseButton*/, int /*keyModifier*/,
     /////////////////////////////////////////////////////
     // RACE SELECTION BUTTONS
     /////////////////////////////////////////////////////
-    if ( widget->GetID() >= 0 && widget->GetID() <= 11 )
+    if ( widget->GetID() >= 0 && widget->GetID() <= 1 )
     {
         if (
             !createManager->IsAvailable(widget->GetID(),1) &&

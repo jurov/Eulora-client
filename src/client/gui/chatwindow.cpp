@@ -592,11 +592,11 @@ void pawsChatWindow::LoadChatSettings()
             }
         }
     }
+ // remove spellchecker   
+/*    csRef<iSpellChecker> spellChecker = csQueryRegistryOrLoad<iSpellChecker>(PawsManager::GetSingleton().GetObjectRegistry(), "crystalspace.planeshift.spellchecker");
     
-    csRef<iSpellChecker> spellChecker = csQueryRegistryOrLoad<iSpellChecker>(PawsManager::GetSingleton().GetObjectRegistry(), "crystalspace.planeshift.spellchecker");
-    
-    spellCheckerNode = chatNode->GetNode("spellChecker");
-    if(!spellCheckerNode)
+     spellCheckerNode = chatNode->GetNode("spellChecker");
+   if(!spellCheckerNode)
         spellCheckerNode = defaultChatNode->GetNode("spellChecker");
     if (spellCheckerNode != NULL)
     {
@@ -625,7 +625,7 @@ void pawsChatWindow::LoadChatSettings()
 		}
 	    }
 	}
-    }    
+    }*/ 
 }
 
 void pawsChatWindow::DetermineChatTabAndSelect(int chattype)
@@ -1126,7 +1126,7 @@ void pawsChatWindow::CreateSettingNode(iDocumentNode* mNode,int color,const char
     cNode->SetAttributeAsInt("g",g);
     cNode->SetAttributeAsInt("b",b);
 }
-
+// *************
 void pawsChatWindow::SaveChatSettings()
 {
     // Save to file
@@ -1332,7 +1332,7 @@ void pawsChatWindow::SaveChatSettings()
         c2Node->SetAttribute("type",type);
         c2Node->SetAttribute("value",value2?"true":"false");
     }
-    
+/*    
     // and the spellChecker
     spellCheckerNode = chatNode->CreateNodeBefore(CS_NODE_ELEMENT,0);
     spellCheckerNode->SetValue("spellChecker");
@@ -1342,10 +1342,10 @@ void pawsChatWindow::SaveChatSettings()
     spellCheckerNode->SetAttributeAsInt("r", red);
     spellCheckerNode->SetAttributeAsInt("g", green);
     spellCheckerNode->SetAttributeAsInt("b", blue);
-    
-    csRef<iSpellChecker> spellChecker = csQueryRegistryOrLoad<iSpellChecker>(PawsManager::GetSingleton().GetObjectRegistry(), "crystalspace.planeshift.spellchecker");
+ */   
+ /*   csRef<iSpellChecker> spellChecker = csQueryRegistryOrLoad<iSpellChecker>(PawsManager::GetSingleton().GetObjectRegistry(), "crystalspace.planeshift.spellchecker");
     // without a spellchecker plugin we have no wordlist to save...so skipping this
-    if (spellChecker)
+   if (spellChecker)
     {    
 	for (size_t i = 0; i < spellChecker->getPersonalDict().GetSize(); i++)
 	{
@@ -1354,10 +1354,11 @@ void pawsChatWindow::SaveChatSettings()
 	    spellCheckerWordNode->SetAttribute("value", spellChecker->getPersonalDict()[i]);
 	}
     }
-
+*/
     doc->Write(file);
 }
 
+// ************************
 void pawsChatWindow::HandleSystemMessage(MsgEntry *me)
 {
     psSystemMessage msg(me);
@@ -1488,7 +1489,7 @@ void pawsChatWindow::HandleSystemMessage(MsgEntry *me)
     }
     return;
 }
-
+// ********************************
 void pawsChatWindow::FormatMessage(csString &sText, csString &sPerson, csString prependingText, csString &buff, bool &hasCharName)
 {
     //checks how we should colour the name of the person
@@ -1507,7 +1508,7 @@ void pawsChatWindow::FormatMessage(csString &sText, csString &sPerson, csString 
     }
 }
 
-
+// ********************************
 void pawsChatWindow::HandleMessage(MsgEntry *me)
 {
     bool sendAway = false;
@@ -1867,13 +1868,13 @@ void pawsChatWindow::HandleMessage(MsgEntry *me)
         msgqueue->SendMessage(chat.msg);  // Send away msg to server
     }
 }
-
+// ******************************************
 void pawsChatWindow::JoinChannel(csString chan)
 {
     psChannelJoinMessage cmdjoin(chan);
     cmdjoin.SendMessage();
 }
-
+// **************************************
 bool pawsChatWindow::LeaveChannel(int hotkeyChannel)
 {
     uint16_t channelID = channels[hotkeyChannel - 1];
@@ -1889,7 +1890,7 @@ bool pawsChatWindow::LeaveChannel(int hotkeyChannel)
     return true;
 }
 
-
+// ****************************************
 void pawsChatWindow::SubscribeCommands()
 {
     cmdsource->Subscribe("/say",this);
@@ -1928,12 +1929,12 @@ void pawsChatWindow::SubscribeCommands()
     cmdsource->Subscribe("/9", this);
     cmdsource->Subscribe("/10", this);
 }
-
+// *****************************
 bool pawsChatWindow::InputActive()
 {
     return inputText->HasFocus();
 }
-
+// ************************************
 bool pawsChatWindow::OnMouseDown( int button, int modifiers, int x , int y )
 {
     pawsWidget::OnMouseDown( button, modifiers, x, y );
@@ -1947,7 +1948,7 @@ bool pawsChatWindow::OnMouseDown( int button, int modifiers, int x , int y )
 
     return true;
 }
-
+// *************************
 void pawsChatWindow::Show()
 {
     pawsControlledWindow::Show();
@@ -1958,7 +1959,7 @@ void pawsChatWindow::Show()
     }
 }
 
-
+// **********************************
 void pawsChatWindow::OnLostFocus()
 {
     hasFocus = false;
@@ -1977,7 +1978,7 @@ void pawsChatWindow::OnLostFocus()
 
 }
 
-
+// ***************************************
 void pawsChatWindow::ReloadChatWindow()
 {
     while ( children.GetSize() > 0 )
@@ -2016,7 +2017,7 @@ void pawsChatWindow::ReloadChatWindow()
 
     
 }
-
+// *****************************
 bool pawsChatWindow::OnKeyDown(utf32_char keyCode, utf32_char key, int modifiers )
 {
     // Do not handle key presses if the text box is not focused. This can occur if the chat tabs are clicked,
@@ -2148,7 +2149,7 @@ bool pawsChatWindow::OnKeyDown(utf32_char keyCode, utf32_char key, int modifiers
 
     return true;
 }
-
+// ****************************************************
 void pawsChatWindow::SendChatLine(csString& textToSend)
 {
     if ( textToSend.Length() )
@@ -2215,7 +2216,7 @@ void pawsChatWindow::SendChatLine(csString& textToSend)
         BringToTop( inputText );
     }
 }
-
+// ************************************************
 bool pawsChatWindow::OnMenuAction(pawsWidget * widget, const pawsMenuAction & action)
 {
     if (action.name == "TranslatedChat")
@@ -2231,7 +2232,7 @@ bool pawsChatWindow::OnMenuAction(pawsWidget * widget, const pawsMenuAction & ac
 
     return pawsWidget::OnMenuAction(widget, action);
 }
-
+// ************************************************8
 bool pawsChatWindow::OnButtonPressed(int /*mouseButton*/, int /*keyModifier*/, pawsWidget* widget)
 {
     // We know that the calling widget is a button.
@@ -2246,7 +2247,7 @@ bool pawsChatWindow::OnButtonPressed(int /*mouseButton*/, int /*keyModifier*/, p
     return true;
 }
 
-
+// ******************************************
 void pawsChatWindow::PerformAction( const char* action )
 {
     csString temp(action);
@@ -2256,13 +2257,14 @@ void pawsChatWindow::PerformAction( const char* action )
         PawsManager::GetSingleton().SetCurrentFocusedWidget( NULL );
     }
 }
-
+//****************************************
 void pawsChatWindow::RefreshCommandList()
 {
     cmdsource->GetSubscribedCommands(commandList);
 }
 
 /// Tab completion
+// ***************************
 void pawsChatWindow::TabCompleteCommand(const char *cmd)
 {
     // Sanity
@@ -2330,7 +2332,7 @@ void pawsChatWindow::TabCompleteCommand(const char *cmd)
 
     return;
 }
-
+// *************************************************
 void pawsChatWindow::TabCompleteName(const char *cmdstr)
 {
     // Sanity
@@ -2404,7 +2406,7 @@ void pawsChatWindow::TabCompleteName(const char *cmdstr)
     return;
 }
 
-
+// **************************************
 void pawsChatWindow::AutoReply(void)
 {
     int i = 0;
@@ -2427,7 +2429,7 @@ void pawsChatWindow::AutoReply(void)
 
     replyCount++;
 }
-
+// ****************************************
 void pawsChatWindow::SetAway(const char* text)
 {
     if ( !strcmp(text, "off") || strlen(text) == 0)
@@ -2441,7 +2443,7 @@ void pawsChatWindow::SetAway(const char* text)
         ChatOutput( "Auto-reply SET");
     }
 }
-
+//**********************************************
 void pawsChatWindow::Clear()
 {
     for(int chattype = 0; chattype < CHAT_END; chattype++)
@@ -2469,7 +2471,7 @@ void pawsChatWindow::Clear()
     }
 }
 
-
+// ****************************************
 void pawsChatWindow::BadWordsFilter(csString& s)
 {
     csString mask = "$@!";
@@ -2525,7 +2527,7 @@ void pawsChatWindow::BadWordsFilter(csString& s)
         }
     }
 }
-
+// ***************************************
 csString pawsChatWindow::GetBracket(int type) //according to the type return the correct bracket
 {
     switch (type)
@@ -2557,7 +2559,7 @@ csString pawsChatWindow::GetBracket(int type) //according to the type return the
     }
     return "";
 }
-
+// **************************************************
 void pawsChatWindow::ChatOutput(const char* data, int colour, int type, bool /*flashEnabled*/, bool /*hasCharName*/, int hotkeyChannel)
 {
     csString s = data;

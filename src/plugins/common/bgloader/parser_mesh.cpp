@@ -48,6 +48,7 @@ CS_PLUGIN_NAMESPACE_BEGIN(bgLoader)
          if(!filename.GetData())
          {
              data = meshfactNode;
+
          }
 
          csRef<iDocumentNodeIterator> it(meshfactNode->GetNodes());
@@ -79,6 +80,7 @@ CS_PLUGIN_NAMESPACE_BEGIN(bgLoader)
                              {
                                  ParseMaterialReference(parserData.data, paramNode->GetContentsValue(),
                                                         "meshfact", GetName());
+
                              }
                              break;
 
@@ -448,6 +450,7 @@ CS_PLUGIN_NAMESPACE_BEGIN(bgLoader)
         if(objNode.IsValid())
         {
             mesh = parserData.data.meshes.Get(objNode->GetContentsValue());
+
         }
 
         if(!mesh.IsValid())

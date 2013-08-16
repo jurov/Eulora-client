@@ -31,7 +31,7 @@ class pawsChatWindow;
 class pawsConfigSpellChecker : public pawsConfigSectionWindow
 {
 public:
-       pawsConfigSpellChecker();
+//       pawsConfigSpellChecker();
 
     //from pawsWidget:
        virtual bool PostSetup();
@@ -59,16 +59,16 @@ private:
         * @param word The word to search for in the personal dictionary.
         * @return TRUE if the word was found.
         */
-       bool WordExists(csRef<iSpellChecker> spellChecker, csString word);
+//       bool WordExists(csRef<iSpellChecker> spellChecker, csString word);
        pawsChatWindow* chatWindow;
        // needed gui elemets
-       pawsMultilineEditTextBox* personalDictBox;
+//       pawsMultilineEditTextBox* personalDictBox;
        pawsCheckBox* enabled;
        pawsEditTextBox* colorR;
        pawsEditTextBox* colorG;
        pawsEditTextBox* colorB;
 };
 
-CREATE_PAWS_FACTORY( pawsConfigSpellChecker );
+//CREATE_PAWS_FACTORY( pawsConfigSpellChecker );
 
 #endif //PAWS_CONFIG_SPELLCHECKER_HEADER

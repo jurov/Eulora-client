@@ -1045,9 +1045,9 @@ pawsEditTextBox::pawsEditTextBox() : password(false),
     int dummy;
     GetFont()->GetMaxSize(dummy, lineHeight);
     lineHeight -=2;
-
+// remove spellchecker
     //get the spellchecker plugin
-    spellChecker = csQueryRegistryOrLoad<iSpellChecker>(PawsManager::GetSingleton().GetObjectRegistry(), "crystalspace.planeshift.spellchecker");
+//    spellChecker = csQueryRegistryOrLoad<iSpellChecker>(PawsManager::GetSingleton().GetObjectRegistry(), "crystalspace.planeshift.spellchecker");
 }
 pawsEditTextBox::pawsEditTextBox(const pawsEditTextBox &origin): pawsWidget(origin),
     spellChecker(origin.spellChecker),

@@ -31,7 +31,7 @@
 #include "../globals.h"
 #include "gui/chatwindow.h"
 
-pawsConfigSpellChecker::pawsConfigSpellChecker()
+/*pawsConfigSpellChecker::pawsConfigSpellChecker()
 {
     personalDictBox = NULL;
     enabled = NULL;
@@ -39,8 +39,8 @@ pawsConfigSpellChecker::pawsConfigSpellChecker()
     colorG = NULL;
     colorB = NULL;
 }
-
-bool pawsConfigSpellChecker::PostSetup()
+*/
+/*bool pawsConfigSpellChecker::PostSetup()
 {
     // setup the widget. Needed in the xml file is one MultiLine Edit Box for the words,a checkbox to enable/disable the spellchecker
     // and three EditTextBoxes for the color components of Typos
@@ -75,9 +75,9 @@ bool pawsConfigSpellChecker::PostSetup()
            Error1("Could not locate typoColorB widget!");
            return false;
     }
-
-    csRef<iSpellChecker> spellChecker = csQueryRegistryOrLoad<iSpellChecker>(PawsManager::GetSingleton().GetObjectRegistry(), "crystalspace.planeshift.spellchecker");
-
+*/
+//    csRef<iSpellChecker> spellChecker = csQueryRegistryOrLoad<iSpellChecker>(PawsManager::GetSingleton().GetObjectRegistry(), "crystalspace.planeshift.spellchecker");
+/*
     if (spellChecker)
     {
         // if no dictionaires are loaded hide the config widgets and show an error message
@@ -135,8 +135,9 @@ bool pawsConfigSpellChecker::PostSetup()
 
     return true;
 }
+*/
 
-bool pawsConfigSpellChecker::Initialize()
+/* bool pawsConfigSpellChecker::Initialize()
 {
     if ( ! LoadFromFile("configspellchecker.xml"))
     {
@@ -144,8 +145,8 @@ bool pawsConfigSpellChecker::Initialize()
     }
     return true;
 }
-
-bool pawsConfigSpellChecker::LoadConfig()
+*/
+/*bool pawsConfigSpellChecker::LoadConfig()
 {
     // set the checkbox according to the current state of the spellchecker
     enabled->SetState(chatWindow->getInputTextBox()->getSpellChecked());
@@ -162,8 +163,8 @@ bool pawsConfigSpellChecker::LoadConfig()
     colorR->SetText(r);
     colorG->SetText(g);
     colorB->SetText(b);
-
-    csRef<iSpellChecker> spellChecker = csQueryRegistryOrLoad<iSpellChecker>(PawsManager::GetSingleton().GetObjectRegistry(), "crystalspace.planeshift.spellchecker");
+// remove spellcheck
+//    csRef<iSpellChecker> spellChecker = csQueryRegistryOrLoad<iSpellChecker>(PawsManager::GetSingleton().GetObjectRegistry(), "crystalspace.planeshift.spellchecker");
 
     if (spellChecker)
     {
@@ -178,8 +179,8 @@ bool pawsConfigSpellChecker::LoadConfig()
     dirty = false;
     return true;
 }
-
-bool pawsConfigSpellChecker::SaveConfig()
+*/
+/*bool pawsConfigSpellChecker::SaveConfig()
 {
     // save if the spellchecker is enabled or not
     chatWindow->getInputTextBox()->setSpellChecked(enabled->GetState());
@@ -187,7 +188,7 @@ bool pawsConfigSpellChecker::SaveConfig()
     // save the color for typos
     chatWindow->getInputTextBox()->setTypoColour(graphics2D->FindRGB(atoi(colorR->GetText()), atoi(colorG->GetText()), atoi(colorB->GetText())));
 
-    csRef<iSpellChecker> spellChecker = csQueryRegistryOrLoad<iSpellChecker>(PawsManager::GetSingleton().GetObjectRegistry(), "crystalspace.planeshift.spellchecker");
+//    csRef<iSpellChecker> spellChecker = csQueryRegistryOrLoad<iSpellChecker>(PawsManager::GetSingleton().GetObjectRegistry(), "crystalspace.planeshift.spellchecker");
 
     if (spellChecker)
     {
@@ -229,8 +230,8 @@ bool pawsConfigSpellChecker::SaveConfig()
     LoadConfig();
     return true;
 }
-
-bool pawsConfigSpellChecker::WordExists(csRef<iSpellChecker> spellChecker, csString word)
+*/
+/*bool pawsConfigSpellChecker::WordExists(csRef<iSpellChecker> spellChecker, csString word)
 {
     if (spellChecker)
     {
@@ -244,9 +245,10 @@ bool pawsConfigSpellChecker::WordExists(csRef<iSpellChecker> spellChecker, csStr
     }
     return false;
 }
-
-void pawsConfigSpellChecker::SetDefault()
+*/
+/*void pawsConfigSpellChecker::SetDefault()
 {
     psengine->GetVFS()->DeleteFile(CONFIG_CHAT_FILE_NAME);
     LoadConfig();
 }
+*/

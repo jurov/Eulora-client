@@ -1,11 +1,11 @@
 /*
  * control.h
  *
- * Copyright (C) 2001-2010 Atomic Blue (info@planshift.it, http://www.planshift.it)
+ * Copyright (C) 2001-2010 Atomic Blue (info@planeshift.it, http://www.planeshift.it)
  *
  * Credits : Saul Leite <leite@engineer.com>
  *           Mathias 'AgY' Voeroes <agy@operswithoutlife.net>
- *           and all past and present planshift coders
+ *           and all past and present planeshift coders
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License

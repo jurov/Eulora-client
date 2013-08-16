@@ -576,6 +576,7 @@ bool psEngine::Initialize(int level)
 
         // Start to fill the loader cache.
         precaches.Push(loader->PrecacheData("/planeshift/materials/materials.cslib"));
+        
         lastLoadingCount = 1;
 
         // Initialize Networking
@@ -861,7 +862,7 @@ void psEngine::DeclareExtraFactories()
     RegisterFactory(pawsNpcDialogWindowFactory);
     RegisterFactory(pawsBartenderWindowFactory);
     RegisterFactory(pawsCraftCancelWindowFactory);
-    RegisterFactory(pawsConfigSpellCheckerFactory);
+ //   RegisterFactory(pawsConfigSpellCheckerFactory);
     RegisterFactory(pawsConfigTooltipsFactory);
     RegisterFactory(pawsMusicWindowFactory);
     RegisterFactory(pawsSheetLineFactory);
@@ -1449,7 +1450,7 @@ void psEngine::LoadGame()
             LoadPawsWidget("Small Inventory Window",  "smallinventory.xml");
             LoadPawsWidget("GM Action Location Edit", "gmaddeditaction.xml");
             LoadPawsWidget("Crafting",                "craft.xml");
-            LoadPawsWidget("Tutorial",                "tutorial.xml");
+        //Chetty    LoadPawsWidget("Tutorial",                "tutorial.xml");
             LoadPawsWidget("Sketch",                  "illumination.xml");
             LoadPawsWidget("GameBoard",               "gameboard.xml");
             LoadPawsWidget("Writing window",          "bookwriting.xml");

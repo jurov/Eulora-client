@@ -2962,7 +2962,7 @@ const char *pawsWidget::FindDefaultWidgetStyle(const char *factoryName)
     static csString style;
 
     if (name=="ChatWindow")
-        printf("Finding default style for factory '%s'\n", factoryName);
+      //  printf("Finding default style for factory '%s'\n", factoryName);
 
     style = defaultWidgetStyles.Get(factoryName,csString("not found"));
     if (style == "not found" && parent != NULL)

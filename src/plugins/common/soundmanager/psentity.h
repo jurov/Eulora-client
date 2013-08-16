@@ -1,12 +1,12 @@
 /*
  * psentity.h
  *
- * Copyright (C) 2001-2010 Atomic Blue (info@planshift.it, http://www.planshift.it)
+ * Copyright (C) 2001-2010 Atomic Blue (info@planeshift.it, http://www.planeshift.it)
  *
  * Credits : Andrea Rizzi <88whacko@gmail.com>
  *           Saul Leite <leite@engineer.com>
  *           Mathias 'AgY' Voeroes <agy@operswithoutlife.net>
- *           and all past and present planshift coders
+ *           and all past and present planeshift coders
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,7 +31,7 @@
 #define UNDEFINED_ENTITY_STATE -1
 
 /**
- * This object represents a planshift entity sound. It can be a mesh entity, if it is
+ * This object represents a planeshift entity sound. It can be a mesh entity, if it is
  * associated to a mesh object, or a factory entity if it is associated to a mesh factory.
  *
  * @see psSoundSector psEntity main user.

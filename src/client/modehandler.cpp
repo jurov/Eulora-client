@@ -1,7 +1,7 @@
 /*
  * modehandler.cpp    Keith Fulton <keith@paqrat.com>
  *
- * Copyright (C) 2001-2002 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2001-2002 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -1098,7 +1098,7 @@ void ModeHandler::UpdateLights()
 }
 
 /**
- * This function is called periodically by euclient.  It
+ * This function is called periodically by psclient.  It
  * handles the smooth interpolation of lights to the new
  * values.  It simply calculates a new pct complete and
  * goes through all the light settings of the current time
@@ -2213,7 +2213,7 @@ void ModeHandler::SetCombatAnim(GEMClientActor* atObject, csStringID anim)
         }
     }
 }
-
+//***********************************************8
 void ModeHandler::HandleCachedFile(MsgEntry* me)
 {
     psCachedFileMessage msg(me);
@@ -2261,3 +2261,4 @@ void ModeHandler::HandleCachedFile(MsgEntry* me)
         }
     }
 }
+//*******************************************

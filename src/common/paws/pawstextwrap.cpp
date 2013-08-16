@@ -71,9 +71,9 @@ pawsMultilineEditTextBox::pawsMultilineEditTextBox() : cursorPosition(0),
     int dummy;
     GetFont()->GetMaxSize(dummy, lineHeight);
     OnResize();
-
+// remove spellcheck
     // get the spellchecker plugin
-    spellChecker = csQueryRegistryOrLoad<iSpellChecker>(PawsManager::GetSingleton().GetObjectRegistry(), "crystalspace.planeshift.spellchecker");
+//    spellChecker = csQueryRegistryOrLoad<iSpellChecker>(PawsManager::GetSingleton().GetObjectRegistry(), "crystalspace.planeshift.spellchecker");
 }
 
 pawsMultilineEditTextBox::pawsMultilineEditTextBox(const pawsMultilineEditTextBox& origin)

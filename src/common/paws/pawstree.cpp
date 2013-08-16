@@ -636,7 +636,9 @@ void pawsTreeStruct::DeleteChild(const csString & name)
 bool pawsTreeStruct::Load(iDocumentNode *node)
 {
     csRef<iDocumentNode> xmlRoot;
+    
     csString factory;
+    
     pawsWidget *rootAsWidget;
     pawsTreeNode *newRoot;
 

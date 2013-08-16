@@ -11,8 +11,8 @@
 class pawsObjectView;
 class psCharAppearance;
 
-#define MAX_CHARS 10
-
+#define MAX_CHARS 1
+// maxd 10 to 1 chetty
 struct Model
 {
     csString factName;

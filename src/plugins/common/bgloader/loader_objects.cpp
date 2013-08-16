@@ -196,6 +196,7 @@ bool BgLoader::MeshFact::LoadObject(bool wait)
             // it's not exactly a trivial loadable if we don't cache
             // manually start the load in this case
             status = GetParent()->GetLoader()->LoadMeshObjectFactory(path, filename);
+
         }
 
         // rest can be handled by trivial loadable

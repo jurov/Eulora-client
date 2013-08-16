@@ -1,11 +1,11 @@
 /*
  * data.h
  *
- * Copyright (C) 2001-2010 Atomic Blue (info@planshift.it, http://www.planshift.it)
+ * Copyright (C) 2001-2010 Atomic Blue (info@planeshift.it, http://www.planeshift.it)
  *
  * Credits : Saul Leite <leite@engineer.com>
  *           Mathias 'AgY' Voeroes <agy@operswithoutlife.net>
- *           and all past and present planshift coders
+ *           and all past and present planeshift coders
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -92,7 +92,7 @@ public:
  *
  * Cache:
  * The data is cached and unloaded when it is not referenced anymore and the time
- * given in the configuration option "PlanShift.Sound.DataCacheTime" has elapsed.
+ * given in the configuration option "PlaneShift.Sound.DataCacheTime" has elapsed.
  * One can force the cache to unload a sound with UnloadSoundFile if it is known
  * that the sound won't be used again.
  *
@@ -159,7 +159,7 @@ public:
     /**
      * Checks the reference counting to sounds to determine if they are still in use
      * or not. Unloads the sound data that has not been used for the time specified
-     * in the configuration option "PlanShift.Sound.DataCacheTime".
+     * in the configuration option "PlaneShift.Sound.DataCacheTime".
      */
     void Update();
 

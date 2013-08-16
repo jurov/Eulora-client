@@ -56,6 +56,7 @@
 
 #define YES_DELETE_CHARACTER    300
 #define NO_DELETE_CHARACTER     302
+//#define NEXT_BUTTON     5000
 
 #define CNF_AUTOPICK_CHAR_NAME "PlaneShift.Connection.AutoPickChar.Name"
 #define CNF_AUTOPICK_CHAR      "PlaneShift.Connection.AutoPickChar.Id"
@@ -477,8 +478,8 @@ void pawsCharacterPickerWindow::SelectCharacter(int character)
         return;
 
     pawsWidget* wdg;
-
-    for (int i = 0;i < 4; i++)
+// char number chetty
+    for (int i = 0;i < 1; i++)
     {
         csString name;
         name = "ImgCharacter";
@@ -530,8 +531,8 @@ void pawsCharacterPickerWindow::SelectCharacter(int character, pawsWidget* widge
         return;
 
     pawsWidget* wdg;
-
-    for (int i = 0;i < 4; i++)
+// change 4 to 1 get char chetty
+    for (int i = 0;i < 1; i++)
     {
         csString name;
         name = "ImgCharacter";

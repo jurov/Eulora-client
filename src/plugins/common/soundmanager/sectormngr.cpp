@@ -1,7 +1,7 @@
 /*
  * sectormngr.cpp, Author: Andrea Rizzi <88whacko@gmail.com>
  *
- * Copyright (C) 2001-2012 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2001-2012 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -49,7 +49,7 @@
 //------------------------------------------------------------------------------------
 #define DEFAULT_AREAS_PATH "/planeshift/soundlib/areas/"
 #define DEFAULT_COMMON_SECTOR_NAME "common"
-// vfs files? chetty
+
 
 SoundSectorManager::SoundSectorManager()
 {
