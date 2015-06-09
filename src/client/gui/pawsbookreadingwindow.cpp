@@ -90,6 +90,7 @@ void pawsBookReadingWindow::HandleMessage(MsgEntry* me)
         {
             Show();
             psReadBookTextMessage mesg(me);
+            Notify2(LOG_USER, "READ_BOOK: %s\n", mesg.text.GetData())
             csRef<iDocumentNode> docnode = ParseStringGetNode(mesg.text, "Contents", false);
             if(docnode)
             {
@@ -174,6 +175,7 @@ void pawsBookReadingWindow::HandleMessage(MsgEntry* me)
             text.ReplaceAll( "[[", "   With Higher " );
             text.ReplaceAll( "]]", " skill you could: " );
 
+            Notify2(LOG_USER, "CRAFT_INFO: %s\n", text.GetData())
             if(text && descriptionCraft && descriptionCraftRight)
             {
                 // setup the craft windows for multi page view
