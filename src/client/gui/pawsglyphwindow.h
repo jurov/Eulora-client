@@ -1,7 +1,7 @@
 /*
  * glyph.h - Author: Anders Reggestad
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -91,6 +91,7 @@ public:
     bool PostSetup();
     void Show();
     void Hide();
+    bool OnMouseDown(int button, int modifiers, int x, int y);
     bool OnButtonPressed( int mouseButton, int keyModifier, pawsWidget* widget );
 
 protected:

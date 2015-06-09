@@ -3,7 +3,7 @@
 
 struct CS_IMPORT_SYM _Bind_psnpcclient_static_plugins_CRYSTAL
 {
-  _Bind_eunpcclient_static_plugins_CRYSTAL ();
+  _Bind_psnpcclient_static_plugins_CRYSTAL ();
 };
 namespace { _Bind_psnpcclient_static_plugins_CRYSTAL bind_psnpcclient_static_plugins_CRYSTAL; }
 

@@ -1,7 +1,7 @@
 /*
  * pawsdetailwindow.cpp - Author: Christian Svensson
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -47,11 +47,17 @@
 #define BTN_DESCROOC 1006  //Out of character Description button for the tab panel
 #define BTN_DESCRCC  1007  //Char creation description button for the tab panel
 #define BTN_STATS    1000 //Stats button for the tab panel
-#define BTN_COMBAT   1001 //Combat button for the tab panel
+//#define BTN_COMBAT   1001 //Combat button for the tab panel
 #define BTN_MAGIC    1002 //Magic button for the tab panel
-#define BTN_JOBS     1003 //Jobs button for the tab panel
-#define BTN_VARIOUS  1004 //Various button for the tab panel
-#define BTN_FACTION  1005
+//#define BTN_JOBS     1003 //Jobs button for the tab panel
+//#define BTN_VARIOUS  1004 //Various button for the tab panel
+#define BTN_GATHER   1001 //gather button for the tab panel
+//#define BTN_FACTION  1005
+#define BTN_CRAFT     1003 //craft button for the tab panel
+#define BTN_FAITH  1004 //faith button for the tab panel
+#define BTN_LEAD  1005
+#define BTN_FIGHT  1008
+#define BTN_UTILITY  1009
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
@@ -128,31 +134,49 @@ void pawsDetailWindow::UpdateTabsVisibility(bool Skills, bool CharCreation, bool
     {
         button = (pawsButton*)FindWidget( "ShowStats" );
         if(button) button->Show();
-        button = (pawsButton*)FindWidget( "ShowCombat" );
+button = (pawsButton*)FindWidget( "ShowFight" );
+
+        if(button) button->Show();
+        button = (pawsButton*)FindWidget( "ShowGather" );
+        if(button) button->Show();
+        button = (pawsButton*)FindWidget( "ShowCraft" );
+
+
         if(button) button->Show();
         button = (pawsButton*)FindWidget( "ShowMagic" );
         if(button) button->Show();
-        button = (pawsButton*)FindWidget( "ShowCraft" );
+
+        button = (pawsButton*)FindWidget( "ShowFaith" );
         if(button) button->Show();
-        button = (pawsButton*)FindWidget( "ShowMisc" );
+        button = (pawsButton*)FindWidget( "ShowLead" );
+
         if(button) button->Show();
-        button = (pawsButton*)FindWidget( "ShowFaction" );
+button = (pawsButton*)FindWidget( "ShowUtility" );
         if(button) button->Show();
     }
     else
     {
         button = (pawsButton*)FindWidget( "ShowStats" );
-        if(button) button->Hide();
-        button = (pawsButton*)FindWidget( "ShowCombat" );
-        if(button) button->Hide();
-        button = (pawsButton*)FindWidget( "ShowMagic" );
-        if(button) button->Hide();
+        if(button) button->Show();
+button = (pawsButton*)FindWidget( "ShowFight" );
+
+
+        if(button) button->Show();
+        button = (pawsButton*)FindWidget( "ShowGather" );
+        if(button) button->Show();
         button = (pawsButton*)FindWidget( "ShowCraft" );
-        if(button) button->Hide();
-        button = (pawsButton*)FindWidget( "ShowMisc" );
-        if(button) button->Hide();
-        button = (pawsButton*)FindWidget( "ShowFaction" );
-        if(button) button->Hide();
+
+        if(button) button->Show();
+        button = (pawsButton*)FindWidget( "ShowMagic" );
+
+        if(button) button->Show();
+        button = (pawsButton*)FindWidget( "ShowFaith" );
+        if(button) button->Show();
+        button = (pawsButton*)FindWidget( "ShowLead" );
+
+        if(button) button->Show();
+button = (pawsButton*)FindWidget( "ShowUtility" );
+        if(button) button->Show();
     }
     
     if(!lastTab->IsVisible())
@@ -297,11 +321,13 @@ bool pawsDetailWindow::SelectTab( pawsWidget* widget )
             break;
         }
     case BTN_STATS:
-    case BTN_FACTION:
-    case BTN_COMBAT:
+    case BTN_LEAD:
+    case BTN_GATHER:
     case BTN_MAGIC:
-    case BTN_JOBS:
-    case BTN_VARIOUS:
+    case BTN_CRAFT:
+    case BTN_FAITH:
+    case BTN_FIGHT:
+    case BTN_UTILITY:
         {
             int id = widget->GetID() - 1000;
             if(id >= 0 && id < 6)

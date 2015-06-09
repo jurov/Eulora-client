@@ -1,7 +1,7 @@
 /*
  * pawsconfigspellchecker.cpp.cpp - Author: Fabian Stock (AiwendilH@googlemail.com)
  *
- * Copyright (C) 2001-2011 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2001-2011 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -128,7 +128,7 @@
         pawsTextBox* errorLabel3 = 0;
         errorLabel3= dynamic_cast<pawsTextBox*>(FindWidget("ErrorLabel3"));
         if (errorLabel3) errorLabel3->Show();
-        if (errorLabel1) errorLabel1->SetText("Sorry, this version of Eulora was compiled without");
+        if (errorLabel1) errorLabel1->SetText("Sorry, this version of PlaneShift was compiled without");
         if (errorLabel2) errorLabel2->SetText("support for the spell checker.");
         if (errorLabel3) errorLabel3->SetText("");
     }

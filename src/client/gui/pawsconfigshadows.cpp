@@ -1,7 +1,7 @@
 /*
  * pawsconfigshadows.cpp - Author: Prashanth Menon
  *
- * Copyright (C) 2001-2008 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2001-2008 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -33,7 +33,7 @@
 #define SAVE_USER     true
 #define DEFAULT_FILE  "/planeshift/data/options/shadows_def.xml"
 #define USER_FILE     "/planeshift/userdata/options/shadows.xml"
-// vfs files? chetty
+
 #define LINES_IN_FRAME	13
 #define NO_CHAT_TYPES	13
 #define	SCROLLBAR_SIZE	15

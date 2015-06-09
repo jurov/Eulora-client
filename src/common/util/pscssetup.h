@@ -1,7 +1,7 @@
 /*
  * cssetup.h - Authored by Elliot Paquette
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -35,7 +35,7 @@ struct iObjectRegistry;
  * @{ */
 
 #ifndef PS_VERSION
-#define PS_VERSION "0.0.0.1"
+#define PS_VERSION "0.1.0"
 #endif
 
 #ifndef APPNAME

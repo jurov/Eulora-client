@@ -1385,6 +1385,7 @@ copy /y "$(TargetPath)" ..\..\out\debug10-x64\bin\
     <ClCompile Include="..\..\src\client\gui\pawsconfigpopup.cpp" />
     <ClCompile Include="..\..\src\client\gui\pawsconfigpvp.cpp" />
     <ClCompile Include="..\..\src\client\gui\pawsconfigshadows.cpp" />
+    <ClCompile Include="..\..\src\client\gui\pawsconfigshortcut.cpp" />
     <ClCompile Include="..\..\src\client\gui\pawsconfigsound.cpp" />
     <ClCompile Include="..\..\src\client\gui\pawsconfigspellchecker.cpp" />
     <ClCompile Include="..\..\src\client\gui\pawsconfigtextpage.cpp" />
@@ -1396,6 +1397,7 @@ copy /y "$(TargetPath)" ..\..\out\debug10-x64\bin\
     <ClCompile Include="..\..\src\client\gui\pawscraftcancelwindow.cpp" />
     <ClCompile Include="..\..\src\client\gui\pawscreditswindow.cpp" />
     <ClCompile Include="..\..\src\client\gui\pawsdetailwindow.cpp" />
+    <ClCompile Include="..\..\src\client\gui\pawsdndbutton.cpp" />
     <ClCompile Include="..\..\src\client\gui\pawsexchangewindow.cpp" />
     <ClCompile Include="..\..\src\client\gui\pawsgameboard.cpp" />
     <ClCompile Include="..\..\src\client\gui\pawsglyphwindow.cpp" />
@@ -1426,6 +1428,7 @@ copy /y "$(TargetPath)" ..\..\out\debug10-x64\bin\
     <ClCompile Include="..\..\src\client\gui\pawsquestrewardwindow.cpp" />
     <ClCompile Include="..\..\src\client\gui\pawsquestwindow.cpp" />
     <ClCompile Include="..\..\src\client\gui\pawsquitinfobox.cpp" />
+    <ClCompile Include="..\..\src\client\gui\pawsscrollmenu.cpp" />
     <ClCompile Include="..\..\src\client\gui\pawssheetline.cpp" />
     <ClCompile Include="..\..\src\client\gui\pawsskillwindow.cpp" />
     <ClCompile Include="..\..\src\client\gui\pawsslot.cpp" />
@@ -1472,6 +1475,7 @@ copy /y "$(TargetPath)" ..\..\out\debug10-x64\bin\
     <ClInclude Include="..\..\src\client\gui\pawsconfigpopup.h" />
     <ClInclude Include="..\..\src\client\gui\pawsconfigpvp.h" />
     <ClInclude Include="..\..\src\client\gui\pawsconfigshadows.h" />
+    <ClInclude Include="..\..\src\client\gui\pawsconfigshortcut.h" />
     <ClInclude Include="..\..\src\client\gui\pawsconfigsound.h" />
     <ClInclude Include="..\..\src\client\gui\pawsconfigspellchecker.h" />
     <ClInclude Include="..\..\src\client\gui\pawsconfigtextpage.h" />
@@ -1483,6 +1487,7 @@ copy /y "$(TargetPath)" ..\..\out\debug10-x64\bin\
     <ClInclude Include="..\..\src\client\gui\pawscraftcancelwindow.h" />
     <ClInclude Include="..\..\src\client\gui\pawscreditswindow.h" />
     <ClInclude Include="..\..\src\client\gui\pawsdetailwindow.h" />
+    <ClInclude Include="..\..\src\client\gui\pawsdndbutton.h" />
     <ClInclude Include="..\..\src\client\gui\pawsexchangewindow.h" />
     <ClInclude Include="..\..\src\client\gui\pawsgameboard.h" />
     <ClInclude Include="..\..\src\client\gui\pawsglyphwindow.h" />
@@ -1513,6 +1518,7 @@ copy /y "$(TargetPath)" ..\..\out\debug10-x64\bin\
     <ClInclude Include="..\..\src\client\gui\pawsquestrewardwindow.h" />
     <ClInclude Include="..\..\src\client\gui\pawsquestwindow.h" />
     <ClInclude Include="..\..\src\client\gui\pawsquitinfobox.h" />
+    <ClInclude Include="..\..\src\client\gui\pawsscrollmenu.h" />
     <ClInclude Include="..\..\src\client\gui\pawssheetline.h" />
     <ClInclude Include="..\..\src\client\gui\pawsskillwindow.h" />
     <ClInclude Include="..\..\src\client\gui\pawsslot.h" />

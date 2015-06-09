@@ -1,7 +1,7 @@
 /*
  * entitylabels.cpp - Author: Ondrej Hurt
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -49,14 +49,14 @@
 #include "psclientchar.h"
 
 
-#define LABEL_FONT             "/this/data/ttf/LiberationSans-Regular.ttf"
+#define LABEL_FONT             "/this/data/ttf/ackermann.ttf"
 #define SPRITE_PLUGIN_NAME     "crystalspace.mesh.object.sprite.2d"
 #define LABEL_MESH_NAME        "EntityLabel"
 #define ENTITY_LABEL_SPACING   5       // horizontal space between label parts
 #define LABEL_MARGIN           2
 #define CONFIG_FILE_NAME       "/planeshift/userdata/options/entitylabels.xml"
 #define CONFIG_FILE_NAME_DEF   "/this/data/options/entitylabels_def.xml"
-// is vfs? chetty
+
 #define SCALE    0.004
 #define BORDER_SIZE 2
 
@@ -229,6 +229,7 @@ void psEntityLabels::SetObjectText(GEMClientObject* object)
                 break;
             case -3: // DEAD
                 colour = entityColors[ENTITY_DEAD];
+printf("entity label 232 dead");
                 break;
 
             case 10: // Tester

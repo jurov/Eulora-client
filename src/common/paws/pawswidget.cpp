@@ -1,7 +1,7 @@
 /*
  * pawswidget.cpp - Author: Andrew Craig
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -373,12 +373,27 @@ void pawsWidget::AddChild( pawsWidget* childWidget )
     childWidget->SetParent( this );
 }
 
+void pawsWidget::AddChild( size_t Index, pawsWidget* childWidget )
+{
+    if ( !childWidget )
+        return;
+
+    //if ( childWidget->IsAlwaysOnTop() )
+        children.Insert( Index, childWidget );
+    //else
+        //children.Push( childWidget );
+
+    // Let the child know that he is attached to this widget.
+    childWidget->SetParent( this );
+}
+
 void pawsWidget::RemoveChild( pawsWidget* widget )
 {
     if ( !widget )
         return;
 
-    children.Delete( widget );
+    if (children.Delete(widget))
+        widget->SetParent(NULL);
 }
 
 void pawsWidget::DeleteChild( pawsWidget* widget )
@@ -542,7 +557,7 @@ bool pawsWidget::LoadAttributes( iDocumentNode* node )
             myFont = graphics2D->GetFontServer()->LoadFont(fontName, (fontSize)?fontSize:10);
             if (!myFont)
             {
-                Error2("Could not load font: >%s<", (const char*)fontName );
+                //Error2("Could not load font: >%s<", (const char*)fontName );
                 return false;
             }
         }
@@ -1335,7 +1350,7 @@ void pawsWidget::DrawToolTip(int x, int y)
         int realX = x, realY = y;
 
         //iFont* font = GetFont();
-        csString fontName = "/planeshift/data/ttf/cupandtalon.ttf";
+        csString fontName = "/planeshift/data/ttf/reteprelieum.ttf";
 
         csRef<iFont> font = graphics2D->GetFontServer()->LoadFont(fontName,16);
         iFont* fontPtr = font;
@@ -1607,6 +1622,8 @@ bool pawsWidget::OnMouseEnter()
 
 bool pawsWidget::OnChildMouseEnter(pawsWidget* /*widget*/)
 {
+    if ( parent )
+        return parent->OnChildMouseEnter( this );
     return true;
 }
 
@@ -1619,6 +1636,8 @@ bool pawsWidget::OnMouseExit()
 
 bool pawsWidget::OnChildMouseExit(pawsWidget* /*child*/)
 {
+    if ( parent )
+        return parent->OnChildMouseExit( this );
     return true;
 }
 
@@ -2687,7 +2706,8 @@ void pawsWidget::SetFontStyle(int style)
 
 bool pawsWidget::SelfPopulateXML( const char *xmlstr )
 {
-    csRef<iDocumentSystem> xml = csPtr<iDocumentSystem>(new csTinyDocumentSystem);
+    csRef<iDocumentSystem> xml;
+    xml.AttachNew(new csTinyDocumentSystem);
 
     csRef<iDocument> doc= xml->CreateDocument();
     const char *error = doc->Parse( xmlstr );
@@ -2866,6 +2886,11 @@ csString pawsWidget::GetPathInWidgetTree()
 
 void pawsWidget::SetMaskingImage(const char* image)
 {
+    if (image == NULL || *image == '\0')
+    {
+        maskImage = 0;
+        return;
+    }
     maskImage = PawsManager::GetSingleton().GetTextureManager()->GetPawsImage(image);
     if (!maskImage)
     {
@@ -2961,14 +2986,9 @@ const char *pawsWidget::FindDefaultWidgetStyle(const char *factoryName)
 {
     static csString style;
 
-    if (name=="ChatWindow")
-      //  printf("Finding default style for factory '%s'\n", factoryName);
-
     style = defaultWidgetStyles.Get(factoryName,csString("not found"));
     if (style == "not found" && parent != NULL)
     {
-        if (name=="ChatWindow")
-            printf("No default style found for factory '%s'. Checking parent.\n", factoryName);
         // walk up the chain of parents
         return parent->FindDefaultWidgetStyle(factoryName);
     }
@@ -2976,8 +2996,6 @@ const char *pawsWidget::FindDefaultWidgetStyle(const char *factoryName)
         return NULL;
     else
     {
-        if (name=="ChatWindow")
-            printf("Default style '%s' found for factory '%s'\n", style.GetData(), factoryName);
         return style;
     }
 }

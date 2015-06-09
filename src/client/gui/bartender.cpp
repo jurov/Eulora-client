@@ -1,7 +1,7 @@
 /*
 * bartender.cpp - Author: Andrew Craig, Stefano Angeleri
 *
-* Copyright (C) 2010 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+* Copyright (C) 2010 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
 *
 *
 * This program is free software; you can redistribute it and/or
@@ -36,7 +36,7 @@
 #define SLOTNODE "slot"
 #define BTN_LOCK   100
 #define BTN_UNLOCK 101
-// vfs? chetty
+
 //=============================================================================
 // Classes
 //=============================================================================
@@ -106,7 +106,8 @@ bool pawsBartenderWindow::PostSetup()
 pawsBartenderWindow::~pawsBartenderWindow()
 {
     //prepares the file for writing
-    csRef<iDocumentSystem> xml = csPtr<iDocumentSystem>(new csTinyDocumentSystem);
+    csRef<iDocumentSystem> xml;
+    xml.AttachNew(new csTinyDocumentSystem);
     csRef<iDocument> doc = xml->CreateDocument();
     csRef<iDocumentNode> root = doc->CreateRoot ();
     csRef<iDocumentNode> bartenderNode = root->CreateNodeBefore(CS_NODE_ELEMENT);
@@ -124,7 +125,7 @@ pawsBartenderWindow::~pawsBartenderWindow()
             slotNode->SetAttribute("name", slot->GetName());
             slotNode->SetAttribute("image", slot->ImageName());
             slotNode->SetAttribute("tooltip", slot->GetToolTip());
-            slotNode->SetAttribute("action", slot->GetBartenderAction());
+            slotNode->SetAttribute("action", slot->GetAction());
         }
     }
 

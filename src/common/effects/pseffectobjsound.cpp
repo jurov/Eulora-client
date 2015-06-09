@@ -1,7 +1,7 @@
 /*
 * Author: Andrew Robberts
 *
-* Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+* Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
 *
 *
 * This program is free software; you can redistribute it and/or
@@ -51,7 +51,7 @@ psEffectObjSound::psEffectObjSound(iView *parentView, psEffect2DRenderer * rende
         soundManager = csQueryRegistryOrLoad<iSoundManager>(psCSSetup::object_reg, "crystalspace.planeshift.sound.dummy");
         if(!soundManager)
         {
-            csReport(psCSSetup::object_reg, CS_REPORTER_SEVERITY_ERROR, "Eulora_effects", "Could not find plugin iSoundManager.\n");
+            csReport(psCSSetup::object_reg, CS_REPORTER_SEVERITY_ERROR, "eulora_effects", "Could not find plugin iSoundManager.\n");
         }
     }
 

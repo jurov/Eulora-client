@@ -1822,6 +1822,9 @@
 				RelativePath="..\..\src\client\gui\pawsconfigshadows.cpp">
 			</File>
 			<File
+				RelativePath="..\..\src\client\gui\pawsconfigshortcut.cpp">
+			</File>
+			<File
 				RelativePath="..\..\src\client\gui\pawsconfigsound.cpp">
 			</File>
 			<File
@@ -1853,6 +1856,9 @@
 			</File>
 			<File
 				RelativePath="..\..\src\client\gui\pawsdetailwindow.cpp">
+			</File>
+			<File
+				RelativePath="..\..\src\client\gui\pawsdndbutton.cpp">
 			</File>
 			<File
 				RelativePath="..\..\src\client\gui\pawsexchangewindow.cpp">
@@ -1943,6 +1949,9 @@
 			</File>
 			<File
 				RelativePath="..\..\src\client\gui\pawsquitinfobox.cpp">
+			</File>
+			<File
+				RelativePath="..\..\src\client\gui\pawsscrollmenu.cpp">
 			</File>
 			<File
 				RelativePath="..\..\src\client\gui\pawssheetline.cpp">
@@ -2081,6 +2090,9 @@
 				RelativePath="..\..\src\client\gui\pawsconfigshadows.h">
 			</File>
 			<File
+				RelativePath="..\..\src\client\gui\pawsconfigshortcut.h">
+			</File>
+			<File
 				RelativePath="..\..\src\client\gui\pawsconfigsound.h">
 			</File>
 			<File
@@ -2112,6 +2124,9 @@
 			</File>
 			<File
 				RelativePath="..\..\src\client\gui\pawsdetailwindow.h">
+			</File>
+			<File
+				RelativePath="..\..\src\client\gui\pawsdndbutton.h">
 			</File>
 			<File
 				RelativePath="..\..\src\client\gui\pawsexchangewindow.h">
@@ -2202,6 +2217,9 @@
 			</File>
 			<File
 				RelativePath="..\..\src\client\gui\pawsquitinfobox.h">
+			</File>
+			<File
+				RelativePath="..\..\src\client\gui\pawsscrollmenu.h">
 			</File>
 			<File
 				RelativePath="..\..\src\client\gui\pawssheetline.h">

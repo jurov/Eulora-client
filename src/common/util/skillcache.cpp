@@ -1,7 +1,7 @@
 /*
  * skillcache.cpp
  *
- * Copyright (C) 2006 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2006 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -46,6 +46,7 @@ psSkillCacheItem::psSkillCacheItem(psSkillCacheItem *item)
 psSkillCacheItem::psSkillCacheItem(unsigned int nameId)
     : removed(false), modified(true)
 {
+//printf("skillcache 49 skillid %d \n",nameId);
     this->nameId = nameId;
     this->skillId = nameId;
 }
@@ -73,6 +74,9 @@ psSkillCacheItem::psSkillCacheItem(int skillId,
     category = CAT;
     this->stat = stat;
     modified = true;
+//printf("skillcache 77 skillid %d ,  Rank R %d \n",nameId,R);
+
+
 }
 
 psSkillCacheItem::~psSkillCacheItem()
@@ -100,12 +104,14 @@ void psSkillCacheItem::update(unsigned short R,
 {
     if (rank != R)
     {
+//printf(" 103 cacheitem rank not = R \n");
         rank = R;
         modified = true;
     }
 
     if (actualStat != AS)
     {
+//printf(" 110 cacheitem actual stat not = AS \n");
         actualStat = AS;
         modified = true;
     }
@@ -183,6 +189,7 @@ void psSkillCacheItem::read(MsgEntry *msg)
             removed = true;
             break;
         case psSkillCacheItem::UPDATE_OR_ADD:
+//printf(" skillcache 188 case  read \n");
             removed = false;
             rank = msg->GetUInt16();
             actualStat = msg->GetUInt16();
@@ -192,6 +199,7 @@ void psSkillCacheItem::read(MsgEntry *msg)
             practiceCost = msg->GetUInt16();
             category = msg->GetUInt16();
             stat = msg->GetBool();
+//printf(" 202 read skillcache rank %d, AS %d, prac %d, knw %d \n",rank,actualStat,practice,knowledge);
             break;
     }
     modified = true;
@@ -206,6 +214,7 @@ void psSkillCacheItem::write(MsgEntry *msg)
     else
     {
         msg->Add((uint8_t)psSkillCacheItem::UPDATE_OR_ADD);
+//printf(" skillcache 188 case  WRITE \n");
         msg->Add((uint16_t)rank);
         msg->Add((uint16_t)actualStat);
         msg->Add((uint16_t)knowledge);
@@ -214,6 +223,7 @@ void psSkillCacheItem::write(MsgEntry *msg)
         msg->Add((uint16_t)practiceCost);
         msg->Add((uint16_t)category);
         msg->Add(stat);
+//printf(" 226 write skillcache rank %d, AS %d, prac %d, knw %d \n",rank,actualStat,practice,knowledge);
     }
     modified = false;
 }
@@ -276,6 +286,7 @@ void psSkillCache::apply(psSkillCache *list)
             {
                 item = new psSkillCacheItem(second);
                 skillCache.PushBack(item);
+//printf("skillcache 287 push  \n");
             }
         }
     }
@@ -286,6 +297,7 @@ void psSkillCache::apply(psSkillCache *list)
 void psSkillCache::addItem(int /*skillId*/, psSkillCacheItem *item)
 {
     skillCache.PushBack(item);
+//printf("skillcache 298 push \n");
 }
 
 psSkillCacheItem *psSkillCache::getItemBySkillId(uint id)
@@ -404,6 +416,7 @@ void psSkillCache::read(MsgEntry *msg)
 void psSkillCache::write(MsgEntry *msg)
 {
     msg->Add((uint32_t)progressionPoints);
+//printf("skillcache 417 add pp \n");
     msg->Add(newList);
     unsigned short cnt = count();
     msg->Add((uint16_t)cnt);
@@ -456,6 +469,11 @@ csString psSkillCache::ToString() const
         else
         {
             result.AppendFmt("NID: %d Cat: %d R: %d AS: %d K: %d KC: %d P: %d PC: %d;",
+                             item->getNameId(), item->getCategory(), item->getRank(),
+                             item->getActualStat(), item->getKnowledge(),
+                             item->getKnowledgeCost(), item->getPractice(),
+                             item->getPracticeCost());
+printf("NID: %d Cat: %d R: %d AS: %d K: %d KC: %d P: %d PC: %d;",
                              item->getNameId(), item->getCategory(), item->getRank(),
                              item->getActualStat(), item->getKnowledge(),
                              item->getKnowledgeCost(), item->getPractice(),

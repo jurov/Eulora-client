@@ -1,7 +1,7 @@
 /*
  * pawssheetline.h, Author: Andrea Rizzi <88whacko@gmail.com>
  *
- * Copyright (C) 2001-2011 Atomic Blue (info@planshift.it, http://www.atomicblue.org) 
+ * Copyright (C) 2001-2011 Atomic Blue (info@planeshift.it, http://www.atomicblue.org) 
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -36,8 +36,6 @@ class pawsSheetLine;
 /**
  * \addtogroup client_gui
  * @{ */
-
-#define SYMBOL_ENCODING_BASE 0xf000
 
 //--------------------------------------------------
 
@@ -147,7 +145,11 @@ public:
 
     /**
      * Adds a note to the chord. If a note in the same position already exists
-     * this overwrites it.
+     * this overwrites it (i.e. the alteration of the note is updated with the
+     * new one). If the added note is a rest and there are already other notes
+     * in the chord, these are deleted from the chord. Viceversa if the added
+     * note is not a rest and there is already a rest in the chord, the rest is
+     * removed.
      *
      * @param position the position where the note (or the rest) must be drawn.
      * @param alter the alteration of the note (-1 flat, 0 normal, 1 sharp).

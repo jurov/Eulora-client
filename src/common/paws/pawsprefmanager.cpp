@@ -1,7 +1,7 @@
 /*
  * pawsprefmanager.cpp - Author: Andrew Craig
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -46,7 +46,7 @@ pawsPrefManager::pawsPrefManager()
     objectReg = PawsManager::GetSingleton().GetObjectRegistry();
 
     vfs =  csQueryRegistry<iVFS > ( objectReg);
-    xml = csPtr<iDocumentSystem> ( new csTinyDocumentSystem ); 
+    xml.AttachNew(new csTinyDocumentSystem); 
     graphics2D =  csQueryRegistry<iGraphics2D > ( objectReg);
 
     defaultFont = defaultScaledFont = NULL;
@@ -102,7 +102,7 @@ bool pawsPrefManager::LoadPrefFile( const char* fileName )
             defaultScaledFont = graphics2D->GetFontServer()->LoadFont( defaultFontName, (size)?size:(float)DEFAULT_FONT_SIZE );
             if ( !defaultFont )
             {
-                Error2("Could not load font: >%s<", (const char*)defaultFontName);
+                //Error2("Could not load font: >%s<", (const char*)defaultFontName);
                 return false;
             }
 

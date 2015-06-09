@@ -1,0 +1,9 @@
+*~
+out/*
+.svn/*
+euclient
+*.exe
+*.dll
+errorlog.txt
+Eulora-client.kdev4
+.*.swp

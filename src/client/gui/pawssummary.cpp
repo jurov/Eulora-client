@@ -1,7 +1,7 @@
 /*
  * pawssummary.cpp - Author: Andrew Craig
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -38,6 +38,7 @@ struct RaceDefinition;
 
 pawsSummaryWindow::pawsSummaryWindow()
 {
+//printf("41 summary window set \n");
     createManager = psengine->GetCharManager()->GetCreation();
     redoVerification = false;
     requestSent = false;
@@ -54,6 +55,7 @@ pawsSummaryWindow::~pawsSummaryWindow()
 
 bool pawsSummaryWindow::PostSetup()
 {
+//printf("58 Sum - postsetup  \n");
     skillsList = (pawsListBox*)FindWidget("skill_list");
     if ( skillsList == NULL ) return false;
     
@@ -75,9 +77,10 @@ bool pawsSummaryWindow::PostSetup()
 
 void pawsSummaryWindow::Update()
 {
+//printf("80 sum update  \n");
     pawsTextBox* label_name = (pawsTextBox*) FindWidget("label_name");
     label_name->SetText(createManager->GetName().GetData());
-
+//printf("83 label_name %s  \n",createManager->GetName().GetData());
     csString textString;
     csString lifeString;
     csString tempString;
@@ -91,10 +94,11 @@ void pawsSummaryWindow::Update()
         textString.Append("Gender: female\n");
     else if (createManager->GetSelectedGender() == PSCHARACTER_GENDER_MALE)
         textString.Append("Gender: male\n");
-
+//printf("97 textString %d  \n",createManager->GetSelectedGender());
     tempString.Format("Race: %s\n", createManager->GetRace(createManager->GetSelectedRace())->name.GetData());
+//printf("99 tempString %s  \n",name.GetData());
     textString.Append(tempString);
-
+//printf("101 race  %s\n",createManager->GetRace(createManager->GetSelectedRace())->name.GetData());
     csArray<uint32_t> choices = createManager->GetChoicesMade();
     csArray<uint32_t>::Iterator iter = choices.GetIterator();
 
@@ -201,6 +205,7 @@ bool pawsSummaryWindow::CheckLoadStatus()
 
 void pawsSummaryWindow::Show()
 {
+//printf("sum 207 show \n");
     pawsWidget::Show();
     redoVerification = true;        
     requestSent = false;
@@ -209,6 +214,7 @@ void pawsSummaryWindow::Show()
 
 void pawsSummaryWindow::Draw()
 {
+
     pawsWidget::Draw();
     
     if ( redoVerification && !requestSent )
@@ -220,18 +226,20 @@ void pawsSummaryWindow::Draw()
             PawsManager::GetSingleton().FindWidget("Summary")->Hide();
             return;
         }
-
+//printf("sum 228 draw  \n");
         requestSent = true;
         createManager->UploadChar( UPLOAD_VERIFY );
+//printf("232 upload verify \n");
     }        
 }
 
 void pawsSummaryWindow::SetVerify( csArray<psCharVerificationMesg::Attribute> stats,
                                    csArray<psCharVerificationMesg::Attribute> skills )
 {
+//printf("sum 237 setverify \n");
     statsList->Clear();
     skillsList->Clear();
-    
+/*    
     for ( size_t x = 0; x < skills.GetSize(); x++ )
     {       
         if (skills[x].value)
@@ -252,12 +260,12 @@ void pawsSummaryWindow::SetVerify( csArray<psCharVerificationMesg::Attribute> st
             pawsListBoxRow* row = statsList->NewRow();
             pawsTextBox* name = (pawsTextBox*)row->GetColumn(0);
             name->SetText( stats[x].name );
-                       
+                      
             pawsTextBox* val = (pawsTextBox*)row->GetColumn(1);
             val->FormatText( "%d", stats[x].value );
         }
     }
-     
+*/     
     serverStatus->SetText(PawsManager::GetSingleton().Translate("Verification complete"));     
     //load the model
     loaded = false;
@@ -266,6 +274,7 @@ void pawsSummaryWindow::SetVerify( csArray<psCharVerificationMesg::Attribute> st
 
 bool pawsSummaryWindow::OnButtonReleased(int /*mouseButton*/, int /*keyModifier*/, pawsWidget* widget)
 {
+//printf("275 sum confirms \n");
     if(!widget)
         return false;
 
@@ -273,6 +282,7 @@ bool pawsSummaryWindow::OnButtonReleased(int /*mouseButton*/, int /*keyModifier*
     {
         case CONFIRM_YES:
         {
+            //CharacterLoader->UpdateCharacterSkill();
             createManager->UploadChar();
             return true;
         }
@@ -296,14 +306,16 @@ bool pawsSummaryWindow::OnButtonReleased(int /*mouseButton*/, int /*keyModifier*
         }*/
         case UPLOAD_BUTTON:
         {           
+//printf("306 sum upload button \n");
             csString cpwarning = PawsManager::GetSingleton().Translate("Are you sure you want to create this Character?  ");
             // Also show CP left if more than zero
-            if ( createManager->GetCurrentCP() > 0 )
+/*            if ( createManager->GetCurrentCP() > 0 )
             {
                 cpwarning += PawsManager::GetSingleton().Translate("You have ");
                 cpwarning += createManager->GetCurrentCP();
                 cpwarning += PawsManager::GetSingleton().Translate(" CP left.");
             }
+*/
             //we set this widget as modal and we don't want it to be
             //translated as we did already our homework
             PawsManager::GetSingleton().CreateYesNoBox(cpwarning, this, true, false);

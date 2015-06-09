@@ -1,7 +1,7 @@
 /*
 * shadowmanager.cpp - Author: Andrew Robberts
 *
-* Copyright (C) 2007 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+* Copyright (C) 2007 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
 *
 *
 * This program is free software; you can redistribute it and/or
@@ -37,7 +37,6 @@
 // Used to determine if shadows are enabled or not
 #define DEFAULT_FILE  "/planeshift/data/options/shadows_def.xml"
 #define USER_FILE     "/planeshift/userdata/options/shadows.xml"
-// does this use vfs or not? chetty
 
 bool psShadowManager::WithinRange(GEMClientObject * object, const csBox3 & bbox) const
 {

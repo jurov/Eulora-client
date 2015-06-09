@@ -1,7 +1,7 @@
 /*
  * Author: Christian Svensson
  *
- * Copyright (C) 2008 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2008 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -28,7 +28,7 @@
 
 #define CONFIG_NPCDIALOG_FILE_NAME       "/planeshift/userdata/options/npcdialog.xml"
 #define CONFIG_NPCDIALOG_FILE_NAME_DEF   "/planeshift/data/options/npcdialog_def.xml"
-// vfs files ? chetty
+
 
 class pawsListBox;
 
@@ -173,7 +173,7 @@ private:
     bool enabledChatBubbles;       ///< Stores the state of chat bubbles.
     bool clickedOnResponseBubble;  ///< flag when player clicks on the response bubble
     bool gotNewMenu;               ///< keeps track of the incoming new menu message
-    int timeDelay;                 ///< calculates the time needed to read the last npc say
+    csTicks timeDelay;                 ///< calculates the time needed to read the last npc say
     int questIDFree;               ///< Keeps the value of the quest if the free text question was triggered.
 
     pawsListBox* responseList;

@@ -1,7 +1,7 @@
 /*
  * meshattach.h - Author: Andrew Craig <andrew@hydlaa.com>
  *
- * Copyright (C) 2008 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2008 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -38,7 +38,7 @@
 //=============================================================================
 class GEMClientObject;
 
-/** Helper class to attach a PlanShift GEM object to a particular mesh.
+/** Helper class to attach a PlaneShift GEM object to a particular mesh.
   * This is needed so we can get the GEM object when a player clicks on a mesh.
   */
 class psGemMeshAttach : public scfImplementationExt1<psGemMeshAttach,

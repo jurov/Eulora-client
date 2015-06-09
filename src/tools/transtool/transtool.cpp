@@ -1,7 +1,7 @@
 /*
  *  transtool.cpp - Author: Stefano Angeleri
  *
- * Copyright (C) 2011 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2011 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -43,12 +43,12 @@ TransTool::~TransTool()
 
 void TransTool::PrintHelp()
 {
-    printf("This application converts Eulora translation files to L10N translation xml files and viceversa.\n\n");
+    printf("This application converts planeshift translation files to L10N translation xml files and viceversa.\n\n");
 
     printf("Options:\n");
     printf("-in The file to convert. Defaults to /this/stringtable.xml\n");
     printf("-out the destination file of the conversion. Defaults to /this/strings.xml\n");
-    printf("-atp converts from L10N to eulora format else the conversion will be from eulora format to L10N\n");
+    printf("-atp converts from L10N to planeshift format else the conversion will be from planeshift format to L10N\n");
     printf("-orig uses the orig also for the translation part\n");
     printf("-clean removes empty entries\n");
     printf("-author sets the author of the translation file. Has meaning only with -atp\n");
@@ -90,7 +90,7 @@ void TransTool::Run()
 
     //initialize
 
-    //if we require an L10N to planshift format we will run this segment
+    //if we require an L10N to planeshift format we will run this segment
     if(atp)
     {
         //prepare our destination document
@@ -142,7 +142,7 @@ void TransTool::Run()
     }
     else
     {
-        //in this case we conver a planshift translation file to L10N format
+        //in this case we conver a planeshift translation file to L10N format
         csRef<iDocument> doc = tinydoc.CreateDocument();
         csRef<iDocumentNode> transout = doc->CreateRoot();
         transout = transout->CreateNodeBefore(CS_NODE_ELEMENT);

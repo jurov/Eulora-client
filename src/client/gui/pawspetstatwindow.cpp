@@ -1,7 +1,7 @@
 /*
  * pawsPetStatWindow.cpp
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -45,13 +45,23 @@
 
 #define BTN_BUY       100
 #define BTN_FILTER    101
-//#define BTN_QUIT    102
-#define BTN_EDIT      102 ///< Edit description
-#define BTN_STATS    1000 ///< Stats button for the tab panel
-#define BTN_COMBAT   1001 ///< Combat button for the tab panel
-#define BTN_MAGIC    1002 ///< Magic button for the tab panel
-#define BTN_JOBS     1003 ///< Jobs button for the tab panel
-#define BTN_VARIOUS  1004 ///< Various button for the tab panel
+
+//#define BTN_EDIT      100  //Edit button, if viewing your own description
+#define BTN_DESCR     999  //Description button for the tab panel
+#define BTN_DESCROOC 1006  //Out of character Description button for the tab panel
+#define BTN_DESCRCC  1007  //Char creation description button for the tab panel
+#define BTN_STATS    1000 //Stats button for the tab panel
+//#define BTN_COMBAT   1001 //Combat button for the tab panel
+#define BTN_MAGIC    1002 //Magic button for the tab panel
+//#define BTN_JOBS     1003 //Jobs button for the tab panel
+//#define BTN_VARIOUS  1004 //Various button for the tab panel
+#define BTN_GATHER   1001 //gather button for the tab panel
+//#define BTN_FACTION  1005
+#define BTN_CRAFT     1003 //craft button for the tab panel
+#define BTN_FAITH  1004 //faith button for the tab panel
+#define BTN_LEAD  1005
+#define BTN_FIGHT  1008
+#define BTN_UTILITY  1009
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
@@ -85,8 +95,8 @@ bool pawsPetStatWindow::PostSetup()
     statsSkillList        = (pawsListBox*)FindWidget("StatsSkillList");
     statsSkillDescription = (pawsMultiLineTextBox*)FindWidget("StatsDescription");
 
-    combatSkillList        = (pawsListBox*)FindWidget("CombatSkillList");
-    combatSkillDescription = (pawsMultiLineTextBox*)FindWidget("CombatDescription");
+    gatherSkillList        = (pawsListBox*)FindWidget("gatherSkillList");
+    gatherSkillDescription = (pawsMultiLineTextBox*)FindWidget("CombatDescription");
 
     magicSkillList        = (pawsListBox*)FindWidget("MagicSkillList");
     magicSkillDescription = (pawsMultiLineTextBox*)FindWidget("MagicDescription");
@@ -94,8 +104,8 @@ bool pawsPetStatWindow::PostSetup()
     knownSpellList        = (pawsListBox*)FindWidget("KnownSpellList");
     knownSpellDescription = (pawsMultiLineTextBox*)FindWidget("KnownSpellDescription");
 
-    variousSkillList        = (pawsListBox*)FindWidget("VariousSkillList");
-    variousSkillDescription = (pawsMultiLineTextBox*)FindWidget("VariousDescription");
+    faithSkillList        = (pawsListBox*)FindWidget("FaithSkillList");
+    faithSkillDescription = (pawsMultiLineTextBox*)FindWidget("FaithDescription");
     
     hpBar = dynamic_cast <pawsProgressBar*> (FindWidget("HPBar"));
     manaBar = dynamic_cast <pawsProgressBar*> (FindWidget("ManaBar"));
@@ -112,10 +122,10 @@ bool pawsPetStatWindow::PostSetup()
     pysStaminaTotal = dynamic_cast <pawsTextBox*> (FindWidget("PysStaminaTotal"));
     menStaminaTotal = dynamic_cast <pawsTextBox*> (FindWidget("MenStaminaTotal"));
 
-    if ( !statsSkillList || !statsSkillDescription || !combatSkillList 
-         ||!combatSkillDescription || !magicSkillList || !magicSkillDescription 
-         ||!knownSpellList || !knownSpellDescription || !variousSkillList 
-         ||!variousSkillDescription || !hpBar || !manaBar || !pysStaminaBar || !menStaminaBar
+    if ( !statsSkillList || !statsSkillDescription || !gatherSkillList 
+         ||!gatherSkillDescription || !magicSkillList || !magicSkillDescription 
+         ||!knownSpellList || !knownSpellDescription || !faithSkillList 
+         ||!faithSkillDescription || !hpBar || !manaBar || !pysStaminaBar || !menStaminaBar
          || !hpCurrent || !manaCurrent || !pysStaminaCurrent || !menStaminaCurrent
          || !hpTotal || !manaTotal || !pysStaminaTotal || !menStaminaTotal) { return false; }
 
@@ -178,11 +188,11 @@ void pawsPetStatWindow::Close()
 {
     Hide();
 
-    combatSkillList->Clear();
+    gatherSkillList->Clear();
     statsSkillList->Clear();
     magicSkillList->Clear();
     knownSpellList->Clear();
-    variousSkillList->Clear();
+    faithSkillList->Clear();
     skillString.Clear();
     selectedSkill.Clear();
 }
@@ -221,16 +231,16 @@ void pawsPetStatWindow::SelectSkill(int skill)
     if(skill < 0 || skill > (int)unsortedSkills.GetSize())
         return;
 
-    combatSkillList->Select(unsortedSkills[skill]);
+    gatherSkillList->Select(unsortedSkills[skill]);
 }
 
 void pawsPetStatWindow::HandleSkillList( csString& skillString )
 {
-    combatSkillList->Clear();
+    gatherSkillList->Clear();
     statsSkillList->Clear();
     magicSkillList->Clear();
     knownSpellList->Clear();
-    variousSkillList->Clear();
+    faithSkillList->Clear();
 
     unsortedSkills.DeleteAll();
     csRef<iDocument> skills = xml->CreateDocument();
@@ -303,7 +313,7 @@ void pawsPetStatWindow::HandleSkillList( csString& skillString )
             }
         case 1://Combat skills
             {        
-                pawsListBoxRow* row = combatSkillList->NewRow();
+                pawsListBoxRow* row = gatherSkillList->NewRow();
        
                 pawsTextBox* name = dynamic_cast <pawsTextBox*> (row->GetColumn(0));
                 if (name == NULL) return;
@@ -316,14 +326,14 @@ void pawsPetStatWindow::HandleSkillList( csString& skillString )
 
                 pawsWidget * indCol = row->GetColumn(2);
                 if (indCol == NULL) return;
-                pawsSkillIndicator * indicator = dynamic_cast <pawsSkillIndicator*> (indCol->FindWidget("CombatIndicator"));
+                pawsSkillIndicator * indicator = dynamic_cast <pawsSkillIndicator*> (indCol->FindWidget("GatherIndicator"));
                 if (indicator == NULL) return;
                 indicator->Set(x, R, Y, skill->GetAttributeValueAsInt("YC"), Z, skill->GetAttributeValueAsInt("ZC"));
 
                 unsortedSkills.Push(row);
                 if (skillName == selectedSkill)
                 {
-                    combatSkillList->Select(row);
+                    gatherSkillList->Select(row);
                     foundSelected = true;
                 }
                 break;
@@ -384,7 +394,7 @@ void pawsPetStatWindow::HandleSkillList( csString& skillString )
             }
         case 4://Various skills
             {
-                pawsListBoxRow* row = variousSkillList->NewRow();
+                pawsListBoxRow* row = faithSkillList->NewRow();
        
                 pawsTextBox* name = dynamic_cast <pawsTextBox*> (row->GetColumn(0));
                 if (name == NULL) return;
@@ -397,14 +407,14 @@ void pawsPetStatWindow::HandleSkillList( csString& skillString )
 
                 pawsWidget * indCol = row->GetColumn(2);
                 if (indCol == NULL) return;
-                pawsSkillIndicator * indicator = dynamic_cast <pawsSkillIndicator*> (indCol->FindWidget("VariousIndicator"));
+                pawsSkillIndicator * indicator = dynamic_cast <pawsSkillIndicator*> (indCol->FindWidget("FaithIndicator"));
                 if (indicator == NULL) return;
                 indicator->Set(x, R, Y, skill->GetAttributeValueAsInt("YC"), Z, skill->GetAttributeValueAsInt("ZC"));
 
                 unsortedSkills.Push(row);
                 if (skillName == selectedSkill)
                 {
-                    variousSkillList->Select(row);
+                    faithSkillList->Select(row);
                     foundSelected = true;
                 }
                 break;
@@ -466,7 +476,7 @@ void pawsPetStatWindow::HandleSkillDescription( csString& description )
         }
     case 1://Combat skills
         {
-            combatSkillDescription->SetText( descStr );
+            gatherSkillDescription->SetText( descStr );
             break;
         }
     case 2://Magic skills
@@ -481,7 +491,7 @@ void pawsPetStatWindow::HandleSkillDescription( csString& description )
         }
     case 4://Various skills
         {
-            variousSkillDescription->SetText(descStr);
+            faithSkillDescription->SetText(descStr);
             break;
         }
     }

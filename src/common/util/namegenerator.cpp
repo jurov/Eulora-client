@@ -1,7 +1,7 @@
 /*
 * namegenerator.h by Andrew Mann <amann tccgi.com>
 *
-* Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org) 
+* Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org) 
 *
 *
 * This program is free software; you can redistribute it and/or
@@ -261,7 +261,8 @@ NameGenerationSystem::~NameGenerationSystem()
 bool NameGenerationSystem::LoadDatabase( iObjectRegistry* objectReg )
 {
     csRef<iVFS> vfs =  csQueryRegistry<iVFS > ( objectReg);
-    csRef<iDocumentSystem> xml = csPtr<iDocumentSystem>(new csTinyDocumentSystem);    
+    csRef<iDocumentSystem> xml;
+    xml.AttachNew(new csTinyDocumentSystem);    
     
     csRef<iDataBuffer> buff = vfs->ReadFile( PHONICS_LIST );
 

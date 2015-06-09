@@ -1,8 +1,8 @@
 /*
  * globals.h
  *
- * Copyright (C) 2001 PlanShift Team (info@planshift.it, 
- * http://www.planshift.it)
+ * Copyright (C) 2001 PlaneShift Team (info@planeshift.it, 
+ * http://www.planeshift.it)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,7 +17,7 @@
  *
  */
 
-/* This file holds definitions for ALL global variables in the planshift
+/* This file holds definitions for ALL global variables in the planeshift
  * server, normally you should move global variables into the psServer class
  */
 #ifndef __GLOBALS_H__

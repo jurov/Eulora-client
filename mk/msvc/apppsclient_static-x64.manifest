@@ -4,7 +4,7 @@
 <assemblyIdentity
     version="0.5.9.10"
     processorArchitecture="amd64"
-    name="Eulora.euclient_static"
+    name="PlaneShift.psclient_static"
     type="win32"
 />
 <description>psclient_static</description>

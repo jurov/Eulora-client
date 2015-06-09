@@ -1,7 +1,7 @@
 /*
  * psCelClient.cpp by Matze Braun <MatzeBraun@gmx.de>
  *
- * Copyright (C) 2002 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2002 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -27,6 +27,7 @@
 #include <cstool/collider.h>
 #include <iutil/cfgmgr.h>
 #include <iutil/objreg.h>
+#include <iutil/plugin.h>
 #include <iutil/stringarray.h>
 #include <iutil/vfs.h>
 #include <ivaria/collider.h>
@@ -40,6 +41,7 @@
 #include <imesh/objmodel.h>
 #include <imesh/spritecal3d.h>
 #include <imesh/nullmesh.h>
+#include <ivaria/engseq.h>
 #include <ivideo/material.h>
 #include <csgeom/math3d.h>
 
@@ -123,18 +125,23 @@ psCelClient::~psCelClient()
         msghandler->Unsubscribe(this, MSGTYPE_GUILDCHANGE);
         msghandler->Unsubscribe(this, MSGTYPE_GROUPCHANGE);
         msghandler->Unsubscribe(this, MSGTYPE_STATS);
+        msghandler->Unsubscribe(this, MSGTYPE_MECS_ACTIVATE);
     }
 
-    if(clientdr)
-        delete clientdr;
-    if(entityLabels)
-        delete entityLabels;
-    if(shadowManager)
-        delete shadowManager;
-
+    delete clientdr;
+    delete entityLabels;
+    delete shadowManager;
 
     entities.DeleteAll();
     entities_hash.DeleteAll();
+
+    // Delete effectItems
+    csHash<ItemEffect*, csString>::GlobalIterator i = effectItems.GetIterator();
+    while (i.HasNext())
+    {
+        delete i.Next();
+    }
+    effectItems.DeleteAll();
 }
 
 
@@ -164,6 +171,9 @@ bool psCelClient::Initialize(iObjectRegistry* object_reg, MsgHandler* newmsghand
     msghandler->Subscribe(this, MSGTYPE_GUILDCHANGE);
     msghandler->Subscribe(this, MSGTYPE_GROUPCHANGE);
     msghandler->Subscribe(this, MSGTYPE_STATS);
+
+    // mechanisms
+    msghandler->Subscribe(this, MSGTYPE_MECS_ACTIVATE);
 
     clientdr = new psClientDR;
     if(!clientdr->Initialize(object_reg, this, msghandler))
@@ -245,7 +255,7 @@ void psCelClient::HandleActor(MsgEntry* me)
         psengine->FatalError("Cannot load main actor. Error during loading.");
         return;
     }
-    psPersistActor msg(me, ((psNetManager*)psengine->GetNetManager())->GetConnection()->GetAccessPointers());
+    psPersistActor msg(me, psengine->GetNetManager()->GetConnection()->GetAccessPointers());
 
     GEMClientActor* actor = new GEMClientActor(this, msg);
 
@@ -266,7 +276,7 @@ void psCelClient::HandleActor(MsgEntry* me)
 
 void psCelClient::HandleItem(MsgEntry* me)
 {
-    psPersistItem msg(me, ((psNetManager*)psengine->GetNetManager())->GetConnection()->GetAccessPointers());
+    psPersistItem msg(me, psengine->GetNetManager()->GetConnection()->GetAccessPointers());
     GEMClientItem* item = new GEMClientItem(this, msg);
     AddEntity(item);
 }
@@ -293,6 +303,8 @@ void psCelClient::AddEntity(GEMClientObject* obj)
         GEMClientObject* target = psengine->GetCharManager()->GetTarget();
         if(target == existing)
         {
+            //we need to forcefully unlock the old target as this is going to get deleted.
+            psengine->GetCharManager()->LockTarget(false);
             psengine->GetCharManager()->SetTarget(obj, "select", false);
             psengine->GetPSCamera()->npcTargetReplaceIfEqual(existing, obj);
         }
@@ -376,7 +388,11 @@ void psCelClient::LoadEffectItems()
                     ie->lights.PushSmart(li);
                 }
                 ie->activeOnGround = itemeffect->GetAttributeValueAsBool("activeonground");
-                effectItems.PutUnique(csString(itemeffect->GetAttributeValue("meshname")), ie);
+                csString meshname = itemeffect->GetAttributeValue("meshname");
+                if (!effectItems.Get(meshname, 0))
+                    effectItems.Put(meshname, ie);
+                else
+                    delete ie;
             }
         }
     }
@@ -653,6 +669,49 @@ void psCelClient::HandleStats(MsgEntry* me)
 
 }
 
+void psCelClient::HandleMecsActivate(MsgEntry* me)
+{
+    psMechanismActivateMessage msg(me);
+
+    Debug2(LOG_ACTIONLOCATION,0,"Received HandleMecsActivate message mesh: %s!", msg.meshName.GetData());
+
+    Debug2(LOG_ACTIONLOCATION,0,"Received HandleMecsActivate message move: %s!", msg.move.GetData());
+
+    Debug2(LOG_ACTIONLOCATION,0,"Received HandleMecsActivate message rot: %s!", msg.rot.GetData());
+
+    csRef<iMeshWrapper> objectWrapper = psengine->GetEngine()->FindMeshObject(msg.meshName);
+
+    // object found
+    if(objectWrapper)
+    {
+        // name of the sequence needs to be unique
+        csString sequenceName = msg.meshName.Append(msg.move).Append(msg.rot);
+		// creates a sequence to move/rotate the object
+		csRef<iEngineSequenceManager> sequenceMngr = csQueryRegistryOrLoad<iEngineSequenceManager> (object_reg,"crystalspace.utilities.sequence.engine", false);
+		csRef<iSequenceWrapper> sequence = sequenceMngr->CreateSequence(sequenceName);
+		csRef<iParameterESM> meshParam = sequenceMngr->CreateParameterESM(objectWrapper);
+		const int ANIM_DURATION = 5000;
+        // move the object
+        if (msg.move && msg.move!="") {
+            Debug2(LOG_ACTIONLOCATION,0,"Found mesh move! %s", objectWrapper->QueryObject()->GetName());
+            csStringArray tokens;
+            tokens.SplitString(msg.move, ",");
+            csVector3 v(atof(tokens.Get(0)), atof(tokens.Get(1)), atof(tokens.Get(2)));
+			sequence->AddOperationMoveDuration(0,meshParam,v,ANIM_DURATION);
+			sequenceMngr->RunSequenceByName(sequenceName,0);
+		// rotates the object
+        } else if (msg.rot && msg.rot!="") {
+            Debug2(LOG_ACTIONLOCATION,0,"Found mesh rotate! %s", objectWrapper->QueryObject()->GetName());
+            csStringArray tokens;
+            tokens.SplitString(msg.rot, ",");
+
+			sequence->AddOperationRotateDuration (0, meshParam, 0, atof(tokens.Get(0)), 1, atof(tokens.Get(1)), 2, atof(tokens.Get(2)), csVector3(0,0,0), ANIM_DURATION, true);
+			sequenceMngr->RunSequenceByName(sequenceName,0);
+
+        }
+    }
+}
+
 void psCelClient::ForceEntityQueues()
 {
     while(!newActorQueue.IsEmpty())
@@ -800,6 +859,12 @@ void psCelClient::HandleMessage(MsgEntry* me)
         case MSGTYPE_GROUPCHANGE:
         {
             HandleGroupChange(me);
+            break;
+        }
+
+        case MSGTYPE_MECS_ACTIVATE:
+        {
+            HandleMecsActivate(me);
             break;
         }
 
@@ -961,7 +1026,8 @@ void psCelClient::PruneEntities()
 
 void psCelClient::AttachObject(iObject* object, GEMClientObject* clientObject)
 {
-    csRef<psGemMeshAttach> attacher = csPtr<psGemMeshAttach> (new psGemMeshAttach(clientObject));
+    csRef<psGemMeshAttach> attacher;
+    attacher.AttachNew(new psGemMeshAttach(clientObject));
     attacher->SetName(clientObject->GetName());  // @@@ For debugging mostly.
     csRef<iObject> attacher_obj(scfQueryInterface<iObject> (attacher));
     object->ObjAdd(attacher_obj);
@@ -1051,10 +1117,12 @@ void psCelClient::replaceRacialGroup(csString &string)
         BeltReplacement = GetMainPlayer()->BeltGroup;
         CloakReplacement = GetMainPlayer()->CloakGroup;
     }
+    Debug2(LOG_CELPERSIST,0,"DEBUG: replacing string %s",string.GetData());
     string.ReplaceAll("$H", HelmReplacement);
     string.ReplaceAll("$B", BracerReplacement);
     string.ReplaceAll("$E", BeltReplacement);
     string.ReplaceAll("$C", CloakReplacement);
+    Debug2(LOG_CELPERSIST,0," replaced:  %s \n",string.GetData());
 }
 
 //-------------------------------------------------------------------------------
@@ -1089,6 +1157,7 @@ GEMClientObject::~GEMClientObject()
         cel->UnattachObject(pcmesh->QueryObject(), this);
         psengine->GetEngine()->RemoveObject(pcmesh);
     }
+    psengine->UnregisterDelayedLoader(this);
 }
 
 int GEMClientObject::GetMasqueradeType(void)
@@ -1320,9 +1389,9 @@ GEMClientActor::GEMClientActor(psCelClient* cel, psPersistActor &mesg)
     mountFactname = mesg.mountFactname;
     MounterAnim = mesg.MounterAnim;
     helmGroup = mesg.helmGroup;
-    BracerGroup = mesg.BracerGroup;
-    BeltGroup = mesg.BeltGroup;
-    CloakGroup = mesg.CloakGroup;
+    BracerGroup = mesg.bracerGroup;
+    BeltGroup = mesg.beltGroup;
+    CloakGroup = mesg.cloakGroup;
     type = mesg.type;
     masqueradeType = mesg.masqueradeType;
     guildName = mesg.guild;
@@ -1366,7 +1435,7 @@ GEMClientActor::GEMClientActor(psCelClient* cel, psPersistActor &mesg)
     if(CloakGroup.Length() == 0)
         CloakGroup = factName;
 
-    Debug3(LOG_CELPERSIST, 0, "Actor %s(%s) Received", mesg.name.GetData(), ShowID(mesg.entityid));
+    Debug5(LOG_CELPERSIST, 0, "Actor %s(%s) Received, scale: %f, Bracergroup: %s", mesg.name.GetData(), ShowID(mesg.entityid),scale, BracerGroup.GetData());
 
     // Set up a temporary nullmesh.  The real mesh may need to be background
     // loaded, but since the mesh stores position, etc., it's important to
@@ -1531,6 +1600,11 @@ const csVector3 GEMClientActor::GetVelocity() const
     return linmove->GetVelocity();
 }
 
+float GEMClientActor::GetYRotation() const
+{
+    return linmove->GetYRotation();
+}
+
 csVector3 GEMClientActor::Pos() const
 {
     csVector3 pos;
@@ -1551,11 +1625,7 @@ csVector3 GEMClientActor::Rot() const
 
 iSector* GEMClientActor::GetSector() const
 {
-    csVector3 pos;
-    float yrot;
-    iSector* sector;
-    linmove->GetLastPosition(pos,yrot, sector);
-    return sector;
+    return linmove->GetSector();
 }
 
 bool GEMClientActor::NeedDRUpdate(unsigned char &priority)
@@ -1657,7 +1727,7 @@ void GEMClientActor::SendDRUpdate(unsigned char priority, csStringHashReversible
     // clients do not use out of date messages when delivered out of order.
     psDRMessage drmsg(0, mappedid, on_ground, 0, ++DRcounter, pos, yrot, sector,
                       sector->QueryObject()->GetName(), vel, worldVel, ang_vel,
-                      ((psNetManager*)psengine->GetNetManager())->GetConnection()->GetAccessPointers());
+                      psengine->GetNetManager()->GetConnection()->GetAccessPointers());
     drmsg.msg->priority = priority;
 
     //if (hackflag)
@@ -1677,7 +1747,7 @@ void GEMClientActor::SetDRData(psDRMessage &drmsg)
             iSector* cur_sector;
             linmove->GetLastPosition(cur_pos,cur_yrot,cur_sector);
 
-            if (DoLogDebug(LOG_DRDATA))
+            if(DoLogDebug(LOG_DRDATA))
             {
                 Debug(LOG_DRDATA, GetEID().Unbox(), "%s, %s, %s, %s, %f, %f, %f, %f, %s, %f, %f, %f, %f, %f, %f, %f",
                       "EUCLIENT", "OLD", ShowID(GetEID()),"?", cur_pos.x, cur_pos.y, cur_pos.z, cur_yrot,
@@ -1748,7 +1818,7 @@ void GEMClientActor::SetPosition(const csVector3 &pos, float rot, iSector* secto
     linmove->SetPosition(pos, rot, sector);
 }
 
-void GEMClientActor::SetVelocity(const csVector3& vel)
+void GEMClientActor::SetVelocity(const csVector3 &vel)
 {
     linmove->SetVelocity(vel);
 }
@@ -1810,7 +1880,7 @@ bool GEMClientActor::IsGroupedWith(GEMClientActor* actor)
 
 bool GEMClientActor::IsOwnedBy(GEMClientActor* actor)
 {
-    if (actor && actor->GetOwnerEID() == GetOwnerEID() && GetOwnerEID() != 0)
+    if(actor && actor->GetOwnerEID() == GetOwnerEID() && GetOwnerEID() != 0)
     {
         return true;
     }
@@ -1927,9 +1997,10 @@ void GEMClientActor::SetMode(uint8_t mode, bool newactor)
         cal3dstate->SetAnimAction("stand up", 0.0f, 1.0f);
 
     SetAlive(mode != psModeMessage::DEAD, newactor);
-
+//printf("pscelclient should set alive 2000");
     switch(mode)
     {
+//printf("what mode: %d", mode);
         case psModeMessage::PEACE:
         case psModeMessage::WORK:
         case psModeMessage::EXHAUSTED:
@@ -1947,6 +2018,7 @@ void GEMClientActor::SetMode(uint8_t mode, bool newactor)
             break;
 
         case psModeMessage::DEAD:
+//printf("dead pscelclient 2020");
             cal3dstate->ClearAllAnims();
             cal3dstate->SetAnimAction("death",0.0f,1.0f);
             linmove->SetVelocity(0);
@@ -1997,15 +2069,19 @@ void GEMClientActor::SetCharacterMode(size_t newmode)
 
 void GEMClientActor::SetAlive(bool newvalue, bool newactor)
 {
+//printf("celclient value actor  %d xx %d \n",newvalue,newactor );
     if(alive == newvalue)
+//printf("celclient setalive if == %d \n",newvalue );
         return;
 
     alive = newvalue;
-
+//printf("celclient setalive  =new %d \n",newvalue );
     if(!newactor)
+//printf("celclient setalive notnewactor %d \n",newactor );
         psengine->GetCelClient()->GetEntityLabels()->RepaintObjectLabel(this);
 
     if(!alive)
+//printf("celclient setalive  not alive %d \n",alive );
         psengine->GetCelClient()->GetClientDR()->HandleDeath(this);
 }
 
@@ -2034,7 +2110,7 @@ void GEMClientActor::RefreshCal3d()
     }
     if(cal3dstate)
     {
-        cal3dstate->SetCyclicBlendFactor(0.1);
+        cal3dstate->SetCyclicBlendFactor(0.1f);
     }
     CS_ASSERT(cal3dstate || animeshObject);
 }
@@ -2141,11 +2217,13 @@ bool GEMClientActor::CheckLoadStatus()
         if(scale >= 0)
         {
             csRef<iMovable> movable = mesh->GetMovable();
-            csReversibleTransform & trans = movable->GetTransform();
+            csReversibleTransform &trans = movable->GetTransform();
             csRef<iSpriteCal3DFactoryState> sprite = scfQueryInterface<iSpriteCal3DFactoryState> (mesh->GetFactory()->GetMeshObjectFactory());
 
             // Normalize the mesh scale to the base scale of the mesh.
+            Debug4(LOG_CELPERSIST,0,"DEBUG: Normalize scale: %f / %f = %f\n",scale, sprite->GetScaleFactor(), scale / sprite->GetScaleFactor());
             scale = scale / sprite->GetScaleFactor();
+            linmove->SetScale(scale);
 
             // Apply the resize transformation.
             trans = csReversibleTransform(1.0f / scale * csMatrix3(),csVector3(0)) * trans;

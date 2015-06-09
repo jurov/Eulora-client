@@ -1,7 +1,7 @@
 /*
  * message.h
  *
- * Copyright (C) 2001 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2001 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -128,11 +128,11 @@ struct psMessageBytes
  */
 const unsigned int MAX_MESSAGE_SIZE = 65535 - sizeof(psMessageBytes) - 1;  // Current max, -1 for safety
 
-#define MSG_SIZEOF_VECTOR2   (2*sizeof(uint32))
-#define MSG_SIZEOF_VECTOR3   (3*sizeof(uint32))
-#define MSG_SIZEOF_VECTOR4   (4*sizeof(uint32))
+#define MSG_SIZEOF_VECTOR2   (4*sizeof(uint32))
+#define MSG_SIZEOF_VECTOR3   (5*sizeof(uint32))
+#define MSG_SIZEOF_VECTOR4   (6*sizeof(uint32))
 #define MSG_SIZEOF_SECTOR    100  // Sector can be a string in the message!!!
-#define MSG_SIZEOF_FLOAT     sizeof(uint32)
+#define MSG_SIZEOF_FLOAT     sizeof(uint64)
 
 //-----------------------------------------------------------------------------
 
@@ -285,6 +285,7 @@ public:
         uint32 *pf = (uint32 *)(bytes->payload+current);
         *pf = csLittleEndian::Convert( csIEEEfloat::FromNative(f) );
         current += sizeof(uint32);
+//printf ("288 current %zu \n", current);
     }
 
     /// Add a double the current psMessageBytes buffer
@@ -423,6 +424,7 @@ public:
         uint32_t *p = (uint32_t *)(bytes->payload+current);
         *p = csLittleEndian::Convert((uint32) i);
         current += sizeof(uint32_t);
+//printf ("427 current %zu \n", current);
     }
 
       /// Add a pointer to the current psMessageBytes buffer. Pointers must never be sent over the network!

@@ -1,8 +1,8 @@
 /*
  * subscriber.h
  *
- * Copyright (C) 2001 PlanShift Team (info@planshift.it, 
- * http://www.planshift.it)
+ * Copyright (C) 2001 PlaneShift Team (info@planeshift.it, 
+ * http://www.planeshift.it)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License

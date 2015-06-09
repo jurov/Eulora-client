@@ -1,7 +1,7 @@
 /*
  * pawsexchangewindow.cpp - Author: Andrew Craig
  *
- * Copyright (C) 2001 Atomic Blue (info@planshift.it, http://www.atomicblue.org) 
+ * Copyright (C) 2001 Atomic Blue (info@planeshift.it, http://www.atomicblue.org) 
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -103,10 +103,10 @@ bool pawsExchangeWindow::PostSetup()
     receivingMoneyWidget->SetContainer( CONTAINER_RECEIVING_MONEY );
     receivingMoneyWidget->Drag( false );
 
-    totalTriasOffered = dynamic_cast <pawsTextBox*>(FindWidget("TotalTriasOffer"));
-    totalTriasReceived= dynamic_cast <pawsTextBox*>(FindWidget("TotalTriasRec"));
+    totalCoppersOffered = dynamic_cast <pawsTextBox*>(FindWidget("TotalCoppersOffer"));
+    totalCoppersReceived= dynamic_cast <pawsTextBox*>(FindWidget("TotalCoppersRec"));
     
-    if(!totalTriasOffered || !totalTriasReceived)
+    if(!totalCoppersOffered || !totalCoppersReceived)
         return false;
                 
     // Create Offering bulk slots
@@ -232,8 +232,8 @@ void pawsExchangeWindow::HandleMessage( MsgEntry* me )
             pawsWidget * widget = PawsManager::GetSingleton().FindWidget("SmallInventoryWindow");
             if (widget && !wasSmallInventoryOpen)
                 widget->Close();
-            totalTriasOffered->SetText("");
-            totalTriasReceived->SetText("");
+            totalCoppersOffered->SetText("");
+            totalCoppersReceived->SetText("");
             for (int i = 0; i < EXCHANGE_SLOT_COUNT; i++)
             {                   
                 offeringSlots[i]->Clear();
@@ -299,7 +299,7 @@ void pawsExchangeWindow::HandleMessage( MsgEntry* me )
         ///////////////////////////////////////////////////////////        
         case MSGTYPE_EXCHANGE_ADD_ITEM:
         {
-            psExchangeAddItemMsg item(me, ((psNetManager*)psengine->GetNetManager())->GetConnection()->GetAccessPointers());                        
+            psExchangeAddItemMsg item(me, psengine->GetNetManager()->GetConnection()->GetAccessPointers());                        
             pawsSlot* itemSlot = 0;
             
             if ( item.container == CONTAINER_EXCHANGE_OFFERING )
@@ -331,8 +331,8 @@ void pawsExchangeWindow::Close()
     if (widget && !wasSmallInventoryOpen)
         widget->Close();
 
-    totalTriasOffered->SetText("");
-    totalTriasReceived->SetText("");
+    totalCoppersOffered->SetText("");
+    totalCoppersReceived->SetText("");
     SendEnd();
     Hide();
 }   
@@ -382,17 +382,17 @@ void pawsExchangeWindow::HandleMoney( MsgEntry* me )
     
     if ( money.container == CONTAINER_OFFERING_MONEY )
     {
-        offeringMoneyWidget->Set(money.circles, money.octas, money.hexas, money.trias);
-        csString triasOffered;
-        triasOffered.Format("Tria Offered %d", money.circles*CIRCLES_VALUE_TRIAS + money.octas*OCTAS_VALUE_TRIAS + money.hexas*HEXAS_VALUE_TRIAS + money.trias);
-        totalTriasOffered->SetText(triasOffered);
+        offeringMoneyWidget->Set(money.bitcents, money.denarius, money.argents, money.coppers);
+        csString coppersOffered;
+        coppersOffered.Format("Copper Offered %d", money.bitcents*BITCENTS_VALUE_COPPERS + money.denarius*DENARIUS_VALUE_COPPERS + money.argents*ARGENTS_VALUE_COPPERS + money.coppers);
+        totalCoppersOffered->SetText(coppersOffered);
     }
     else if ( money.container == CONTAINER_RECEIVING_MONEY )
     {
-        receivingMoneyWidget->Set(money.circles, money.octas, money.hexas, money.trias);
-        csString triasReceived;
-        triasReceived.Format("Tria Received %d", money.circles*CIRCLES_VALUE_TRIAS + money.octas*OCTAS_VALUE_TRIAS + money.hexas*HEXAS_VALUE_TRIAS + money.trias);
-        totalTriasReceived->SetText(triasReceived);
+        receivingMoneyWidget->Set(money.bitcents, money.denarius, money.argents, money.coppers);
+        csString coppersReceived;
+        coppersReceived.Format("Copper Received %d", money.bitcents*BITCENTS_VALUE_COPPERS + money.denarius*DENARIUS_VALUE_COPPERS + money.argents*ARGENTS_VALUE_COPPERS + money.coppers);
+        totalCoppersReceived->SetText(coppersReceived);
     }
 }
 
@@ -422,6 +422,6 @@ void pawsExchangeWindow::Clear()
     offeringBG->SetBackground("Standard Background");            
     receivingBG->SetBackground("Standard Background");
     
-    totalTriasOffered->SetText("");
-    totalTriasReceived->SetText("");            
+    totalCoppersOffered->SetText("");
+    totalCoppersReceived->SetText("");            
 }

@@ -1,7 +1,7 @@
 /*
  * messages.h
  *
- * Copyright (C) 2001-2002 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2001-2002 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -33,6 +33,8 @@
 #include "util/psconst.h"
 #include "util/skillcache.h"
 #include <ivideo/graph3d.h>
+
+#include "bulkobjects/activespell.h"
 
 /**
  * \addtogroup messages
@@ -168,6 +170,7 @@ enum MSG_TYPES
     MSGTYPE_QUESTIONCANCEL,
     MSGTYPE_GUILDMOTDSET,
     MSGTYPE_PLAYSOUND,
+    MSGTYPE_PLAYVOICE,
     MSGTYPE_CHARACTERDETAILS,
     MSGTYPE_CHARDETAILSREQUEST,
     MSGTYPE_CHARDESCUPDATE,
@@ -277,7 +280,10 @@ enum MSG_TYPES
     MSGTYPE_SIMPLE_RENDER_MESH,
     MSGTYPE_NPC_WORKDONE,
     MSGTYPE_PATH_NETWORK,
-    MSGTYPE_LOCATION
+    MSGTYPE_LOCATION,
+
+    // mechanisms
+    MSGTYPE_MECS_ACTIVATE
 };
 
 class psMessageCracker;
@@ -388,9 +394,10 @@ public:
 typedef psMessageCracker* (*psfMsgFactoryFunc)(MsgEntry* me, NetBase::AccessPointers* accessPointers);
 
 csString GetMsgTypeName(int msgType);
-void DecodeMessage(MsgEntry* me, NetBase::AccessPointers* accessPointers, bool filterhex, csString& msgText, int& filterNumber);
+void DecodeMessage(MsgEntry* me, NetBase::AccessPointers* accessPointers, bool filterhex, csString &msgText, int &filterNumber);
 
 void psfRegisterMsgFactoryFunction(psfMsgFactoryFunc factoryfunc, int msgtype, const char* msgtypename);
+void psfUnRegisterMsgFactories(void);
 psMessageCracker* psfCreateMsg(int msgtype,
                                MsgEntry* me,
                                NetBase::AccessPointers* accessPointers);
@@ -1643,7 +1650,7 @@ public:
      * should normally be only done on the client.
      * @param command The type that this inventory message is. Should be one of the
      *                 defined enums. Default is request for inventory.
-     * @param size The max size of this message.  Can be cliped when sent on the network.
+     * @param size The max size of this message.  Can be clipped when sent on the network.
      */
     psGUIInventoryMessage(uint8_t command = REQUEST, uint32_t size=0);
 
@@ -1652,7 +1659,7 @@ public:
      * Create a new message that will be used for an inventory list.
      *
      * This is usually done by the server to create a message to be sent
-     * to the client about the players inventory. It needs to know totalItems
+     * to the client about the player's inventory. It needs to know totalItems
      * so it can write that to the message first.
      *
      * @param clientNum   Client destination.
@@ -2396,7 +2403,7 @@ public:
 /** Effect Message
  *
  * This message is used to manage any effect the server wants to send to the
- * clients.  ps ClientCharManager handles this clientside
+ * clients.  psClientCharManager handles this clientside
  */
 class psEffectMessage : public psMessageCracker
 {
@@ -2476,7 +2483,7 @@ public:
      * @param targetID    Name of the new target to display.
      */
     psGUITargetUpdateMessage(uint32_t clientNum, EID targetID);
-    
+
     psGUITargetUpdateMessage(MsgEntry* message);
 
     PSF_DECLARE_MSG_FACTORY();
@@ -2680,7 +2687,8 @@ public:
     uint32_t statsDirty;
     uint8_t counter;
 
-    float hp,hp_rate,mana,mana_rate,pstam,pstam_rate;
+    float bp,hp,mana,spirit,pstam,pstam_rate;
+    float hp_rate,mana_rate,bp_rate,spirit_rate;
     float mstam,mstam_rate,exp,prog;
 };
 
@@ -2698,7 +2706,8 @@ public:
      *  @param maxWeight The maximum weight that this character can carry.
      *  @param maxCapacity The maximum capacity of items that this character can carry.
      */
-    psStatsMessage(uint32_t client, float maxHP, float maxMana, float maxWeight, float maxCapacity);
+    psStatsMessage(uint32_t client, float maxHP, float maxBP,float maxMana,float maxSpirit, float maxWeight, float maxCapacity);
+//psStatsMessage(uint32_t client, float maxHP,float maxMana, float maxWeight, float maxCapacity);
 
     /** Crack open the message from the server. */
     psStatsMessage(MsgEntry* me);
@@ -2718,7 +2727,9 @@ public:
 
     bool  request; // True if this is a request for stats
     float hp;
+    float bp;
     float mana;
+    float spirit;
     float weight;
     float capacity;
 };
@@ -2728,7 +2739,7 @@ public:
 
 //--------------------------------------------------------------------------
 
-/** GUI Skill Message
+/** GUI Skill Message -old
  *
  * This message is used to manage the player skill window. The
  * client psSkillWindow and server psProgressionManager will deal with
@@ -2745,8 +2756,8 @@ public:
                    QUIT
                  };
 
-    static const char * SkillCommandString[];
-    
+    static const char* SkillCommandString[];
+
     /**
      * Constucts a new equipment message to go on the network.
      *
@@ -2767,22 +2778,35 @@ public:
                       psSkillCache* skills,
                       uint32_t str,
                       uint32_t end,
-                      uint32_t agi,
+                      uint32_t con,
                       uint32_t inl,
-                      uint32_t wil,
-                      uint32_t chr,
+                      uint32_t wis,
+                      uint32_t ins,
+                      uint32_t agi,
+                      uint32_t dex,
+                      uint32_t coo,
+                      uint32_t att,
+                      uint32_t foc,
+                      uint32_t pat,
+                      uint32_t pit,
                       uint32_t hp,
+                      uint32_t bp,            
                       uint32_t man,
+                      uint32_t spr,
                       uint32_t physSta,
                       uint32_t menSta,
                       uint32_t hpMax,
+                      uint32_t bpMax,                      
                       uint32_t manMax,
+                      uint32_t sprMax,
                       uint32_t physStaMax,
                       uint32_t menStaMax,
                       bool open,
                       int32_t focus,
                       int32_t selSkillCat,
                       bool isTraining);
+
+
 
     /// Crack this message off the network.
     psGUISkillMessage(MsgEntry* message);
@@ -2803,17 +2827,28 @@ public:
 
     unsigned int strength;
     unsigned int endurance;
-    unsigned int agility;
+    unsigned int constitution;
     unsigned int intelligence;
-    unsigned int will;
-    unsigned int charisma;
+    unsigned int wisdom;
+    unsigned int insight;
+    unsigned int agility;
+    unsigned int dexterity;
+    unsigned int coordination;
+    unsigned int attention;
+    unsigned int focus;
+    unsigned int patience;
+    unsigned int patiences;
     unsigned int hitpoints;
+    unsigned int bloodpoints;
     unsigned int mana;
+    unsigned int spirit;
     unsigned int physStamina;
     unsigned int menStamina;
 
     unsigned int hitpointsMax;
+    unsigned int bloodpointsMax;
     unsigned int manaMax;
+    unsigned int spiritMax;
     unsigned int physStaminaMax;
     unsigned int menStaminaMax;
     bool openWindow;
@@ -2824,7 +2859,131 @@ public:
 private:
     bool includeStats;
 };
+//***************************************
+/** GUI Skill Message -new
+ *
+ * This message is used to manage the player skill window. The
+ * client psSkillWindow and server psProgressionManager will deal with
+ * this messages.
+ */
+class psGUISkillsMessage : public psMessageCracker
+{
+public:
+    enum Command { REQUEST,
+                   BUY_SKILL,
+                   SKILL_LIST,
+                   SKILL_SELECTED,
+                   DESCRIPTION,
+                   QUIT
+                 };
 
+    static const char* SkillCommandString[];
+
+    /**
+     * Constucts a new equipment message to go on the network.
+     *
+     * This will build any of the GUI exchange message needed in
+     * a skill window.
+     *
+     * @param command     One of REQUEST,BUY_SKILL, SKILL_LIST
+     *                             SKILL_SELECTED, DESCRIPTION, QUIT
+     * @param commandData XML string with command data
+     *
+     */
+    psGUISkillsMessage(uint8_t command,
+                      csString commandData);
+
+    psGUISkillsMessage(uint32_t clientNum,
+                      uint8_t command,
+                      csString commandData,
+                      psSkillCache* skills,
+                      uint32_t str,
+                      uint32_t end,
+                      uint32_t con,
+                      uint32_t inl,
+                      uint32_t wis,
+                      uint32_t ins,
+                      uint32_t agi,
+                      uint32_t dex,
+                      uint32_t coo,
+                      uint32_t att,
+                      uint32_t foc,
+                      uint32_t pat,
+                      uint32_t pit,
+
+                      uint32_t hp,
+                      uint32_t bp,
+                      
+                      uint32_t man,
+                      uint32_t spr,
+                      uint32_t physSta,
+                      uint32_t menSta,
+                      uint32_t hpMax,
+                      uint32_t bpMax,
+                     
+                      uint32_t manMax,
+                      uint32_t sprMax,
+                      uint32_t physStaMax,
+                      uint32_t menStaMax,
+                      bool open,
+                      int32_t focus,
+                      int32_t selSkillCat,
+                      bool isTraining);
+
+
+
+    /// Crack this message off the network.
+    psGUISkillsMessage(MsgEntry* message);
+
+    PSF_DECLARE_MSG_FACTORY();
+
+    /**
+     *  Converts the message into human readable string.
+     *
+     * @param accessPointers A struct to a number of access pointers.
+     * @return Return a human readable string for the message.
+     */
+    virtual csString ToString(NetBase::AccessPointers* accessPointers);
+
+    uint8_t command;
+    csString commandData;
+    psSkillCache skillCache;
+
+    unsigned int strength;
+    unsigned int endurance;
+    unsigned int constitution;
+    unsigned int intelligence;
+    unsigned int wisdom;
+    unsigned int insight;
+    unsigned int agility;
+    unsigned int dexterity;
+    unsigned int coordination;
+    unsigned int attention;
+    unsigned int focus;
+    unsigned int patience;
+    unsigned int patiences;
+    unsigned int hitpoints;
+    unsigned int bloodpoints;
+    unsigned int mana;
+    unsigned int spirit;
+    unsigned int physStamina;
+    unsigned int menStamina;
+
+    unsigned int hitpointsMax;
+    unsigned int bloodpointsMax;
+    unsigned int manaMax;
+    unsigned int spiritMax;
+    unsigned int physStaminaMax;
+    unsigned int menStaminaMax;
+    bool openWindow;
+    int32_t focusSkill;
+    int32_t skillCat;
+    bool trainingWindow; //Are we training or not?
+
+private:
+    bool includeStats;
+};
+//***************************************
 
 //--------------------------------------------------------------------------
 
@@ -2846,27 +3005,27 @@ public:
     psGUIBankingMessage(uint32_t clientNum,
                         uint8_t command,
                         bool guild,
-                        int circlesBanked,
-                        int octasBanked,
-                        int hexasBanked,
-                        int triasBanked,
-                        int circles,
-                        int octas,
-                        int hexas,
-                        int trias,
-                        int maxCircles,
-                        int maxOctas,
-                        int maxHexas,
-                        int maxTrias,
+                        int bitcentsBanked,
+                        int denariusBanked,
+                        int argentsBanked,
+                        int coppersBanked,
+                        int bitcents,
+                        int denarius,
+                        int argents,
+                        int coppers,
+                        int maxBITCents,
+                        int maxDenarius,
+                        int maxArgents,
+                        int maxCoppers,
                         float exchangeFee,
                         bool forceOpen);
 
     psGUIBankingMessage(uint8_t command,
                         bool guild,
-                        int circles,
-                        int octas,
-                        int hexas,
-                        int trias);
+                        int bitcents,
+                        int denarius,
+                        int argents,
+                        int coppers);
 
     psGUIBankingMessage(uint8_t command,
                         bool guild,
@@ -2888,18 +3047,18 @@ public:
 
     uint8_t command;
     bool guild;
-    int circlesBanked;
-    int octasBanked;
-    int hexasBanked;
-    int triasBanked;
-    int circles;
-    int octas;
-    int hexas;
-    int trias;
-    int maxCircles;
-    int maxOctas;
-    int maxHexas;
-    int maxTrias;
+    int bitcentsBanked;
+    int denariusBanked;
+    int argentsBanked;
+    int coppersBanked;
+    int bitcents;
+    int denarius;
+    int argents;
+    int coppers;
+    int maxBITCents;
+    int maxDenarius;
+    int maxArgents;
+    int maxCoppers;
     int coins;
     int coin;
     float exchangeFee;
@@ -2948,10 +3107,17 @@ public:
                       csString commandData,
                       uint32_t str,
                       uint32_t end,
-                      uint32_t agi,
+                      uint32_t con,
                       uint32_t inl,
-                      uint32_t wil,
-                      uint32_t chr,
+                      uint32_t wis,
+                      uint32_t ins,
+                      uint32_t agi,
+                      uint32_t dex,
+                      uint32_t coo,
+                      uint32_t att,
+                      uint32_t foc,
+                      uint32_t pat,
+                      
                       uint32_t hp,
                       uint32_t man,
                       uint32_t physSta,
@@ -2981,10 +3147,17 @@ public:
 
     unsigned int strength;
     unsigned int endurance;
-    unsigned int agility;
+    unsigned int constitution;
     unsigned int intelligence;
-    unsigned int will;
-    unsigned int charisma;
+    unsigned int wisdom;
+    unsigned int insight;
+    unsigned int agility;
+    unsigned int dexterity;
+    unsigned int coordination;
+    unsigned int attention;
+    unsigned int focus;
+    unsigned int patience;
+    unsigned int patiences;
     unsigned int hitpoints;
     unsigned int mana;
     unsigned int physStamina;
@@ -3297,9 +3470,9 @@ public:
     csString MounterAnim;               ///< The anim to be used by the mounter.
     unsigned short int gender;
     csString helmGroup;                 ///< Used for helm groupings.
-    csString BracerGroup;               ///< Used for bracers groupings.
-    csString BeltGroup;                 ///< Used for belt groupings.
-    csString CloakGroup;                ///< Used for cloak groupings.
+    csString bracerGroup;               ///< Used for bracers groupings.
+    csString beltGroup;                 ///< Used for belt groupings.
+    csString cloakGroup;                ///< Used for cloak groupings.
     csVector3 top, bottom, offset;
     csString texParts;
     csString equipment;
@@ -3686,33 +3859,70 @@ public:
  *
  * This message is used to manage the active spells window. The
  * client psActiveSpellWindow and server psProgressionManager will deal with
- * this messages.
+ * this message.
  */
 class psGUIActiveMagicMessage : public psMessageCracker
 {
 public:
-    enum commandType { Add, Remove };
+    
+    enum commandType { Add, Remove, List };
 
-    psGUIActiveMagicMessage(uint32_t clientNum,
-                            commandType cmd,
-                            SPELL_TYPE type,
-                            const csString &name)
+    psGUIActiveMagicMessage(uint32_t clientNum, csArray<ActiveSpell*>& spells, uint32_t index )
     {
-        msg.AttachNew(new MsgEntry(sizeof(bool) + +sizeof(uint8_t) + sizeof(int32_t) + name.Length() + 1));
+        //                  MSGTYPE_ACTIVEMAGIC + clientNum        + command         + valid        + index            + spellCount;
+        size_t    msgSize = sizeof(uint8_t)     + sizeof(uint32_t) + sizeof(uint8_t) + sizeof(bool) + sizeof(uint32_t) + sizeof(uint32_t); 
+
+	size_t    numSpells = spells.GetSize();
+
+        for( size_t i=0; i<numSpells; i++ )
+        {
+            msgSize += sizeof(uint8_t);     //SPELL_TYPE 
+            msgSize += sizeof(uint32_t);    //duration
+            msgSize += spells[i]->Name().Length() + 1;
+            msgSize += spells[i]->Image().Length() + 1;
+        }
+
+        msg.AttachNew(new MsgEntry(msgSize));
         msg->SetType(MSGTYPE_ACTIVEMAGIC);
         msg->clientnum = clientNum;
-        msg->Add((uint8_t)cmd);
-        msg->Add((uint8_t)type);
-        msg->Add(name);
+        msg->Add((uint8_t)psGUIActiveMagicMessage::List);
+        msg->Add((uint32_t)index);
+        msg->Add((uint32_t)numSpells);
+        for( size_t i=0; i<numSpells; i++ )
+        {
+            msg->Add((uint8_t)spells[i]->Type());
+            msg->Add((uint32_t)spells[i]->Duration());
+            msg->Add(spells[i]->Name().GetData());
+            msg->Add(spells[i]->Image().GetData());
+        }
         valid = !(msg->overrun);
     }
 
     /// Crack this message off the network.
     psGUIActiveMagicMessage(MsgEntry* message)
     {
-        command = (commandType) message->GetUInt8();
-        type = (SPELL_TYPE) message->GetUInt8();
-        name = message->GetStr();
+        //what type of message : Add, Remove or List. retained so older style messages won't make the system crash.
+        command = (commandType)message->GetUInt8();
+        if( command != List )
+        {
+            valid = false;
+            return;
+        }
+
+	//what is the index number of this message?
+	index = message->GetUInt32();
+
+	//how many spells are in the message?
+	size_t totalSpells = message->GetUInt32();
+
+	//read the spells
+	for( size_t i=0; i<totalSpells; i++ )
+	{
+	    type.Push( (SPELL_TYPE) message->GetUInt8() );
+	    duration.Push( message->GetUInt32());
+	    name.Push( message->GetStr());          //if there was no name when the message was sent, this should read a null string
+	    image.Push( message->GetStr());         //if there was no name when the message was sent, this should read a null string
+	}
         valid = true;
     }
 
@@ -3726,9 +3936,12 @@ public:
      */
     virtual csString ToString(NetBase::AccessPointers* accessPointers);
 
+    uint32_t             index;
     commandType command;
-    SPELL_TYPE type;
-    csString name;
+    csArray<SPELL_TYPE>  type;
+    csArray<uint32>      duration;
+    csArray<csString>    name;
+    csArray<csString>    image;
 };
 
 //-----------------------------------------------------------------------------
@@ -4186,7 +4399,7 @@ public:
      * @param isContainer True if this item is a container.
      */
     psViewContainerDescription(uint32_t to, const char* itemName, const char* description, const char* icon,
-                          uint32_t stackCount);
+                               uint32_t stackCount);
 
     /** Crack out the details from the message.
       * This will look at the packet and figure out if it is a single item or a container.
@@ -4440,7 +4653,7 @@ class psExchangeMoneyMsg : public psMessageCracker
 {
 public:
     psExchangeMoneyMsg(uint32_t client, int container,
-                       int trias, int hexas, int circles,int octas);
+                       int coppers, int argents, int bitcents,int denarius);
 
     psExchangeMoneyMsg(MsgEntry* me);
 
@@ -4456,10 +4669,10 @@ public:
 
     int container;
 
-    int trias;
-    int octas;
-    int hexas;
-    int circles;
+    int coppers;
+    int denarius;
+    int argents;
+    int bitcents;
 };
 
 /** A request to start an exchange with your current target
@@ -5679,6 +5892,29 @@ public:
      */
     virtual csString ToString(NetBase::AccessPointers* accessPointers);
 };
+//-----------------------------------------------------------------------------
+/** This message is used to tell the client to play a voice file.
+ *
+ */
+class psPlayVoiceMessage : public psMessageCracker
+{
+public:
+    csString fname;
+
+    psPlayVoiceMessage(uint32_t client, csString fname);
+    psPlayVoiceMessage(MsgEntry* message);
+
+    PSF_DECLARE_MSG_FACTORY();
+    /**
+     *  Converts the message into human readable string.
+     *
+     * @param accessPointers A struct to a number of access pointers.
+     * @return Return a human readable string for the message.
+     */
+    virtual csString ToString(NetBase::AccessPointers* accessPointers);
+};
+
+
 
 //-----------------------------------------------------------------------------
 
@@ -5846,6 +6082,42 @@ public:
      */
     virtual csString ToString(NetBase::AccessPointers* accessPointers);
 };
+
+/**
+ * This message is used by the server to activate one mechanism client side.
+ */
+class psMechanismActivateMessage: public psMessageCracker
+{
+public:
+    /**
+     * Constructor.
+     * @param client the client's ID.
+     * @param sectorname the sector where the mechanism resides.
+     * @param meshName the name of the mesh to activate.
+     * @param mechanismScript the script to run on the selected mesh.
+     */
+    psMechanismActivateMessage(uint32_t client, const char* meshName,
+                               const char* move, const char* rot);
+
+    /**
+     * Constructor from a MsgEntry.
+     * @param me the message entry.
+     */
+    psMechanismActivateMessage(MsgEntry* me);
+
+    // From psMessageCracker
+    PSF_DECLARE_MSG_FACTORY();
+
+    virtual csString ToString(NetBase::AccessPointers* /*accessPointers*/)
+    {
+        return csString("not implemented");
+    }
+
+    csString meshName;
+    csString move;
+    csString rot;
+};
+
 
 /**
 *  Class to implement sequential delivery of net messages

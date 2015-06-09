@@ -1,7 +1,7 @@
 /*
  * psslotmgr.cpp
  *
- * Copyright (C) 2005 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2005 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,8 +30,10 @@
 #include <iscenemanipulate.h>
 #include "paws/pawsmainwidget.h"
 #include "gui/pawsslot.h"
+#include "gui/pawsdndbutton.h"
 #include "pscamera.h"
 #include "globals.h"
+#include "pscharcontrol.h"
 
 
 //=============================================================================
@@ -44,6 +46,8 @@ psSlotManager::psSlotManager()
     isDragging = false;
     isPlacing = false;
     isRotating = false;
+    draggingSlot.stackCount = 0;
+    last_count = -1;
 
     // Initialize event shortcuts
     MouseMove = csevMouseMove (psengine->GetEventNameRegistry(), 0);
@@ -74,7 +78,7 @@ bool psSlotManager::HandleEvent( iEvent& ev )
         }
         else if(ev.Name == MouseDown)
         {
-            if(button == 0) // Left
+            if(button == csmbLeft) // Left
             {
                 if(isPlacing)
                 {
@@ -87,7 +91,7 @@ bool psSlotManager::HandleEvent( iEvent& ev )
                     PlaceItem();
                 }
             }
-            else if(button == 1) // right
+            else if(button == csmbRight) // right
             {
                 if(!isRotating)
                 {
@@ -111,7 +115,7 @@ bool psSlotManager::HandleEvent( iEvent& ev )
         }
         else if(ev.Name == MouseUp)
         {
-            if(button == 1) // right
+            if(button == csmbRight) // right
             {
                 if(isRotating)
                 {
@@ -137,6 +141,7 @@ bool psSlotManager::HandleEvent( iEvent& ev )
 
 void psSlotManager::CancelDrag()
 {
+
     isDragging = false;
 
     if(isPlacing)
@@ -151,23 +156,32 @@ void psSlotManager::CancelDrag()
         hadInventory = false;
     }
 
-    pawsSlot* dragging = (pawsSlot*)PawsManager::GetSingleton().GetDragDropWidget();
-    if ( !dragging )
-        return;
+    if( draggingSlot.stackCount>0 ) 
+    {
+        pawsSlot* dragging = (pawsSlot*)PawsManager::GetSingleton().GetDragDropWidget();
+        if ( !dragging )
+        {
+            return;
+        }
 
-    draggingSlot.slot->SetPurifyStatus(dragging->GetPurifyStatus());
-    int oldStack =  draggingSlot.slot->StackCount();
-    oldStack += draggingSlot.stackCount;
+        if( draggingSlot.slot )
+        {
+            ((pawsSlot *)draggingSlot.slot)->SetPurifyStatus(dragging->GetPurifyStatus());
+            int oldStack =  ((pawsSlot *)draggingSlot.slot)->StackCount();
+            oldStack += draggingSlot.stackCount;
 
-    csString res;
-    if(dragging->Image())
-        res = dragging->Image()->GetName();
-    else
-        res.Clear();
+            csString res;
+            if(dragging->Image())
+                res = dragging->Image()->GetName();
+            else
+                res.Clear();
 
-    draggingSlot.slot->PlaceItem(res, draggingSlot.meshFactName, draggingSlot.materialName, oldStack);
-    draggingSlot.slot->SetToolTip(draggingSlot.toolTip);
-    draggingSlot.slot->SetBartenderAction(draggingSlot.bartenderAction);
+            ((pawsSlot *)draggingSlot.slot)->PlaceItem(res, draggingSlot.meshFactName, draggingSlot.materialName, oldStack);
+            ((pawsSlot *)draggingSlot.slot)->SetToolTip(draggingSlot.toolTip);
+            ((pawsSlot *)draggingSlot.slot)->SetBartenderAction(draggingSlot.Action);
+        }
+    }
+        
     PawsManager::GetSingleton().SetDragDropWidget( NULL );
 }
 
@@ -197,6 +211,7 @@ void psSlotManager::OnNumberEntered(const char* /*name*/, int param, int count)
     if (!parent)
         return;
 
+    last_count = count;
     int purifyStatus = parent->GetPurifyStatus();
     int newStack = parent->StackCount() - count;
 
@@ -210,7 +225,7 @@ void psSlotManager::OnNumberEntered(const char* /*name*/, int param, int count)
 
     widget->SetPurifyStatus( purifyStatus );
     widget->SetBackgroundAlpha(0);
-    widget->SetParent( NULL );
+    widget->SetParent(NULL);
     widget->DrawStackCount(parent->IsDrawingStackCount());
 
     SetDragDetails(parent, count);
@@ -220,9 +235,14 @@ void psSlotManager::OnNumberEntered(const char* /*name*/, int param, int count)
 }
 
 
+void psSlotManager::SetDragDetails(pawsDnDButton* target )
+{
+    draggingSlot.stackCount      = 0;			//the only way it can be zero is if this is a DnDButton...
+    draggingSlot.slot            = target;
+}
+
 void psSlotManager::SetDragDetails(pawsSlot* slot, int count)
 {
-    //printf("SetDragDetails: \n");
     draggingSlot.containerID     = slot->ContainerID();
     draggingSlot.slotID          = slot->ID();
     draggingSlot.stackCount      = count;
@@ -230,7 +250,7 @@ void psSlotManager::SetDragDetails(pawsSlot* slot, int count)
     draggingSlot.meshFactName    = slot->GetMeshFactName();
     draggingSlot.materialName    = slot->GetMaterialName();
     draggingSlot.toolTip         = slot->GetToolTip();
-    draggingSlot.bartenderAction = slot->GetBartenderAction();
+    draggingSlot.Action = slot->GetAction();
     //checks if we are dragging the whole thing or not
     draggingSlot.split           = slot->StackCount() != count;
 }
@@ -238,6 +258,11 @@ void psSlotManager::SetDragDetails(pawsSlot* slot, int count)
 
 void psSlotManager::PlaceItem()
 {
+    if( draggingSlot.stackCount== 0 ) //stackCount==0 means this is a DnDButton. 
+    {
+        return;
+    }
+
     // Get WS position.
     psPoint p = PawsManager::GetSingleton().GetMouse()->GetPosition();
 
@@ -314,8 +339,6 @@ void psSlotManager::DropItem(bool guard)
 
 void psSlotManager::Handle( pawsSlot* slot, bool grabOne, bool grabAll )
 {
-    //printf("In psSlotManager::Handle()\n");
-
     if ( !isDragging )
     {
         // Make sure other code isn't drag-and-dropping a different object.
@@ -323,7 +346,6 @@ void psSlotManager::Handle( pawsSlot* slot, bool grabOne, bool grabAll )
         if (dndWidget)
             return;
 
-        //printf("Starting a drag/drop action\n");
         if( !slot->GetLock() ){
             int stackCount = slot->StackCount();
             if ( stackCount > 0 )
@@ -343,39 +365,24 @@ void psSlotManager::Handle( pawsSlot* slot, bool grabOne, bool grabAll )
                     csString max;
                     max.Format("Max %d", stackCount );
 
-                    pawsNumberPromptWindow::Create(max,
-                                                   -1, 1, stackCount, this, "StackCount", tmpID);
+                    pawsNumberPromptWindow::Create(max, last_count,
+                                                   1, stackCount, this, "StackCount", tmpID);
                 }
             }
         }
     }
     else
     {
-        //do nothing if it's the same slot and we aren't dragging a split item
+        // Do nothing if it's the same slot and we aren't dropping a split stack.
+        // Note that crafters use this to pick up one item from a stack,
+        // drop it on the stack, and have the server put the item in a
+        // different slot.
         if(slot == draggingSlot.slot && !draggingSlot.split)
         {
             CancelDrag();
             return;
         }
-        //printf("Dropping Slot Here\n");
-        //printf("Target Slot Information: \n");
-        //printf("Bartender Slot: %d\n", slot->IsBartender());
-        //printf("Sending slot movement message\n");
-        if ( slot->IsBartender() && !slot->GetLock() )
-        {
-            //we cancel dragging because we aren't moving the original item but just taking
-            //a reference to it. If it's among bartender slots we will handle them differently
-            CancelDrag();
-            slot->PlaceItem( draggingSlot.slot->ImageName(), "", "", draggingSlot.stackCount);
-            slot->SetBartenderAction(draggingSlot.bartenderAction);
-            slot->SetToolTip(draggingSlot.toolTip);
-            //if the original slot was a bartender clear it as we are moving it to a new one
-            if(draggingSlot.slot->IsBartender())
-            {
-                draggingSlot.slot->Clear();
-            }
-        }
-        else if( !slot->GetLock() )
+        if( !slot->GetLock() )
         {
             //printf("Slot->ID: %d\n", slot->ID() );
             //printf("Container: %d\n", slot->ContainerID() );
@@ -388,7 +395,7 @@ void psSlotManager::Handle( pawsSlot* slot, bool grabOne, bool grabAll )
                 CancelDrag();
 
                 // Set the image to this slot.
-                slot->PlaceItem( draggingSlot.slot->ImageName(), "", "", draggingSlot.stackCount);
+                slot->PlaceItem( ((pawsSlot *)draggingSlot.slot)->ImageName(), "", "", draggingSlot.stackCount);
             }
             else
             {
@@ -414,4 +421,118 @@ void psSlotManager::Handle( pawsSlot* slot, bool grabOne, bool grabAll )
             }
         }
     }
+}
+
+void psSlotManager::Handle( pawsDnDButton* target )
+{
+    if( target==NULL )
+    {
+       return;
+    }
+    if ( !IsDragging() )
+    {
+        // Make sure other code isn't drag-and-dropping a different object.
+        pawsWidget *dndWidget = PawsManager::GetSingleton().GetDragDropWidget();
+        if (dndWidget)
+        {
+            return;
+        }
+
+        if( (target->GetMaskingImage()==NULL || *(target->GetMaskingImage()->GetName())==0) && (target->GetName()==NULL || *(target->GetName())==0 ) )
+        { //there's nothing in this button, don't drag it.
+           return;
+        }
+
+        pawsDnDButton* widget = new pawsDnDButton();
+        widget->SetRelativeFrame( 0,0, target->GetDefaultFrame().Width(), target->GetDefaultFrame().Height() );
+        widget->PlaceItem( target->GetMaskingImage()!=NULL?target->GetMaskingImage()->GetName():NULL, target->GetName(), target->GetToolTip(), target->GetAction() );
+        if( target->GetMaskingImage()==NULL || *(target->GetMaskingImage()->GetName()) == 0 )
+        {
+            widget->SetText(target->GetName());
+        }
+
+        widget->SetBackgroundAlpha(0);
+        widget->SetParent( NULL );
+        widget->SetIndexBase( target->GetIndexBase() );
+
+        //SetDragDetails(parent, 0);
+
+        SetDragDetails(target);
+        isDragging = true;
+        PawsManager::GetSingleton().SetDragDropWidget( widget );
+    }
+    else if( draggingSlot.stackCount == 0 ) //dragging from a dndbutton
+    {
+        //do nothing if it's the same slot and we aren't dragging a split item
+        if(target == (pawsDnDButton *)draggingSlot.slot )
+        {
+            CancelDrag();
+            return;
+        }
+        if ( target->GetDnDLock() ) //state "down" == true == editable
+        {
+            target->Clear();
+
+            target->SetImageNameCallback( ((pawsDnDButton *)draggingSlot.slot)->GetImageNameCallback() );
+            target->SetNameCallback( ((pawsDnDButton *)draggingSlot.slot)->GetNameCallback() );
+            target->SetActionCallback( ((pawsDnDButton *)draggingSlot.slot)->GetActionCallback() );
+
+            if( target->PlaceItem( ((pawsDnDButton *)draggingSlot.slot)->GetMaskingImage()!=NULL?((pawsDnDButton *)draggingSlot.slot)->GetMaskingImage()->GetName():NULL,  ((pawsDnDButton *)draggingSlot.slot)->GetName(), ((pawsDnDButton *)draggingSlot.slot)->GetToolTip(),  ((pawsDnDButton *)draggingSlot.slot)->GetAction() ) )
+            {
+                //move key bindings
+                csString          editedCmd;
+                const psControl*  keyBinding;
+                csString          keyName;
+                uint32            keyButton,
+                                  keyMods;
+                psControl::Device           keyDevice;
+
+              
+                editedCmd.Format("Shortcut %d",((pawsDnDButton *)draggingSlot.slot)->GetButtonIndex()+1 );
+                keyBinding =  psengine->GetCharControl()->GetTrigger( editedCmd );
+
+                if( keyBinding->name.Length()>0 )
+                {
+                    keyButton  = keyBinding->button;
+                    keyMods    = keyBinding->mods;
+                    keyDevice  = keyBinding->device;
+
+                    psengine->GetCharControl()->RemapTrigger(editedCmd,psControl::NONE,0,0);
+             
+                    editedCmd.Format("Shortcut %d",target->GetButtonIndex()+1 );
+                    psengine->GetCharControl()->RemapTrigger( editedCmd, keyDevice, keyButton, keyMods );
+                }
+
+                //set text if there's no icon
+                if(  ((pawsDnDButton *)draggingSlot.slot)->GetMaskingImage()==NULL || *(((pawsDnDButton *)draggingSlot.slot)->GetMaskingImage()->GetName()) == 0 )
+                {
+                    target->SetText( ((pawsDnDButton *)draggingSlot.slot)->GetName() );
+                }
+
+                //clear contents of the originating button
+                ((pawsDnDButton *)draggingSlot.slot)->Clear();
+
+                //redraw the parent window to change layout
+                target->SetParent( ((pawsDnDButton *)draggingSlot.slot)->GetParent() );
+                target->GetParent()->GetParent()->OnResize(); // parent is the buttonHolder, grandparent is the shortcut window.
+
+            }
+            CancelDrag();
+        }
+    }
+    else //dragging from a Slot
+    {
+        CancelDrag();
+        if( !draggingSlot.Action.IsEmpty() )
+        {
+            target->PlaceItem( ((pawsSlot *)draggingSlot.slot)->ImageName(), draggingSlot.toolTip, draggingSlot.toolTip, draggingSlot.Action );
+        }
+        else
+        {
+            csString t = "/use " + draggingSlot.toolTip;
+            target->PlaceItem( ((pawsSlot *)draggingSlot.slot)->ImageName(), draggingSlot.toolTip, draggingSlot.toolTip, t );
+            draggingSlot.stackCount--;
+        }
+    }
+
 }

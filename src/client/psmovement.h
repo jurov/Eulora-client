@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2006 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -64,6 +64,14 @@ struct psMovement
     uint32 id;            ///< ID of this movement type from server DB
     csString name;        ///< Name of this movement
     psVelocity motion;    ///< Motion aplied for this movement
+};
+
+/// Used to save movement state to detect changes.
+struct psMoveState
+{
+    uint activeMoves;
+    bool autoMove;
+    bool sneaking;
 };
 
 /** Manages main character movements.
@@ -197,6 +205,20 @@ public:
 
     void SetSneaking(bool v) { sneaking = v; }
     bool Sneaking() { return sneaking; }
+
+    void SaveMoveState(psMoveState& state)
+    {
+        state.activeMoves = activeMoves;
+        state.autoMove = autoMove;
+        state.sneaking = sneaking;
+    }
+
+    bool MoveStateChanged(psMoveState& state)
+    {
+        return state.activeMoves != activeMoves ||
+               state.autoMove != autoMove ||
+               state.sneaking != sneaking;
+    }
 };
 
 #endif

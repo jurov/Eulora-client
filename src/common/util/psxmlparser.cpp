@@ -1,7 +1,7 @@
 /*
  * psxmlparser.cpp
  *
- * Copyright (C) 2001 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2001 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -279,12 +279,12 @@ csRef<iDocument> ParseFile(iObjectRegistry* object_reg, const csString & name)
     csRef<iDataBuffer> buff = vfs->ReadFile(name);
     if (buff == NULL)
     {
-        Error2("Could not find file: %s", name.GetData());
+        //Error2("Could not find file: %s", name.GetData());
         return NULL;
     }
     xml =  csQueryRegistry<iDocumentSystem> (object_reg);
-    if (!xml)
-        xml = csPtr<iDocumentSystem>(new csTinyDocumentSystem);
+    if (!xml.IsValid())
+        xml.AttachNew(new csTinyDocumentSystem);
     assert(xml);
     doc = xml->CreateDocument();
     assert(doc);
@@ -300,7 +300,7 @@ csRef<iDocument> ParseFile(iObjectRegistry* object_reg, const csString & name)
 csRef<iDocument> ParseString(const csString & str, bool notify)
 {
     csRef<iDocumentSystem> xml;
-    xml = csPtr<iDocumentSystem>(new csTinyDocumentSystem);
+    xml.AttachNew(new csTinyDocumentSystem);
     CS_ASSERT(xml != NULL);
     csRef<iDocument> doc  = xml->CreateDocument();
     const char* error = doc->Parse(str);
@@ -308,7 +308,7 @@ csRef<iDocument> ParseString(const csString & str, bool notify)
     {
         if (notify)
         {
-           // Error3("Error in XML: %s\nString was: %s", error, str.GetDataSafe());
+            Error3("Error in XML: %s\nString was: %s", error, str.GetDataSafe());
         }
         return NULL;
     }

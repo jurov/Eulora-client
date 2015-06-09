@@ -1,7 +1,7 @@
 /*
  * pawsstoragewindow.cpp -  Stefano Angeleri <weltall2@gmail.com>
  *
- * Copyright (C) 2010 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2010 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -106,7 +106,7 @@ bool pawsStorageWindow::PostSetup()
 
     categoryBox = (pawsListBox*)FindWidget("Categories");
     itemsBox    = (pawsListBox*)FindWidget("Items");
-    trias       = (pawsTextBox*)FindWidget("TotalTrias");
+    coppers       = (pawsTextBox*)FindWidget("TotalCoppers");
 
     return true;
 }
@@ -181,16 +181,16 @@ void pawsStorageWindow::HandleMoney( const char* moneyData )
 
     psMoney money(moneyString);
 
-    UpdateMoney("circles","MoneyCircles",  money.GetCircles());
-    UpdateMoney("octas",  "MoneyOctas",    money.GetOctas());
-    UpdateMoney("hexas",  "MoneyHexas",    money.GetHexas());
-    UpdateMoney("trias",  "MoneyTrias",    money.GetTrias());
+    UpdateMoney("bitcents","MoneyCircles",  money.GetBITCents());
+    UpdateMoney("denarius",  "MoneyOctas",    money.GetDenarius());
+    UpdateMoney("argents",  "MoneyHexas",    money.GetArgents());
+    UpdateMoney("coppers",  "MoneyTrias",    money.GetCoppers());
     
     PawsManager::GetSingleton().Publish( "sigInvMoney", money.ToString() );         
     PawsManager::GetSingleton().Publish( "sigInvMoneyTotal", money.GetTotal() );
 
     
-    trias->SetText(csString().Format("%d Trias",money.GetTotal()));    
+    coppers->SetText(csString().Format("%d Coppers",money.GetTotal()));    
 }
 
 

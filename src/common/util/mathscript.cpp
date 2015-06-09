@@ -1,7 +1,7 @@
 /*
- * mathscript.cpp by Keith Fulton <keith@planshift.it>
+ * mathscript.cpp by Keith Fulton <keith@planeshift.it>
  *
- * Copyright (C) 2010s Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2010s Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -105,7 +105,7 @@ MathType MathVar::Type() const
 void MathVar::SetValue(double v)
 {
     value = v;
-
+//printf(" math sets v %g \n",v);
     if (changedVarCallback)
         changedVarCallback(changedVarCallbackArg);
 }
@@ -113,7 +113,7 @@ void MathVar::SetValue(double v)
 void MathVar::SetObject(iScriptableVar* p)
 {
     value = parent->GetValue(p);
-
+//printf(" math sets object  \n");
     if (changedVarCallback)
         changedVarCallback(changedVarCallbackArg);
 }
@@ -121,7 +121,7 @@ void MathVar::SetObject(iScriptableVar* p)
 void MathVar::SetString(const char* p)
 {
     value = parent->GetValue(p);
-
+//printf(" math sets string  \n");
     if (changedVarCallback)
         changedVarCallback(changedVarCallbackArg);
 }
@@ -212,6 +212,7 @@ void MathEnvironment::InterpolateString(csString & str) const
 void MathEnvironment::Define(const char *name, double value)
 {
     MathVar* var = GetVar(name);
+//printf(" define name & value %s %g \n", name,value);
     var->SetValue(value);
 }
 
@@ -772,6 +773,7 @@ csWeakRef<MathScript> MathScriptEngine::FindScript(const csString & name)
 
 bool MathScriptEngine::CheckAndUpdateScript(csWeakRef<MathScript> &script, const csString &name)
 {
+//printf("checking script %s \n",name.GetData();
     //check if we need to reload the script
     if(!script.IsValid())
     {
@@ -831,6 +833,7 @@ double MathScriptEngine::CustomCompoundFunc(const double * parms)
     else
     {
         // calculate a function on the object
+//printf("math 636 do calc function return v %d or ? %s \n",v,funcName.GetData());
         return (v ? v->CalcFunction(env, funcName.GetData(), &parms[3]) : 0);
     }
 }
@@ -879,7 +882,7 @@ MathExpression* MathExpression::Create(const char *expression, const char *name)
 {
     MathExpression* exp = new MathExpression;
     exp->name = name;
-
+//printf(" 885 math \n");
     if (!exp->Parse(expression))
     {
         delete exp;
@@ -957,7 +960,7 @@ bool MathExpression::Parse(const char *exp)
         tokens.Push(exp+start);
 
     // return statements are treated specially
-    if (tokens[0] == "return")
+    if (tokens.GetSize() && tokens[0] == "return")
     {
         tokens.DeleteIndex(0);
         opcode |= MATH_BREAK;
@@ -1111,12 +1114,13 @@ bool MathExpression::Parse(const char *exp)
     csString expression;
     for (size_t i = 0; i < tokens.GetSize(); i++)
         expression.Append(tokens[i]);
-
+//printf(" math 1117 Final expression: '%s' (%s)\n", expression.GetData(), fpVars.GetDataSafe());
     Debug3(LOG_SCRIPT, 0, "Final expression: '%s' (%s)\n", expression.GetData(), fpVars.GetDataSafe());
 
     size_t ret = fp.Parse(expression.GetData(), fpVars.GetDataSafe());
     if (ret != (size_t) -1)
     {
+//printf("math 1123 Parse error in MathExpression >%s: '%s'< at column %zu: %s", name, expression.GetData(), ret, fp.ErrorMsg());
         Error5("Parse error in MathExpression >%s: '%s'< at column %zu: %s", name, expression.GetData(), ret, fp.ErrorMsg());
         return false;
     }
@@ -1128,6 +1132,7 @@ bool MathExpression::Parse(const char *exp)
 
 double MathExpression::Evaluate(MathEnvironment *env) const
 {
+//printf(" math 1133 Start math env \n");
     double *values = new double [requiredVars.GetSize() + propertyRefs.GetSize()];
     size_t i = 0;
 
@@ -1137,9 +1142,10 @@ double MathExpression::Evaluate(MathEnvironment *env) const
     {
         const csString & varName = it.Next();
         MathVar *var = env->Lookup(varName);
-
+//printf(" math 1142 in >%s<: Required variable >%s<  in environment.\n", name, varName.GetData());
         if (!var) // invalid variable
         {
+//printf(" math 1146 bad var  \n");
             csString msg;
             msg.Format("Error in >%s<: Required variable >%s< not supplied in environment.", name, varName.GetData());
             CS_ASSERT_MSG(msg.GetData(),false);
@@ -1148,6 +1154,7 @@ double MathExpression::Evaluate(MathEnvironment *env) const
             return 0.0;
         }
         values[i++] = var->GetValue();
+//printf("math 1155 values %0.0f \n", values[i++]);
     }
 
     // retrieve the objects requried to retrieve

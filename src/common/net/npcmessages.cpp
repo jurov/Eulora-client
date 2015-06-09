@@ -1,7 +1,7 @@
 /*
  * npcmessages.cpp
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org) 
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org) 
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -929,6 +929,24 @@ csString psNPCCommandsMessage::ToString(NetBase::AccessPointers * accessPointers
                     float hpRate = msg->GetFloat();
                     msgtext.AppendFmt(" HPRate: %.2f",hpRate);
                 }
+//-------------------
+                if (statsDirtyFlags & DIRTY_VITAL_BP)
+                {
+                    float bp = msg->GetFloat();
+                    msgtext.AppendFmt(" HP: %.2f",bp);
+                }
+                if (statsDirtyFlags & DIRTY_VITAL_BP_MAX)
+                {
+                    float maxBP = msg->GetFloat();
+                    msgtext.AppendFmt(" MaxBP: %.2f",maxBP);
+                }
+                if (statsDirtyFlags & DIRTY_VITAL_BP_RATE)
+                {
+                    float bpRate = msg->GetFloat();
+                    msgtext.AppendFmt(" BPRate: %.2f",bpRate);
+                }
+//-------------------                
+
                 if (statsDirtyFlags & DIRTY_VITAL_MANA)
                 {
                     float mana = msg->GetFloat();
@@ -943,7 +961,26 @@ csString psNPCCommandsMessage::ToString(NetBase::AccessPointers * accessPointers
                 {
                     float manaRate = msg->GetFloat();
                     msgtext.AppendFmt(" ManaRate: %.2f",manaRate);
+
                 }
+//------------------
+                if (statsDirtyFlags & DIRTY_VITAL_SPIRIT)
+                {
+                    float spirit = msg->GetFloat();
+                    msgtext.AppendFmt(" Spirit: %.2f",spirit);
+                }
+                if (statsDirtyFlags & DIRTY_VITAL_SPIRIT_MAX)
+                {
+                    float maxSpirit = msg->GetFloat();
+                    msgtext.AppendFmt(" MaxSpirit: %.2f",maxSpirit);
+                }
+                if (statsDirtyFlags & DIRTY_VITAL_SPIRIT_RATE)
+                {
+                    float spiritRate = msg->GetFloat();
+                    msgtext.AppendFmt(" SpiritRate: %.2f",spiritRate);
+
+                }
+//-------------------
                 if (statsDirtyFlags & DIRTY_VITAL_PYSSTAMINA)
                 {
                     float pysStamina = msg->GetFloat();

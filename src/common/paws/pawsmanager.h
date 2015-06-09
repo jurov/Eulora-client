@@ -1,7 +1,7 @@
 /*
  * pawsmanager.h - Author: Andrew Craig
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -75,9 +75,9 @@ typedef csHash<PAWSSubscription*,csString> PAWSSubscriptionsHash;
 
 #define CONFIG_TOOLTIPS_FILE_NAME       "/planeshift/userdata/options/tooltips.xml"
 #define CONFIG_TOOLTIPS_FILE_NAME_DEF   "/planeshift/data/options/tooltips_def.xml"
-// VFS files? chetty
+
 /**
- * Main PlanShift Window manager.
+ * Main PlaneShift Window manager.
  */
 class PawsManager : public Singleton<PawsManager>
 {
@@ -253,7 +253,7 @@ public:
     /// Returns the mouse.
     pawsMouse* GetMouse() { return mouse; }
 
-    /// Returns the resized image.
+    /// Returns the resize button image.
     csRef<iPawsImage> GetResizeImage() { return resizeImg; }
 
     /**
@@ -584,7 +584,7 @@ protected:
     /*                      Sound Member Variables
     ------------------------------------------------------------------------*/
 
-    csRef<iSoundManager> soundManager;  ///< planshift's sound manager
+    csRef<iSoundManager> soundManager;  ///< planeshift's sound manager
 
     /**
      * Parses given file and returns the \<widget_description\> tag of it

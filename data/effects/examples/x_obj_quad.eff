@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<library>
+<!--
+    <textures>
+        <texture name="quad_example">
+            <file>art/effects/examples/quad_example.dds</file>
+        </texture>
+    </textures>
+    <materials>
+        <material name="quad_example">
+            <texture>quad_example</texture>
+        </material>
+    </materials>
+    <addon plugin="PSEffects">
+        <effect name="x_obj_quad">
+            <anchor type="basic" name="pos">
+                <dir>none</dir>
+            </anchor>
+
+            
+            <obj type="quad" name="quad" material="quad_example">
+                <attach>pos</attach>
+                <death>none</death>
+            </obj>
+
+           
+            <obj type="quad" name="quad_target" material="quad_example">
+                <attach>pos</attach>
+                <death>none</death>
+                <dir>target</dir>
+                <keyFrame time="0">
+                    <action name="position" y="0.5" z="1" />
+                    <action name="spin" x="90" />
+                    <action name="colour" r="255" g="0" b="0" />
+                </keyFrame>
+            </obj>
+
+            
+            <obj type="quad" name="quad_origin" material="quad_example">
+                <attach>pos</attach>
+                <death>none</death>
+                <dir>origin</dir>
+                <keyFrame time="0">
+                    <action name="position" y="1" z="1" />
+                    <action name="spin" x="90" />
+                    <action name="colour" r="0" g="255" b="0" />
+                </keyFrame>
+            </obj>
+
+            
+            <obj type="quad" name="quad_totarget" material="quad_example">
+                <attach>pos</attach>
+                <death>none</death>
+                <dir>totarget</dir>
+                <keyFrame time="0">
+                    <action name="position" y="1.5" z="1" />
+                    <action name="spin" x="90" />
+                    <action name="colour" r="0" g="0" b="255" />
+                </keyFrame>
+            </obj>
+
+            
+            <obj type="quad" name="quad_camera" material="quad_example">
+                <attach>pos</attach>
+                <death>none</death>
+                <dir>camera</dir>
+                <keyFrame time="0">
+                    <action name="position" y="2" z="1" />
+                    <action name="colour" r="255" g="255" b="0" />
+                </keyFrame>
+            </obj>
+
+            
+            <obj type="quad" name="quad_billboard" material="quad_example">
+                <attach>pos</attach>
+                <death>none</death>
+                <dir>billboard</dir>
+                <keyFrame time="0">
+                    <action name="position" y="2.5" z="1" />
+                    <action name="colour" r="255" g="0" b="255" />
+                </keyFrame>
+            </obj>
+
+            
+            <obj type="quad" name="quad_cells" xcells="2" ycells="1" material="quad_example">
+                <attach>pos</attach>
+                <death>none</death>
+                <dir>billboard</dir>
+                <keyFrame time="0">
+                    <action name="position" y="3" z="1" />
+                    <action name="colour" r="0" g="255" b="255" />
+                    <action name="cell" value="0" />
+                </keyFrame>
+                <keyFrame time="500">
+                    <action name="cell" value="1" />
+                </keyFrame>
+                <keyFrame time="1000">
+                    <action name="cell" value="0" />
+                </keyFrame>
+            </obj>
+        </effect>
+    </addon>
+-->
+</library>
+

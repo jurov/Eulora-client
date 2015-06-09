@@ -1,9 +1,9 @@
 #----------------------------------------------------------------------------
-# Copyright (C)2001-2012 by Atomic Blue.
+# 
 #
 # Script taken from the Crystal Space SDK project.
 #
-# Autoconf input script for PlanShift. Start the ./autogen.sh script which
+# Autoconf input script for Eulora. Start the ./autogen.sh script which
 # calls autoconf to produce a configure script.
 #----------------------------------------------------------------------------
 AC_PREREQ([2.56])
@@ -11,10 +11,8 @@ AC_PREREQ([2.56])
 #----------------------------------------------------------------------------
 # Initialize autoconf
 #----------------------------------------------------------------------------
-AC_INIT([Eulora], [0.0.0.1], [])
-CS_PACKAGEINFO([Eulora a 3d MMORPG],
-	[Copyright TBD],
-	[http:])
+AC_INIT([Eulora], [0.0.0.5], [http://http://minigame.bz/eulora/binaries/])
+CS_PACKAGEINFO([Eulora a 3d MMORPG])
 AC_CONFIG_SRCDIR([mk/jam/build.jam])
 AC_CONFIG_AUX_DIR([mk/autoconf])
 AC_CANONICAL_HOST

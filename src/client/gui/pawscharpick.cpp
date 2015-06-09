@@ -1,7 +1,7 @@
 /*
  * pawscharpick.cpp by Andrew Craig <acraig@paqrat.com>
  *
- * Copyright (C) 2001 Atomic Blue (info@planshift.it, http://www.atomicblue.org) 
+ * Copyright (C) 2001 Atomic Blue (info@planeshift.it, http://www.atomicblue.org) 
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -56,7 +56,6 @@
 
 #define YES_DELETE_CHARACTER    300
 #define NO_DELETE_CHARACTER     302
-//#define NEXT_BUTTON     5000
 
 #define CNF_AUTOPICK_CHAR_NAME "PlaneShift.Connection.AutoPickChar.Name"
 #define CNF_AUTOPICK_CHAR      "PlaneShift.Connection.AutoPickChar.Id"
@@ -128,7 +127,8 @@ void pawsCharacterPickerWindow::HandleMessage( MsgEntry* me )
             
             psAuthApprovedMessage msg(me);            
 
-            for (int i=0; i < msg.msgNumOfChars; i++)
+            for (int i=0; i < (msg.msgNumOfChars); i++)
+             
             {
                 csString name,race,factName,traits,equipment;
 
@@ -176,7 +176,20 @@ void pawsCharacterPickerWindow::HandleMessage( MsgEntry* me )
                 pawsWidget* widget = FindWidget("login");
                 if ( widget )
                     widget->Show();           
-                if ( charactersFound < 1 )
+                if ( charactersFound == 1 )
+                {
+                   /* csString buff;
+                    buff.Format("SelectCharacter%i", charactersFound);
+                    pawsWidget* widget = FindWidget( buff );
+                    widget->Show();
+                    buff.Format("ImgCharacter%i", charactersFound);
+                    pawsWidget* radio = FindWidget(buff);
+                    radio->Show();*/
+                    pawsWidget* deleteCharBut = FindWidget("delete");
+                    if (deleteCharBut)
+                        deleteCharBut->Show();                
+                }  
+                if ( charactersFound == 0 )
                 {
                     csString buff;
                     buff.Format("SelectCharacter%i", charactersFound);
@@ -184,13 +197,16 @@ void pawsCharacterPickerWindow::HandleMessage( MsgEntry* me )
                     widget->Show();
                     buff.Format("ImgCharacter%i", charactersFound);
                     pawsWidget* radio = FindWidget(buff);
-                    radio->Show();                
-                }                    
+                    radio->Show();
+                    pawsWidget* deleteCharBut = FindWidget("delete");
+                    if (deleteCharBut)
+                        deleteCharBut->Hide();                
+                }                       
 
                 // If there's some char created then show delete option
-                pawsWidget* deleteCharBut = FindWidget("delete");
+                /*pawsWidget* deleteCharBut = FindWidget("delete");
                 if (deleteCharBut)
-                    deleteCharBut->Show();
+                    deleteCharBut->Show();*/
             }
             return;
         }
@@ -449,7 +465,7 @@ void pawsCharacterPickerWindow::Show()
     if(credits)
         credits->Hide();
 
-    // Sync the gotStrings with ps ClientDR
+    // Sync the gotStrings with psClientDR
     gotStrings = psengine->GetCelClient()->GetClientDR()->GotStrings();
     if(gotStrings)
         ReceivedStrings();

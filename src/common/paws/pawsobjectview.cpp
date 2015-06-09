@@ -1,7 +1,7 @@
 /*
  * pawsobjectview.cpp - Author: Andrew Craig
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -203,7 +203,8 @@ void pawsObjectView::OnResize()
 
 bool pawsObjectView::LoadMap( const char* map, const char* sector )
 {
-    csRef<iStringArray> zone = csPtr<iStringArray>(new scfStringArray());
+    csRef<iStringArray> zone;
+    zone.AttachNew(new scfStringArray());
     zone->Push(map);
     if(!loader->LoadPriorityZones(zone))
     {
@@ -220,12 +221,12 @@ bool pawsObjectView::LoadMap( const char* map, const char* sector )
     static uint sectorCount = 0;
     meshSector = engine->CreateSector(csString(sector).AppendFmt("%u", sectorCount++));
 
-    meshView = csPtr<iView>(new csView(engine, PawsManager::GetSingleton().GetGraphics3D()));
+    meshView.AttachNew(new csView(engine, PawsManager::GetSingleton().GetGraphics3D()));
     meshView->SetAutoResize(false);
     meshView->GetCamera()->SetSector(meshSector);
     meshView->GetCamera()->GetTransform().SetOrigin(csVector3(0, 1, -distance));
 
-    view = csPtr<iView>(new csView(engine, PawsManager::GetSingleton().GetGraphics3D()));
+    view.AttachNew(new csView(engine, PawsManager::GetSingleton().GetGraphics3D()));
     view->SetAutoResize(false);
     view->GetCamera()->SetSector(stage);
     view->GetCamera()->GetTransform().SetOrigin(csVector3(0, 1, -distance));

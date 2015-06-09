@@ -1,7 +1,7 @@
 /*
  * pawsconfigtextpage.h - Author: Luca Pancallo
  *
- * Copyright (C) 2001-2008 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2001-2008 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -26,7 +26,7 @@
 
 class pawsMultiLineTextBox;
 
-/* This class is used as part of the PlanShift Configuration Window
+/* This class is used as part of the PlaneShift Configuration Window
  * as one panel on the right side. It has a textbox which can be filled by
  * the configwindow.xml file with any text.
  */

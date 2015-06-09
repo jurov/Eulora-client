@@ -1,7 +1,7 @@
 /*
  * pawsmoney.cpp - Author: Ondrej Hurt
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -47,10 +47,10 @@ csRef<iDocumentNode> FindFirstWidget(iDocument * doc);
 
 pawsMoney::pawsMoney()
 {
-    circles   =   NULL;
-    octas     =   NULL;
-    hexas     =   NULL;
-    trias     =   NULL;
+    bitcents   =   NULL;
+    denarius     =   NULL;
+    argents     =   NULL;
+    coppers     =   NULL;
     amount    =   0;
 }
 
@@ -101,57 +101,57 @@ bool pawsMoney::CreateGUI()
 
 void pawsMoney::SetContainer(int container)
 {
-    if (!trias) return;
+    if (!coppers) return;
 
-    trias->SetContainer( container );
-    hexas->SetContainer( container );
-    octas->SetContainer( container );
-    circles->SetContainer( container );
+    coppers->SetContainer( container );
+    argents->SetContainer( container );
+    denarius->SetContainer( container );
+    bitcents->SetContainer( container );
     
-    circles->SetSlotID( MONEY_CIRCLES );
-    octas->SetSlotID( MONEY_OCTAS ); 
-    hexas->SetSlotID( MONEY_HEXAS ); 
-    trias->SetSlotID( MONEY_TRIAS ); 
+    bitcents->SetSlotID( MONEY_BITCENTS );
+    denarius->SetSlotID( MONEY_DENARIUS ); 
+    argents->SetSlotID( MONEY_ARGENTS ); 
+    coppers->SetSlotID( MONEY_COPPERS ); 
 }
 
 
 bool pawsMoney::PostSetup()
 {
-    circles  =  dynamic_cast <pawsSlot*> (FindWidget("Circles"));
-    if (circles == NULL)
+    bitcents  =  dynamic_cast <pawsSlot*> (FindWidget("BITCents"));
+    if (bitcents == NULL)
         return false;
 
-    circles->SetEmptyOnZeroCount(false);
-    circles->PlaceItem("MoneyCircles", "");
-    circles->SetSlotID( MONEY_CIRCLES );
+    bitcents->SetEmptyOnZeroCount(false);
+    bitcents->PlaceItem("MoneyCircles", "");
+    bitcents->SetSlotID( MONEY_BITCENTS );
     //if (border) 
     //    circles->SetBackground("Bulk Item Slot");
             
-    octas = dynamic_cast <pawsSlot*> (FindWidget("Octas"));
-    if (octas == NULL)
+    denarius = dynamic_cast <pawsSlot*> (FindWidget("Denarius"));
+    if (denarius == NULL)
         return false;
-    octas->SetEmptyOnZeroCount(false);                
-    octas->PlaceItem("MoneyOctas", "");
-    octas->SetSlotID( MONEY_OCTAS );    
+    denarius->SetEmptyOnZeroCount(false);                
+    denarius->PlaceItem("MoneyOctas", "");
+    denarius->SetSlotID( MONEY_DENARIUS );    
     //octas->SetRelativeFramePos(GetActualWidth(SLOT_SIZE+spacing), 0);
     //if (border) 
     //    octas->SetBackground("Bulk Item Slot");
     
-    hexas =  dynamic_cast <pawsSlot*> (FindWidget("Hexas"));
-    if (hexas == NULL)
+    argents =  dynamic_cast <pawsSlot*> (FindWidget("Argents"));
+    if (argents == NULL)
         return false;
-    hexas->SetEmptyOnZeroCount(false);        
-    hexas->PlaceItem("MoneyHexas", "");
-    hexas->SetSlotID( MONEY_HEXAS );   
+    argents->SetEmptyOnZeroCount(false);        
+    argents->PlaceItem("MoneyHexas", "");
+    argents->SetSlotID( MONEY_ARGENTS );   
     //hexas->SetRelativeFramePos(0, GetActualHeight(SLOT_SIZE+spacing));
     //if (border) hexas->SetBackground("Bulk Item Slot");
     
-    trias    =  dynamic_cast <pawsSlot*> (FindWidget("Trias"));
-    if (trias == NULL)
+    coppers    =  dynamic_cast <pawsSlot*> (FindWidget("Coppers"));
+    if (coppers == NULL)
         return false;
-    trias->SetEmptyOnZeroCount(false);        
-    trias->PlaceItem("MoneyTrias", "");
-    trias->SetSlotID( MONEY_TRIAS );     
+    coppers->SetEmptyOnZeroCount(false);        
+    coppers->PlaceItem("MoneyTrias", "");
+    coppers->SetSlotID( MONEY_COPPERS );     
     //trias->SetRelativeFramePos(GetActualWidth(SLOT_SIZE+spacing), GetActualHeight(SLOT_SIZE+spacing));
     //if (border) trias->SetBackground("Bulk Item Slot");
     
@@ -165,60 +165,60 @@ void pawsMoney::Draw()
 
 void pawsMoney::Drag( bool dragOn )
 {
-    trias->SetDrag( dragOn );
-    hexas->SetDrag( dragOn );
-    octas->SetDrag( dragOn );
-    circles->SetDrag( dragOn );
+    coppers->SetDrag( dragOn );
+    argents->SetDrag( dragOn );
+    denarius->SetDrag( dragOn );
+    bitcents->SetDrag( dragOn );
 }
 
-void pawsMoney::Set(int circles, int octas, int hexas, int trias)
+void pawsMoney::Set(int bitcents, int denarius, int argents, int coppers)
 {
-    if (!this->trias) return;
+    if (!this->coppers) return;
 
-    this->  circles  ->StackCount(circles);
-    this->  octas    ->StackCount(octas);
-    this->  hexas    ->StackCount(hexas);
-    this->  trias    ->StackCount(trias);
+    this->  bitcents  ->StackCount(bitcents);
+    this->  denarius    ->StackCount(denarius);
+    this->  argents    ->StackCount(argents);
+    this->  coppers    ->StackCount(coppers);
 
     RecalculateAmount();
 }
 
 void pawsMoney::Set(const psMoney & money)
 {
-    Set( money.GetCircles(), money.GetOctas(), money.GetHexas(), 
-        money.GetTrias() );
+    Set( money.GetBITCents(), money.GetDenarius(), money.GetArgents(), 
+        money.GetCoppers() );
 }
 
 void pawsMoney::Set(int coinType, int count)
 {
     switch (coinType)
     {
-        case MONEY_CIRCLES:  circles  -> StackCount(count); break;
-        case MONEY_OCTAS:    octas    -> StackCount(count); break;
-        case MONEY_HEXAS:    hexas    -> StackCount(count); break;
-        case MONEY_TRIAS:    trias    -> StackCount(count); break;
+        case MONEY_BITCENTS:  bitcents  -> StackCount(count); break;
+        case MONEY_DENARIUS:    denarius    -> StackCount(count); break;
+        case MONEY_ARGENTS:    argents    -> StackCount(count); break;
+        case MONEY_COPPERS:    coppers    -> StackCount(count); break;
         default: CS_ASSERT(0);
     }
 
     this->RecalculateAmount();
 }
 
-void pawsMoney::Get(int & circles, int & octas, int & hexas, int & trias)
+void pawsMoney::Get(int & bitcents, int & denarius, int & argents, int & coppers)
 {
-    circles  =  this->  circles  ->StackCount();
-    octas    =  this->  octas    ->StackCount();
-    hexas    =  this->  hexas    ->StackCount();
-    trias    =  this->  trias    ->StackCount();
+    bitcents  =  this->  bitcents  ->StackCount();
+    denarius    =  this->  denarius    ->StackCount();
+    argents    =  this->  argents    ->StackCount();
+    coppers    =  this->  coppers    ->StackCount();
 }
 
 int pawsMoney::Get(int coinType)
 {
     switch (coinType)
     {
-        case MONEY_CIRCLES:  return  circles  -> StackCount(); break;
-        case MONEY_OCTAS:    return  octas    -> StackCount(); break;
-        case MONEY_HEXAS:    return  hexas    -> StackCount(); break;
-        case MONEY_TRIAS:    return  trias    -> StackCount(); break;
+        case MONEY_BITCENTS:  return  bitcents  -> StackCount(); break;
+        case MONEY_DENARIUS:    return  denarius    -> StackCount(); break;
+        case MONEY_ARGENTS:    return  argents    -> StackCount(); break;
+        case MONEY_COPPERS:    return  coppers    -> StackCount(); break;
         default: CS_ASSERT(0);
     }
     return 0;
@@ -232,30 +232,17 @@ bool pawsMoney::IsNoAmount()
     return false;
 }
 
-pawsSlot * pawsMoney::GetSlot(int coin)
-{
-    switch (coin)
-    {
-        case MONEY_CIRCLES:  return circles;
-        case MONEY_OCTAS:    return octas;
-        case MONEY_HEXAS:    return hexas;
-        case MONEY_TRIAS:    return trias;
-        default: CS_ASSERT(0);
-    }    
-    return 0;
-}
-
 void pawsMoney::RecalculateAmount()
 {
-    amount  = this->trias->StackCount();
-    amount += this->hexas->StackCount()   * 10;
-    amount += this->octas->StackCount()   * 50;
-    amount += this->circles->StackCount() * 250;
+    amount  = this->coppers->StackCount();
+    amount += this->argents->StackCount()   * 100;
+    amount += this->denarius->StackCount()   * 10000;
+    amount += this->bitcents->StackCount() * 1000000;
 }
 
 psMoney pawsMoney::Get()
 {
-    psMoney money(Get(MONEY_CIRCLES), Get(MONEY_OCTAS), Get(MONEY_HEXAS), Get(MONEY_TRIAS));
+    psMoney money(Get(MONEY_BITCENTS), Get(MONEY_DENARIUS), Get(MONEY_ARGENTS), Get(MONEY_COPPERS));
     return money;
 }
 

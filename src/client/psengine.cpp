@@ -1,7 +1,7 @@
 /*
  * psengine.cpp
  *
- * Copyright (C) 2001 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2001 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -35,8 +35,7 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #define CONFIGFILENAME       "/planeshift/userdata/planeshift.cfg"
-#define PSAPP                "planeshift.application.client"
-// chetty is vfs?
+#define PSAPP                "eulora.application.client"
 
 
 //////////////////////////////////////////////////////////////////////////////
@@ -156,6 +155,8 @@ if (!myref)                                                  \
 #include "gui/pawsspellbookwindow.h"
 #include "gui/pawssplashwindow.h"
 #include "gui/shortcutwindow.h"
+#include "gui/pawsscrollmenu.h"
+#include "gui/pawsdndbutton.h"
 #include "gui/pawsloginwindow.h"
 #include "gui/pawscharpick.h"
 #include "gui/pawsloading.h"
@@ -201,7 +202,6 @@ if (!myref)                                                  \
 #include "gui/pawsconfigshadows.h"
 #include "gui/pawsconfigtextpage.h"
 #include "gui/pawsnpcdialog.h"
-#include "gui/bartender.h"
 #include "gui/pawsconfigspellchecker.h"
 #include "gui/pawsconfigtooltips.h"
 #include "gui/pawsmusicwindow.h"
@@ -264,7 +264,7 @@ psEngine::psEngine(iObjectRegistry* objectreg, psCSSetup* CSSetup)
 
     drawScreen = true;
 
-    cal3DCallbackLoader = csPtr<psCal3DCallbackLoader> (new psCal3DCallbackLoader(objectreg));
+    cal3DCallbackLoader.AttachNew(new psCal3DCallbackLoader(objectreg));
 
     BrightnessCorrection = 0.0f;
 
@@ -396,9 +396,9 @@ bool psEngine::Initialize(int level)
         // Check for Windows software OpenGL renderer.
         if(hwRenderer == "GDI Generic")
         {
-            printf("PlaneShift requires hardware acceleration (OpenGL). Make sure your video card drivers are up-to-date.\n");
+            printf("Eulora requires hardware acceleration (OpenGL). Make sure your video card drivers are up-to-date.\n");
             csRef<iWin32Assistant> assistant = csQueryRegistry<iWin32Assistant>(object_reg);
-            assistant->AlertV(psEngine::hwnd, CS_ALERT_ERROR, "Warning!",  0, "PlaneShift requires hardware acceleration (OpenGL). Make sure your video card drivers are up-to-date.", 0);
+            assistant->AlertV(psEngine::hwnd, CS_ALERT_ERROR, "Warning!",  0, "Eulora requires hardware acceleration (OpenGL). Make sure your video card drivers are up-to-date.", 0);
         }
         csRef<iWin32Canvas> canvas = scfQueryInterface<iWin32Canvas> (g2d);
         // This does not seem to give the correct window handle.
@@ -479,6 +479,7 @@ bool psEngine::Initialize(int level)
         if(!LoadConfirmationSettings())
             return false;
 
+
         // Register our event handlers.
         event_frame = csevFrame(object_reg);
         event_canvashidden = csevCanvasHidden(object_reg,g2d);
@@ -521,7 +522,7 @@ bool psEngine::Initialize(int level)
 
         // Inform debug that everything initialized succesfully
         csReport(object_reg, CS_REPORTER_SEVERITY_NOTIFY, PSAPP,
-                 "psEngine initialized.");
+                 "euEngine initialized.");
 
         // Set up font for messages that bypass paws.
         iFontServer* fntsvr = g2d->GetFontServer();
@@ -576,13 +577,12 @@ bool psEngine::Initialize(int level)
 
         // Start to fill the loader cache.
         precaches.Push(loader->PrecacheData("/planeshift/materials/materials.cslib"));
-        
         lastLoadingCount = 1;
 
         // Initialize Networking
         if(!netmanager)
         {
-            netmanager = csPtr<psNetManager> (new psNetManager);
+            netmanager.AttachNew(new psNetManager);
 
             if(!netmanager->Initialize(object_reg))
             {
@@ -594,12 +594,12 @@ bool psEngine::Initialize(int level)
 
         inventoryCache = new psInventoryCache();
         guiHandler = new GUIHandler();
-        celclient = csPtr<psCelClient> (new psCelClient());
+        celclient.AttachNew(new psCelClient());
         slotManager = new psSlotManager();
         songManager = new ClientSongManager();
-        modehandler = csPtr<ModeHandler> (new ModeHandler(celclient,netmanager->GetMsgHandler(),object_reg));
-        actionhandler = csPtr<ActionHandler> (new ActionHandler(netmanager->GetMsgHandler(), object_reg));
-        zonehandler = csPtr<ZoneHandler> (new ZoneHandler(netmanager->GetMsgHandler(), celclient));
+        modehandler.AttachNew(new ModeHandler(celclient,netmanager->GetMsgHandler(),object_reg));
+        actionhandler.AttachNew(new ActionHandler(netmanager->GetMsgHandler(), object_reg));
+        zonehandler.AttachNew(new ZoneHandler(netmanager->GetMsgHandler(), celclient));
         questionclient = new psQuestionClient(GetMsgHandler(), object_reg);
 
         if(!zonehandler->IsValid())
@@ -811,6 +811,8 @@ void psEngine::DeclareExtraFactories()
     RegisterFactory(pawsPetitionWindowFactory);
     RegisterFactory(pawsPetitionGMWindowFactory);
     RegisterFactory(pawsShortcutWindowFactory);
+    RegisterFactory(pawsScrollMenuFactory);
+    RegisterFactory(pawsDnDButtonFactory);
     RegisterFactory(pawsLoginWindowFactory);
     RegisterFactory(pawsCharacterPickerWindowFactory);
     RegisterFactory(pawsGuildWindowFactory);
@@ -860,12 +862,12 @@ void psEngine::DeclareExtraFactories()
     RegisterFactory(pawsConfigShadowsFactory);
     RegisterFactory(pawsConfigTextPageFactory);
     RegisterFactory(pawsNpcDialogWindowFactory);
-    RegisterFactory(pawsBartenderWindowFactory);
     RegisterFactory(pawsCraftCancelWindowFactory);
- //   RegisterFactory(pawsConfigSpellCheckerFactory);
+//    RegisterFactory(pawsConfigSpellCheckerFactory);
     RegisterFactory(pawsConfigTooltipsFactory);
     RegisterFactory(pawsMusicWindowFactory);
     RegisterFactory(pawsSheetLineFactory);
+    
 }
 
 //-----------------------------------------------------------------------------
@@ -1185,7 +1187,7 @@ inline void psEngine::UpdatePerFrame()
         celclient->GetMainPlayer()->GetVitalMgr()->Predict(csGetTicks(),"Self");
 
         // Update stats for Target if Target is there and has stats
-        GEMClientObject* target = psengine->GetCharManager()->GetTarget();
+        GEMClientObject* target = charmanager->GetTarget();
         if(target && target->GetType() != -2)
         {
             GEMClientActor* actor = dynamic_cast<GEMClientActor*>(target);
@@ -1294,7 +1296,6 @@ void psEngine::LoadGame()
         case LS_LOAD_SCREEN:
         {
             paws->LoadWidget("loadwindow.xml");
-            LoadPawsWidget("Active Magic window","activemagicwindow.xml");
 
             pawsLoadWindow* window = dynamic_cast <pawsLoadWindow*>(paws->FindWidget("LoadWindow"));
             if(!window)
@@ -1415,7 +1416,7 @@ void psEngine::LoadGame()
 
             LoadPawsWidget("Status window",           "infowindow.xml");
             LoadPawsWidget("Ignore window",           "ignorewindow.xml");
-            LoadPawsWidget("Communications window",   GetChatWindowWidget().GetData());
+            LoadPawsWidget("Communications window",   "chat.xml");
             LoadPawsWidget("Inventory window",        "inventory.xml");
             LoadPawsWidget("Item description window", "itemdesc.xml");
             LoadPawsWidget("Container description window","containerdesc.xml");
@@ -1446,7 +1447,7 @@ void psEngine::LoadGame()
             LoadPawsWidget("Character description window","chardescwindow.xml");
             LoadPawsWidget("Quest reward window",     "questrewardwindow.xml");
             LoadPawsWidget("GM Spawn interface",      "gmspawn.xml");
-            //LoadPawsWidget( "Active Magic window",   "activemagicwindow.xml" );
+            LoadPawsWidget("Active Magic window",     "activemagicwindow.xml");
             LoadPawsWidget("Small Inventory Window",  "smallinventory.xml");
             LoadPawsWidget("GM Action Location Edit", "gmaddeditaction.xml");
             LoadPawsWidget("Crafting",                "craft.xml");
@@ -1455,7 +1456,6 @@ void psEngine::LoadGame()
             LoadPawsWidget("GameBoard",               "gameboard.xml");
             LoadPawsWidget("Writing window",          "bookwriting.xml");
             LoadPawsWidget("NPC dialog window",       "dialog.xml");
-            LoadPawsWidget("QuickSpellBar",            "quick_spell_bar.xml");
             LoadPawsWidget("Craft status window",     "craftcancelwindow.xml");
             LoadPawsWidget("Music window",            "musicwindow.xml");
 
@@ -1574,41 +1574,6 @@ psMouseBinds* psEngine::GetMouseBinds()
             Error1("Failed to load mouse options");
     }
     return mouseBinds;
-}
-
-csString psEngine::GetChatWindowWidget()
-{
-    csString chatWidget = "chat.xml";
-    csRef<iDocument> doc;
-    csRef<iDocumentNode> root, chatNode, optionNode;
-    if(psengine->GetVFS()->Exists(CONFIG_CHAT_FILE_NAME))
-        doc = ParseFile(GetObjectRegistry(), CONFIG_CHAT_FILE_NAME);
-    else
-        doc = ParseFile(GetObjectRegistry(), CONFIG_CHAT_FILE_NAME_DEF);
-
-    if(doc == NULL)
-        return chatWidget;
-
-    root = doc->GetRoot();
-    if(root == NULL)
-        return chatWidget;
-
-    chatNode = root->GetNode("chat");
-    if(chatNode == NULL)
-        return chatWidget;
-
-    optionNode = chatNode->GetNode("chatoptions");
-    if(optionNode != NULL)
-    {
-        csRef<iDocumentNode> oNode = optionNode->GetNode("chatWidget");
-        if(oNode)
-        {
-            chatWidget = oNode->GetAttributeValue("value");
-            if(!chatWidget.Length()) //if none are defined put a default one
-                chatWidget = "chat.xml";
-        }
-    }
-    return chatWidget;
 }
 
 size_t psEngine::GetTime()
@@ -2032,6 +1997,9 @@ int main(int argc, char* argv[])
     // remove engine before destroying Application
     delete psengine;
     psengine = NULL;
+
+    // Free registered message factories.
+    psfUnRegisterMsgFactories();
 
     delete CSSetup;
 

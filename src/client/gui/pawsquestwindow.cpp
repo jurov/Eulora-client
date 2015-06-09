@@ -1,7 +1,7 @@
 /*
 * pawsquestwindow.cpp - Author: Keith Fulton
 *
-* Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+* Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
 *
 *
 * This program is free software; you can redistribute it and/or
@@ -617,7 +617,8 @@ void pawsQuestListWindow::SaveNotes(const char* fileName)
 
     // Save quest notes to a local file
     char temp[20];
-    csRef<iDocumentSystem> xml = csPtr<iDocumentSystem>(new csTinyDocumentSystem);
+    csRef<iDocumentSystem> xml;
+    xml.AttachNew(new csTinyDocumentSystem);
     csRef<iDocument> doc = xml->CreateDocument();
     csRef<iDocumentNode> root = doc->CreateRoot();
     csRef<iDocumentNode> parentMain = root->CreateNodeBefore(CS_NODE_ELEMENT);

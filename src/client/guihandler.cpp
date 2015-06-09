@@ -1,10 +1,10 @@
 /*
 * guihandler.cpp
 *
-* Copyright (C) 2005 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+* Copyright (C) 2005 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
 *
 * Credits : 
-*           Keith Fulton <keith@planshift.it>
+*           Keith Fulton <keith@planeshift.it>
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License
@@ -66,7 +66,7 @@ void GUIHandler::HandleMessage(MsgEntry* me)
 
 void GUIHandler::HandleInventory(MsgEntry* me)
 {
-    psGUIInventoryMessage incoming(me, ((psNetManager*)psengine->GetNetManager())->GetConnection()->GetAccessPointers());
+    psGUIInventoryMessage incoming(me, psengine->GetNetManager()->GetConnection()->GetAccessPointers());
 
     // drop inventory list, if its version is older than the current.
     // this may happen due to UDP latency.
@@ -90,13 +90,13 @@ void GUIHandler::HandleInventory(MsgEntry* me)
     {
         inventoryCache->SetInventoryItem(incoming.items[z].slot,
                                          incoming.items[z].container,
-                                         incoming.items[z].name.GetData(),
-                                         incoming.items[z].meshName.GetData(),
-                                         incoming.items[z].materialName.GetData(),
+                                         incoming.items[z].name,
+                                         incoming.items[z].meshName,
+                                         incoming.items[z].materialName,
                                          incoming.items[z].weight,
                                          incoming.items[z].size,
                                          incoming.items[z].stackcount,
-                                         incoming.items[z].iconImage.GetData(),
+                                         incoming.items[z].iconImage,
                                          incoming.items[z].purifyStatus);
 
         itemWeight += incoming.items[z].weight;

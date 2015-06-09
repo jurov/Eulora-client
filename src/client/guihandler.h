@@ -1,10 +1,10 @@
 /*
 * guihandler.h
 *
-* Copyright (C) 2005 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+* Copyright (C) 2005 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
 *
 * Credits : 
-*           Keith Fulton <keith@planshift.it>
+*           Keith Fulton <keith@planeshift.it>
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License

@@ -1,7 +1,7 @@
 /*
 * Author: Andrew Robberts
 *
-* Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+* Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
 *
 *
 * This program is free software; you can redistribute it and/or
@@ -74,7 +74,7 @@ csPtr<iBase> psEffectLoader::Parse(iDocumentNode* node, iStreamSource* /*istream
             if (manager->FindEffect(newEffect->GetName()))
             {
                 parseLock.UpgradeUnlock();
-                csReport(psCSSetup::object_reg, CS_REPORTER_SEVERITY_ERROR, "Eulora_effects", "Duplicate effect '%s' found!", newEffect->GetName().GetData());
+                csReport(psCSSetup::object_reg, CS_REPORTER_SEVERITY_ERROR, "eulora_effects", "Duplicate effect '%s' found!", newEffect->GetName().GetData());
                 delete newEffect;
             }
             else

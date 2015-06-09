@@ -1,7 +1,7 @@
 /*
  *  loader.cpp - Author: Matthieu Kraus
  *
- * Copyright (C) 2010 Atomic Blue (info@planshift.it, http://www.atomicblue.org) 
+ * Copyright (C) 2010 Atomic Blue (info@planeshift.it, http://www.atomicblue.org) 
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -145,22 +145,11 @@ bool BgLoader::Light::LoadObject(bool wait)
 	parent->GetLights()->Add(light);
     }
 
-    // Load all light sequences.
-    bool ready = ObjectLoader<Sequence>::LoadObjects(wait);
-
-    if(ready)
-    {
-        ready &= ObjectLoader<Trigger>::LoadObjects(wait);
-    }
-
-    return ready;
+    return true;
 }
 
 void BgLoader::Light::UnloadObject()
 {
-    ObjectLoader<Trigger>::UnloadObjects();
-    ObjectLoader<Sequence>::UnloadObjects();
-
     Loadable::CheckRemove<iLight,ObjectNames::light>(light);
 }
 
@@ -196,7 +185,6 @@ bool BgLoader::MeshFact::LoadObject(bool wait)
             // it's not exactly a trivial loadable if we don't cache
             // manually start the load in this case
             status = GetParent()->GetLoader()->LoadMeshObjectFactory(path, filename);
-
         }
 
         // rest can be handled by trivial loadable
@@ -290,16 +278,6 @@ bool BgLoader::MeshObj::LoadObject(bool wait)
         ready = TrivialLoadable<iMeshWrapper,ObjectNames::meshobj>::LoadObject(wait);
     }
 
-    if(ready)
-    {
-        ready = ObjectLoader<Sequence>::LoadObjects(wait);
-    }
-
-    if(ready)
-    {
-        ready &= ObjectLoader<Trigger>::LoadObjects(wait);
-    }
-
     return ready;
 }
 
@@ -347,9 +325,6 @@ void BgLoader::MeshObj::FinishObject()
 
 void BgLoader::MeshObj::UnloadObject()
 {
-    ObjectLoader<Trigger>::UnloadObjects();
-    ObjectLoader<Sequence>::UnloadObjects();
-
     TrivialLoadable<iMeshWrapper,ObjectNames::meshobj>::UnloadObject();
 
     ObjectLoader<Texture>::UnloadObjects();

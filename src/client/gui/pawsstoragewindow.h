@@ -1,7 +1,7 @@
 /*
  * pawsstoragewindow.cpp -  Stefano Angeleri <weltall2@gmail.com>
  *
- * Copyright (C) 2010 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2010 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -77,7 +77,7 @@ protected:
 
     pawsListBox* categoryBox;
     pawsListBox* itemsBox;
-    pawsTextBox* trias;
+    pawsTextBox* coppers;
     
     csString currentItem,currentID;
 }; 

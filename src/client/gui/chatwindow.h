@@ -1,7 +1,7 @@
 /*
  * chatwindow.h - Author: Andrew Craig
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -45,7 +45,7 @@
 
 #define CONFIG_CHAT_FILE_NAME       "/planeshift/userdata/options/chat.xml"
 #define CONFIG_CHAT_FILE_NAME_DEF   "/planeshift/data/options/chat_def.xml"
-// vfs files? chetty
+
 enum CHAT_COMBAT_FILTERS {
     COMBAT_SUCCEEDED = 1,
     COMBAT_BLOCKED   = 2,
@@ -85,6 +85,7 @@ struct ChatSettings
     bool joindefaultchannel;
     bool defaultlastchat;
     bool looseFocusOnSend;
+    bool mouseFocus;
     bool dirtyLogChannelFile[CHAT_END]; ///< Stores if the log file name was changed.
     csString logChannelFile[CHAT_END];  ///< Stores the log files to use for each chat type
     csString channelBracket[CHAT_END];  ///< Stores the brackets to add for each chat type
@@ -95,7 +96,6 @@ struct ChatSettings
     bool mainBrackets; ///< If it's true brackets like [guild] [tell] will be put in main tab.
     bool yourColorMix; ///< If it's true the yourColor will be mixed with the Color of the destination
                        ///Example: if you send a tell the color of your text will be (yourColor+tellColor)/2
-    csString chatWidget; ///< contains the widget to load, default being chat.xml. It's used during engine init and for changing settings.
     csArray<csString> badWords;
     csArray<csString> goodWords;
     csArray<csString> completionItems; ///< List of items for autocompletion from xml file
@@ -126,7 +126,7 @@ struct ChatSettings
 //--------------------------------------------------------------------------
 
 
-/** Main Chat window for PlanShift.
+/** Main Chat window for PlaneShift.
  * This class will handle most of the communication that goes on between
  * players and system messages from the server. This class also tracks the
  * ignore list on the client.
@@ -148,6 +148,8 @@ public:
     bool OnMenuAction(pawsWidget * widget, const pawsMenuAction & action);
     bool PostSetup();
 
+    bool OnChildMouseEnter(pawsWidget* widget);
+    bool OnChildMouseExit(pawsWidget* widget);
 
     bool OnMouseDown( int button, int modifiers, int x , int y );
 

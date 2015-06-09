@@ -1,7 +1,7 @@
 /*
  * pawscontainerdescriptionwidow.cpp - Author: Thomas Towey
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -93,7 +93,7 @@ bool pawsContainerDescWindow::PostSetup()
 
 void pawsContainerDescWindow::HandleUpdateItem( MsgEntry* me )
 {
-    psViewItemUpdate mesg( me, ((psNetManager*)psengine->GetNetManager())->GetConnection()->GetAccessPointers() );
+    psViewItemUpdate mesg( me, psengine->GetNetManager()->GetConnection()->GetAccessPointers() );
     csString sigData, data;
 
     // We send ownerID to multiple clients, so each client must decide if the item is owned by
@@ -104,7 +104,7 @@ void pawsContainerDescWindow::HandleUpdateItem( MsgEntry* me )
         mesg.stackCount = -1; // hardcoded signal that item is not owned by this player
     }
 
-    sigData.Format("invslot_%d", mesg.containerID.Unbox() * 100 + mesg.slotID + 16);
+    sigData.Format("invslot_%d", mesg.containerID.Unbox() * 100 + mesg.slotID);
     if (!mesg.clearSlot)
     {
         data.Format("%s %d %d %s %s %s", mesg.icon.GetData(), mesg.stackCount, 0, mesg.meshName.GetData(), mesg.materialName.GetData(), mesg.name.GetData());
@@ -120,7 +120,7 @@ void pawsContainerDescWindow::HandleUpdateItem( MsgEntry* me )
 void pawsContainerDescWindow::HandleViewContainer( MsgEntry* me )
 {
     Show();
-    psViewContainerDescription mesg(me, ((psNetManager*)psengine->GetNetManager())->GetConnection()->GetAccessPointers());
+    psViewContainerDescription mesg(me, psengine->GetNetManager()->GetConnection()->GetAccessPointers());
 
     description->SetText( mesg.itemDescription );
     name->SetText( mesg.itemName );
@@ -166,27 +166,27 @@ void pawsContainerDescWindow::HandleViewContainer( MsgEntry* me )
                     slot->SetSlotID(i*cols+j);
                     //slot->SetDefaultToolTip("Empty");
 
+                    // Note that the server adds +16 to the slotID that the
+                    // client sends so we subscribe to the slotID+16
+                    // but publish without the +16 to compensate.
                     csString slotName;
-                    slotName.Format("invslot_%d", mesg.containerID * 100 + i*cols+j + 16); // container slot + next two digit slot number
+                    slotName.Format("invslot_%d", mesg.containerID * 100 + i*cols+j + (mesg.containerID < 100 ? 16 : 0));
                     slot->SetSlotName(slotName);
                     Debug3(LOG_CHARACTER, 0, "Container slot %d subscribing to %s.", i*cols+j, slotName.GetData());
                     // New slots must subscribe to sigClear* -before-
                     // invslot_n, or else the cached clear signal will override
                     // the signal with the cached slot data, resulting in an
                     // empty window.
-                    if (containerID < 100)
-                        PawsManager::GetSingleton().Subscribe("sigClearInventorySlots", slot);
                     PawsManager::GetSingleton().Subscribe("sigClearContainerSlots", slot);
                     PawsManager::GetSingleton().Subscribe(slotName, slot);
                 }
             }
         }
-        if (containerID > 100)
-            PawsManager::GetSingleton().Publish("sigClearContainerSlots");
+        PawsManager::GetSingleton().Publish("sigClearContainerSlots");
         for (size_t i=0; i < mesg.contents.GetSize(); i++)
         {
             csString sigData, data;
-            sigData.Format("invslot_%u", mesg.containerID * 100 + mesg.contents[i].slotID + 16);
+            sigData.Format("invslot_%u", mesg.containerID * 100 + mesg.contents[i].slotID);
 
             data.Format( "%s %d %d %s %s %s", mesg.contents[i].icon.GetData(),
                          mesg.contents[i].stackCount,
@@ -248,12 +248,14 @@ bool pawsContainerDescWindow::OnButtonPressed(int /*mouseButton*/, int /*keyModi
 
         Debug3(LOG_PAWS, 0, "selecting containerID %d, oldID %u", containerID, oldID.Unbox());
         psUserActionMessage setnewtarget(0, containerID, "select");
+//printf("container 252 \n");
         setnewtarget.SendMessage();
 
         // Attempt to grab all items in the container.
         psengine->GetCmdHandler()->Execute("/takestackall");
 
         psUserActionMessage setoldtarget(0, oldID, "select");
+//printf(" container 258 \n");
         setoldtarget.SendMessage();
     }
     // Check to see if player attempts to take everything
@@ -269,12 +271,14 @@ bool pawsContainerDescWindow::OnButtonPressed(int /*mouseButton*/, int /*keyModi
 
         Debug3(LOG_PAWS, 0, "selecting containerID %d, oldID %u", containerID, oldID.Unbox());
         psUserActionMessage setnewtarget(0, containerID, "select");
+//printf(" container 274 \n");
         setnewtarget.SendMessage();
 
         // Attempt to grab all items in the container.
         psengine->GetCmdHandler()->Execute("/takeall");
 
         psUserActionMessage setoldtarget(0, oldID, "select");
+//printf(" container 281 \n");
         setoldtarget.SendMessage();
     }
     else if(widgetName == "UseContainer")
@@ -289,6 +293,8 @@ bool pawsContainerDescWindow::OnButtonPressed(int /*mouseButton*/, int /*keyModi
         {
             psViewItemDescription out(psengine->GetSlotManager()->HoldingContainerID(),
                                       psengine->GetSlotManager()->HoldingSlotID());
+//printf(" container 296 \n");
+
             out.SendMessage();
 
             psengine->GetSlotManager()->CancelDrag();
@@ -325,6 +331,7 @@ bool pawsContainerDescWindow::OnButtonPressed(int /*mouseButton*/, int /*keyModi
         }
         Debug3(LOG_PAWS, 0, "selecting containerID %d, oldID %u", containerID, oldID.Unbox());
         psUserActionMessage setnewtarget(0, containerID, "select");
+//printf(" container 334 \n");
         setnewtarget.SendMessage();
 
         if(widget->GetID() == COMBINE_BUTTON)
@@ -333,27 +340,9 @@ bool pawsContainerDescWindow::OnButtonPressed(int /*mouseButton*/, int /*keyModi
             psengine->GetCmdHandler()->Execute("/uncombine");
 
         psUserActionMessage setoldtarget(0, oldID, "select");
+//printf(" container 343 \n");
         setoldtarget.SendMessage();
     }
 
     return true;
 }
-
-pawsSlot* pawsContainerDescWindow::GetSlot(int slotID)
-{
-    int col = slotID%6;
-    int row = (slotID-col)/6;
-
-    if (col > 0 && col < contents->GetTotalColumns())
-    {
-        pawsListBoxRow* listRow = contents->GetRow(row);
-        if (listRow)
-        {
-            return dynamic_cast <pawsSlot*> (listRow->GetColumn(col));
-        }
-    }
-
-    return NULL;
-}
-
-

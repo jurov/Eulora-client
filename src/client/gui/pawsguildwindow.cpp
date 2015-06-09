@@ -1,7 +1,7 @@
 /*
  * pawsguildwidow.cpp - Author: Andrew Craig
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -304,7 +304,7 @@ void pawsGuildWindow::HandleMessage( MsgEntry* me )
         {
             SetCreatingGuild(true);
             csString msg;
-            msg.Format("You are not in a guild.\nNew guilds must have a minimum of %d members, and the fee is %d trias. Beware that a guild will be automatically disbanded if it has less than 5 members for more than %d minutes\nDo you wish to found a guild now?",
+            msg.Format("You are not in a guild.\nNew guilds must have a minimum of %d members, and the fee is %d coppers. Beware that a guild will be automatically disbanded if it has less than 5 members for more than %d minutes\nDo you wish to found a guild now?",
                        GUILD_MIN_MEMBERS, GUILD_FEE, GUILD_KICK_GRACE);
             pawsYesNoBox::Create(this, msg, CREATE_GUILD_CONFIRM, CREATE_GUILD_DECLINE);
             break;

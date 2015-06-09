@@ -1,7 +1,7 @@
 /*
  * pawsskillwindow.h
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -24,7 +24,8 @@
 #include "net/cmdbase.h"
 #include "util/skillcache.h"
 #include "gui/pawscontrolwindow.h"
-#include "paws/pawsnumberpromptwindow.h"
+//#include "paws/pawsnumberpromptwindow.h"
+#include "paws/pawsnumberspromptwindow.h"
 
 class pawsTextBox;
 class pawsListBox;
@@ -118,13 +119,13 @@ protected:
     void HandleSkillCategory(pawsListBox* tabNameSkillList, const char* indWidget,
                              const char* tabName, psSkillCacheItem* skillInfo, int &idx, bool flush);
 
-    pawsListBox *statsSkillList, *combatSkillList, *magicSkillList, *jobsSkillList, *variousSkillList;
-    pawsListBox *factionList;
+    pawsListBox *statsSkillList, *gatherSkillList, *magicSkillList, *craftSkillList, *faithSkillList, *fightSkillList, *utilitySkillList, *leadSkillList;
+    pawsListBox *leadList;
 
-    pawsMultiLineTextBox *combatSkillDescription, *magicSkillDescription, *jobsSkillDescription;
-    pawsMultiLineTextBox *variousSkillDescription, *statsSkillDescription, *factionsDescription;
-    pawsProgressBar *hpBar, *manaBar, *pysStaminaBar, *menStaminaBar, *experienceBar;
-    pawsTextBox *hpFrac, *manaFrac, *pysStaminaFrac, *menStaminaFrac, *experiencePerc;
+    pawsMultiLineTextBox *gatherSkillDescription, *magicSkillDescription, *craftSkillDescription, *fightSkillDescription, *utilitySkillDescription;
+    pawsMultiLineTextBox *faithSkillDescription, *statsSkillDescription, *leadSkillDescription;
+    pawsProgressBar *hpBar,*bpBar, *manaBar, *spiritBar,*pysStaminaBar, *menStaminaBar, *experienceBar;
+    pawsTextBox *hpFrac,*bpFrac, *manaFrac, *spiritFrac,*pysStaminaFrac, *menStaminaFrac, *experiencePerc;
 
     csArray<pawsListBoxRow*> unsortedSkills; ///< Array keeping the server order of the skills
 
@@ -134,7 +135,9 @@ protected:
     csString skillString;
     csString selectedSkill;
 
-    int hitpointsMax, manaMax, physStaminaMax, menStaminaMax;
+    int hitpointsMax,bloodpointsMax, manaMax,spiritMax, physStaminaMax, menStaminaMax;
+//    int hitpointsMax,manaMax, physStaminaMax, menStaminaMax;
+//    int hitpoints,bloodpoints, mana,spirit; 
 
     int currentTab, previousTab; ///< Used for storing which is the current tab and the previous one
 

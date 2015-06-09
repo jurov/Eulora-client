@@ -2,7 +2,7 @@
 /*
  * psmoney.cpp by Anders Reggestad <andersr@pvv.org>
  *
- * Copyright (C) 2001 Atomic Blue (info@planshift.it, http://www.atomicblue.org) 
+ * Copyright (C) 2001 Atomic Blue (info@planeshift.it, http://www.atomicblue.org) 
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -28,22 +28,22 @@
 
 
 psMoney::psMoney()
-    :circles(0), octas(0), hexas(0), trias(0)
+    :bitcents(0), denarius(0), argents(0), coppers(0)
 {
 }
 
-psMoney::psMoney(int trias)
-    :circles(0), octas(0), hexas(0), trias(trias)
+psMoney::psMoney(int coppers)
+    :bitcents(0), denarius(0), argents(0), coppers(coppers)
 {
 }
 
-psMoney::psMoney(int circles, int octas, int hexas, int trias)
-    :circles(circles), octas(octas), hexas(hexas), trias(trias)
+psMoney::psMoney(int bitcents, int denarius, int argents, int coppers)
+    :bitcents(bitcents), denarius(denarius), argents(argents), coppers(coppers)
 {
 }
 
 psMoney::psMoney(const char * moneyString)
-    :circles(0), octas(0), hexas(0), trias(0)
+    :bitcents(0), denarius(0), argents(0), coppers(0)
 {
     Set(moneyString);
 }
@@ -54,12 +54,12 @@ void psMoney::Set(const char * moneyString)
     if (moneyString==NULL)
         return;
 
-    if (sscanf(moneyString,"%d,%d,%d,%d",&circles,&octas,&hexas,&trias) != 4)
+    if (sscanf(moneyString,"%d,%d,%d,%d",&bitcents,&denarius,&argents,&coppers) != 4)
     {
-        circles = octas = hexas = 0;
-        if (sscanf(moneyString,"%d",&trias) != 1)
+        bitcents = denarius = argents = 0;
+        if (sscanf(moneyString,"%d",&coppers) != 1)
         {
-            trias = 0;
+            coppers = 0;
         }
     }
 }
@@ -68,25 +68,25 @@ void psMoney::Set( int type, int value )
 {
     switch( type )
     {
-        case MONEY_TRIAS:   SetTrias( value ); break;
-        case MONEY_HEXAS:   SetHexas( value ); break;
-        case MONEY_OCTAS:   SetOctas( value ); break;
-        case MONEY_CIRCLES: SetCircles( value ); break;
+        case MONEY_COPPERS:   SetCoppers( value ); break;
+        case MONEY_ARGENTS:   SetArgents( value ); break;
+        case MONEY_DENARIUS:   SetDenarius( value ); break;
+        case MONEY_BITCENTS: SetBITCents( value ); break;
     }
 }
 
-void psMoney::Set(int circles, int octas, int hexas, int trias)
+void psMoney::Set(int bitcents, int denarius, int argents, int coppers)
 {
-    this->circles  =  circles;
-    this->octas    =  octas;
-    this->hexas    =  hexas;
-    this->trias    =  trias;
+    this->bitcents  =  bitcents;
+    this->denarius    =  denarius;
+    this->argents    =  argents;
+    this->coppers    =  coppers;
 }
 
 int psMoney::GetTotal() const
 {
-    int64 total = (int64)circles*CIRCLES_VALUE_TRIAS + (int64)octas*OCTAS_VALUE_TRIAS
-        + (int64)hexas*HEXAS_VALUE_TRIAS + trias;
+    int64 total = (int64)bitcents*BITCENTS_VALUE_COPPERS + (int64)denarius*DENARIUS_VALUE_COPPERS
+        + (int64)argents*ARGENTS_VALUE_COPPERS + coppers;
     if(total > INT_MAX)
         total = INT_MAX;
     return (int)total;
@@ -94,39 +94,39 @@ int psMoney::GetTotal() const
 
 csString psMoney::ToString() const
 { 
-    return csString().Format("%d,%d,%d,%d",circles,octas,hexas,trias);
+    return csString().Format("%d,%d,%d,%d",bitcents,denarius,argents,coppers);
 }
 
 csString psMoney::ToUserString() const
 {
-    if(!trias && !hexas && !octas && !circles)
-        return csString("0 Trias");
+    if(!coppers && !argents && !denarius && !bitcents)
+        return csString("0 Coppers");
 
     csString strs[4];
     int found = 0;
 
-    if(circles)
+    if(bitcents)
     {
-      strs[0] = circles;
-      strs[0].Append(" Circles");
+      strs[0] = bitcents;
+      strs[0].Append(" BITCents");
       found = 1;
     }
-    if(octas)
+    if(denarius)
     {
-      strs[found] = octas;
-      strs[found].Append(" Octas");
+      strs[found] = denarius;
+      strs[found].Append(" Denarius");
       found++;
     }
-    if(hexas)
+    if(argents)
     {
-      strs[found] = hexas;
-      strs[found].Append(" Hexas");
+      strs[found] = argents;
+      strs[found].Append(" Argents");
       found++;
     }
-    if(trias)
+    if(coppers)
     {
-      strs[found] = trias;
-      strs[found].Append(" Trias");
+      strs[found] = coppers;
+      strs[found].Append(" Coppers");
       found++;
     }
 
@@ -151,44 +151,44 @@ void psMoney::Adjust( int type, int value )
 {
     switch( type )
     {
-        case MONEY_TRIAS:   AdjustTrias(  value ); break;
-        case MONEY_HEXAS:   AdjustHexas(  value ); break;
-        case MONEY_OCTAS:   AdjustOctas(  value ); break;
-        case MONEY_CIRCLES: AdjustCircles(value ); break;
+        case MONEY_COPPERS:   AdjustCoppers(  value ); break;
+        case MONEY_ARGENTS:   AdjustArgents(  value ); break;
+        case MONEY_DENARIUS:   AdjustDenarius(  value ); break;
+        case MONEY_BITCENTS: AdjustBITCents(value ); break;
     }
 }
 
 
-void psMoney::AdjustCircles( int c)
+void psMoney::AdjustBITCents( int c)
 { 
-	circles+= c; 
-	if ( circles < 0 )
-		circles = 0;
+	bitcents+= c; 
+	if ( bitcents < 0 )
+		bitcents = 0;
 }
 
-void psMoney::AdjustOctas( int c )
+void psMoney::AdjustDenarius( int c )
 { 
-	octas+= c; 
-	if ( octas < 0 )
-		octas = 0;
+	denarius+= c; 
+	if ( denarius < 0 )
+		denarius = 0;
 }
-void psMoney::AdjustHexas( int c )
+void psMoney::AdjustArgents( int c )
 { 
-    hexas+= c; 
-    if ( hexas < 0 )
-        hexas = 0;
-}
-
-
-void psMoney::AdjustTrias( int c )
-{ 
-    trias+= c; 
-    if ( trias < 0 )
-        trias = 0;
+    argents+= c; 
+    if ( argents < 0 )
+        argents = 0;
 }
 
 
-bool psMoney::EnsureTrias(int minValue)
+void psMoney::AdjustCoppers( int c )
+{ 
+    coppers+= c; 
+    if ( coppers < 0 )
+        coppers = 0;
+}
+
+
+bool psMoney::EnsureCoppers(int minValue)
 {
 	int total = GetTotal();
 
@@ -203,65 +203,65 @@ bool psMoney::EnsureTrias(int minValue)
 	*this = Normalized();
 
 	// Now add back in the trias we need
-	trias += minValue;
+	coppers += minValue;
 	return true;
 }
 
-bool psMoney::EnsureHexas(int minValue)
+bool psMoney::EnsureArgents(int minValue)
 {
 	int total = GetTotal();
 
-	if (total < minValue * HEXAS_VALUE_TRIAS)
+	if (total < minValue * ARGENTS_VALUE_COPPERS)
 		return false;
 
 	// Reserve how many hexas we need
-	total -= minValue * HEXAS_VALUE_TRIAS;
+	total -= minValue * ARGENTS_VALUE_COPPERS;
 
 	// Now normalize the remainder
 	Set(0,0,0,total);
 	*this = Normalized();
 
 	// Now add back in the hexas we need
-	hexas += minValue;
+	argents += minValue;
 	return true;
 }
 
-bool psMoney::EnsureOctas(int minValue)
+bool psMoney::EnsureDenarius(int minValue)
 {
 	int total = GetTotal();
 
-	if (total < minValue * OCTAS_VALUE_TRIAS)
+	if (total < minValue * DENARIUS_VALUE_COPPERS)
 		return false;
 
 	// Reserve how many octas we need
-	total -= minValue * OCTAS_VALUE_TRIAS;
+	total -= minValue * DENARIUS_VALUE_COPPERS;
 
 	// Now normalize the remainder
 	Set(0,0,0,total);
 	*this = Normalized();
 
 	// Now add back in the octas we need
-	octas += minValue;
+	denarius += minValue;
 
 	return true;
 }
 
-bool psMoney::EnsureCircles(int minValue)
+bool psMoney::EnsureBITCents(int minValue)
 {
 	int total = GetTotal();
 
-	if (total < minValue * CIRCLES_VALUE_TRIAS)
+	if (total < minValue * BITCENTS_VALUE_COPPERS)
 		return false;
 
 	// Reserve how many circles we need
-	total -= minValue * CIRCLES_VALUE_TRIAS;
+	total -= minValue * BITCENTS_VALUE_COPPERS;
 
 	// Now normalize the remainder
 	Set(0,0,0,total);
 	*this = Normalized();
 
 	// Now add back in the hexas we need
-	circles += minValue;
+	bitcents += minValue;
 	return true;
 }
 
@@ -269,10 +269,10 @@ int psMoney::Get( int type ) const
 {
     switch( type )
     {
-        case MONEY_TRIAS:   return trias;
-        case MONEY_HEXAS:   return hexas;
-        case MONEY_OCTAS:   return octas;
-        case MONEY_CIRCLES: return circles;
+        case MONEY_COPPERS:   return coppers;
+        case MONEY_ARGENTS:   return argents;
+        case MONEY_DENARIUS:   return denarius;
+        case MONEY_BITCENTS: return bitcents;
     }
     return 0;
 }
@@ -280,12 +280,12 @@ int psMoney::Get( int type ) const
 psMoney psMoney::Normalized() const
 {
     int tot = GetTotal(); 
-    int c = tot/CIRCLES_VALUE_TRIAS;
-    tot = tot%CIRCLES_VALUE_TRIAS;
-    int o = tot/OCTAS_VALUE_TRIAS;
-    tot = tot%OCTAS_VALUE_TRIAS;
-    int h = tot/HEXAS_VALUE_TRIAS;
-    tot = tot%HEXAS_VALUE_TRIAS;
+    int c = tot/BITCENTS_VALUE_COPPERS;
+    tot = tot%BITCENTS_VALUE_COPPERS;
+    int o = tot/DENARIUS_VALUE_COPPERS;
+    tot = tot%DENARIUS_VALUE_COPPERS;
+    int h = tot/ARGENTS_VALUE_COPPERS;
+    tot = tot%ARGENTS_VALUE_COPPERS;
     int t = tot;
     return psMoney(c,o,h,t);
 }
@@ -298,16 +298,16 @@ bool psMoney::operator > (const psMoney& other) const
 
 psMoney psMoney::operator +=(const psMoney& other)
 {
-    circles += other.circles;
-    octas += other.octas;
-    hexas += other.hexas;
-    trias += other.trias;
-    return psMoney(circles, octas, hexas, trias);
+    bitcents += other.bitcents;
+    denarius += other.denarius;
+    argents += other.argents;
+    coppers += other.coppers;
+    return psMoney(bitcents, denarius, argents, coppers);
 }
 
 psMoney psMoney::operator - (void) const
 {
-    return psMoney(-circles, -octas, -hexas, -trias);
+    return psMoney(-bitcents, -denarius, -argents, -coppers);
 }
 
 psMoney psMoney::operator - (const psMoney& other) const
@@ -315,8 +315,8 @@ psMoney psMoney::operator - (const psMoney& other) const
     psMoney left,taken;
     left = *this;
 
-    int type = MONEY_TRIAS;
-    while(taken.GetTotal() < other.GetTotal() && type <= MONEY_CIRCLES)
+    int type = MONEY_COPPERS;
+    while(taken.GetTotal() < other.GetTotal() && type <= MONEY_BITCENTS)
     {
       const int amount = csMin( left.Get(type), other.GetTotal() - taken.GetTotal() );
       taken.Adjust(type, amount);
@@ -349,14 +349,14 @@ psMoney psMoney::operator - (const psMoney& other) const
 
 psMoney psMoney::operator + (const psMoney& other) const
 {
-    return psMoney(circles+other.circles,
-                   octas+other.octas,
-                   hexas+other.hexas,
-                   trias+other.trias);
+    return psMoney(bitcents+other.bitcents,
+                   denarius+other.denarius,
+                   argents+other.argents,
+                   coppers+other.coppers);
 }
 
 psMoney psMoney::operator * (const int mult) const
 {
-    return psMoney(circles*mult,octas*mult,hexas*mult,trias*mult);
+    return psMoney(bitcents*mult,denarius*mult,argents*mult,coppers*mult);
 }
 

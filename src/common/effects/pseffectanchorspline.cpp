@@ -1,7 +1,7 @@
 /*
 * Author: Andrew Robberts
 *
-* Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+* Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
 *
 *
 * This program is free software; you can redistribute it and/or
@@ -58,7 +58,7 @@ bool psEffectAnchorSpline::Load(iDocumentNode * node)
     }
     if (name.IsEmpty())
     {
-        csReport(psCSSetup::object_reg, CS_REPORTER_SEVERITY_ERROR, "planeshift_effects", "Attempting to create an effect spline anchor with no name.\n");
+        csReport(psCSSetup::object_reg, CS_REPORTER_SEVERITY_ERROR, "eulora_effects", "Attempting to create an effect spline anchor with no name.\n");
         return false;
     }
     

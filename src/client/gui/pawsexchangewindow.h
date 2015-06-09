@@ -1,7 +1,7 @@
 /*
  * pawsexchangewindow.h"
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *exi
  * Credits :    Andrew Craig <acraig@paqrat.com> 
  *          
@@ -42,7 +42,7 @@ enum psExchangeType
                                 - used for quests */
 };
 
-/** The trade window in PlanShift.
+/** The trade window in PlaneShift.
  * This is the window that people will use to trade with each other.
  * There are 4 slots for items and 4 for money for both receiving and 
  * offering.  Whenever a person accepts their panel will change so each 
@@ -101,7 +101,7 @@ protected:
     pawsMoney * offeringMoneyWidget, * receivingMoneyWidget;
 
     //Text that shows the total amount of trias
-    pawsTextBox * totalTriasOffered, *totalTriasReceived;
+    pawsTextBox * totalCoppersOffered, *totalCoppersReceived;
 
     /// List of slots for items that have been offered.
     pawsSlot* offeringSlots[EXCHANGE_SLOT_COUNT];

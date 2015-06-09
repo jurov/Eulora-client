@@ -1,7 +1,7 @@
 /*
  * pawstree.cpp - Author: Ondrej Hurt
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -636,9 +636,7 @@ void pawsTreeStruct::DeleteChild(const csString & name)
 bool pawsTreeStruct::Load(iDocumentNode *node)
 {
     csRef<iDocumentNode> xmlRoot;
-    
     csString factory;
-    
     pawsWidget *rootAsWidget;
     pawsTreeNode *newRoot;
 
@@ -647,7 +645,7 @@ bool pawsTreeStruct::Load(iDocumentNode *node)
     xmlRoot = node->GetNode("widget");
     if (xmlRoot == NULL)
     {
-        Error1("<widget> tag not found");
+        //Error1("<widget> tag not found");
         return true;
     }
 

@@ -1,7 +1,7 @@
 /*
  * pawsskillwindow.cpp
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -40,16 +40,24 @@
 #include "paws/pawsprogressbar.h"
 #include "gui/pawscontrolwindow.h"
 
+
+
 #define BTN_BUY       100
 #define BTN_FILTER    101
 #define BTN_BUYLVL    103
 #define BTN_STATS    1000 ///< Stats button for the tab panel
-#define BTN_COMBAT   1001 ///< Combat button for the tab panel
+//#define BTN_COMBAT   1001 ///< Combat button for the tab panel
 #define BTN_MAGIC    1002 ///< Magic button for the tab panel
-#define BTN_JOBS     1003 ///< Jobs button for the tab panel
-#define BTN_VARIOUS  1004 ///< Various button for the tab panel
-#define BTN_FACTION  1005
-#define MAX_CAT         4
+//#define BTN_JOBS     1003 ///< Jobs button for the tab panel
+//#define BTN_VARIOUS  1004 ///< Various button for the tab panel
+//#define BTN_FACTION  1005
+#define MAX_CAT         6
+#define BTN_GATHER   1001 ///< gather button for the tab panel
+#define BTN_CRAFT     1003 ///< craft button for the tab panel
+#define BTN_FAITH  1004 ///< Faith for the tab panel
+#define BTN_LEAD  1005
+#define BTN_UTILITY  1009
+#define BTN_FIGHT  1008
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
@@ -61,9 +69,17 @@ pawsSkillWindow::pawsSkillWindow()
     skillString.Clear();
     skillDescriptions.DeleteAll();
     filter = false;
+    train = false;
+    foundSelected = false;
 
     hitpointsMax = 0;
+    bloodpointsMax = 0;
     manaMax = 0;
+    spiritMax = 0;
+//    hitpoints = 0;
+//    bloodpoints = 0;
+//    mana = 0;
+ //   spirit = 0;
     physStaminaMax = 0;
     menStaminaMax = 0;
 
@@ -99,41 +115,58 @@ bool pawsSkillWindow::PostSetup()
     statsSkillList        = (pawsListBox*)FindWidget("StatsSkillList");
     statsSkillDescription = (pawsMultiLineTextBox*)FindWidget("StatsDescription");
 
-    combatSkillList        = (pawsListBox*)FindWidget("CombatSkillList");
-    combatSkillDescription = (pawsMultiLineTextBox*)FindWidget("CombatDescription");
+    fightSkillList        = (pawsListBox*)FindWidget("FightSkillList");
+    fightSkillDescription = (pawsMultiLineTextBox*)FindWidget("FightDescription");
+
+    gatherSkillList        = (pawsListBox*)FindWidget("GatherSkillList");
+    gatherSkillDescription = (pawsMultiLineTextBox*)FindWidget("GatherDescription");
+
+    craftSkillList        = (pawsListBox*)FindWidget("CraftSkillList");
+    craftSkillDescription = (pawsMultiLineTextBox*)FindWidget("CraftDescription");
 
     magicSkillList        = (pawsListBox*)FindWidget("MagicSkillList");
     magicSkillDescription = (pawsMultiLineTextBox*)FindWidget("MagicDescription");
 
-    jobsSkillList        = (pawsListBox*)FindWidget("JobsSkillList");
-    jobsSkillDescription = (pawsMultiLineTextBox*)FindWidget("JobsDescription");
+    faithSkillList        = (pawsListBox*)FindWidget("FaithSkillList");
+    faithSkillDescription = (pawsMultiLineTextBox*)FindWidget("FaithDescription");
 
-    variousSkillList        = (pawsListBox*)FindWidget("VariousSkillList");
-    variousSkillDescription = (pawsMultiLineTextBox*)FindWidget("VariousDescription");
+    leadSkillList        = (pawsListBox*)FindWidget("LeadSkillList");
+    leadSkillDescription = (pawsMultiLineTextBox*)FindWidget("LeadDescription");
 
-    factionList        = (pawsListBox*)FindWidget("FactionList");
-    factionsDescription = (pawsMultiLineTextBox*)FindWidget("FactionDescription");
+    utilitySkillList        = (pawsListBox*)FindWidget("UtilitySkillList");
+    utilitySkillDescription = (pawsMultiLineTextBox*)FindWidget("UtilityDescription");
+
+
+
+
+
 
     hpBar = dynamic_cast <pawsProgressBar*> (FindWidget("HPBar"));
+    bpBar = dynamic_cast <pawsProgressBar*> (FindWidget("BPBar"));
     manaBar = dynamic_cast <pawsProgressBar*> (FindWidget("ManaBar"));
+    spiritBar = dynamic_cast <pawsProgressBar*> (FindWidget("SpiritBar"));
     pysStaminaBar = dynamic_cast <pawsProgressBar*> (FindWidget("PysStaminaBar"));
     menStaminaBar = dynamic_cast <pawsProgressBar*> (FindWidget("MenStaminaBar"));
     experienceBar = dynamic_cast <pawsProgressBar*> (FindWidget("ExperienceBar"));
 
     hpFrac = dynamic_cast <pawsTextBox*> (FindWidget("HPFrac"));
+    bpFrac = dynamic_cast <pawsTextBox*> (FindWidget("BPFrac"));
     manaFrac = dynamic_cast <pawsTextBox*> (FindWidget("ManaFrac"));
+    spiritFrac = dynamic_cast <pawsTextBox*> (FindWidget("SpiritFrac"));
     pysStaminaFrac = dynamic_cast <pawsTextBox*> (FindWidget("PysStaminaFrac"));
     menStaminaFrac = dynamic_cast <pawsTextBox*> (FindWidget("MenStaminaFrac"));
     experiencePerc = dynamic_cast <pawsTextBox*> (FindWidget("ExperiencePerc"));
 
-    if ( !hpBar || !manaBar || !pysStaminaBar || !menStaminaBar || !experienceBar
-         || !hpFrac || !manaFrac || !pysStaminaFrac || !menStaminaFrac || !experiencePerc )
+    if ( !hpBar  || !bpBar  || !manaBar ||  !spiritBar ||!pysStaminaBar || !menStaminaBar || !experienceBar
+         || !hpFrac  || !manaFrac  || !pysStaminaFrac || !menStaminaFrac || !experiencePerc )
     {
         return false;
     }
 
     hpBar->SetTotalValue(1);
+    bpBar->SetTotalValue(1);
     manaBar->SetTotalValue(1);
+    spiritBar->SetTotalValue(1);
     pysStaminaBar->SetTotalValue(1);
     menStaminaBar->SetTotalValue(1);
     experienceBar->SetTotalValue(1);
@@ -188,7 +221,7 @@ bool pawsSkillWindow::SetupDoll()
     return true;
 }
 
-void pawsSkillWindow::HandleFactionMsg(MsgEntry* me)
+/*void pawsSkillWindow::HandleFactionMsg(MsgEntry* me)
 {
     psFactionMessage factMsg(me);
     csString ratingStr;
@@ -268,16 +301,16 @@ void pawsSkillWindow::HandleFactionMsg(MsgEntry* me)
         }
     }
 }
-
+*/
 void pawsSkillWindow::HandleMessage( MsgEntry* me )
 {
     switch ( me->GetType() )
     {
-        case MSGTYPE_FACTION_INFO:
+        /*case MSGTYPE_FACTION_INFO:
         {
             HandleFactionMsg(me);
             break;
-        }
+        }*/
 
         case MSGTYPE_GUISKILL:
         {
@@ -287,6 +320,15 @@ void pawsSkillWindow::HandleMessage( MsgEntry* me )
             {
                 case psGUISkillMessage::SKILL_LIST:
                 {
+                    bool flush = (train != incoming.trainingWindow) || incoming.openWindow;
+                    train=incoming.trainingWindow;
+                    if (train)
+                    {
+                        factRequest = false;
+                        factions.DeleteAll();
+                        //factionList->Clear();
+                    }
+
                     skillString = "no";
                     if (!IsVisible() && incoming.openWindow)
                     {
@@ -294,9 +336,6 @@ void pawsSkillWindow::HandleMessage( MsgEntry* me )
                     }
                     skillString = incoming.commandData;
                     skillCache.apply(&incoming.skillCache);
-
-                    bool flush = (train != incoming.trainingWindow) || incoming.openWindow;
-                    train=incoming.trainingWindow;
 
                     int selectedRowIdx = -1;
                     HandleSkillList(&skillCache, incoming.focusSkill, &selectedRowIdx, flush);
@@ -307,7 +346,16 @@ void pawsSkillWindow::HandleMessage( MsgEntry* me )
                     }
 
                     hitpointsMax = incoming.hitpointsMax;
+
+                    bloodpointsMax = incoming.bloodpointsMax;
                     manaMax = incoming.manaMax;
+                    spiritMax = incoming.spiritMax;
+/*                    hitpoints = incoming.hitpoints;
+
+                    bloodpoints = incoming.bloodpoints;
+                    mana = incoming.mana;
+                    spirit = incoming.spirit;
+*/
                     physStaminaMax = incoming.physStaminaMax;
                     menStaminaMax = incoming.menStaminaMax;
 
@@ -328,11 +376,16 @@ void pawsSkillWindow::Close()
 {
     Hide();
 
-    combatSkillList->Clear();
+
     statsSkillList->Clear();
+    fightSkillList->Clear();
+    gatherSkillList->Clear();
+    craftSkillList->Clear();
     magicSkillList->Clear();
-    jobsSkillList->Clear();
-    variousSkillList->Clear();
+    faithSkillList->Clear();
+    leadSkillList->Clear();
+    utilitySkillList->Clear();
+
     skillString.Clear();
     selectedSkill.Clear();
     unsortedSkills.DeleteAll();
@@ -362,11 +415,15 @@ bool pawsSkillWindow::OnButtonPressed(int /*mouseButton*/, int /*keyModifier*/, 
         }
 
         case BTN_STATS:
-        case BTN_FACTION:
-        case BTN_COMBAT:
+        
+        case BTN_FIGHT:
+        case BTN_UTILITY:
+        case BTN_LEAD:
+        case BTN_GATHER:
         case BTN_MAGIC:
-        case BTN_JOBS:
-        case BTN_VARIOUS:
+        case BTN_CRAFT:
+        case BTN_FAITH:
+
         {
             previousTab = currentTab; //Keep the selection if we are hitting the same tab where we are.
             currentTab = widget->GetID() - 1000;
@@ -398,22 +455,37 @@ void pawsSkillWindow::SelectSkill(int skill, int cat)
         }
     case 1: //Combat skills
         {
-            combatSkillList->Select(unsortedSkills[skill]);
+            fightSkillList->Select(unsortedSkills[skill]);
             break;
         }
     case 2: //Magic Skills
         {
-            magicSkillList->Select(unsortedSkills[skill]);
+            utilitySkillList->Select(unsortedSkills[skill]);
             break;
         }
     case 3://Jobs Skills
         {
-            jobsSkillList->Select(unsortedSkills[skill]);
+            leadSkillList->Select(unsortedSkills[skill]);
             break;
         }
     case 4://Various Skills
         {
-            variousSkillList->Select(unsortedSkills[skill]);
+            gatherSkillList->Select(unsortedSkills[skill]);
+            break;
+        }
+    case 5://Various Skills
+        {
+            magicSkillList->Select(unsortedSkills[skill]);
+            break;
+        }
+    case 6://Various Skills
+        {
+            craftSkillList->Select(unsortedSkills[skill]);
+            break;
+        }
+    case 7://Various Skills
+        {
+            faithSkillList->Select(unsortedSkills[skill]);
             break;
         }
     }
@@ -433,17 +505,26 @@ void pawsSkillWindow::HandleSkillList(psSkillCache *skills, int selectedNameId, 
     {
         // Clear descriptions
         statsSkillDescription->SetText("");
-        combatSkillDescription->SetText("");
+        fightSkillDescription->SetText("");
+        utilitySkillDescription->SetText("");
+        leadSkillDescription->SetText("");
+        gatherSkillDescription->SetText("");
         magicSkillDescription->SetText("");
-        jobsSkillDescription->SetText("");
-        variousSkillDescription->SetText("");
+        craftSkillDescription->SetText("");
+        faithSkillDescription->SetText("");
+
 
         // Clear everything on a flush
-        combatSkillList->Clear();
         statsSkillList->Clear();
+        fightSkillList->Clear();
+        utilitySkillList->Clear();
+        leadSkillList->Clear();
+        gatherSkillList->Clear();
         magicSkillList->Clear();
-        jobsSkillList->Clear();
-        variousSkillList->Clear();
+        craftSkillList->Clear();
+        faithSkillList->Clear();
+
+
         unsortedSkills.DeleteAll();
     }
 
@@ -472,22 +553,37 @@ void pawsSkillWindow::HandleSkillList(psSkillCache *skills, int selectedNameId, 
                 }
                 case 1://Combat skills
                 {
-                    HandleSkillCategory(combatSkillList, "CombatIndicator", "Combat Button", skill, idx, flush);
+                    HandleSkillCategory(fightSkillList, "FightIndicator", "Fight Button", skill, idx, flush);
                     break;
                 }
                 case 2://Magic skills
                 {
-                    HandleSkillCategory(magicSkillList, "MagicIndicator", "Magic Button", skill, idx, flush);
+                    HandleSkillCategory(utilitySkillList, "UtilityIndicator", "Utility Button", skill, idx, flush);
                     break;
                 }
                 case 3://Jobs skills
                 {
-                    HandleSkillCategory(jobsSkillList, "JobsIndicator", "Jobs Button", skill, idx, flush);
+                    HandleSkillCategory(leadSkillList, "LeadIndicator", "Lead Button", skill, idx, flush);
                     break;
                 }
                 case 4://Various skills
                 {
-                    HandleSkillCategory(variousSkillList, "VariousIndicator", "Various Button", skill, idx, flush);
+                    HandleSkillCategory(gatherSkillList, "GatherIndicator", "Gather Button", skill, idx, flush);
+                    break;
+                }
+                case 5://Lead skills
+                {
+                    HandleSkillCategory(magicSkillList, "MagicIndicator", "Magic Button", skill, idx, flush);
+                    break;
+                }
+                case 6://fight skills
+                {
+                    HandleSkillCategory(craftSkillList, "CraftIndicator", "Craft Button", skill, idx, flush);
+                    break;
+                }
+                case 7://utility skills
+                {
+                    HandleSkillCategory(faithSkillList, "FaithIndicator", "Faith Button", skill, idx, flush);
                     break;
                 }
             }
@@ -497,10 +593,16 @@ void pawsSkillWindow::HandleSkillList(psSkillCache *skills, int selectedNameId, 
     if (flush)
     {
         statsSkillList->SetSortedColumn(0);
-        combatSkillList->SetSortedColumn(0);
+        fightSkillList->SetSortedColumn(0);
+        utilitySkillList->SetSortedColumn(0);
+        leadSkillList->SetSortedColumn(0);
+        gatherSkillList->SetSortedColumn(0);
         magicSkillList->SetSortedColumn(0);
-        jobsSkillList->SetSortedColumn(0);
-        variousSkillList->SetSortedColumn(0);
+        craftSkillList->SetSortedColumn(0);
+        faithSkillList->SetSortedColumn(0);
+
+
+       
     }
 
     if (flush && !foundSelected)
@@ -581,27 +683,37 @@ void pawsSkillWindow::HandleSkillDescription( csString& description )
         }
         case 1://Combat skills
         {
-            combatSkillDescription->SetText( descStr );
+            fightSkillDescription->SetText( descStr );
             break;
         }
         case 2://Magic skills
         {
-            magicSkillDescription->SetText(descStr);
+            utilitySkillDescription->SetText(descStr);
             break;
         }
         case 3://Jobs skills
         {
-            jobsSkillDescription->SetText(descStr);
+            leadSkillDescription->SetText(descStr);
             break;
         }
         case 4://Various skills
         {
-            variousSkillDescription->SetText(descStr);
+            gatherSkillDescription->SetText(descStr);
             break;
         }
         case 5://Factions
         {
-            factionsDescription->SetText(descStr);
+            magicSkillDescription->SetText(descStr);
+            break;
+        }
+        case 6://Factions
+        {
+            craftSkillDescription->SetText(descStr);
+            break;
+        }
+        case 7://Factions
+        {
+            faithSkillDescription->SetText(descStr);
             break;
         }
     }
@@ -648,7 +760,7 @@ void pawsSkillWindow::BuyMaxSkill()
         possibleTraining = skillCache.getProgressionPoints();
         
     //check for 0 pp
-    if(!possibleTraining)
+/*    if(!possibleTraining)
     {
         if(!skillCache.getProgressionPoints())
             PawsManager::GetSingleton().CreateWarningBox("You don't have PP to train.");
@@ -656,7 +768,7 @@ void pawsSkillWindow::BuyMaxSkill()
             PawsManager::GetSingleton().CreateWarningBox("You can't train this skill anymore.");
         return;
     }
-
+*/
     commandData.Format("<B NAME=\"%s\" AMOUNT=\"%d\"/>", EscpXML(selectedSkill).GetData(), possibleTraining);
     psGUISkillMessage msg(psGUISkillMessage::BUY_SKILL, commandData);
     msg.SendMessage();
@@ -683,7 +795,7 @@ void pawsSkillWindow::BuySkill()
         return;
     }
     unsigned short possibleTraining = currSkill->getKnowledgeCost() - currSkill->getKnowledge();
-
+/*
     if (skillCache.getProgressionPoints() < possibleTraining)
         possibleTraining = skillCache.getProgressionPoints();
     
@@ -696,10 +808,15 @@ void pawsSkillWindow::BuySkill()
             PawsManager::GetSingleton().CreateWarningBox("You can't train this skill anymore.");
         return;
     }
+*/
+    pawsNumbersPromptWindow::Create("Training Percent", 0, 1, 100, this, "Training Percent");
+/*pawsNumbersPromptWindow * Create(const csString & label,
+                                           int number, int minNumber, int maxNumber, 
+                                           iOnNumberEnteredAction * action,const char *name, int param=0);
 
-    pawsNumberPromptWindow::Create("Training amount", 0, 1, possibleTraining, this, "Training amount");
+*/
 }
-
+////label, number, minNumber, maxNumber, action,name,param);
 void pawsSkillWindow::Show()
 {
     pawsControlledWindow::Show();
@@ -714,7 +831,7 @@ void pawsSkillWindow::Show()
 
     // If this is the first time the window is open then we need to get our
     // full list of faction information.
-    if (!factRequest)
+    if (!train && !factRequest)
     {
         psFactionMessage factionRequest(0, psFactionMessage::MSG_FULL_LIST);
         factionRequest.BuildMsg();
@@ -728,6 +845,7 @@ void pawsSkillWindow::Hide()
     outgoing.SendMessage();
     skillCache.clear();
     pawsControlledWindow::Hide();
+    train = false;
 }
 
 
@@ -769,27 +887,37 @@ void pawsSkillWindow::OnListAction( pawsListBox* widget, int status )
                 }
                 case 1://Combat skills
                 {
-                    combatSkillDescription->SetText(desc->GetDescription());
+                    fightSkillDescription->SetText(desc->GetDescription());
                     break;
                 }
                 case 2://Magic skills
                 {
-                    magicSkillDescription->SetText(desc->GetDescription());
+                    utilitySkillDescription->SetText(desc->GetDescription());
                     break;
                 }
                 case 3://Jobs skills
                 {
-                    jobsSkillDescription->SetText(desc->GetDescription());
+                    leadSkillDescription->SetText(desc->GetDescription());
                     break;
                 }
                 case 4://Various skills
                 {
-                    variousSkillDescription->SetText(desc->GetDescription());
+                    gatherSkillDescription->SetText(desc->GetDescription());
                     break;
                 }
                 case 5://Factions
                 {
-                    factionsDescription->SetText(desc->GetDescription());
+                    magicSkillDescription->SetText(desc->GetDescription());
+                    break;
+                }
+                case 6://Factions
+                {
+                    craftSkillDescription->SetText(desc->GetDescription());
+                    break;
+                }
+                case 7://Factions
+                {
+                    faithSkillDescription->SetText(desc->GetDescription());
                     break;
                 }
             }
@@ -809,12 +937,34 @@ void pawsSkillWindow::Draw()
     {
         csString buff;
         buff.Format("%1.0f/%i", vitals->GetHP()*hitpointsMax, hitpointsMax);
+//printf("skills 912 hpmax  %u \n",  hitpointsMax);
+//printf("format statement %1.0f/%i", vitals->GetHP()*hitpointsMax, hitpointsMax);
+//printf(" test get HPmod  %g \n\n",vitals->GetHP());
         hpFrac->SetText(buff);
+
+        buff.Format("%1.0f/%i", vitals->GetBP()*bloodpointsMax, bloodpointsMax);
+//        buff.Format("%d/%i", bloodpoints*bloodpointsMax, bloodpointsMax);
+//printf(" BP %10.2f \n " ,vitals->GetBP()*bloodpointsMax);
+//printf("skills 915 bpmax  %u \n",  bloodpointsMax);
+//printf("format statement %1.0f/%i", vitals->GetBP()*bloodpointsMax, bloodpointsMax);
+//printf(" test get bpmod %g \n\n",vitals->GetBP());
+        bpFrac->SetText(buff);
+
         buff.Format("%1.0f/%i", vitals->GetMana()*manaMax, manaMax);
+//printf("skills 922  manaMax %u \n", manaMax);
+//printf(" test get manamod  %g \n\n",vitals->GetMana());
         manaFrac->SetText(buff);
+
+        buff.Format("%1.0f/%i", vitals->GetSpirit()*spiritMax, spiritMax);
+//printf("skills 922  spirit %u \n", spiritMax);
+//printf(" test get spiritmod  %g \n\n",vitals->GetSpirit());
+        spiritFrac->SetText(buff);
+
         buff.Format("%1.0f/%i", vitals->GetPStamina()*physStaminaMax, physStaminaMax);
+//printf(" test get spiritmod  %g \n\n",vitals->GetPStamina());
         pysStaminaFrac->SetText(buff);
         buff.Format("%1.0f/%i", vitals->GetMStamina()*menStaminaMax, menStaminaMax);
+//printf(" test get spiritmod  %g \n\n",vitals->GetMStamina());
         menStaminaFrac->SetText(buff);
     }
 
@@ -823,10 +973,12 @@ void pawsSkillWindow::Draw()
 
 void pawsSkillWindow::FlashTabButton(const char* buttonName, bool flash)
 {
+/*
     if (buttonName != NULL && FindWidget(buttonName))
     {
         ((pawsButton *) FindWidget(buttonName))->Flash(flash);
     }
+*/
 }
 
 void pawsSkillWindow::HandleSkillCategory(pawsListBox* tabNameSkillList,
@@ -840,14 +992,19 @@ void pawsSkillWindow::HandleSkillCategory(pawsListBox* tabNameSkillList,
     int Y = skillInfo->getKnowledge();
     int Z = skillInfo->getPractice();
 
-     // filter out untrained skills
+     // filter out untrained skills FILTER
     if (filter  &&  R==0  &&  Y==0  &&  Z==0)
+    {
+        return;
+    }
+    if (R==0)
     {
         return;
     }
 
     // Get the skill name string from common strings
     csString skillName = psengine->FindCommonString(skillInfo->getNameId());
+
     if (skillName.IsEmpty())
     {
         Error2("Invalid skill name with Id %d", skillInfo->getNameId());
@@ -899,7 +1056,7 @@ void pawsSkillWindow::HandleSkillCategory(pawsListBox* tabNameSkillList,
     }
     indicator->Set(x, R, Y, skillInfo->getKnowledgeCost(),
                    Z, skillInfo->getPracticeCost());
-
+//printf("1042 skill set indicate x %d R %d Y %d knowC %d Z %d practC %d \n",x, R, Y, skillInfo->getKnowledgeCost(), Z, skillInfo->getPracticeCost());
     if (flush)
     {
         unsortedSkills.Push(row);
@@ -916,7 +1073,7 @@ void pawsSkillWindow::HandleSkillCategory(pawsListBox* tabNameSkillList,
     }
 
     //If we are training, flash the tab button
-    FlashTabButton(tabName, train);
+//    FlashTabButton(tabName, train);
 
     ++idx; // Update the row index
 }
@@ -947,7 +1104,9 @@ unsigned int pawsSkillIndicator::GetRelCoord(unsigned int pt)
     }
     else
     {
+
         int returnv = int(screenFrame.Width() * pt / float(yCost+zCost));
+//printf("1089 returnnv %d - real cord %d - ycost %d zcost %d \n", returnv, pt, yCost,zCost);
         if(returnv > screenFrame.Width())
         {
             returnv = screenFrame.Width();
@@ -1002,6 +1161,7 @@ void pawsSkillIndicator::Draw()
 
 void pawsSkillIndicator::Set(unsigned int x, int rank, int y, int yCost, int z, int zCost)
 {
+//printf("1145  rank %d ycost %d zcost %d \n",rank,  yCost,zCost);
     this->x = x;
     this->rank = rank;
     //clamp ycost so if someone overtrained (due to training before changes to the training cost)

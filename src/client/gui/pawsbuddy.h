@@ -1,7 +1,7 @@
 /*
  * Author: Andrew Craig
  *
- * Copyright (C) 2004 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2004 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -34,7 +34,7 @@ class pawsListBox;
  *  names in the buddy list with user choices.
  */
 #define ALIASES_FILE_PREFIX       "/planeshift/userdata/aliases_"
-// vfs files? chetty
+
 
 /** The buddy window that shows your current list of in game 'friends'.  
  *  This allows you to send them a tell or add/remove buddies.

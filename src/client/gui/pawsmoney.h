@@ -1,7 +1,7 @@
 /*
  * pawsmoney.h - Author: Ondrej Hurt
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -43,10 +43,10 @@ public:
     virtual bool PostSetup();
 
     /** Get and set amounts of different coins */
-    void Set(int circles, int octas, int hexas, int trias);
+    void Set(int bitcents, int denarius, int argents, int cpppers);
     void Set(int coinType, int count);
     void Set(const psMoney & money);
-    void Get(int & circles, int & octas, int & hexas, int & trias);
+    void Get(int & bitcents, int & denarius, int & argents, int & coppers);
     int  Get(int coinType);
 
     /** Returns the amount of money in trias */
@@ -56,9 +56,6 @@ public:
 
     /** Tells if the amount of money is Zero (null) */
     bool IsNoAmount();
-
-    /** Returns pawsItemSlot that represents given coin */
-    pawsSlot * GetSlot(int coin);
 
     void SetContainer( int containerID );
     void Drag( bool dragOn );
@@ -75,10 +72,10 @@ protected:
 
     int amount;     ///< The total amount of money in trias
 
-    pawsSlot * circles;
-    pawsSlot * octas;
-    pawsSlot * hexas;
-    pawsSlot * trias;
+    pawsSlot * bitcents;
+    pawsSlot * denarius;
+    pawsSlot * argents;
+    pawsSlot * coppers;
 
     /// Called when amount of a coin (hexa, octa ... ) is changed
     void RecalculateAmount();

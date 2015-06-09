@@ -17,7 +17,7 @@ IncludeDir "include" ;
 IncludeDir src client ;
 IncludeDir src server ;
 IncludeDir src common ;
-#IncludeDir src tools wordnet ;
+IncludeDir src tools wordnet ;
 IncludeDir src tools breakpad ;
 IncludeDir src tools breakpad third_party linux include ;
 IncludeDir $(BUILDTOP) : : literal transient ;
@@ -217,7 +217,7 @@ MsvcGenConfig BREAKPAD.LIBDIRS.DEBUG ;
 
 # Write a description of each compile group for 'jam help'
 Description server : "Server components" ;
-Description eunpcclient : "NPC client components" ;
+Description psnpcclient : "NPC client components" ;
 Description client : "Client components" ;
 Description tests : "Tests" ;
 Description tools : "Tools" ;
@@ -226,12 +226,9 @@ Description server_static : "Static server components" ;
 
 # Register the compile groups. To add a project to a compile group, add the line CompileGroups project : compilegroup ; in the projects Jamfile.
 
-#RegisterCompileGroups server psserver psclient psnpcclient client tests tools client_static server_static ;
-
-RegisterCompileGroups server psserver euclient eunpcclient client tests tools client_static server_static ;
+RegisterCompileGroups server psserver euclient psnpcclient client tests tools client_static server_static ;
 
 # List the first layer of subdirectories containing the jamfiles for the projects you wish to compile. This is order sensistive.
 # Library targets must be seen by Jam before Application and Plugin targets.
 
 SubInclude TOP src ;
-#SubInclude TOP docs ;

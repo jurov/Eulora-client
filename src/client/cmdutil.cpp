@@ -1,7 +1,7 @@
 /*
  * cmdutil.h - Author: Keith Fulton
  *
- * Copyright (C) 2001 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2001 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -107,7 +107,7 @@ const char *psUtilityCommands::HandleCommand(const char *cmd)
             psengine->QuitClient();
         else
             HandleQuit();
-        return "Exiting Yliakum...";
+        return "Exiting ...";
     }
     /*else if(words[0] == "/dumpmovements")
     {
@@ -208,7 +208,7 @@ const char *psUtilityCommands::HandleCommand(const char *cmd)
         }
         if(words[1] == "shortcut")
         {
-            ((pawsShortcutWindow*)PawsManager::GetSingleton().FindWidget("ShortcutWindow"))->LoadCommandsFile();
+            ((pawsShortcutWindow*)PawsManager::GetSingleton().FindWidget("ShortcutMenu"))->LoadCommandsFile();
             return "Shortcuts reloaded";
         }
         return "try /reload sound";

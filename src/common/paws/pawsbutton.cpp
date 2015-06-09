@@ -1,7 +1,7 @@
 /*
  * pawsbutton.cpp - Author: Andrew Craig
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -341,7 +341,7 @@ bool pawsButton::OnMouseEnter()
         SetState(true, false);
     }
 
-    return true;
+    return pawsWidget::OnMouseEnter();
 }
 
 bool pawsButton::OnMouseExit()
@@ -351,7 +351,7 @@ bool pawsButton::OnMouseExit()
         SetState(false, false);
     }
 
-    return true;
+    return pawsWidget::OnMouseExit();
 }
 
 bool pawsButton::OnMouseDown( int button, int modifiers, int x, int y )

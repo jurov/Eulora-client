@@ -1,7 +1,7 @@
 /*
  * inventorywindow.cpp - Author: Andrew Craig
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -336,52 +336,6 @@ void pawsInventoryWindow::Dequip( const char* itemName )
     }
 }
 
-void pawsInventoryWindow::UpdateFromContainer(ContainerID fromContainerID, int fromSlotID, int fromStackCount, int takenStackCount)
-{
-    pawsSlot* fromSlot = NULL;
-
-    // Find the fromSlot
-    if (fromContainerID == CONTAINER_INVENTORY_BULK)
-    {
-        if (fromContainerID >= 0 && fromContainerID < INVENTORY_BULK_COUNT)
-        {
-            fromSlot = bulkSlots[fromSlotID];
-        }
-        else
-        {
-            int slotID = fromSlotID % 100;
-            int locationInParent = (fromSlotID-slotID)/100;
-
-            pawsContainerDescWindow* containerDescWindow = (pawsContainerDescWindow*)PawsManager::GetSingleton().FindWidget("ContainerDescWindow");
-            if (containerDescWindow)
-            {
-                if (containerDescWindow->GetContainerID() == locationInParent)
-                {
-                    fromSlot = containerDescWindow->GetSlot( slotID );
-                }
-            }
-        }
-
-    }
-
-    if (fromSlot)
-    {
-        // Prechange the slot, client side
-        if (fromStackCount > takenStackCount)
-        {
-            fromSlot->StackCount(fromStackCount - takenStackCount);
-        }
-        else
-        {
-            fromSlot->Clear();
-        }
-    }
-    else
-    {
-        // Found no slot!!!
-    }
-}
-
 void pawsInventoryWindow::Equip( const char* itemName, int stackCount, int toSlotID )
 {
     csArray<psInventoryCache::CachedItemDescription*>::Iterator iter = psengine->GetInventoryCache()->GetSortedIterator();
@@ -394,8 +348,11 @@ void pawsInventoryWindow::Equip( const char* itemName, int stackCount, int toSlo
 
         if (slotDesc->name.CompareNoCase(itemName))
         {
-            from = slotDesc;
-            break;  // We found an item, so breaking the search
+            if (slotDesc->containerID == CONTAINER_INVENTORY_BULK)
+            {
+                from = slotDesc;
+                break;  // We found an item, so breaking the search
+            }
         }
     }
 
@@ -403,8 +360,6 @@ void pawsInventoryWindow::Equip( const char* itemName, int stackCount, int toSlo
     {
         int container   = from->containerID;
         int slot        = from->slot;
-
-        UpdateFromContainer(container, slot, from->stackCount, stackCount);
 
         if (container == CONTAINER_INVENTORY_BULK)
         {

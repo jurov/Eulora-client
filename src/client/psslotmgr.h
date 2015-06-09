@@ -1,7 +1,7 @@
 /*
  * psslotmgr.h
  *
- * Copyright (C) 2005 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2005 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,6 +29,7 @@
 // Forward Declarations
 //=============================================================================
 class pawsSlot;
+class pawsDnDButton;
 class MsgHandler;
 struct iMeshWrapper;
 
@@ -46,7 +47,10 @@ public:
     bool HandleEvent( iEvent& ev );
 
     void Handle( pawsSlot* slot, bool grabOne = false, bool grabAll = false );
+    void Handle( pawsDnDButton* target );
+
     void SetDragDetails(pawsSlot* slot, int count);
+    void SetDragDetails(pawsDnDButton *target );
 
     bool IsDragging() { return isDragging; }
     bool IsPlacing() { return isPlacing; }
@@ -68,11 +72,11 @@ private:
         int containerID;
         int slotID;
         int stackCount;
-        pawsSlot* slot;
+        pawsWidget* slot;
         csString meshFactName;
         csString materialName;
         csString toolTip;
-        csString bartenderAction;
+        csString Action;
         int parentID;
         bool split; ///< Holds if the slot we are dragging contains a split of a stack.
     } draggingSlot;
@@ -90,6 +94,7 @@ private:
     psPoint basePoint;
 
     csArray<pawsSlot*> slotsInUse;
+    int last_count;
 
     csEventID MouseMove; ///< Shortcut for event mouse move
     csEventID MouseDown; ///< Shortcut for event mouse down

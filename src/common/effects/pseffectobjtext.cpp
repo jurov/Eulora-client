@@ -1,7 +1,7 @@
 /*
 * Author: Andrew Robberts
 *
-* Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+* Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
 *
 *
 * This program is free software; you can redistribute it and/or
@@ -213,7 +213,7 @@ bool psEffectObjText::SetText(int rows, ...)
 bool psEffectObjText::Load(iDocumentNode * node, iLoaderContext* ldr_context)
 {
     // default text attributes
-    fontName = "/this/data/ttf/LiberationSans-Regular.ttf";
+    fontName = "/this/data/ttf/reteprelieum.ttf";
     fontSize = 20;
 
     // read text attributes

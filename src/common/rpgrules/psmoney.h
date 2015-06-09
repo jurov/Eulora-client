@@ -1,7 +1,7 @@
 /*
  * psmoney.h by Anders Reggestad <andersr@pvv.org>
  *
- * Copyright (C) 2001 Atomic Blue (info@planshift.it, http://www.atomicblue.org) 
+ * Copyright (C) 2001 Atomic Blue (info@planeshift.it, http://www.atomicblue.org) 
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -24,20 +24,20 @@
 #include <csutil/csstring.h>
 
 // Value of coins in other coins
-#define CIRCLES_VALUE_TRIAS 250
-#define OCTAS_VALUE_TRIAS    50
-#define HEXAS_VALUE_TRIAS    10
+#define BITCENTS_VALUE_COPPERS 1000000
+#define DENARIUS_VALUE_COPPERS  10000
+#define ARGENTS_VALUE_COPPERS   100
 
-#define CIRCLES_VALUE_HEXAS  (CIRCLES_VALUE_TRIAS / HEXAS_VALUE_TRIAS)
-#define CIRCLES_VALUE_OCTAS   (CIRCLES_VALUE_TRIAS / OCTAS_VALUE_TRIAS)
-#define OCTAS_VALUE_HEXAS     (OCTAS_VALUE_TRIAS / HEXAS_VALUE_TRIAS)
+#define BITCENTS_VALUE_ARGENTS  (BITCENTS_VALUE_COPPERS / ARGENTS_VALUE_COPPERS)
+#define BITCENTS_VALUE_DENARIUS   (BITCENTS_VALUE_COPPERS / DENARIUS_VALUE_COPPERS)
+#define DENARIUS_VALUE_ARGENTS     (DENARIUS_VALUE_COPPERS / ARGENTS_VALUE_COPPERS)
 
 typedef enum
 {
-    MONEY_TRIAS,
-    MONEY_HEXAS,
-    MONEY_OCTAS,
-    MONEY_CIRCLES
+    MONEY_COPPERS,
+    MONEY_ARGENTS,
+    MONEY_DENARIUS,
+    MONEY_BITCENTS
 } Money_Slots;
 
 
@@ -45,8 +45,8 @@ class psMoney
 {
 public:
     psMoney();
-    psMoney(int trias);
-    psMoney(int circles, int octas, int hexas, int trias);
+    psMoney(int coppers);
+    psMoney(int bitcents, int denarius, int argents, int coppers);
 
     /** Construct a psMoney based on a string 
      *  Format: "C,O,H,T"
@@ -56,45 +56,45 @@ public:
    
     void Set(const char * moneyString);
     void Set(int type, int value);
-    void Set(int circles, int octas, int hexas, int trias);
+    void Set(int bitcents, int denarius, int argents, int coppers);
 
     /** Set the number of circles
      */
-    void SetCircles(int c) { circles = c; }
-    void AdjustCircles( int c );
+    void SetBITCents(int c) { bitcents = c; }
+    void AdjustBITCents( int c );
     
     /** Get the number of circles
      * @return circles
      */
-    int GetCircles() const { return circles; }
+    int GetBITCents() const { return bitcents; }
 
     /** Set the number of octas
      */
-    void SetOctas(int o) { octas = o; }
-    void AdjustOctas(int o);
+    void SetDenarius(int o) { denarius = o; }
+    void AdjustDenarius(int o);
     /** Get the number of octas
      * @return octas
      */
-    int GetOctas() const { return octas; }
+    int GetDenarius() const { return denarius; }
 
     /** Set the number of hexas
      */
-    void SetHexas(int h) { hexas = h; }
-    void AdjustHexas( int h );
+    void SetArgents(int h) { argents = h; }
+    void AdjustArgents( int h );
     /** Get the number of hexas
      * @return hexas
      */
-    int GetHexas() const { return hexas; }
+    int GetArgents() const { return argents; }
 
     /** Set the number of trias
      */
-    void SetTrias(int t) { trias = t; }   
-    void AdjustTrias( int t );
+    void SetCoppers(int t) { coppers = t; }   
+    void AdjustCoppers( int t );
 
     /** Get the number of trias
      * @return trias
      */
-    int GetTrias() const { return trias; }   
+    int GetCoppers() const { return coppers; }   
    
     /** Get the total in trias
      * @return Trias
@@ -126,16 +126,16 @@ public:
     void Adjust( int type, int value );
     int Get( int type ) const;
 
-	bool EnsureTrias(int minValue);
-	bool EnsureHexas(int minValue);
-	bool EnsureOctas(int minValue);
-	bool EnsureCircles(int minValue);
+	bool EnsureCoppers(int minValue);
+	bool EnsureArgents(int minValue);
+	bool EnsureDenarius(int minValue);
+	bool EnsureBITCents(int minValue);
 
 protected:
-    int circles;
-    int octas;
-    int hexas;
-    int trias;
+    int bitcents;
+    int denarius;
+    int argents;
+    int coppers;
 };
 
 

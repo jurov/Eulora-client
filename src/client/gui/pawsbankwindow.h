@@ -1,7 +1,7 @@
 /*
 * pawsbankwindow.h - Author: Mike Gist
 *
-* Copyright (C) 2007 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+* Copyright (C) 2007 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
 *
 *
 * This program is free software; you can redistribute it and/or
@@ -27,7 +27,7 @@
 #include "paws/pawslistbox.h"
 #include "paws/pawsradio.h"
 
-/** The bank window in PlanShift.
+/** The bank window in PlaneShift.
  * This is the window that people will use to interact with their bank accounts.
  */
 class pawsBankWindow : public pawsWidget, public psClientNetSubscriber
@@ -46,19 +46,19 @@ public:
 protected:
 
     /* Text that shows the total amount of money available to withdraw. */
-    pawsTextBox *circlesCanWithdraw, *octasCanWithdraw, *hexasCanWithdraw, *triasCanWithdraw;
+    pawsTextBox *bitcentsCanWithdraw, *denariusCanWithdraw, *argentsCanWithdraw, *coppersCanWithdraw;
 
     /* Text that shows the total amount of money available to deposit. */
-    pawsTextBox *circlesCanDeposit, *octasCanDeposit, *hexasCanDeposit, *triasCanDeposit;
+    pawsTextBox *bitcentsCanDeposit, *denariusCanDeposit, *argentsCanDeposit, *coppersCanDeposit;
 
     /* Text that shows the maximum amount of each coin available to exchange. */
-    pawsTextBox *circlesCanExchange, *octasCanExchange, *hexasCanExchange, *triasCanExchange;
+    pawsTextBox *bitcentsCanExchange, *denariusCanExchange, *argentsCanExchange, *coppersCanExchange;
 
     /* Box for specifying how much to withdraw. */
-    pawsEditTextBox *circlesToWithdraw, *octasToWithdraw, *hexasToWithdraw, *triasToWithdraw;
+    pawsEditTextBox *bitcentsToWithdraw, *denariusToWithdraw, *argentsToWithdraw, *coppersToWithdraw;
 
     /* Box for specifying how much to deposit. */
-    pawsEditTextBox *circlesToDeposit, *octasToDeposit, *hexasToDeposit, *triasToDeposit;
+    pawsEditTextBox *bitcentsToDeposit, *denariusToDeposit, *argentsToDeposit, *coppersToDeposit;
 
     /* Box for specifying how much to exchange. */
     pawsEditTextBox *coinsToExchange;
@@ -67,7 +67,7 @@ protected:
     pawsRadioButtonGroup *coinSelect;
 
     /* Radio buttons for specifying which coin type to exchange. */
-    pawsRadioButton *circles, *octas, *hexas, *trias;
+    pawsRadioButton *bitcents, *denarius, *argents, *coppers;
 
     /* Fee info for coin conversions. */
     pawsTextBox *feeInfo;

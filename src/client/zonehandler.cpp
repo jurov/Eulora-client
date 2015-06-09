@@ -1,7 +1,7 @@
 /*
  * zonehandler.cpp    Keith Fulton <keith@paqrat.com>
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -194,23 +194,27 @@ void ZoneHandler::HandleMessage(MsgEntry* me)
     psNewSectorMessage msg(me);
 
     Notify3(LOG_LOAD, "Crossed from sector %s to sector %s.", msg.oldSector.GetData(), msg.newSector.GetData());
-    float vel = 0.0;
+
+    csVector3 velocity = csVector3(0.0f);
+    float yrot = 0.0f;
     // load current speed on sector crossing if the player is valid (not during game loading)
     if(celclient->GetMainPlayer())
     {
-        csVector3 velocity = celclient->GetMainPlayer()->GetVelocity();
-        Notify4(LOG_LOAD, "Velocity %f %f %f", velocity.x, velocity.y, velocity.z);
-        vel=velocity.z;
+        velocity = celclient->GetMainPlayer()->GetVelocity();
+        yrot = celclient->GetMainPlayer()->GetYRotation();
     }
-    // TOFIX: should be a vector3 and not just velocity.z
-    LoadZone(msg.pos, msg.newSector, vel);
+
+    LoadZone(msg.pos, yrot, msg.newSector, velocity);
 }
 
-void ZoneHandler::LoadZone(csVector3 pos, const char* sector, float vel, bool force)
+void ZoneHandler::LoadZone(csVector3 pos, float yrot, const char* sector, csVector3 vel, bool force)
 {
     if((loading || !strcmp(sector, LOADING_SECTOR)) && !force)
         return;
+
     newPos = pos;
+    newyrot = yrot;
+    newVel = vel;
     csString sectorBackup = sectorToLoad; // cache old sector
     sectorToLoad = sector;
     bool connected = true;
@@ -222,8 +226,11 @@ void ZoneHandler::LoadZone(csVector3 pos, const char* sector, float vel, bool fo
         return;
     }
 
+    // Save current movement state before stopping.
+    psengine->GetCharControl()->GetMovementManager()->SaveMoveState(moveState);
+
     // Move player to the loading sector.
-    MovePlayerTo(csVector3(0.0f), LOADING_SECTOR, vel);
+    MovePlayerTo(csVector3(0.0f), 0.0f, LOADING_SECTOR, csVector3(0.0f));
 
     // load target location
     if(!psengine->BackgroundWorldLoading())
@@ -261,7 +268,6 @@ void ZoneHandler::LoadZone(csVector3 pos, const char* sector, float vel, bool fo
     loadCount = psengine->GetLoader()->GetLoadingCount();
     if(FindLoadWindow() && (loadCount != 0 || !psengine->HasLoadedMap() || !connected || forcedLoadingEndTime != 0))
     {
-
         loading = true;
 
         if(psengine->HasLoadedMap())
@@ -290,29 +296,23 @@ void ZoneHandler::LoadZone(csVector3 pos, const char* sector, float vel, bool fo
 
         psengine->ForceRefresh();
     }
-
-    // do move the player in *any* case to make sure we won't end up looping to death
-    // move player to new pos
-    MovePlayerTo(newPos, sectorToLoad, vel);
+    else
+        MovePlayerTo(newPos, newyrot, sectorToLoad, newVel);
 }
 
-void ZoneHandler::MovePlayerTo(const csVector3 &newPos, const csString &newSector, float newVel)
+void ZoneHandler::MovePlayerTo(const csVector3 &Pos, float yrot,
+                               const csString &newSector, const csVector3 &Vel)
 {
     if(!celclient->IsReady())
         return;
 
-    csVector3 pos;
-    float yrot;
-    iSector* sector;
-
-    celclient->GetMainPlayer()->GetLastPosition(pos, yrot, sector);             // retrieve last yrot
-
-    sector = psengine->GetEngine()->FindSector(newSector);
+    iSector* sector = psengine->GetEngine()->FindSector(newSector);
     if(sector != NULL)
     {
-        Notify6(LOG_LOAD, "Setting position of player %f %f %f in sector '%s' velocity: %f", newPos.x, newPos.y, newPos.z, newSector.GetData(),newVel);
-        celclient->GetMainPlayer()->SetPosition(newPos, yrot, sector);          // set new position
-        celclient->GetMainPlayer()->SetVelocity(csVector3(0.0,0.0,newVel));
+        Notify9(LOG_LOAD, "Setting position of player %f %f %f rot %f in sector '%s' velocity: %f %f %f",
+            Pos.x, Pos.y, Pos.z, yrot, newSector.GetData(), Vel.x, Vel.y, Vel.z);
+        celclient->GetMainPlayer()->SetPosition(Pos, yrot, sector);          // set new position
+        celclient->GetMainPlayer()->SetVelocity(Vel);
     }
     else
     {
@@ -326,8 +326,18 @@ void ZoneHandler::OnDrawingFinished()
     {
         if(psengine->GetLoader()->GetLoadingCount() == 0 && csGetTicks() >= forcedLoadingEndTime)
         {
+            // This is a bit of a hack. The problem is that we want to
+            // stop movement while the loading screen is visible but not
+            // restore the saved velocity if the player has changed movement
+            // keys.
+            if (celclient->GetMainPlayer() &&
+                psengine->GetCharControl()->GetMovementManager()->MoveStateChanged(moveState))
+            {
+                newVel = celclient->GetMainPlayer()->GetVelocity();
+            }
+
             // move player to new pos
-            MovePlayerTo(newPos, sectorToLoad, 0.0);
+            MovePlayerTo(newPos, newyrot, sectorToLoad, newVel);
 
             if(psengine->HasLoadedMap())
                 loadWindow->Hide();

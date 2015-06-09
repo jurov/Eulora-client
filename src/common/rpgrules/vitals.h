@@ -1,7 +1,7 @@
 /*
  * vitals.h
  *
- * Copyright (C) 2005 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2005 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -22,8 +22,10 @@
 
 #include <csutil/array.h>
 
-#define HP_REGEN_RATE  0.2F
-#define MANA_REGEN_RATE  0.2F
+#define HP_REGEN_RATE  0.00F
+#define MANA_REGEN_RATE  0.00F
+#define BP_REGEN_RATE  0.00F
+#define SPIRIT_REGEN_RATE  0.00F
 
 
 /** The vitals that the client is concerned about. Used as params into
@@ -32,7 +34,9 @@
 enum PS_VITALS
 {
     VITAL_HITPOINTS,
+    VITAL_BLOODPOINTS,
     VITAL_MANA,
+    VITAL_SPIRIT,
     VITAL_PYSSTAMINA,
     VITAL_MENSTAMINA,
     VITAL_COUNT   // Count used to build a array of vitals, not a legal vital name
@@ -40,13 +44,15 @@ enum PS_VITALS
 
 /** Used by the server to tell which fields are incoming */
 enum PS_DIRTY_VITALS
-{
+/*{
     DIRTY_VITAL_HP              = 0x0001,
     DIRTY_VITAL_HP_MAX          = 0x0002,
-    DIRTY_VITAL_HP_RATE         = 0x0004,
+//    DIRTY_VITAL_HP_RATE         = 0x0004,
+    DIRTY_VITAL_SPIRIT         = 0x0004,
     DIRTY_VITAL_MANA            = 0x0008,
     DIRTY_VITAL_MANA_MAX        = 0x0010,
-    DIRTY_VITAL_MANA_RATE       = 0x0020,
+//    DIRTY_VITAL_MANA_RATE       = 0x0020,
+    DIRTY_VITAL_SPIRIT_MAX       = 0x0020,
     DIRTY_VITAL_PYSSTAMINA      = 0x0040,
     DIRTY_VITAL_PYSSTAMINA_MAX  = 0x0080,
     DIRTY_VITAL_PYSSTAMINA_RATE = 0x0100,
@@ -55,13 +61,65 @@ enum PS_DIRTY_VITALS
     DIRTY_VITAL_MENSTAMINA_RATE = 0x0800,
     DIRTY_VITAL_EXPERIENCE      = 0x1000,
     DIRTY_VITAL_PROGRESSION     = 0x2000,
-    DIRTY_VITAL_ALL = DIRTY_VITAL_HP | DIRTY_VITAL_HP_MAX | DIRTY_VITAL_HP_RATE |
+    DIRTY_VITAL_BP         = 0x4000,
+    DIRTY_VITAL_BP_MAX       = 0x8000,
+/*    DIRTY_VITAL_ALL = DIRTY_VITAL_HP | DIRTY_VITAL_HP_MAX | DIRTY_VITAL_HP_RATE |
                       DIRTY_VITAL_MANA | DIRTY_VITAL_MANA_MAX |DIRTY_VITAL_MANA_RATE |
                       DIRTY_VITAL_PYSSTAMINA | DIRTY_VITAL_PYSSTAMINA_MAX | DIRTY_VITAL_PYSSTAMINA_RATE |
                       DIRTY_VITAL_MENSTAMINA | DIRTY_VITAL_MENSTAMINA_MAX | DIRTY_VITAL_MENSTAMINA_RATE |
                       DIRTY_VITAL_EXPERIENCE |
-                      DIRTY_VITAL_PROGRESSION
+                      DIRTY_VITAL_PROGRESSION |DIRTY_VITAL_BP |DIRTY_VITAL_BP_MAX
+
+ DIRTY_VITAL_ALL = DIRTY_VITAL_HP | DIRTY_VITAL_HP_MAX | DIRTY_VITAL_SPIRIT | 
+                      DIRTY_VITAL_MANA | DIRTY_VITAL_MANA_MAX |DIRTY_VITAL_SPIRIT_MAX |
+                      DIRTY_VITAL_PYSSTAMINA | DIRTY_VITAL_PYSSTAMINA_MAX | DIRTY_VITAL_PYSSTAMINA_RATE |
+                      DIRTY_VITAL_MENSTAMINA | DIRTY_VITAL_MENSTAMINA_MAX | DIRTY_VITAL_MENSTAMINA_RATE |
+                      DIRTY_VITAL_EXPERIENCE |
+                      DIRTY_VITAL_PROGRESSION |DIRTY_VITAL_BP |DIRTY_VITAL_BP_MAX
 };
+*/
+//--------------------
+{
+    DIRTY_VITAL_HP              = 0x0001,
+    DIRTY_VITAL_HP_MAX          = 0x0002,
+    DIRTY_VITAL_BP              = 0x0004,
+
+    DIRTY_VITAL_BP_MAX          = 0x0008,
+    DIRTY_VITAL_MANA            = 0x0010,
+    DIRTY_VITAL_MANA_MAX        = 0x0020,
+
+    DIRTY_VITAL_SPIRIT          = 0x0040,
+    DIRTY_VITAL_SPIRIT_MAX      = 0x0080,
+
+    DIRTY_VITAL_PYSSTAMINA      = 0x0100,
+    DIRTY_VITAL_PYSSTAMINA_MAX  = 0x0200,
+    DIRTY_VITAL_PYSSTAMINA_RATE = 0x0400,
+    DIRTY_VITAL_MENSTAMINA      = 0x0800,
+    DIRTY_VITAL_MENSTAMINA_MAX  = 0x1000,
+    DIRTY_VITAL_MENSTAMINA_RATE = 0x2000,
+    DIRTY_VITAL_EXPERIENCE      = 0x4000,
+    DIRTY_VITAL_PROGRESSION     = 0x8000,
+DIRTY_VITAL_HP_RATE  = 0x8001,
+DIRTY_VITAL_MANA_RATE   = 0x8002,
+DIRTY_VITAL_BP_RATE  = 0x8004,
+DIRTY_VITAL_SPIRIT_RATE   = 0x8008,
+//    DIRTY_VITAL_BP         = 0x4000,
+//    DIRTY_VITAL_BP_MAX       = 0x8000,
+/*    DIRTY_VITAL_ALL = DIRTY_VITAL_HP | DIRTY_VITAL_HP_MAX | DIRTY_VITAL_HP_RATE |
+                      DIRTY_VITAL_MANA | DIRTY_VITAL_MANA_MAX |DIRTY_VITAL_MANA_RATE |
+                      DIRTY_VITAL_PYSSTAMINA | DIRTY_VITAL_PYSSTAMINA_MAX | DIRTY_VITAL_PYSSTAMINA_RATE |
+                      DIRTY_VITAL_MENSTAMINA | DIRTY_VITAL_MENSTAMINA_MAX | DIRTY_VITAL_MENSTAMINA_RATE |
+                      DIRTY_VITAL_EXPERIENCE |
+                      DIRTY_VITAL_PROGRESSION |DIRTY_VITAL_BP |DIRTY_VITAL_BP_MAX
+*/
+ DIRTY_VITAL_ALL = DIRTY_VITAL_HP | DIRTY_VITAL_HP_MAX | DIRTY_VITAL_BP | 
+                      DIRTY_VITAL_BP_MAX | DIRTY_VITAL_MANA |DIRTY_VITAL_MANA_MAX |DIRTY_VITAL_SPIRIT |DIRTY_VITAL_SPIRIT_MAX |
+                      DIRTY_VITAL_PYSSTAMINA | DIRTY_VITAL_PYSSTAMINA_MAX | DIRTY_VITAL_PYSSTAMINA_RATE |
+                      DIRTY_VITAL_MENSTAMINA | DIRTY_VITAL_MENSTAMINA_MAX | DIRTY_VITAL_MENSTAMINA_RATE |
+                      DIRTY_VITAL_EXPERIENCE |
+                      DIRTY_VITAL_PROGRESSION | DIRTY_VITAL_HP_RATE |DIRTY_VITAL_MANA_RATE | DIRTY_VITAL_BP_RATE |DIRTY_VITAL_SPIRIT_RATE
+};
+//---------------------enum PS_DIRTY_VITALS
 
 /** Manages a set of Vitals and does the predictions and updates on them
   *   when new data comes from the server.
@@ -75,11 +133,11 @@ public:
         experiencePoints  = 0;
         progressionPoints = 0;
         lastDRUpdate = 0;
-        for(int i = 0; i < VITAL_COUNT; i++)
+/*        for(int i = 0; i < VITAL_COUNT; i++)
         {
             vitals[i].value = 0;
             origVitals[i].value = 0;
-        }
+        }*/
     }
     ~psVitalManager() {}
     
@@ -87,6 +145,7 @@ public:
     {
         for(int i = 0; i < VITAL_COUNT; i++)
         {
+//printf("vitals.h set vitals i = %d value =  \n", i);
             vitals[i] = newVitalMgr.vitals[i];
         }
     }
@@ -102,7 +161,9 @@ public:
     void SetOrigVitals()
     {
         for (int i = 0; i < VITAL_COUNT; i++)
+
             origVitals[i] = vitals[i];
+
     }
 
     /** @brief Get a reference to a particular vital.
@@ -119,16 +180,30 @@ public:
     // Quick accessors
     float GetHP()
     {
+//printf(" vitals.h  %10.2f GetHP \n" ,vitals[VITAL_HITPOINTS].value);
         return vitals[VITAL_HITPOINTS].value;
+    }
+    float GetBP()
+    {
+//printf(" vitals.h  %10.2f GetBP \n" ,vitals[VITAL_BLOODPOINTS].value);
+        return vitals[VITAL_BLOODPOINTS].value;
     }
 
     float GetMana()
     {
+//printf(" vitals %0.0f MANA \n" ,vitals[VITAL_MANA].value);
         return vitals[VITAL_MANA].value;
     }
-
+//----------------
+    float GetSpirit()
+    {
+//printf(" vitals %0.0f SPIRIT \n" ,vitals[VITAL_SPIRIT].value);
+        return vitals[VITAL_SPIRIT].value;
+    }
+//-----------------
     float GetPStamina()
     {
+//printf(" vitals %0.0f PSTAM \n" ,vitals[VITAL_PYSSTAMINA].value);
         return vitals[VITAL_PYSSTAMINA].value;
     }
 

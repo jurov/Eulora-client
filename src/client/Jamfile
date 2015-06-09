@@ -12,7 +12,6 @@ ApplicationIcon win32 : euclient : [ ConcatDirs $(TOP) support icons icon1.ico ]
 ApplicationIcon macosx : euclient : [ ConcatDirs $(TOP) support icons icon1.icns ] ;
 Application euclient : [ Wildcard *.cpp *.h ] ;
 ExternalLibs euclient : CRYSTAL CAL3D BREAKPAD ;
-
 CompileGroups euclient : client ;
 COMMONLIBS = gui psnet psengine psrpgrules psutil paws effects fparser ;
 LinkWith euclient : gui psnet psengine psrpgrules psutil paws effects fparser ;
@@ -139,7 +138,7 @@ STATIC.PLUGINLIST.PS =
   dummysndmngr
 ;
 
-
+if $(TARGET.OS) != "WIN32" { STATIC.PLUGINLIST.PS += spellchecker ; }
 
 LinkStaticPlugins euclient_static :
   $(STATIC.PLUGINLIST.PS)

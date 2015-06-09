@@ -1,7 +1,7 @@
 /*
  * clientsongmngr.cpp, Author: Andrea Rizzi <88whacko@gmail.com>
  *
- * Copyright (C) 2001-2011 Atomic Blue (info@planshift.it, http://www.atomicblue.org) 
+ * Copyright (C) 2001-2011 Atomic Blue (info@planeshift.it, http://www.atomicblue.org) 
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -30,7 +30,7 @@
 //====================================================================================
 // Project Includes
 //====================================================================================
-#include <util/music.h>
+#include <music/musicutil.h>
 #include <gui/pawsmusicwindow.h>
 #include <paws/pawsmanager.h>
 #include <net/clientmsghandler.h>
@@ -62,7 +62,7 @@ void ClientSongManager::PlayMainPlayerSong(uint32_t itemID, const csString &musi
 {
     // updating state
     sheet = musicalSheet;
-    mainSongID = PENDING;
+    mainSongID = (uint)PENDING;
 
     // request to server
     psMusicalSheetMessage musicalSheetMessage(0, itemID, true, true, "", sheet);
@@ -97,7 +97,7 @@ void ClientSongManager::Update()
 
     // checking main player song
     if(mainSongID != NO_SONG
-       && mainSongID != PENDING
+       && mainSongID != (uint)PENDING
        && !sndMngr->IsSoundValid(mainSongID))
     {
         StopMainPlayerSong(false);
@@ -162,9 +162,9 @@ void ClientSongManager::HandleMessage(MsgEntry* message)
             {
                 // decompressing score
                 csString uncompressedScore;
-                psMusic::ZDecompressSong(playMsg.musicalScore, uncompressedScore);
+/*                psMusic::ZDecompressSong(playMsg.musicalScore, uncompressedScore);
 
-                songHandleID = PlaySong(uncompressedScore, playMsg.instrName, playerPos);
+                songHandleID = PlaySong(uncompressedScore, playMsg.instrName, playerPos);*/
             }
 
             // handling instrument not defined
@@ -209,7 +209,7 @@ void ClientSongManager::HandleMessage(MsgEntry* message)
         {
             csString errorStr;
 
-            if(mainSongID == PENDING) // no instrument equipped, invalid MusicXML or low skill
+            if(mainSongID == (uint)PENDING) // no instrument equipped, invalid MusicXML or low skill
             {
                 // updating mainSongId
                 mainSongID = NO_SONG;

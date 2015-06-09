@@ -110,6 +110,7 @@ void psCharVerificationMesg::Construct()
     
     for ( size_t z = 0; z < skills.GetSize(); z++ )
     {
+printf("charmsg 113 skill num %zu, %d \n",z,skills[z].value );
         msg->Add( (uint32_t)skills[z].value );   
         msg->Add( skills[z].name );
     }

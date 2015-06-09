@@ -1,7 +1,7 @@
 /*
  * pawstextbox.h - Author: Andrew Craig
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -705,6 +705,7 @@ public:
     int GetCurrentPageNum();
 protected:
 
+    // splits the given text in separate lines filling the 'lines' variable
     void OrganizeText(const char* text);
 
     /**

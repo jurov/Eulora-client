@@ -1,0 +1,108 @@
+<RaceDefs>
+	<Race name="fdermorian">
+		<Region name="nose">
+			<line x1="125" x2="131" y="5" />
+		</Region>
+		<Region name="eyes">
+			<line x1="101" x2="109" y="101" />
+		</Region>
+		<Region name="chin">
+			<line x1="338" x2="345" y="5" />
+		</Region>
+		<Region name="hair">
+			<line x1="119" x2="121" y="112" />
+		</Region>
+	</Race>
+	<Race name="fstonebreaker">
+		<Region name="nose">
+			<line x1="136" x2="142" y="0" />
+		</Region>
+		<Region name="eyes">
+			<line x1="261" x2="267" y="471" />
+		</Region>
+		<Region name="chin">
+			<line x1="152" x2="162" y="0" />
+		</Region>
+		<Region name="hair">
+			<line x1="337" x2="359" y="201" />
+		</Region>
+	</Race>
+	<Race name="mstonebreaker">
+		<Region name="chin">
+			<line x1="25" x2="30" y="1" />
+		</Region>
+		<Region name="eyes">
+			<line x1="126" x2="133" y="424" />
+		</Region>
+		<Region name="nose">
+			<line x1="262" x2="378" y="0" />
+		</Region>
+		<Region name="hair">
+			<line x1="146" x2="148" y="192" />
+		</Region>
+	</Race>
+	<Race name="mylian">
+		<Region name="nose">
+			<line x1="382" x2="389" y="107" />
+		</Region>
+		<Region name="eyes">
+			<line x1="380" x2="384" y="131" />
+		</Region>
+		<Region name="chin">
+			<line x1="215" x2="231" y="9" />
+		</Region>
+		<Region name="hair">
+			<line x1="374" x2="382" y="3" />
+		</Region>
+	</Race>
+	<Race name="nkran">
+		<Region name="nose">
+			<line x1="82" x2="84" y="1" />
+		</Region>
+		<Region name="eyes">
+			<line x1="339" x2="340" y="240" />
+		</Region>
+		<Region name="chin">
+			<line x1="184" x2="185" y="18" />
+		</Region>
+		<Region name="hair"></Region>
+	</Race>
+	<Race name="mynnwn">
+		<Region name="nose">
+			<line x1="385" x2="395" y="0" />
+		</Region>
+		<Region name="eyes">
+			<line x1="405" x2="414" y="103" />
+		</Region>
+		<Region name="chin">
+			<line x1="112" x2="141" y="0" />
+		</Region>
+		<Region name="hair">
+			<line x1="258" x2="269" y="0" />
+		</Region>
+	</Race>
+	<Race name="fenkidukai">
+		<Region name="nose">
+			<line x1="442" x2="455" y="3" />
+		</Region>
+		<Region name="eyes">
+			<line x1="54" x2="57" y="177" />
+		</Region>
+		<Region name="chin">
+			<line x1="292" x2="293" y="2" />
+		</Region>
+		<Region name="hair"></Region>
+	</Race>
+	<Race name="menkidukai">
+		<Region name="nose">
+			<line x1="190" x2="200" y="3" />
+		</Region>
+		<Region name="eyes">
+			<line x1="112" x2="122" y="388" />
+		</Region>
+		<Region name="chin">
+			<line x1="383" x2="384" y="68" />
+		</Region>
+		<Region name="hair"></Region>
+	</Race>
+</RaceDefs>

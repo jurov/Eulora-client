@@ -1,7 +1,7 @@
 /*
  * pawsskillwindow.h
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -63,9 +63,9 @@ protected:
     void HandleSkillDescription( csString& description );
     void SelectSkill(int skill);
 
-    pawsListBox*        statsSkillList, *combatSkillList, *magicSkillList, *knownSpellList, *variousSkillList;
-    pawsMultiLineTextBox* combatSkillDescription, *magicSkillDescription, *knownSpellDescription;
-    pawsMultiLineTextBox* variousSkillDescription, *statsSkillDescription;
+    pawsListBox*        statsSkillList, *gatherSkillList, *magicSkillList, *knownSpellList, *faithSkillList;
+    pawsMultiLineTextBox* gatherSkillDescription, *magicSkillDescription, *knownSpellDescription;
+    pawsMultiLineTextBox* faithSkillDescription, *statsSkillDescription;
     pawsProgressBar*    hpBar, *manaBar, *pysStaminaBar, *menStaminaBar;
     pawsTextBox        *hpCurrent, *hpTotal,
                        *manaCurrent, *manaTotal,

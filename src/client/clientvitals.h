@@ -1,7 +1,7 @@
 /*
  * clientvitals.h
  *
- * Copyright (C) 2005 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2005 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -37,6 +37,8 @@ class psStatDRMessage;
 /// A character vital (such as HP or Mana) - client side
 struct Vital
 {
+    Vital() : value(0.0), drRate(0.0) {}
+
     float value;
     float drRate;
 };

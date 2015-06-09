@@ -1,7 +1,7 @@
 /*
  * pawssheetline.cpp, Author: Andrea Rizzi <88whacko@gmail.com>
  *
- * Copyright (C) 2001-2011 Atomic Blue (info@planshift.it, http://www.atomicblue.org) 
+ * Copyright (C) 2001-2011 Atomic Blue (info@planeshift.it, http://www.atomicblue.org) 
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -46,6 +46,7 @@
 #define SINGLE_STAFF_FONT_SIZE 0.75f        // the multiplier of the font's size when switching from the double staff to the single one.
 
 // Font's characters
+#define SYMBOL_ENCODING_BASE 0xf000
 #define G_CLEF_SONORA '&' | SYMBOL_ENCODING_BASE
 #define F_CLEF_SONORA '?' | SYMBOL_ENCODING_BASE
 #define SHARP_SONORA '#' | SYMBOL_ENCODING_BASE
@@ -230,7 +231,7 @@ void Chord::AddNote(int position, int alter, bool rest)
             notesLength = 0;
         }
 
-        // keep the highest note first for a better rendering
+        // keep the highest note first to simplify drawing
         for(size_t i = 0; i < notesLength; i++)
         {
             // if this note is already in the chord: overwrite
@@ -359,7 +360,7 @@ void Chord::Draw(pawsSheetLine* pawsLine, Chord* selectedChord, int horizontalPo
     int vCPos;                  // vertical position of the central C
 
     int prevNotePos;
-    int lastDownNote;           // position of the last note that must be drawn downwards
+    size_t lastDownNote;        // position of the last note that must be drawn downwards
 
     size_t notesLength = notes.GetSize();
 
@@ -439,7 +440,7 @@ void Chord::Draw(pawsSheetLine* pawsLine, Chord* selectedChord, int horizontalPo
     // drawing chord
     for(size_t i = 0; i < notesLength; i++)
     {
-        short int notePos = notes[i].position;
+        int notePos = notes[i].position;
 
         int nextHPosUpString = horizontalPos;
         int nextHPosLowString = horizontalPos;
@@ -1556,7 +1557,7 @@ bool SheetLine::SetSize(uint newSize, pawsSheetLine* pawsLine)
         size = newSize;
     }
 
-    if(noteLength != pawsLine->noteCharLength)
+    if(noteLength != (uint)pawsLine->noteCharLength)
     {
         isChanged = true;
         noteLength = pawsLine->noteCharLength;

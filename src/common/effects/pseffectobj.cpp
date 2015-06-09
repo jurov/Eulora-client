@@ -1,7 +1,7 @@
 /*
 * Author: Andrew Robberts
 *
-* Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+* Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
 *
 *
 * This program is free software; you can redistribute it and/or
@@ -403,7 +403,7 @@ bool psEffectObj::Load(iDocumentNode *node, iLoaderContext* /*ldr_context*/)
     }
     else
     {
-        csReport(psCSSetup::object_reg, CS_REPORTER_SEVERITY_ERROR, "Eulora_effects", "Effect obj %s is missing a <death> tag.  If you want an infinite effect use <death>none</death>\n", name.GetData());
+        csReport(psCSSetup::object_reg, CS_REPORTER_SEVERITY_ERROR, "eulora_effects", "Effect obj %s is missing a <death> tag.  If you want an infinite effect use <death>none</death>\n", name.GetData());
         return false; // effect is invalid without a death tag
     }
 

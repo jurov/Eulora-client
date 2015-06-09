@@ -1,7 +1,7 @@
 /*
  * pawscontrolwindow.cpp - Author: Andrew Craig
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -90,8 +90,7 @@ bool pawsControlWindow::PostSetup()
     AddWindow( "SpellBookWindow" ,   "SpellBookButton" );
     AddWindow( "InfoWindow" ,        "InfoButton" );
     AddWindow( "HelpWindow" ,        "HelpButton" );
-    AddWindow( "ShortcutWindow" ,    "ShortcutButton" );
-    AddWindow( "HotBar" ,            "HotBarButton" );
+    AddWindow( "ShortcutMenu" ,    "ShortcutButton" );
     AddWindow( "BuddyWindow" ,       "BuddyButton" );
     AddWindow( "GroupWindow" ,       "GroupButton" );
     AddWindow( "PetitionWindow" ,    "PetitionButton" );
@@ -99,6 +98,7 @@ bool pawsControlWindow::PostSetup()
     AddWindow( "SkillWindow" ,       "SkillsButton" );
     AddWindow( "QuestNotebook" ,     "QuestButton" );
     AddWindow( "GuildWindow" ,       "GuildButton" );
+    AddWindow( "ActiveMagicWindow" ,       "ActiveMagicButton" );
 
     keyboard = csQueryRegistry<iKeyboardDriver> (PawsManager::GetSingleton().GetObjectRegistry());
 
@@ -318,7 +318,7 @@ bool pawsControlWindow::HandleWindowName(csString widgetStr)
     else if(widgetStr == "gm")
         widget = "GmGUI";
     else if(widgetStr == "shortcut")
-        widget = "ShortcutWindow";
+        widget = "ShortcutMenu";
     else if(widgetStr == "group")
         widget = "GroupWindow";
     else if(widgetStr == "guild")
@@ -353,8 +353,6 @@ bool pawsControlWindow::HandleWindowName(csString widgetStr)
         widget = "ActiveMagicWindow";
     else if(widgetStr == "managepetitions")
         widget = "PetitionGMWindow";
-    else if(widgetStr == "quickspell")
-        widget = "HotBar";
     else if(widgetStr == "music")
         widget = "MusicWindow";
     else if(widgetStr == "quit")
@@ -421,6 +419,11 @@ void pawsControlWindow::Register( pawsControlledWindow* window )
     Icon * icon = new Icon;
     icon->window = window;
     icon->theirButton = FindButtonFromWindow( window->GetName() );
+    if( icon->theirButton==NULL )
+    {
+        Error2("pawsControlWindow::Register couldn't find window %s!", window->GetName() );
+        return;
+    }
     icon->orgRes = icon->theirButton->GetBackground();
     icon->IsActive = false;
     icon->IsOver = false;

@@ -1,7 +1,7 @@
 /*
  * psclientchar.cpp
  *
- * Copyright (C) 2002 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2002 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -510,9 +510,9 @@ void psClientCharManager::HandleEffect( MsgEntry* me )
 
         // get the target
         GEMClientObject* gemTarget = cel->FindObject(effect.targetID);
-        iMeshWrapper *target = anchor;
+        iMeshWrapper *meshtarget = anchor;
         if (gemTarget)
-            target = gemTarget->GetMesh();
+            meshtarget = gemTarget->GetMesh();
 
         // render the actual effect
         if (psengine->GetEffectManager ())
@@ -524,14 +524,14 @@ void psClientCharManager::HandleEffect( MsgEntry* me )
             if (anchor)
             {
                 effectID = psengine->GetEffectManager()->RenderEffect(effect.name, effect.offset,
-                                                                      anchor, target, up, uniqueIDOverride,
+                                                                      anchor, meshtarget, up, uniqueIDOverride,
                                                                       false, effect.scale);
             }
             else
             {
                 iSector * sector = psengine->GetPSCamera()->GetICamera()->GetCamera()->GetSector(); // Sector should come in the message
                 effectID = psengine->GetEffectManager()->RenderEffect(effect.name, sector,
-                                                                      effect.offset, target,
+                                                                      effect.offset, meshtarget,
                                                                       up, uniqueIDOverride, effect.scale);
             }
 
@@ -1004,7 +1004,8 @@ void psCreationManager::LoadPathInfo()
             PathDefinition::Bonus* bonus = new PathDefinition::Bonus();
 
             csString skillName  = tmp->GetAttributeValue("name");
-            float rank = tmp->GetAttributeValueAsFloat("rank");
+//            float rank = tmp->GetAttributeValueAsFloat("rank");
+float rank = -5;
             bonus->name = skillName;
             bonus->value = rank;
             path->skillBonuses.Push(bonus);

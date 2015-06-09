@@ -1,8 +1,7 @@
-
 /*
  * pawsinteractwidow.cpp - Author: Andrew Craig
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -337,12 +336,13 @@ bool pawsInteractWindow::OnButtonPressed(int /*mouseButton*/, int /*keyModifier*
             Hide();
             return true;
         }
-        case INTERACT_INTRODUCE:
+/*       case INTERACT_INTRODUCE:
         {
             psengine->GetCmdHandler()->Execute("/introduce");
             Hide();
             return true;
         }
+        */
         case INTERACT_TRAIN:
         {
             psengine->GetCmdHandler()->Execute("/train");
@@ -386,7 +386,7 @@ bool pawsInteractWindow::OnButtonPressed(int /*mouseButton*/, int /*keyModifier*
             Hide();
             return true;
         }
-        case INTERACT_MARRIAGE:
+/*        case INTERACT_MARRIAGE:
         {
            //Pop up a prompt window where you add the personal message for marrying.
            pawsStringPromptWindow::Create("Enter the message for your marriage proposal.", "",
@@ -394,6 +394,7 @@ bool pawsInteractWindow::OnButtonPressed(int /*mouseButton*/, int /*keyModifier*
            Hide();  
            return true;
         }
+        */
         case INTERACT_DIVORCE:
         {
             //Pop up a prompt window where you add the message for divorcing.

@@ -1,7 +1,7 @@
 /*
  * autoexec.cpp - Author: Fabian Stock (Aiwendil)
  *
- * Copyright (C) 2010 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2010 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,7 @@
 #define AUTOEXECROOTNODE "autoexec"
 #define AUTOEXECOPTIONSNODE "options"
 #define AUTOEXECCOMMANDSNODE "commands"
-// vfs files? chetty
+
 #include "globals.h"
 #include <psconfig.h>
 
@@ -151,7 +151,8 @@ void Autoexec::SaveCommands()
         return;
     }
     // Save the autoexec commands
-    csRef<iDocumentSystem> xml = csPtr<iDocumentSystem>(new csTinyDocumentSystem);
+    csRef<iDocumentSystem> xml;
+    xml.AttachNew(new csTinyDocumentSystem);
     csRef<iDocument> doc = xml->CreateDocument();
     csRef<iDocumentNode> root = doc->CreateRoot ();
     csRef<iDocumentNode> mainNode = root->CreateNodeBefore(CS_NODE_ELEMENT);

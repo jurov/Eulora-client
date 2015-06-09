@@ -1,0 +1,96 @@
+<?xml version="1.0" ?>
+<!DOCTYPE Sounds SYSTEM "sfxfiles.dtd">
+<Sounds>
+    <Sound name="splash" file="/planeshift/art/music/gui/jingle_splash.ogg"/>
+    <Sound name="intro" file="/planeshift/art/music/maintheme1.0.ogg"/>
+    <Sound name="mainmenu" file="/planeshift/art/music/maintheme1.0.ogg"/>
+    
+    <Sound name="credits" file="/planeshift/art/music/maintheme1.0.ogg"/>
+
+    <Sound name="charcreation" file="/planeshift/art/music/charactertheme1.0.ogg"/>
+ 
+    <Sound name="connect" file="/planeshift/art/music/gui/jingleconnect.ogg"/>
+
+    <Sound name="hydlaa_plaza background" file="/planeshift/art/music/inthedarktown1.0.ogg"/>
+    
+    
+    <Sound name="NPCroom" file="/planeshift/art/music/inthedarktown1.0.ogg"/>
+    <Sound name="NPCroom_Ambient" file="/planeshift/art/music/ComplexWind3.ogg"/>
+    <Sound name="NPCroom_3D" file="/planeshift/art/music/torch_test.wav"/>
+    
+    
+    
+    <Sound name="exp" file="/planeshift/art/music/exp.wav"/>
+    
+    <Sound name="laanx_entrance background" file="/planeshift/art/music/thelaanxtemple1.0.ogg"/>
+    <Sound name="laanx_main background" file="/planeshift/art/music/thelaanxtemple1.0.ogg"/>
+    <Sound name="laanx_well background" file="/planeshift/art/music/thelaanxtemple1.0.ogg"/>
+    <Sound name="tavern_de_kadel background" file="/planeshift/art/music/tavern0.2.ogg"/>
+    <Sound name="jayose_inside background" file="/planeshift/art/music/perplex-part1-1.0.ogg"/>
+    <Sound name="laanx_dungeon background" file="/planeshift/art/music/journeyincavern1.0.ogg"/>
+
+
+    <Sound name="combat" file="/planeshift/art/music/battletheme1.0.ogg"/>
+
+    <!--
+    <Sound name="room background" file="/planeshift/art/music/maintheme1.0.ogg"/>
+    -->
+
+    <Sound name="sound.standardButtonClick" file="/planeshift/art/music/gui/ccreate/next.wav"/>
+
+    <Sound name="smallButton" file="/planeshift/art/music/gui/menu/btcreate.wav"/>
+
+    <Sound name="sound.gui.menu.button.create" file="/planeshift/art/music/gui/menu/btcreate.wav"/>
+    <Sound name="sound.gui.menu.button.quit" file="/planeshift/art/music/gui/menu/btquit.wav"/>
+    <Sound name="sound.gui.menu.button.connect" file="/planeshift/art/music/gui/menu/btconn.wav"/>
+    <Sound name="sound.gui.charcreation.next" file="/planeshift/art/music/gui/ccreate/next.wav"/>
+    <Sound name="sound.gui.charcreation.back" file="/planeshift/art/music/gui/ccreate/back.wav"/>
+    <Sound name="sound.gui.charcreation.quit" file="/planeshift/art/music/gui/ccreate/quit.wav"/>
+    <Sound name="sound.gui.charcreation.decstat" file="/planeshift/art/music/gui/ccreate/decstat.wav"/>
+    <Sound name="sound.gui.charcreation.incstat" file="/planeshift/art/music/gui/ccreate/incstat.wav"/>
+    <Sound name="sound.gui.charcreation.infotext" file="/planeshift/art/music/gui/ccreate/infotext.wav"/>
+    <Sound name="sound.gui.chat.sendmsg" file="/planeshift/art/music/gui/chat/sendmsg.wav"/>
+
+    <!-- GUI: IN-GAME BUTTONS (art/sounds/gui) -->
+	<Sound name="gui.toolbar" file="/planeshift/art/sounds/gui/bttn_toolbar.ogg"/>
+	<Sound name="gui.cancel" file="/planeshift/art/sounds/gui/bttn_cancel.ogg"/>
+	<Sound name="gui.ok" file="/planeshift/art/sounds/gui/bttn_ok.ogg"/>
+	<Sound name="gui.scrolldown" file="/planeshift/art/sounds/gui/bttn_scrolldown.ogg"/>
+	<Sound name="gui.scrollup" file="/planeshift/art/sounds/gui/bttn_scrollup.ogg"/>
+	<Sound name="gui.shortcut" file="/planeshift/art/sounds/gui/bttn_shortcut.ogg"/>
+	<Sound name="gui.quit" file="/planeshift/art/sounds/gui/bttn_quit.ogg"/>
+	
+    <Sound name="sound.msg.dodge"     file="/planeshift/art/music/effects/swoosh.wav" />
+    <Sound name="sound.msg.block"     file="/planeshift/art/music/effects/swordclash.wav" />
+    <Sound name="sound.msg.hityou"    file="/planeshift/art/music/effects/ouch!.wav" />
+    <Sound name="sound.msg.hitother"  file="/planeshift/art/music/effects/gasps8.wav" />
+    <Sound name="sound.msg.yourhit"   file="/planeshift/art/music/effects/NBA_2K1_grunt_3.wav" />
+    <Sound name="sound.msg.otherhit"  file="/planeshift/art/music/effects/NBA_2K1_grunt_3.wav" />
+    <Sound name="sound.msg.shield"    file="/planeshift/art/music/effects/thump16bit.wav" />
+    <Sound name="sound.msg.death"     file="/planeshift/art/music/effects/sucks.wav" />
+    <Sound name="sound.msg.victory"   file="/planeshift/art/music/effects/halleluj.wav" />
+    <Sound name="sound.msg.error"     file="/planeshift/art/music/effects/doggr.wav" />
+    <Sound name="sound.msg.loot"      file="/planeshift/art/music/effects/chaching.wav" />
+
+    <Sound name="sound.ambient.rain.light"    file="/planeshift/art/music/effects/PS_lightrain.ogg" />
+    <Sound name="sound.ambient.rain.heavy"    file="/planeshift/art/music/effects/PS_heavyrain.ogg" />
+    <Sound name="sound.ambient.thunder[0]" file="/planeshift/art/music/effects/PS_Thunder1.wav" />
+    <Sound name="sound.ambient.thunder[1]" file="/planeshift/art/music/effects/PS_Thunder2.wav" />
+    <Sound name="sound.ambient.thunder[2]" file="/planeshift/art/music/effects/PS_Thunder3.wav" />
+    <Sound name="sound.ambient.thunder[3]" file="/planeshift/art/music/effects/PS_Thunder4.wav" />
+    <Sound name="sound.ambient.thunder[4]" file="/planeshift/art/music/effects/PS_Thunder5.wav" />
+
+    <Sound name="sound.spell.heal1"        file="/planeshift/art/music/effects/heal1.ogg" />
+    <Sound name="sound.spell.heal2"        file="/planeshift/art/music/effects/heal2.ogg" />
+    <Sound name="sound.spell.attack3"      file="/planeshift/art/music/effects/attack3.ogg" />
+
+    <!-- sample entries to be used with common.xml for creature sounds -->
+    <Sound name="ylian_peace_v1"            file="/planeshift/art/sounds/creature/ulber_loop.ogg"/>
+    <Sound name="ylian_peace_v2"            file="/planeshift/art/sounds/creature/ulber_loop.ogg"/>
+    <Sound name="ylian_peace_v3"            file="/planeshift/art/sounds/creature/ulber_loop.ogg"/>
+
+    <Sound name="ylian_walk_v1"            file="/planeshift/art/sounds/amb/cave_monsters_1.ogg"/>
+    <Sound name="ylian_walk_v2"            file="/planeshift/art/sounds/amb/cave_monsters_1.ogg"/>
+    <Sound name="ylian_walk_v3"            file="/planeshift/art/sounds/amb/cave_monsters_1.ogg"/>
+
+</Sounds>

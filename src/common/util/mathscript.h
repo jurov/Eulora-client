@@ -1,7 +1,7 @@
 /*
- * mathscript.h by Keith Fulton <keith@planshift.it>
+ * mathscript.h by Keith Fulton <keith@planeshift.it>
  *
- * Copyright (C) 2010 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2010 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -35,7 +35,7 @@ double round(double value);
 
 class MathScript;
 class MathVar;
-class iDataConnection;
+struct iDataConnection;
 
 /**
  * \addtogroup common_util
@@ -317,6 +317,8 @@ public:
     inline double GetValue() const
     {
         return value;
+
+
     }
 
     inline iScriptableVar* GetObject() const

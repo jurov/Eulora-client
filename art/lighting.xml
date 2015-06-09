@@ -1,0 +1,82 @@
+<lighting>
+
+<color value="0" object="_sky" type="ambient" r="0" g="0" b="0" rain_r="0" rain_g="0" rain_b="0" />
+<color value="1" object="_sky" type="ambient" r="0" g="0" b="0" rain_r="0" rain_g="0" rain_b="0" />
+<color value="2" object="_sky" type="ambient" r="0" g="0" b="0" rain_r="0" rain_g="0" rain_b="0" />
+<color value="3" object="_sky" type="ambient" r="0" g="0" b="0" rain_r="0" rain_g="0" rain_b="0" />
+<color value="4" object="_sky" type="ambient" r="0" g="0" b="0" rain_r="0" rain_g="0" rain_b="0" />
+<color value="5" object="_sky" type="ambient" r="0" g="0" b="0" rain_r="0" rain_g="0" rain_b="0" />
+<color value="6" object="_sky" type="ambient" r="0.2" g="0.22" b="0.26" rain_r="0.2" rain_g="0.22" rain_b="0.26" />
+<color value="7" object="_sky" type="ambient" r="0.4" g="0.36" b="0.32" rain_r="0.4" rain_g="0.36" rain_b="0.32" />
+<color value="8" object="_sky" type="ambient" r="0.9" g="0.83" b="0.71" rain_r="0.9" rain_g="0.83" rain_b="0.71" />
+<color value="9" object="_sky" type="ambient" r="0.9" g="0.83" b="0.71" rain_r="0.9" rain_g="0.83" rain_b="0.71" />
+<color value="10" object="_sky" type="ambient" r="0.9" g="0.83" b="0.71" rain_r="0.9" rain_g="0.83" rain_b="0.71" />
+<color value="11" object="_sky" type="ambient" r="0.9" g="0.83" b="0.71" rain_r="0.9" rain_g="0.83" rain_b="0.71" />
+<color value="12" object="_sky" type="ambient" r="0.9" g="0.83" b="0.71" rain_r="0.9" rain_g="0.83" rain_b="0.71" />
+<color value="13" object="_sky" type="ambient" r="0.9" g="0.83" b="0.71" rain_r="0.9" rain_g="0.83" rain_b="0.71" />
+<color value="14" object="_sky" type="ambient" r="0.9" g="0.83" b="0.71" rain_r="0.9" rain_g="0.83" rain_b="0.71" />
+<color value="15" object="_sky" type="ambient" r="0.9" g="0.83" b="0.71" rain_r="0.9" rain_g="0.83" rain_b="0.71" />
+<color value="16" object="_sky" type="ambient" r="0.9" g="0.83" b="0.71" rain_r="0.9" rain_g="0.83" rain_b="0.71" />
+<color value="17" object="_sky" type="ambient" r="0.9" g="0.83" b="0.71" rain_r="0.9" rain_g="0.83" rain_b="0.71" />
+<color value="18" object="_sky" type="ambient" r="0.9" g="0.83" b="0.71" rain_r="0.9" rain_g="0.83" rain_b="0.71" />
+<color value="19" object="_sky" type="ambient" r="0.9" g="0.83" b="0.71" rain_r="0.9" rain_g="0.83" rain_b="0.71" />
+<color value="20" object="_sky" type="ambient" r="0.4" g="0.36" b="0.32" rain_r="0.4" rain_g="0.36" rain_b="0.32" />
+<color value="21" object="_sky" type="ambient" r="0.2" g="0.22" b="0.26" rain_r="0.2" rain_g="0.22" rain_b="0.26" />
+<color value="22" object="_sky" type="ambient" r="0" g="0" b="0" rain_r="0" rain_g="0" rain_b="0" />
+<color value="23" object="_sky" type="ambient" r="0" g="0" b="0" rain_r="0" rain_g="0" rain_b="0" />
+
+ <color value="0" object="IslandSun" type="light" r="0" g="0" b="0" rain_r="0" rain_g="0" rain_b="0" />
+ <color value="0" sector="Island" type="ambient" r="0.02" g="0.04" b="0.05" rain_r="0.12" rain_g="0.14" rain_b="0.15" />
+
+
+ <color value="1" object="IslandSun" type="light" r="0" g="0" b="0" rain_r="0" rain_g="0" rain_b="0" />
+ <color value="1" sector="Island" type="ambient" r="0.02" g="0.04" b="0.05" rain_r="0.12" rain_g="0.14" rain_b="0.15" />
+ <color value="2" object="IslandSun" type="light" r="0" g="0" b="0" rain_r="0" rain_g="0" rain_b="0" />
+ <color value="2" sector="Island" type="ambient" r="0.02" g="0.04" b="0.05" rain_r="0.12" rain_g="0.14" rain_b="0.15" />
+ <color value="3" object="IslandSun" type="light" r="0" g="0" b="0" rain_r="0" rain_g="0" rain_b="0" />
+ <color value="3" sector="Island" type="ambient" r="0.02" g="0.04" b="0.05" rain_r="0.12" rain_g="0.14" rain_b="0.15" />
+ <color value="4" object="IslandSun" type="light" r="0" g="0" b="0" rain_r="0" rain_g="0" rain_b="0" />
+ <color value="4" sector="Island" type="ambient" r="0.02" g="0.04" b="0.05" rain_r="0.12" rain_g="0.14" rain_b="0.15" />
+ <color value="5" object="IslandSun" type="light" r="0" g="0" b="0" rain_r="0" rain_g="0" rain_b="0" />
+ <color value="5" sector="Island" type="ambient" r="0.02" g="0.04" b="0.05" rain_r="0.12" rain_g="0.14" rain_b="0.15" />
+
+
+ <color value="6" object="IslandSun" type="light" r="0.27" g="0.29" b="0.33" rain_r="0.27" rain_g="0.29" rain_b="0.33" />
+ <color value="6" sector="Island" type="ambient" r="0.15" g="0.16" b="0.17" rain_r="0.15" rain_g="0.16" rain_b="0.17" />
+ <color value="7" object="IslandSun" type="light" r="0.41" g="0.37" b="0.32" rain_r="0.41" rain_g="0.37" rain_b="0.32" />
+ <color value="7" sector="Island" type="ambient" r="0.17" g="0.18" b="0.19" rain_r="0.17" rain_g="0.18" rain_b="0.19" />
+ <color value="8" object="IslandSun" type="light" r="0.90" g="0.83" b="0.71" rain_r="0.90" rain_g="0.83" rain_b="0.71" />
+ <color value="8" sector="Island" type="ambient" r="0.20" g="0.21" b="0.22" rain_r="0.20" rain_g="0.21" rain_b="0.22" />
+ <color value="9" object="IslandSun" type="light" r="0.90" g="0.83" b="0.71" rain_r="0.90" rain_g="0.83" rain_b="0.71" />
+ <color value="9" sector="Island" type="ambient" r="0.20" g="0.21" b="0.22" rain_r="0.20" rain_g="0.21" rain_b="0.22" />
+ <color value="10" object="IslandSun" type="light" r="0.90" g="0.83" b="0.71" rain_r="0.90" rain_g="0.83" rain_b="0.71" />
+ <color value="10" sector="Island" type="ambient" r="0.20" g="0.21" b="0.22" rain_r="0.20" rain_g="0.21" rain_b="0.22" />
+ <color value="11" object="IslandSun" type="light" r="0.90" g="0.83" b="0.71" rain_r="0.90" rain_g="0.83" rain_b="0.71" />
+ <color value="11" sector="Island" type="ambient" r="0.20" g="0.21" b="0.22" rain_r="0.20" rain_g="0.21" rain_b="0.22" />
+ <color value="12" object="IslandSun" type="light" r="0.90" g="0.83" b="0.71" rain_r="0.90" rain_g="0.83" rain_b="0.71" />
+ <color value="12" sector="Island" type="ambient" r="0.20" g="0.21" b="0.22" rain_r="0.20" rain_g="0.21" rain_b="0.22" />
+ <color value="13" object="IslandSun" type="light" r="0.90" g="0.83" b="0.71" rain_r="0.90" rain_g="0.83" rain_b="0.71" />
+ <color value="13" sector="Island" type="ambient" r="0.20" g="0.21" b="0.22" rain_r="0.20" rain_g="0.21" rain_b="0.22" />
+ <color value="14" object="IslandSun" type="light" r="0.90" g="0.83" b="0.71" rain_r="0.90" rain_g="0.83" rain_b="0.71" />
+ <color value="14" sector="Island" type="ambient" r="0.20" g="0.21" b="0.22" rain_r="0.20" rain_g="0.21" rain_b="0.22" />
+ <color value="15" object="IslandSun" type="light" r="0.90" g="0.83" b="0.71" rain_r="0.90" rain_g="0.83" rain_b="0.71" />
+ <color value="15" sector="Island" type="ambient" r="0.20" g="0.21" b="0.22" rain_r="0.20" rain_g="0.21" rain_b="0.22" />
+ <color value="16" object="IslandSun" type="light" r="0.90" g="0.83" b="0.71" rain_r="0.90" rain_g="0.83" rain_b="0.71" />
+ <color value="16" sector="Island" type="ambient" r="0.20" g="0.21" b="0.22" rain_r="0.20" rain_g="0.21" rain_b="0.22" />
+ <color value="17" object="IslandSun" type="light" r="0.90" g="0.83" b="0.71" rain_r="0.90" rain_g="0.83" rain_b="0.71" />
+ <color value="17" sector="Island" type="ambient" r="0.20" g="0.21" b="0.22" rain_r="0.20" rain_g="0.21" rain_b="0.22" />
+ <color value="18" object="IslandSun" type="light" r="0.90" g="0.83" b="0.71" rain_r="0.90" rain_g="0.83" rain_b="0.71" />
+ <color value="18" sector="Island" type="ambient" r="0.20" g="0.21" b="0.22" rain_r="0.20" rain_g="0.21" rain_b="0.22" />
+ <color value="19" object="IslandSun" type="light" r="0.90" g="0.83" b="0.71" rain_r="0.90" rain_g="0.83" rain_b="0.71" />
+ <color value="19" sector="Island" type="ambient" r="0.20" g="0.21" b="0.22" rain_r="0.20" rain_g="0.21" rain_b="0.22" />
+ <color value="20" object="IslandSun" type="light" r="0.41" g="0.37" b="0.32" rain_r="0.41" rain_g="0.37" rain_b="0.32" />
+ <color value="20" sector="Island" type="ambient" r="0.17" g="0.18" b="0.19" rain_r="0.17" rain_g="0.18" rain_b="0.19" />
+
+ <color value="21" object="IslandSun" type="light" r="0.27" g="0.29" b="0.33" rain_r="0.27" rain_g="0.29" rain_b="0.33" />
+ <color value="21" sector="Island" type="ambient" r="0.15" g="0.16" b="0.17" rain_r="0.15" rain_g="0.16" rain_b="0.17" />
+ <color value="22" object="IslandSun" type="light" r="0" g="0" b="0" rain_r="0" rain_g="0" rain_b="0" />
+ <color value="22" sector="Island" type="ambient" r="0.02" g="0.04" b="0.05" rain_r="0.12" rain_g="0.14" rain_b="0.15" />
+ <color value="23" object="IslandSun" type="light" r="0" g="0" b="0" rain_r="0" rain_g="0" rain_b="0" />
+ <color value="23" sector="Island" type="ambient" r="0.02" g="0.04" b="0.05" rain_r="0.12" rain_g="0.14" rain_b="0.15" />
+ </lighting>
+

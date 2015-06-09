@@ -1,7 +1,7 @@
 /*
 * chatwindow.cpp - Author: Andrew Craig
 *
-* Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+* Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
 *
 *
 * This program is free software; you can redistribute it and/or
@@ -146,8 +146,9 @@ pawsChatWindow::pawsChatWindow()
     settings.yourColorMix = true;
     settings.joindefaultchannel = true;
     settings.defaultlastchat = true;
+    settings.looseFocusOnSend = false;
+    settings.mouseFocus = false;
     settings.tabSetting = 1023; //enables all tabs
-    settings.chatWidget = "chat.xml";
 
     for (int i = 0; i < CHAT_END; i++)
     {
@@ -196,81 +197,78 @@ bool pawsChatWindow::PostSetup()
     LoadChatSettings();
 
     // Adjust tabs according tabs
-    if(settings.chatWidget != "chat_basic.xml") 
+    pawsWidget * pw = FindWidget("Chat Tabs");
+
+    csArray<csString> buttonNames;//tabs' names that will be searched later
+    buttonNames.Push("Main Button");
+    buttonNames.Push("Chat Button");
+    buttonNames.Push("NPC Button");
+    buttonNames.Push("Tell Button");
+    buttonNames.Push("Guild Button");
+    buttonNames.Push("Group Button");
+    buttonNames.Push("Alliance Button");
+    buttonNames.Push("Auction Button");
+    buttonNames.Push("System Button");
+    buttonNames.Push("Help Button");
+
+    unsigned int ct = 0;
+    int lastX, lastY, increment;
+    bool isVertical = false;
+    pawsWidget * tmp;
+    for (unsigned int i = 0 ; i < buttonNames.GetSize() ; i++)
     {
-        pawsWidget * pw = FindWidget("Chat Tabs");
-
-        csArray<csString> buttonNames;//tabs' names that will be searched later
-        buttonNames.Push("Main Button");
-        buttonNames.Push("Chat Button");
-        buttonNames.Push("NPC Button");
-        buttonNames.Push("Tell Button");
-        buttonNames.Push("Guild Button");
-        buttonNames.Push("Group Button");
-        buttonNames.Push("Alliance Button");
-        buttonNames.Push("Auction Button");
-        buttonNames.Push("System Button");
-        buttonNames.Push("Help Button");
-
-        unsigned int ct = 0;
-        int lastX, lastY, increment;
-        bool isVertical = false;
-        pawsWidget * tmp;
-        for (unsigned int i = 0 ; i < buttonNames.GetSize() ; i++)
+        if(i == 0)
         {
-            if(i == 0)
+            tmp = pw->FindWidget(buttonNames[i]);
+            lastX = tmp->GetDefaultFrame().xmin;
+            lastY = tmp->GetDefaultFrame().ymin;
+        }
+        if(TABVALUE(settings.tabSetting,i))
+        {//this tab is visible
+            if(ct == 0) 
             {
                 tmp = pw->FindWidget(buttonNames[i]);
-                lastX = tmp->GetDefaultFrame().xmin;
-                lastY = tmp->GetDefaultFrame().ymin;
+                if(tmp->GetDefaultFrame().xmin != lastX || tmp->GetDefaultFrame().ymin != lastY)
+                {
+                    tmp->SetRelativeFramePos(lastX,lastY);
+                }
+                tabs->OnButtonPressed(0,0,tmp);//activate the first tab
+                ct++;
+                continue;
             }
-            if(TABVALUE(settings.tabSetting,i))
-            {//this tab is visible
-                if(ct == 0) 
-                {
-                    tmp = pw->FindWidget(buttonNames[i]);
-                    if(tmp->GetDefaultFrame().xmin != lastX || tmp->GetDefaultFrame().ymin != lastY)
-                    {
-                        tmp->SetRelativeFramePos(lastX,lastY);
-                    }
-                    tabs->OnButtonPressed(0,0,tmp);//activate the first tab
-                    ct++;
-                    continue;
-                }
-                tmp = pw->FindWidget(buttonNames[i]);
-                if(ct == 1)
-                {
-                    int thisX, thisY;
-                    thisX = tmp->GetDefaultFrame().xmin;
-                    thisY = tmp->GetDefaultFrame().ymin;
+            tmp = pw->FindWidget(buttonNames[i]);
+            if(ct == 1)
+            {
+                int thisX, thisY;
+                thisX = tmp->GetDefaultFrame().xmin;
+                thisY = tmp->GetDefaultFrame().ymin;
 
-                    if(thisX == lastX && thisY != lastY)
-                    {
-                        isVertical = true;
-                        increment = tmp->GetDefaultFrame().Height();
-                    }
-                    else
-                    {
-                        increment = tmp->GetDefaultFrame().Width();
-                    }
-                }
-                if(isVertical)
+                if(thisX == lastX && thisY != lastY)
                 {
-                    tmp->SetRelativeFramePos(lastX,lastY+increment*ct);
-                    //tmp->MoveDelta(0,increment*ct);
+                    isVertical = true;
+                    increment = tmp->GetDefaultFrame().Height();
                 }
                 else
                 {
-                    tmp->SetRelativeFramePos(lastX+increment*ct, lastY);
+                    increment = tmp->GetDefaultFrame().Width();
                 }
-                tmp->SetVisibility(true);
-                ct++;
+            }
+            if(isVertical)
+            {
+                tmp->SetRelativeFramePos(lastX,lastY+increment*ct);
+                //tmp->MoveDelta(0,increment*ct);
             }
             else
             {
-                tmp = pw->FindWidget(buttonNames[i]);
-                tmp->SetVisibility(false);
+                tmp->SetRelativeFramePos(lastX+increment*ct, lastY);
             }
+            tmp->SetVisibility(true);
+            ct++;
+        }
+        else
+        {
+            tmp = pw->FindWidget(buttonNames[i]);
+            tmp->SetVisibility(false);
         }
     }
     
@@ -365,7 +363,9 @@ void pawsChatWindow::LoadChatSettings()
 
             if (nodeName == "loose")
                 settings.looseFocusOnSend = option->GetAttributeValueAsBool("value", false);
-            if (nodeName == "tabSetting")
+            else if (nodeName == "mouseFocus")
+                settings.mouseFocus = option->GetAttributeValueAsBool("value", false);
+            else if (nodeName == "tabSetting")
                 settings.tabSetting = option->GetAttributeValueAsInt("value");
             else if (nodeName == "selecttabstyle")
                 settings.selectTabStyle = (int)option->GetAttributeValueAsInt("value");
@@ -379,12 +379,6 @@ void pawsChatWindow::LoadChatSettings()
                 settings.joindefaultchannel = option->GetAttributeValueAsBool("value", true);
             else if (nodeName == "defaultlastchat")
                 settings.defaultlastchat = option->GetAttributeValueAsBool("value", true);          
-            else if (nodeName == "chatWidget")
-            {
-                settings.chatWidget = option->GetAttributeValue("value");
-                if(!settings.chatWidget.Length()) //if none are defined put a default one
-                    settings.chatWidget = "chat.xml";
-            }
             else
             {
                 for(int i = 0; i < CHAT_END; i++)
@@ -595,8 +589,10 @@ void pawsChatWindow::LoadChatSettings()
  // remove spellchecker   
 /*    csRef<iSpellChecker> spellChecker = csQueryRegistryOrLoad<iSpellChecker>(PawsManager::GetSingleton().GetObjectRegistry(), "crystalspace.planeshift.spellchecker");
     
-     spellCheckerNode = chatNode->GetNode("spellChecker");
-   if(!spellCheckerNode)
+    csRef<iSpellChecker> spellChecker = csQueryRegistryOrLoad<iSpellChecker>(PawsManager::GetSingleton().GetObjectRegistry(), "crystalspace.planeshift.spellchecker");
+    
+    spellCheckerNode = chatNode->GetNode("spellChecker");
+    if(!spellCheckerNode)
         spellCheckerNode = defaultChatNode->GetNode("spellChecker");
     if (spellCheckerNode != NULL)
     {
@@ -1140,13 +1136,14 @@ void pawsChatWindow::SaveChatSettings()
         return;
     }
 
-    csRef<iDocumentSystem> docsys = csPtr<iDocumentSystem> (new csTinyDocumentSystem ());
+    csRef<iDocumentSystem> docsys;
+    docsys.AttachNew(new csTinyDocumentSystem ());
 
     csRef<iDocument> doc = docsys->CreateDocument();
-    csRef<iDocumentNode> root, chatNode, colorNode, optionNode,looseNode,filtersNode,
+    csRef<iDocumentNode> root, chatNode, colorNode, optionNode, looseNode, filtersNode,
                          badWordsNode, badWordsTextNode, tabCompletionNode, completionItemNode, cNode, logNode, selectTabStyleNode,
                          echoScreenInSystemNode, mainBracketsNode, yourColorMixNode, joindefaultchannelNode, tabSettingNode, 
-                         defaultlastchatNode, spellCheckerNode, spellCheckerWordNode, chatWidgetNode, mainTabNode, flashingNode, flashingOnCharNode, node;
+                         defaultlastchatNode, spellCheckerNode, spellCheckerWordNode, mainTabNode, flashingNode, flashingOnCharNode, node, mouseNode;
 
     root = doc->CreateRoot();
 
@@ -1180,13 +1177,13 @@ void pawsChatWindow::SaveChatSettings()
     defaultlastchatNode->SetValue("defaultlastchat");
     defaultlastchatNode->SetAttributeAsInt("value",(int)settings.defaultlastchat);    
 
-    chatWidgetNode = optionNode->CreateNodeBefore(CS_NODE_ELEMENT,0);
-    chatWidgetNode->SetValue("chatWidget");
-    chatWidgetNode->SetAttribute("value",settings.chatWidget.GetData());
-
     looseNode = optionNode->CreateNodeBefore(CS_NODE_ELEMENT,0);
     looseNode->SetValue("loose");
     looseNode->SetAttributeAsInt("value",(int)settings.looseFocusOnSend);
+
+    mouseNode = optionNode->CreateNodeBefore(CS_NODE_ELEMENT,0);
+    mouseNode->SetValue("mouseFocus");
+    mouseNode->SetAttributeAsInt("value",(int)settings.mouseFocus);
 
     tabSettingNode = optionNode->CreateNodeBefore(CS_NODE_ELEMENT,0);
     tabSettingNode->SetValue("tabSetting");
@@ -1675,7 +1672,10 @@ void pawsChatWindow::HandleMessage(MsgEntry *me)
 
         case CHAT_NPC_MY:
         {
-            buff.Format("%s's %s", (const char *)msg.sPerson, ((const char *)msg.sText));
+            size_t len = msg.sPerson.Length() - 1;
+            buff.Format(msg.sPerson.GetAt(len) == 's' ?
+                        "%s' %s" : "%s's %s",
+                        msg.sPerson.GetData(), msg.sText.GetData());
             colour = settings.npcColor;
             break;
         }
@@ -1934,7 +1934,25 @@ bool pawsChatWindow::InputActive()
 {
     return inputText->HasFocus();
 }
-// ************************************
+
+bool pawsChatWindow::OnChildMouseEnter(pawsWidget* widget)
+{
+    if (settings.mouseFocus)
+    {
+        PawsManager::GetSingleton().SetCurrentFocusedWidget(inputText);
+    }
+    return true;
+}
+
+bool pawsChatWindow::OnChildMouseExit(pawsWidget* widget)
+{
+    if (settings.mouseFocus)
+    {
+        PawsManager::GetSingleton().SetCurrentFocusedWidget(NULL);
+    }
+    return true;
+}
+
 bool pawsChatWindow::OnMouseDown( int button, int modifiers, int x , int y )
 {
     pawsWidget::OnMouseDown( button, modifiers, x, y );
@@ -2036,7 +2054,7 @@ bool pawsChatWindow::OnKeyDown(utf32_char keyCode, utf32_char key, int modifiers
         case CSKEY_ENTER:
         {
             if (settings.looseFocusOnSend || !strcmp(inputText->GetText(), ""))
-                PawsManager::GetSingleton().SetCurrentFocusedWidget((pawsWidget*)PawsManager::GetSingleton().GetMainWidget());
+                PawsManager::GetSingleton().SetCurrentFocusedWidget(NULL);
 
             csString text = inputText->GetText();
             inputText->Clear();
@@ -2211,12 +2229,9 @@ void pawsChatWindow::SendChatLine(csString& textToSend)
         }
 
         currLine.Free(); // Set to NULL
-
-        PawsManager::GetSingleton().SetCurrentFocusedWidget( inputText );
-        BringToTop( inputText );
     }
 }
-// ************************************************
+
 bool pawsChatWindow::OnMenuAction(pawsWidget * widget, const pawsMenuAction & action)
 {
     if (action.name == "TranslatedChat")
@@ -2232,11 +2247,12 @@ bool pawsChatWindow::OnMenuAction(pawsWidget * widget, const pawsMenuAction & ac
 
     return pawsWidget::OnMenuAction(widget, action);
 }
-// ************************************************8
+
 bool pawsChatWindow::OnButtonPressed(int /*mouseButton*/, int /*keyModifier*/, pawsWidget* widget)
 {
     // We know that the calling widget is a button.
     csString name = widget->GetName();
+// ************************************************8
 
     if ( name=="inputback" )
     {

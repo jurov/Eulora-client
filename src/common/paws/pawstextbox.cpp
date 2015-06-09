@@ -1,7 +1,7 @@
 /*
  * pawstextbox.cpp - Author: Andrew Craig
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -36,6 +36,7 @@
 #include "util/log.h"
 #include "util/strutil.h"
 #include "util/psstring.h"
+#include "util/psconst.h"
 
 #define BORDER_SIZE            2 // For pawsFadingTextBox
 
@@ -651,7 +652,7 @@ void pawsMessageTextBox::AddMessage(const char* data, int msgColour)
         }
 
         last = message.FindLast("\n");
-        if(last == (size_t)-1)
+        if(last == SIZET_NOT_FOUND)
         {
             cutMessages.Push(message);
             break;
@@ -720,12 +721,12 @@ void pawsMessageTextBox::AddMessage(const char* data, int msgColour)
         while(textStart < messageText.Length())
         {
             size_t pos = messageText.FindFirst(ESCAPECODE, textStart);
-            if(pos == (size_t) - 1)
+            if(pos == SIZET_NOT_FOUND)
                 textEnd = messageText.Length();
             else
                 textEnd = pos;
 
-            if(textStart == 0 && pos == (size_t) - 1)
+            if(textStart == 0 && pos == SIZET_NOT_FOUND)
             {
                 int dummyX = -1;
                 SplitMessage(messageText, colour, size, msgLine, dummyX);
@@ -744,7 +745,7 @@ void pawsMessageTextBox::AddMessage(const char* data, int msgColour)
             }
             textStart = textEnd;
 
-            if(pos != (size_t)-1 && pos + LENGTHCODE <= messageText.Length())
+            if(pos != SIZET_NOT_FOUND && pos + LENGTHCODE <= messageText.Length())
             {
                 int r, g, b;
                 if(!psColours::ParseColour(messageText.GetData() + pos, r, g, b, size))
@@ -1050,8 +1051,8 @@ pawsEditTextBox::pawsEditTextBox() : password(false),
 //    spellChecker = csQueryRegistryOrLoad<iSpellChecker>(PawsManager::GetSingleton().GetObjectRegistry(), "crystalspace.planeshift.spellchecker");
 }
 pawsEditTextBox::pawsEditTextBox(const pawsEditTextBox &origin): pawsWidget(origin),
-    spellChecker(origin.spellChecker),
-    spellChecked(origin.spellChecked),
+   // spellChecker(origin.spellChecker),
+   // spellChecked(origin.spellChecked),
     typoColour(origin.typoColour),
     words(origin.words)
 {
@@ -1339,7 +1340,7 @@ bool pawsEditTextBox::OnKeyDown(utf32_char code, utf32_char key, int modifiers)
         {
             if(cursorPosition >= text.Length())
                 break;
-            if(cursorPosition != (size_t)-1)
+            if(cursorPosition != SIZET_NOT_FOUND)
             {
                 if(pawsTextBox::CountCodePoints(text, 0, cursorPosition) - pawsTextBox::CountCodePoints(text, 0, start) < 5)
                     start = (int)pawsTextBox::RewindCodePoints(text, cursorPosition, 5);
@@ -1586,7 +1587,7 @@ void pawsEditTextBox::checkSpelling()
         csString tmpString;
         size_t oldSpace = 0;
         size_t foundSpace = text.Find(" ", oldSpace);
-        while(foundSpace != (size_t)-1)
+        while(foundSpace != SIZET_NOT_FOUND)
         {
             text.SubString(tmpString, oldSpace, foundSpace-oldSpace);
             // now do the spellchecking
@@ -1711,7 +1712,6 @@ void pawsMultiLineTextBox::Resize()
 
 void pawsMultiLineTextBox::OrganizeText(const char* newText)
 {
-    int greyedOut = 0;
     csString text(newText);
 
     // Check if we end with \n
@@ -1821,7 +1821,7 @@ void pawsMultiLineTextBox::SetText(const char* newText)
 
     psString str(newText);
     size_t pos = str.FindSubString("\r");
-    while(pos != (size_t)-1)
+    while(pos != SIZET_NOT_FOUND)
     {
         str = str.Slice(0,pos) + "\n" + str.Slice(pos+2,str.Length()-pos-2);
         pos = str.FindSubString("\r");
@@ -1831,9 +1831,10 @@ void pawsMultiLineTextBox::SetText(const char* newText)
     usingScrollBar = false;
     if(scrollBar) scrollBar->Hide();
 
-
+    // try to fit the message into the window, filling 'lines' variable
     OrganizeText(str.GetData());
 
+    // if it fits into the current window...
     if(canDrawLines >= lines.GetSize())
     {
         canDrawLines = lines.GetSize();
@@ -1843,9 +1844,10 @@ void pawsMultiLineTextBox::SetText(const char* newText)
             scrollBar->SetCurrentValue(0);
         }
     }
+    // if it doesn't then add a scrollbar
     else
     {
-        //  usingScrollBar = true;
+        usingScrollBar = true;
         lines.Empty();
         OrganizeText(str.GetData());
         if(scrollBar)
@@ -2047,15 +2049,13 @@ void pawsMultiPageTextBox::OrganizeText(const char* newText)
     else
         dummy[0] = 0;
 
-    int offSet = margin*6;
+    int offSet = margin*2;
     if(usingScrollBar)
-        offSet += 66;
+        offSet += 36;
 
 
     while(dummy)
     {
-	// chetty change offset
-
         // See how many characters can be drawn on a single line.
         int canDrawLength =  GetFont()->GetLength(dummy, screenFrame.Width()-offSet);
 
@@ -2179,7 +2179,7 @@ void pawsMultiPageTextBox::SetText(const char* newText)
     currentPageNum = 0;
     psString str(newText);
     size_t pos = str.FindSubString("\r");
-    while(pos != (size_t)-1)
+    while(pos != SIZET_NOT_FOUND)
     {
         str = str.Slice(0,pos) + "\n" + str.Slice(pos+2,str.Length()-pos-2);
         pos = str.FindSubString("\r");
@@ -2628,11 +2628,11 @@ unsigned int pawsDocumentView::ProcessPictureInfo(iDocumentNode* node)
     }
 
     csString temp = srcs;
-    unsigned int pos;
-    unsigned int sz = 0;
+    size_t pos;
+    size_t sz = 0;
 
     //process the src attribute and push corresponding PictureInfo into picsInfo array
-    while((pos = temp.FindFirst(';')) != -1)
+    while((pos = temp.FindFirst(';')) != SIZET_NOT_FOUND)
     {
         csString sub;
         temp.SubString(sub,0,pos);
@@ -2655,7 +2655,7 @@ unsigned int pawsDocumentView::ProcessPictureInfo(iDocumentNode* node)
 void pawsDocumentView::OrganizeContent(const char* newtext)
 {
     csString str(newtext);
-    csRef<iDocumentNode> root = ParseStringGetNode(str, "Contents");
+    csRef<iDocumentNode> root = ParseStringGetNode(str, "Contents", false);
 
     if(root == 0)
         return;
@@ -2757,7 +2757,7 @@ void pawsDocumentView::SetText(const char* newtext)
 
     psString str(newtext);
     size_t pos = str.FindSubString("\r");
-    while(pos != (size_t)-1)
+    while(pos != SIZET_NOT_FOUND)
     {
         str = str.Slice(0, pos) + "\n" + str.Slice(pos+2, str.Length()-pos-2);
         pos = str.FindSubString("\r");
@@ -3002,11 +3002,11 @@ unsigned int pawsMultiPageDocumentView::ProcessPictureInfo(iDocumentNode* node)
     }
 
     csString temp = srcs;
-    unsigned int pos;
-    unsigned int sz = 0;
+    size_t pos;
+    size_t sz = 0;
 
     //process the src attribute and push corresponding PictureInfo into picsInfo array
-    while((pos = temp.FindFirst(';')) != -1)
+    while((pos = temp.FindFirst(';')) != SIZET_NOT_FOUND)
     {
         csString sub;
         temp.SubString(sub,0,pos);
@@ -3029,7 +3029,7 @@ unsigned int pawsMultiPageDocumentView::ProcessPictureInfo(iDocumentNode* node)
 void pawsMultiPageDocumentView::OrganizeContent(const char* newtext)
 {
     csString str(newtext);
-    csRef<iDocumentNode> root = ParseStringGetNode(str, "Contents");
+    csRef<iDocumentNode> root = ParseStringGetNode(str, "Contents", false);
 
     if(root == 0)
         return;
@@ -3131,7 +3131,7 @@ void pawsMultiPageDocumentView::SetText(const char* newtext)
 
     psString str(newtext);
     size_t pos = str.FindSubString("\r");
-    while(pos != (size_t)-1)
+    while(pos != SIZET_NOT_FOUND)
     {
         str = str.Slice(0, pos) + "\n" + str.Slice(pos+2, str.Length()-pos-2);
         pos = str.FindSubString("\r");

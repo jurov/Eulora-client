@@ -1,8 +1,8 @@
 /*
- * mathscript.h by Keith Fulton <keith@planshift.it>
+ * mathscript.h by Keith Fulton <keith@planeshift.it>
  *
- * Copyright (C) 2004 PlanShift Team (info@planshift.it,
- * http://www.planshift.it)
+ * Copyright (C) 2004 PlaneShift Team (info@planeshift.it,
+ * http://www.planeshift.it)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License

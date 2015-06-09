@@ -1,7 +1,7 @@
 /*
  * pawsmanger.cpp - Author: Andrew Craig
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -118,9 +118,9 @@ PawsManager::PawsManager(iObjectRegistry* object, const char* skin, const char* 
     KeyboardDown = csevKeyboardDown(objectReg);
     KeyboardUp = csevKeyboardUp(objectReg);
 
-    vfs =  csQueryRegistry<iVFS > (objectReg);
-    xml = csPtr<iDocumentSystem>(new csTinyDocumentSystem);
-    csRef<iConfigManager> cfg =  csQueryRegistry<iConfigManager> (objectReg);
+    vfs = csQueryRegistry<iVFS> (objectReg);
+    xml.AttachNew(new csTinyDocumentSystem);
+    csRef<iConfigManager> cfg = csQueryRegistry<iConfigManager> (objectReg);
 
     // Getting sound manager
     soundManager = csQueryRegistryOrLoad<iSoundManager>(objectReg, "iSoundManager");
@@ -409,7 +409,7 @@ bool PawsManager::HandleDoubleClick(csMouseEventData &data)
 bool PawsManager::LoadSkinDefinition(const char* zip)
 {
     //Mount the skin
-    printf("Mounting skin: %s\n", zip);
+    //printf("Mounting skin: %s\n", zip);
     csRef<iDataBuffer> realPath = vfs->GetRealPath(zip);
 
     if(!realPath.IsValid())
@@ -622,7 +622,7 @@ bool PawsManager::HandleMouseDown(csMouseEventData &data)
         if(modalWidget != NULL)
         {
             // Check to see if the widget is a child of the modal widget.
-            // These are the only components allowed access durning modal
+            // These are the only components allowed access durring modal
             // mode
             pawsWidget* check = modalWidget->FindWidget(widget->GetName(), false);
             if(check != widget)
@@ -639,7 +639,10 @@ bool PawsManager::HandleMouseDown(csMouseEventData &data)
 
             if(widget != mainWidget)
             {
-                widget->GetParent()->BringToTop(widget);
+                if( widget->GetParent() )
+                {
+                    widget->GetParent()->BringToTop(widget);
+                }
             }
 
             // Distribute the event to the widget
@@ -768,8 +771,9 @@ bool PawsManager::HandleMouseMove(csMouseEventData &data)
             // Handle mouse over for 
             if(widget && widget != mouseoverWidget)
             {
+                if(mouseoverWidget)
+                    mouseoverWidget->OnMouseExit();
                 widget->OnMouseEnter();
-                if(mouseoverWidget) mouseoverWidget->OnMouseExit();
             }
 
             mouseoverWidget = widget;
@@ -1034,7 +1038,7 @@ pawsWidget* PawsManager::LoadWidget(iDocumentNode* widgetNode)
         delete widget;
         return NULL;
     }
-
+//printf("widget loaded %s \n",widget->GetName());
     return widget;
 }
 
@@ -1094,9 +1098,10 @@ void PawsManager::SetCurrentFocusedWidget(pawsWidget* widget)
 {
     if(widget == NULL)
     {
-        SetCurrentFocusedWidget(mainWidget);
-        return;
+        widget = mainWidget;
     }
+    if(currentFocusedWidget == widget)
+        return;
 
     // Allow widget to be focused if it is a child of the modal widget, or if there is no modal widget.
     if(!modalWidget || modalWidget->FindWidget(widget->GetName(), false))
@@ -1287,6 +1292,8 @@ void PawsManager::RegisterFactories()
         RegisterFactory (pawsPetitionWindowFactory);
         RegisterFactory (pawsPetitionGMWindowFactory);
         RegisterFactory (pawsPetitionViewWindowFactory);
+        RegisterFactory (pawsScrollMenuFactory);
+        RegisterFactory (pawsDnDButtonFactory);
         RegisterFactory (pawsShortcutWindowFactory);
         RegisterFactory (pawsLoginWindowFactory);
         RegisterFactory (pawsCharacterPickerWindowFactory);
@@ -1492,7 +1499,7 @@ void PawsManager::Subscribe(const char* dataname,iPAWSSubscriber* listener)
     {
         PAWSData lastKnownValue;
 
-        // Check for entries without sibscriber and store lastKnownValue
+        // Check for entries without subscriber and store lastKnownValue
         while(iter.HasNext())
         {
             PAWSSubscription* p = iter.Next();
@@ -1666,7 +1673,7 @@ void PawsManager::RequestClipboardContent()
             //static bool juce_x11_requestSelectionContent(String &selection_content, Atom selection, Atom requested_format)
 
             Atom property_name = XInternAtom(dpy, "PLANESHIFT_SEL", false);
-//chetty
+
             /* the selection owner will be asked to set the PLANESHIFT_SEL property on the PS window(w) with the selection content */
             XConvertSelection(dpy, selection, XA_UTF8_STRING, property_name, w, CurrentTime);
 
@@ -1731,5 +1738,7 @@ bool PawsManager::LoadTooltips(const char* fileName)
 
 csString PawsManager::getToolTipSkinPath()
 {
-    return GetLocalization()->FindLocalizedFile("tooltips.xml");
+    csString t;
+    t = GetLocalization()->FindLocalizedFile("tooltips.xml");
+    return t;
 }

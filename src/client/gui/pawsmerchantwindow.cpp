@@ -2,7 +2,7 @@
  * pawsmerchantwindow.cpp -  Anders Reggestad <andersr@pvv.org>
  *                        -  PAWS version Andrew Craig <acraig@paqrat.com>
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -107,7 +107,7 @@ bool pawsMerchantWindow::PostSetup()
 
     categoryBox = (pawsListBox*)FindWidget("Categories");
     itemsBox    = (pawsListBox*)FindWidget("Items");
-    trias       = (pawsTextBox*)FindWidget("TotalTrias");
+    coppers       = (pawsTextBox*)FindWidget("TotalCoppers");
 
     return true;
 }
@@ -116,8 +116,8 @@ void pawsMerchantWindow::HandleMessage( MsgEntry* me )
 {
     psGUIMerchantMessage incomming( me );
 
-    //    printf("pawsMerchantWindow::HandleMessage %d %s\n",
-    //           incomming.command,(const char*)incomming.commandData);
+//        printf("pawsMerchantWindow::HandleMessage %d %s\n",
+//               incomming.command,(const char*)incomming.commandData);
 
     switch ( incomming.command )
     {
@@ -185,16 +185,16 @@ void pawsMerchantWindow::HandleMoney( const char* moneyData )
 
     psMoney money(moneyString);
 
-    UpdateMoney("circles","MoneyCircles",  money.GetCircles());
-    UpdateMoney("octas",  "MoneyOctas",    money.GetOctas());
-    UpdateMoney("hexas",  "MoneyHexas",    money.GetHexas());
-    UpdateMoney("trias",  "MoneyTrias",    money.GetTrias());
+    UpdateMoney("BITCents","MoneyCircles",  money.GetBITCents());
+    UpdateMoney("denarius",  "MoneyOctas",    money.GetDenarius());
+    UpdateMoney("argents",  "MoneyHexas",    money.GetArgents());
+    UpdateMoney("coppers",  "MoneyTrias",    money.GetCoppers());
     
     PawsManager::GetSingleton().Publish( "sigInvMoney", money.ToString() );         
     PawsManager::GetSingleton().Publish( "sigInvMoneyTotal", money.GetTotal() );
 
     
-    trias->SetText(csString().Format("%d Trias",money.GetTotal()));    
+    coppers->SetText(csString().Format("%d Coppers",money.GetTotal()));    
 }
 
 
@@ -256,10 +256,15 @@ void pawsMerchantWindow::HandleMerchant( const char* merchantData )
 
     pawsRadioButtonGroup* group = (pawsRadioButtonGroup*)FindWidget("BuySell");
     if ( buy )
+{
         group->SetActive( "Buy" );
+//printf("pawsMerchantWindow::BUY \n");
+}
     else 
+{
         group->SetActive( "Sell" );
-        
+//printf("pawsMerchantWindow::SELL \n");
+   }     
 }
 
 
@@ -335,7 +340,7 @@ void pawsMerchantWindow::HandleItems( const char* data )
         return;
     }
     csRef<iDocumentNodeIterator> iter = topNode->GetNodes();
-    
+//printf("After error check %s", data);    
     while ( iter->HasNext() )
     {
         csRef<iDocumentNode> item = iter->Next();
@@ -514,7 +519,7 @@ void pawsMerchantWindow::DoTrade(int count,const char* itemName,const char* item
             merchantID, escpxml.GetData(), count, itemID);
     psGUIMerchantMessage outgoing(tradeCommand, commandData);
     outgoing.SendMessage();
-    Error2("%s", commandData);
+    //Error2("%s", commandData);
 }
 
 void pawsMerchantWindow::OnNumberEntered(const char* /*name*/, int /*param*/, int value)

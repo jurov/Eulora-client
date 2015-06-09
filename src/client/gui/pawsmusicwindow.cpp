@@ -1,7 +1,7 @@
 /*
  * pawsmusicwindow.cpp, Author: Andrea Rizzi <88whacko@gmail.com>
  *
- * Copyright (C) 2001-2011 Atomic Blue (info@planshift.it, http://www.atomicblue.org) 
+ * Copyright (C) 2001-2011 Atomic Blue (info@planeshift.it, http://www.atomicblue.org) 
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -34,7 +34,7 @@
 #include <paws/pawsborder.h>
 #include <paws/pawsbutton.h>
 #include <paws/pawscrollbar.h>
-#include <util/music.h>
+#include <music/musicutil.h>
 
 //====================================================================================
 // Local Includes
@@ -356,9 +356,7 @@ void pawsMusicWindow::OnStringEntered(const char* name, int param, const char* v
 
 
     //----------------------------//
-    // FROM ps ClientNetSubscriber //
-    //  needs fix maybe           //
-    //  chetty                    //
+    // FROM psClientNetSubscriber //
     //----------------------------//
 
 
@@ -696,11 +694,11 @@ bool pawsMusicWindow::LoadXML(csRef<iDocument> sheet)
     }
 
     // getting measures
-    if(!psMusic::GetMeasures(sheet, measures))
+/*    if(!psMusic::GetMeasures(sheet, measures))
     {
         return false;
     }
-
+*/
     //if there are no measures it's still valid
     if(measures.IsEmpty())
     {
@@ -711,11 +709,11 @@ bool pawsMusicWindow::LoadXML(csRef<iDocument> sheet)
     // getting attributes. It's necessary to provide temporary attributes because
     // if GetAttributes is successful the previous sheet will be unloaded and the
     // attributes resetted.
-    if(!psMusic::GetAttributes(sheet, quarterDivisions, scoreFifths, iBeats, iBeatType, scoreTempo))
+/*    if(!psMusic::GetAttributes(sheet, quarterDivisions, scoreFifths, iBeats, iBeatType, scoreTempo))
     {
         return false;
     }
-
+*/
     // everything is ok, unload previous one
     Unload();
 
@@ -1192,7 +1190,7 @@ void pawsMusicWindow::Save()
     csString fileName;
     csString path;
     csString xml;
-    csRef<iVFS> vfs = psengine->GetVFS();
+    iVFS* vfs = psengine->GetVFS();
     csRef<iConfigManager> configMgr = psengine->GetConfig();
 
     // if in edit mode the sheet is not consistent

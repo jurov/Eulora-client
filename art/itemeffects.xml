@@ -1,0 +1,229 @@
+<itemeffect meshname="items#campfire01a" activeonground="true">
+  <pseffect>
+    <effectname>torch</effectname>
+    <offset x="0.0" y="0.25" z="0.0" />
+  </pseffect>
+  <light>
+    <colour r="0.5" g="0.25" b="0.0" />
+    <offset x="0.0" y="0.25" z="0.0" />
+    <radius>8</radius>
+  </light>
+</itemeffect>
+<itemeffect meshname="items#torch" activeonground="true">
+  <pseffect>
+    <effectname>torch</effectname>
+    <offset x="0.0" y="0.6" z="0.0" />
+  </pseffect>
+  <light>
+    <colour r="0.5" g="0.25" b="0.0" />
+    <offset x="0.0" y="0.65" z="0.0" />
+    <radius>2</radius>  
+  </light>
+</itemeffect>
+<!--<itemeffect meshname="weapons#wand03a" activeonground="true">
+  <pseffect>
+    <effectname>wand03a</effectname>
+    <offset x="0.0" y="0.7" z="0.0" />
+  </pseffect>
+  <light>
+    <colour r="0.1" g="0.0" b="0.0" />
+    <offset x="0.0" y="0.75" z="0.0" />
+    <radius>0.2</radius>  
+  </light>
+</itemeffect>
+<itemeffect meshname="weapons#wand06a" activeonground="true">
+    <pseffect>
+        <effectname>wand06a</effectname>
+        <offset x="0.0" y="0.8" z="0.0" />
+    </pseffect>
+    <light>
+        <colour r="0.05" g="0.05" b="0.05" />
+        <offset x="0.0" y="0.8" z="0.0" />
+        <radius>0.5</radius>  
+    </light>
+</itemeffect>
+-->
+<!-- MAGIC STAVES-->
+<!-- Azure Way   -->
+<!--
+<itemeffect meshname="weapons#staff_azure1" activeonground="true">
+    <pseffect>
+        <effectname>staff_azure1</effectname>
+        <offset x="0.0" y="0.0" z="0.0" />
+    </pseffect>
+</itemeffect>
+<itemeffect meshname="weapons#staff_azure2" activeonground="true">
+    <pseffect>
+        <effectname>staff_azure2</effectname>
+        <offset x="0.0" y="0.0" z="0.0" />
+    </pseffect>
+</itemeffect>
+<itemeffect meshname="weapons#staff_azure3" activeonground="true">
+    <pseffect>
+        <effectname>staff_azure3</effectname>
+        <offset x="0.0" y="0.0" z="0.0" />
+    </pseffect>
+</itemeffect>
+-->
+<!-- Blue Way   -->
+<!--
+<itemeffect meshname="weapons#staff_blue1" activeonground="true">
+    <pseffect>
+        <effectname>staff_blue1</effectname>
+        <offset x="0.0" y="0.90" z="0.0" />
+    </pseffect>
+</itemeffect>
+<itemeffect meshname="weapons#staff_blue2" activeonground="true">
+    <pseffect>
+        <effectname>staff_blue2</effectname>
+        <offset x="0.0" y="0.90" z="0.0" />
+    </pseffect>
+</itemeffect>
+<itemeffect meshname="weapons#staff_blue3" activeonground="true">
+    <pseffect>
+        <effectname>staff_blue3</effectname>
+        <offset x="0.0" y="0.90" z="0.0" />
+    </pseffect>
+</itemeffect>
+-->
+<!-- Brown Way   -->
+<!--
+<itemeffect meshname="weapons#staff_brown1" activeonground="true">
+    <pseffect>
+        <effectname>staff_brown1</effectname>
+        <offset x="0.0" y="0.90" z="0.0" />
+    </pseffect>
+</itemeffect>
+<itemeffect meshname="weapons#staff_brown2" activeonground="true">
+    <pseffect>
+        <effectname>staff_brown2</effectname>
+        <offset x="0.0" y="0.90" z="0.0" />
+    </pseffect>
+</itemeffect>
+<itemeffect meshname="weapons#staff_brown3" activeonground="true">
+    <pseffect>
+        <effectname>staff_brown3</effectname>
+        <offset x="0.0" y="0.90" z="0.0" />
+    </pseffect>
+</itemeffect>
+-->
+<!-- Crystal Way   -->
+<!--
+<itemeffect meshname="weapons#staff_crystal1" activeonground="true">
+    <light>
+        <colour red="0.91" green="0.91" blue="0.98" />
+        <offset x="0.0" y="1.00" z="0.0" />
+        <radius>2</radius>  
+    </light>
+</itemeffect>
+<itemeffect meshname="weapons#staff_crystal2" activeonground="true">
+    <light>
+        <colour red="0.91" green="0.91" blue="0.98" />
+        <offset x="0.0" y="1.00" z="0.0" />
+        <radius>2</radius>  
+    </light>
+</itemeffect>
+<itemeffect meshname="weapons#staff_crystal3" activeonground="true">
+    <light>
+        <colour red="0.91" green="0.91" blue="0.98" />
+        <offset x="0.0" y="1.00" z="0.0" />
+        <radius>2</radius>  
+    </light>
+</itemeffect>
+-->
+<!-- Dark Way   -->
+<!--
+<itemeffect meshname="weapons#staff_dark1" activeonground="true">
+    <pseffect>
+        <effectname>staff_dark1</effectname>
+        <offset x="0.0" y="0.90" z="0.0" />
+    </pseffect>
+</itemeffect>
+<itemeffect meshname="weapons#staff_dark2" activeonground="true">
+    <pseffect>
+        <effectname>staff_dark2</effectname>
+        <offset x="0.0" y="0.85" z="0.0" />
+    </pseffect>
+</itemeffect>
+<itemeffect meshname="weapons#staff_dark3" activeonground="true">
+    <pseffect>
+        <effectname>staff_dark3</effectname>
+        <offset x="0.0" y="1.00" z="0.0" />
+    </pseffect>
+</itemeffect>
+-->
+<!-- Red Way   -->
+<!--
+<itemeffect meshname="weapons#staff_red1" activeonground="true">
+    <pseffect>
+        <effectname>staff_red1</effectname>
+        <offset x="0.0" y="0.87" z="0.0" />
+    </pseffect>
+    <light>
+        <colour r="0.5" g="0.25" b="0.0" />
+        <offset x="0.0" y="1.00" z="0.0" />
+        <radius>2</radius>  
+    </light>
+</itemeffect>
+<itemeffect meshname="weapons#staff_red2" activeonground="true">
+    <pseffect>
+        <effectname>staff_red2</effectname>
+        <offset x="0.0" y="0.80" z="0.0" />
+    </pseffect>
+    <light>
+        <colour r="0.5" g="0.25" b="0.0" />
+        <offset x="0.0" y="0.80" z="0.0" />
+        <radius>2.5</radius>  
+    </light>
+</itemeffect>
+<itemeffect meshname="weapons#staff_red3" activeonground="true">
+    <pseffect>
+        <effectname>staff_red3</effectname>
+        <offset x="0.0" y="0.90" z="0.0" />
+    </pseffect>
+    <light>
+        <colour r="0.50" g="0.50" b="1.0" />
+        <offset x="0.0" y="1.20" z="0.0" />
+        <radius>2.5</radius>  
+    </light>
+</itemeffect>
+<itemeffect meshname="items#effect1" activeonground="true">
+    <pseffect>
+        <effectname>staff_red1</effectname>
+        <offset x="0.0" y="0.00" z="0.0" />
+    </pseffect>
+    <light>
+        <colour r="0.5" g="0.25" b="0.0" />
+        <offset x="0.0" y="0.00" z="0.0" />
+        <radius>3</radius>  
+    </light>
+</itemeffect>
+<itemeffect meshname="items#effect2" activeonground="true">
+    <pseffect>
+        <effectname>staff_red2</effectname>
+        <offset x="0.0" y="0.00" z="0.0" />
+    </pseffect>
+    <light>
+        <colour r="0.5" g="0.25" b="0.0" />
+        <offset x="0.0" y="0.00" z="0.0" />
+        <radius>3</radius>  
+    </light>
+</itemeffect>
+<itemeffect meshname="tools#alchemy_forge01a" activeonground="true">
+    <pseffect>
+        <effectname>alchemy_forge01a</effectname>
+        <offset x="0.0" y="0.85" z="0.0" />
+    </pseffect>
+    <light>
+        <colour r="0.5" g="0.5" b="0.5" />
+        <offset x="0.0" y="0.85" z="0.0" />
+        <radius>3</radius>  
+    </light>
+</itemeffect>
+<itemeffect meshname="tools#alchemy_stove01a" activeonground="true">
+    <pseffect>
+        <effectname>alchemy_stove01a</effectname>
+        <offset x="-2.1" y="2.8" z="0.30" />
+    </pseffect>
+</itemeffect>
+-->

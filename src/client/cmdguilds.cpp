@@ -1,7 +1,7 @@
 /*
  * cmdguilds.cpp - Author: Keith Fulton
  *
- * Copyright (C) 2001 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2001 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -58,7 +58,7 @@ psGuildCommands::psGuildCommands( ClientMsgHandler* mh,
     cmdsource->Subscribe("/setmemberpermissions",this); // sets the permissions of a particular player
     cmdsource->Subscribe("/guildmembers",this); // see list of members (optional level #)
     cmdsource->Subscribe("/guildpoints",this);  // view "karma points" of named guild
-    cmdsource->Subscribe("/guildname",this);  // view "karma points" of named guild
+
     cmdsource->Subscribe("/guildsecret", this);
     cmdsource->Subscribe("/guildweb", this);
     cmdsource->Subscribe("/guildmotd", this);
@@ -86,7 +86,7 @@ psGuildCommands::~psGuildCommands()
     cmdsource->Unsubscribe("/setmemberpermissions",this);
     cmdsource->Unsubscribe("/guildmembers",this);
     cmdsource->Unsubscribe("/guildpoints",this);
-    cmdsource->Unsubscribe("/guildname", this);
+
     cmdsource->Unsubscribe("/guildsecret", this);
     cmdsource->Unsubscribe("/guildweb", this);
     cmdsource->Unsubscribe("/guildmotd", this);

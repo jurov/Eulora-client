@@ -1,7 +1,7 @@
 /*
  * pawsgroupwidow.cpp - Author: Andrew Craig
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -171,10 +171,20 @@ void pawsGroupWindow::HandleMembers( csString& members )
         progress->SetTotalValue( 1 );
         progress->SetCurrentValue(member->GetAttributeValueAsFloat("H")/100);
 
+        //Set BP
+        progress = (pawsProgressBar*)stats->FindWidget("BP");
+        progress->SetTotalValue( 1 );
+        progress->SetCurrentValue(member->GetAttributeValueAsFloat("B")/100);
+
         //Set mana
         progress = (pawsProgressBar*)stats->FindWidget("MANA");
         progress->SetTotalValue( 1 );
         progress->SetCurrentValue(member->GetAttributeValueAsFloat("M")/100);
+
+        //Set Spirit
+        progress = (pawsProgressBar*)stats->FindWidget("Spirit");
+        progress->SetTotalValue( 1 );
+        progress->SetCurrentValue(member->GetAttributeValueAsFloat("S")/100);
 
     }
 }
@@ -191,13 +201,16 @@ void pawsGroupWindow::SetStats( GEMClientActor* actor )
     if ( row )
     {
         float hp;
+        float bp;
         float mana;
-
+        float spirit;
         // Adjust the hitpoints
         hp = actor->GetVitalMgr()->GetHP();
+        bp = actor->GetVitalMgr()->GetBP();
 
         // Adjust the mana
         mana = actor->GetVitalMgr()->GetMana();
+        spirit = actor->GetVitalMgr()->GetSpirit();     
 
         pawsProgressBar *progress;
 
@@ -208,10 +221,21 @@ void pawsGroupWindow::SetStats( GEMClientActor* actor )
         progress->SetTotalValue( 1 );
         progress->SetCurrentValue( hp );
 
+        //Set BP
+        progress = (pawsProgressBar*)stats->FindWidget("BP");
+        progress->SetTotalValue( 1 );
+        progress->SetCurrentValue( bp );
+
         //Set mana
         progress = (pawsProgressBar*)stats->FindWidget("MANA");
         progress->SetTotalValue( 1 );
         progress->SetCurrentValue( mana );
+
+        //Set spirit
+        progress = (pawsProgressBar*)stats->FindWidget("SPIRIT");
+        progress->SetTotalValue( 1 );
+        progress->SetCurrentValue( spirit );
+
     }
 }
 

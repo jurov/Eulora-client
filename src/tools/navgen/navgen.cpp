@@ -1,7 +1,7 @@
 /*
  *  navgen.cpp - Author: Matthieu Kraus
  *
- * Copyright (C) 2010 Atomic Blue (info@planshift.it, http://www.atomicblue.org) 
+ * Copyright (C) 2010 Atomic Blue (info@planeshift.it, http://www.atomicblue.org) 
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -30,8 +30,6 @@
 CS_IMPLEMENT_APPLICATION
 
 #define CONFIGFILE "/planeshift/navgen.cfg"
-
-// vfs files? chetty
 
 NavGen::NavGen(iObjectRegistry* object_reg) : object_reg(object_reg)
 {

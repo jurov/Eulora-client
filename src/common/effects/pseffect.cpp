@@ -1,7 +1,7 @@
 /*
 * Author: Andrew Robberts
 *
-* Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+* Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
 *
 *
 * This program is free software; you can redistribute it and/or
@@ -78,7 +78,7 @@ psEffectAnchor * psEffect::CreateAnchor(const csString & type)
     else if (type == "socket")
         return new psEffectAnchorSocket();
     
-    csReport(psCSSetup::object_reg, CS_REPORTER_SEVERITY_ERROR, "Eulora_effects", "Unknown anchor type: %s\n", type.GetData());
+    csReport(psCSSetup::object_reg, CS_REPORTER_SEVERITY_ERROR, "eulora_effects", "Unknown anchor type: %s\n", type.GetData());
     return 0;
 }
 

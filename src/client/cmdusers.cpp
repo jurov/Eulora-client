@@ -1,7 +1,7 @@
 /*
  * cmdusers.h - Author: Keith Fulton
  *
- * Copyright (C) 2001 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2001 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -67,8 +67,8 @@ psUserCommands::psUserCommands(ClientMsgHandler* mh,CmdHandler *ch,iObjectRegist
 //    msgqueue->Subscribe(MSGTYPE_CHAT,this);
 	cmdsource->Subscribe("/?",             this);
     cmdsource->Subscribe("/admin",         this);
-    cmdsource->Subscribe("/advice",        this);
-    cmdsource->Subscribe("/advisor",       this);
+
+
     cmdsource->Subscribe("/assist",        this);
     cmdsource->Subscribe("/attack",        this);
     cmdsource->Subscribe("/away",          this);
@@ -85,16 +85,17 @@ psUserCommands::psUserCommands(ClientMsgHandler* mh,CmdHandler *ch,iObjectRegist
     cmdsource->Subscribe("/construct",     this);
     cmdsource->Subscribe("/dequip",        this);
     cmdsource->Subscribe("/die",           this);
-    cmdsource->Subscribe("/dig",           this);
+    cmdsource->Subscribe("/explore",           this);
+cmdsource->Subscribe("/bezzle",           this);
     cmdsource->Subscribe("/drop",          this);
     cmdsource->Subscribe("/emote",         this);
     cmdsource->Subscribe("/equip",         this);
     cmdsource->Subscribe("/fish",          this);
-    cmdsource->Subscribe("/harvest",       this);
+    cmdsource->Subscribe("/explore",       this);
     cmdsource->Subscribe("/game",          this);
     cmdsource->Subscribe("/give",          this);
-    cmdsource->Subscribe("/guard",         this);
-    cmdsource->Subscribe("/help",          this);
+    cmdsource->Subscribe("/unguard",         this);
+
     cmdsource->Subscribe("/ignore",        this);
     cmdsource->Subscribe("/introduce",     this);
     cmdsource->Subscribe("/join",          this);
@@ -130,15 +131,16 @@ psUserCommands::psUserCommands(ClientMsgHandler* mh,CmdHandler *ch,iObjectRegist
     cmdsource->Subscribe("/unmount",       this);
     cmdsource->Subscribe("/unstick",       this);
     cmdsource->Subscribe("/use",           this);
+    cmdsource->Subscribe("/build",           this);
     cmdsource->Subscribe("/who",           this); // list players on server
     cmdsource->Subscribe("/write",         this);
     cmdsource->Subscribe("/yield",         this);
     cmdsource->Subscribe("/takeall",       this); // Take all items from a container
     cmdsource->Subscribe("/takestackall",  this); // Take all items from a container and stack not precisely
     cmdsource->Subscribe("/setdesc",       this); // set the description of a char
-    cmdsource->Subscribe("/setoocdesc",    this); // set the ooc description of a char
+ 
     cmdsource->Subscribe("/loaddesc",      this); // load a description for this char from a file
-    cmdsource->Subscribe("/loadoocdesc",   this); // load a ooc description for this char from a file
+ 
 }
 
 psUserCommands::~psUserCommands()
@@ -164,16 +166,17 @@ psUserCommands::~psUserCommands()
     cmdsource->Unsubscribe("/construct",             this);
     cmdsource->Unsubscribe("/dequip",                this);
     cmdsource->Unsubscribe("/die",                   this);
-    cmdsource->Unsubscribe("/dig",                   this);
+    cmdsource->Unsubscribe("/explore",                   this);
+    cmdsource->Unsubscribe("/bezzle",                   this);
     cmdsource->Unsubscribe("/drop",                  this);
     cmdsource->Unsubscribe("/emote",                 this);
     cmdsource->Unsubscribe("/equip",                 this);
     cmdsource->Unsubscribe("/fish",                  this);
-    cmdsource->Unsubscribe("/harvest",               this);
+    cmdsource->Unsubscribe("/explore",               this);
     cmdsource->Unsubscribe("/game",                  this);
     cmdsource->Unsubscribe("/give",                  this);
     cmdsource->Unsubscribe("/guard",                 this);
-    cmdsource->Unsubscribe("/help",                  this);
+    
     cmdsource->Unsubscribe("/ignore",                this);
     cmdsource->Unsubscribe("/introduce",             this);
     cmdsource->Unsubscribe("/join",                  this);
@@ -209,15 +212,16 @@ psUserCommands::~psUserCommands()
     cmdsource->Unsubscribe("/unmount",               this);
     cmdsource->Unsubscribe("/unstick",               this);
     cmdsource->Unsubscribe("/use",                   this);
+    cmdsource->Unsubscribe("/build",                   this);
     cmdsource->Unsubscribe("/who",                   this);
     cmdsource->Unsubscribe("/write",                 this);
     cmdsource->Unsubscribe("/yield",                 this);
     cmdsource->Unsubscribe("/takeall",               this);
     cmdsource->Unsubscribe("/takestackall",          this);
     cmdsource->Unsubscribe("/setdesc",               this);
-    cmdsource->Unsubscribe("/setoocdesc",            this);
+
     cmdsource->Unsubscribe("/loaddesc",              this);
-    cmdsource->Unsubscribe("/loadoocdesc",           this);
+
 
 
 
@@ -627,31 +631,46 @@ const char *psUserCommands::HandleCommand(const char *cmd)
     else if (words[0] == "/target")
     {
         if (words[1].IsEmpty()) {
-            return "You can use /target [self|clear] or /target [prev|next] [item|npc|player|any].";
+            return "You can use /target [self|clear] or /target [prev|next|nearest] [item|npc|player|any].";
         } else if (words[1] == "self")
             psengine->GetCharManager()->SetTarget(psengine->GetCelClient()->GetMainPlayer(),"select");
         else
         {
+            SearchDirection dir;
             csString tail;
-            if(words[1] == "next" || words[1] == "prev")
+            if(words[1] == "next")
+            {
+                dir = SEARCH_FORWARD;
                 tail = words.GetTail(2);
+            }
+            else if(words[1] == "prev")
+            {
+                dir = SEARCH_BACK;
+                tail = words.GetTail(2);
+            }
+            else if(words[1] == "nearest")
+            {
+                dir = SEARCH_NONE;
+                tail = words.GetTail(2);
+            }
             else
+            {
+                dir = SEARCH_NONE;
                 tail = words.GetTail(1);
-
-            SearchDirection dir = (words[1] == "prev") ? SEARCH_BACK : SEARCH_FORWARD;
+            }
 
             if (tail == "item")
-                UpdateTarget(dir,PSENTITYTYPE_ITEM);
+                UpdateTarget(dir, PSENTITYTYPE_ITEM, NULL);
             else if (tail == "npc")
-                UpdateTarget(dir, PSENTITYTYPE_NON_PLAYER_CHARACTER);
+                UpdateTarget(dir, PSENTITYTYPE_NON_PLAYER_CHARACTER, NULL);
             else if (tail == "player" || tail == "pc")
-                UpdateTarget(dir, PSENTITYTYPE_PLAYER_CHARACTER);
+                UpdateTarget(dir, PSENTITYTYPE_PLAYER_CHARACTER, NULL);
             else if (tail == "any")
-                UpdateTarget(dir, PSENTITYTYPE_NO_TARGET);
+                UpdateTarget(dir, PSENTITYTYPE_NO_TARGET, NULL);
             else if (tail == "clear")
-                psengine->GetCharManager()->SetTarget(NULL,"select");
+                psengine->GetCharManager()->SetTarget(NULL, "select");
             else
-                psengine->GetCharManager()->SetTarget(FindEntityWithName(tail),"select");
+                UpdateTarget(dir, PSENTITYTYPE_NAME, tail);
         }
     }
 
@@ -669,12 +688,14 @@ const char *psUserCommands::HandleCommand(const char *cmd)
     }
 
     else if (words[0] == "/use" ||
+             words[0] == "/build" ||
              words[0] == "/combine" ||
              words[0] == "/uncombine" ||
              words[0] == "/construct" ||
-             words[0] == "/dig" ||
+             words[0] == "/explore" ||
              words[0] == "/fish" ||
-             words[0] == "/harvest" ||
+             words[0] == "/explore" ||
+             words[0] == "/bezzle" ||
              words[0] == "/repair" )
     {
         psWorkCmdMessage work(cmd);
@@ -694,53 +715,7 @@ const char *psUserCommands::HandleCommand(const char *cmd)
         return NULL;
     }
 
-    else if (words[0] == "/advisor" ) //this manages all the subcases of advisor: on, off, list, listsessions, reuquests
-    {
-        csString pPerson;
-        csString pText;
-
-        psAdviceMessage advice(0,words[1].GetDataSafe(),pPerson.GetDataSafe(), pText.GetDataSafe());
-        advice.SendMessage();
-
-        return NULL;
-    }
-
-    else if (words[0] == "/help" ) //used to request help
-    {
-        //get the chatwindow for use later
-        pawsChatWindow* chatWindow = dynamic_cast<pawsChatWindow*>(PawsManager::GetSingleton().FindWidget("ChatWindow"));
-
-        csString pPerson;
-        csString pText( words.GetTail( 1 ) );
-
-        if (pText.IsEmpty())
-            return "You must enter the text. e.g /help [text]";
-
-        if (chatWindow && chatWindow->GetSettings().enableBadWordsFilterOutgoing) //check for badwords filtering
-            chatWindow->BadWordsFilter(pText); //if enabled apply it
-
-        psAdviceMessage advice(0,words[0].GetDataSafe(),pPerson.GetDataSafe(), pText.GetDataSafe());
-        advice.SendMessage();
-        return NULL;
-    }
-
-    else if (words[0] == "/advice") //used to give help
-    {
-        //get the chatwindow for use later
-        pawsChatWindow* chatWindow = dynamic_cast<pawsChatWindow*>(PawsManager::GetSingleton().FindWidget("ChatWindow"));
-
-        if (words.GetCount() < 2)
-            return "You must enter the text. e.g /Advice [user] <text>";
-        csString pPerson( words[1] );
-        csString pText(words.GetTail(2));
-
-        if (chatWindow && chatWindow->GetSettings().enableBadWordsFilterOutgoing) //check for badwords filtering
-            chatWindow->BadWordsFilter(pText); //if enabled apply it
-
-        psAdviceMessage advice(0,words[0],pPerson, pText);
-        advice.SendMessage();
-        return NULL;
-    }
+   
 
     else if (  words[0] == "/pet")
     {
@@ -1100,22 +1075,7 @@ const char *psUserCommands::HandleCommand(const char *cmd)
             return "Character description set.";
         }
     }
-    else if (words[0] == "/setoocdesc")
-    {
-        if (words.GetCount() < 2)
-        {
-            return "Please specify the OOC description for this character.";
-        }
-        else
-        {
-            csString newDesc = words.GetTail(1);
-            // change all "\n" to real linefeeds
-            newDesc.ReplaceAll("\\n", "\n");
-            psCharacterDescriptionUpdateMessage descUpdate(newDesc, DESC_OOC);
-            descUpdate.SendMessage();
-            return "Character OOC description set.";
-        }
-    }
+
     else if (words[0] == "/loaddesc")
     {
         if (words.GetCount() < 2)
@@ -1150,41 +1110,7 @@ const char *psUserCommands::HandleCommand(const char *cmd)
             return "Character description loaded.";
         }
     }
-    else if (words[0] == "/loadoocdesc")
-    {
-        if (words.GetCount() < 2)
-        {
-            return "Please specify the filename of the ooc description to load.";
-        }
-        else
-        {
-            csRef<iVFS> vfs = psengine->GetVFS();
-            // lets construct the filename from the first argument
-            csString FileName("/planeshift/userdata/descriptions/");
-            FileName.Append(words[1]);
 
-            // check if the file can be found
-            if (!vfs->Exists(FileName))
-            {
-                return "File not found!";
-            }
-            // now read what's in the file
-            csRef<iDataBuffer> data = vfs->ReadFile(FileName); //load the file
-            if (!data)
-            {
-                return "Error while reading the files!";
-            }
-            csString DescriptionData = data->GetData();
-            DescriptionData.ReplaceAll("\r\n", "\n"); //remove linefeeds
-
-            // and finnaly set the loaded desc
-            psCharacterDescriptionUpdateMessage descUpdate(DescriptionData, DESC_OOC);
-            descUpdate.SendMessage();
-
-            return "Character OOC description loaded.";
-
-        }
-    }
     else
     {
         psUserCmdMessage cmdmsg(cmd);
@@ -1200,12 +1126,13 @@ void psUserCommands::HandleMessage(MsgEntry *msg)
 }
 
 // Starting from startingEntity, this function returns the next nearest or
-// furthest PC, NPC or ITEM.  If startingEntity is NULL, it returns the the nearest
+// furthest PC, NPC or ITEM.  If startingEntity is NULL, it returns the nearest
 // or furthest PC, NPC or ITEM from the player.  If the search doesn't find a new
 // target because we are already at the furthest or nearest entity, it cycles
 // around to the nearest or furthest entity respectively.
 void psUserCommands::UpdateTarget(SearchDirection searchDirection,
-                                  EntityTypes entityType)
+                                  EntityTypes entityType,
+                                  const char *name)
 {
     GEMClientObject* startingEntity = psengine->GetCharManager()->GetTarget();
     psCelClient* cel = psengine->GetCelClient();
@@ -1243,7 +1170,7 @@ void psUserCommands::UpdateTarget(SearchDirection searchDirection,
     // Loop entity is the entity returned if we're already at the last entity
     // and need to cycle through.
     GEMClientObject* loopObject = startingEntity;
-    float loopDistance = (searchDirection == SEARCH_FORWARD) ? FLT_MAX : 0;
+    float loopDistance = (searchDirection == SEARCH_BACK) ? 0 : FLT_MAX;
 
     // Iterate through the entity list looking for the nearest one.
     size_t entityCount = entities.GetSize();
@@ -1252,9 +1179,8 @@ void psUserCommands::UpdateTarget(SearchDirection searchDirection,
     {
         GEMClientObject* object = entities[i];
 
-        GEMClientObject* other = ( startingEntity == NULL ) ? NULL : startingEntity;
-
-        if (object == myEntity || object == other)
+        if (object == myEntity ||
+            (object == startingEntity && searchDirection != SEARCH_NONE))
         {
             continue;
         }
@@ -1266,7 +1192,9 @@ void psUserCommands::UpdateTarget(SearchDirection searchDirection,
 
         if ((entityType == PSENTITYTYPE_PLAYER_CHARACTER && eType < 0)
             || (entityType == PSENTITYTYPE_NON_PLAYER_CHARACTER && (eType >= 0 || eType == -2))
-            || (entityType == PSENTITYTYPE_ITEM && eType != -2))
+            || (entityType == PSENTITYTYPE_ITEM && eType != -2)
+            || (entityType == PSENTITYTYPE_NAME &&
+                !csString(object->GetName()).StartsWith(name, true)))
             continue;
 
         csVector3 pos = object->GetPosition();
@@ -1277,7 +1205,7 @@ void psUserCommands::UpdateTarget(SearchDirection searchDirection,
         // This is the distance from the starting entity to the current one.
         // If it's negative, the current entity is invalid for the search
         // (it can still be a valid loop entity, but never a best entity.)
-        float dist = ((startingEntity != NULL)
+        float dist = ((startingEntity && searchDirection != SEARCH_NONE)
                       ? ((searchDirection == SEARCH_FORWARD)
                          ? ((seDistance < distFromMe)
                             ? csSquaredDist::PointPoint(sePos, pos)
@@ -1288,8 +1216,8 @@ void psUserCommands::UpdateTarget(SearchDirection searchDirection,
                       : seDistance - distFromMe);
 
         // Update loop entity.
-        if ((searchDirection == SEARCH_FORWARD && distFromMe < loopDistance)
-            || (searchDirection == SEARCH_BACK && distFromMe > loopDistance))
+        if ((searchDirection == SEARCH_BACK && distFromMe > loopDistance) ||
+            distFromMe < loopDistance)
         {
             loopObject = object;
             loopDistance = distFromMe;
@@ -1317,6 +1245,8 @@ GEMClientObject* psUserCommands::FindEntityWithName(const char *name)
 {
     psCelClient* cel = psengine->GetCelClient();
     csVector3 myPos = cel->GetMainPlayer()->GetPosition();
+    GEMClientObject* bestObject = NULL;
+    float distance = 0.0f;
 
     // Find all entities within a certain radius.
     csArray<GEMClientObject*> entities = cel->FindNearbyEntities(cel->GetMainPlayer()->GetSector(),
@@ -1332,11 +1262,18 @@ GEMClientObject* psUserCommands::FindEntityWithName(const char *name)
         GEMClientObject* object = entities[i];
         CS_ASSERT( object );
 
-        if (csString(object->GetName()).StartsWith(name, true))
-            return object;
+        if (!csString(object->GetName()).StartsWith(name, true))
+            continue;
+        csVector3 pos(object->GetPosition());
+        float seDistance = csSquaredDist::PointPoint(myPos, pos);
+        if (!bestObject || seDistance < distance)
+        {
+            bestObject = object;
+            distance = seDistance;
+        }
     }
 
-    return NULL;
+    return bestObject;
 }
 
 csString psUserCommands::FormatTarget(const csString& target)

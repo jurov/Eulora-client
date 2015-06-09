@@ -1,7 +1,7 @@
 /*
  * waypoint.h
  *
- * Copyright (C) 2004 Atomic Blue (info@planshift.it, http://www.atomicblue.org) 
+ * Copyright (C) 2004 Atomic Blue (info@planeshift.it, http://www.atomicblue.org) 
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -83,7 +83,7 @@ class Waypoint
 public:
     Location                   loc;            ///< Id and position
     csString                   group;          ///< Hold group name for this waypoint if any.
-    csArray<WaypointAlias*>    aliases;        ///< Hold aliases for this waypoint
+    csPDelArray<WaypointAlias> aliases;        ///< Hold aliases for this waypoint
 
     csArray<Waypoint*>         links;          ///< Links to other waypoinst connected with paths from this node.
     csArray<float>             dists;          ///< Distances of each link.

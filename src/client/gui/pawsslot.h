@@ -39,7 +39,7 @@ public:
 
     void PlaceItem( const char* imageName, const char* meshFactName,
         const char* matName = NULL, int count = 0 );
-    csRef<iPawsImage> Image() { return image;}
+    iPawsImage* Image() { return image; }
     const char *ImageName();
 
     const char *GetMeshFactName()
@@ -81,9 +81,10 @@ public:
     void ScalePurifyStatus();
 
     bool IsBartender() { return isBartender; }
+    void SetBartender( bool t) { isBartender = t; }
 
     void SetBartenderAction(csString& act) { action = act; }
-    csString &GetBartenderAction() { return action; }
+    csString &GetAction() { return action; }
     void clearBartenderAction() { action.Empty(); }
 
     bool GetLock() { return locked; }

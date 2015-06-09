@@ -1,7 +1,7 @@
 /*
  * connection.cpp 
  *
- * Copyright (C) 2001 Atomic Blue (info@planshift.it, http://www.atomicblue.org) 
+ * Copyright (C) 2001 Atomic Blue (info@planeshift.it, http://www.atomicblue.org) 
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -232,7 +232,7 @@ void psNetConnection::Run ()
             laststatdisplay = currentticks;
 
             
-            if (pslog::disp_flag[LOG_LOAD])
+            if (pslog::disp_flag[LOG_NET])
             {
                 printf("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
                 printf("+ Currently using %1.2fKbps out, %1.2fkbps in...\n",

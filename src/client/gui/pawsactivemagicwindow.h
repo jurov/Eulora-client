@@ -1,7 +1,7 @@
 /*
  * pawsactivemagicwindow.h
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -31,51 +31,63 @@ class pawsConfigPopup;
 #include "net/cmdbase.h"
 #include "net/subscriber.h"
 #include "gui/pawscontrolwindow.h"
+#include "gui/pawsscrollmenu.h"
 
 #define CONFIG_ACTIVEMAGIC_FILE_NAME       "/planeshift/userdata/options/activemagic.xml"
 #define CONFIG_ACTIVEMAGIC_FILE_NAME_DEF   "/planeshift/data/options/activemagic_def.xml"
-// vfs files? chetty
+
 /** This handles all the details about how the spell cancel works.
  */
-class pawsActiveMagicWindow : public pawsWidget, public psClientNetSubscriber
+class pawsActiveMagicWindow : public pawsControlledWindow, public psClientNetSubscriber
 {
 public:
 
-    virtual ~pawsActiveMagicWindow() {};
+    pawsActiveMagicWindow();
+    virtual ~pawsActiveMagicWindow() {}
 
     bool PostSetup();
+    bool Setup(iDocumentNode* node);
 
-    void HandleMessage( MsgEntry* me );
+    void HandleMessage(MsgEntry* me);
+    void OnResize();
 
     virtual void Close();
-    
+
     /** Loads the configuration file
     *   @return true if no errors and false if errors
     */
-    bool LoadSetting(); 
+    bool LoadSetting();
 
     ///Saves the configuration file
     void SaveSetting();
 
+    void AutoResize();
+
     /**
-      * Check-box which gives the user a opportunity to show or 
+      * Check-box which gives the user a opportunity to show or
       * not to show the Active Magic Window
       */
     pawsCheckBox*    showWindow;
+
 private:
 
-    pawsListBox*     buffCategories;   ///< Listbox used to show active buff magic
-    pawsListBox*     debuffCategories; ///< Listbox used to show active debuff magic
- 
-    
+    pawsScrollMenu*  buffList;
+    uint32_t         lastIndex;    ///<Version number of the last list received
+
     pawsConfigPopup* configPopup;  ///<This is used to point to a instance of ConfigPopup
-                                 
+
     /** If true, show active magic window
      *  if false, don't show this window
      */
-    bool show;
+    bool show,
+         useImages,
+         autoResize,
+         showEffects;   ///<true==show spell & item effects; false==show spell effects but not item effects
+    int  Orientation;
+
+
 };
 
-CREATE_PAWS_FACTORY( pawsActiveMagicWindow );
+CREATE_PAWS_FACTORY(pawsActiveMagicWindow);
 
-#endif 
+#endif

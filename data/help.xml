@@ -1,0 +1,1083 @@
+<?xml version="1.0"?>
+<help>
+  <branch name="Overview">
+    <Contents>
+      <content type="text">This guide contains some basic information about the game, which should be enough to get you going. 
+
+Please bear in mind that Eulora was designed around the "easy to learn, hard to master" model, and that while our parent company does not believe in the "every player must be able to experience all content" mantra of every other game publisher out there, our chief designer is firmly convinced that the meta-game is just as much the game as the game itself.
+
+Consequently, a lot about Eulora simply isn't publicly known, and perhaps never will be. There's also a large and growing pile of user conjecture floating about on the Internet, ranging from user-compiled data to plain fanfiction. Sifting the accurate from the merely imagined from - in turn - the deliberately misleading is your task, just as much as crafting or mining for resources.
+
+We hope you'll have fun, but whether you do or you don't : Eulora is certainly not going to be like anything you've ever played before.      
+      </content>
+    </Contents>
+    <topic name="Who's who">
+    <Contents>
+      <content type="text">
+Eulora is the game you're playing. 
+
+Minigame (trading as S.MG on MPEx, the Bitcoin stock exchange) is the publisher of Eulora. Minigame is a company like any other, except it's incorporated in Bitcoin rather than the Virgin Islands or Bermuda. It has been releasing monthly financial reports since its incorporation in June 2013, which you may find interesting. It's also looking for fresh games to publish.
+
+Mircea Popescu is a major shareholder, and CEO of Minigame. He's also worked as the lead designer on Eulora. He also holds significant stakes in MPEx itself, as well as a number of other Bitcoin ventures. He is also noted for million dollar bet on the future of Berkshire Hathaway and assorted philanthropy.
+
+Martha McCuller is a major shareholder and CTO of Minigame. She is a veteran of the Computer Industry, having been in front of a keyboard since before GE acquired RCA. She has been involved in every aspect of the coding of Eulora.
+      </content>
+    </Contents>
+    </topic>
+    <topic name="Eulora and freedom">
+    <Contents>
+      <content type="text">
+Eulora is free as in freedom. The source code for each release is available for anyone to download - and modify! In fact, we don't even release binaries, instead we retain independent contractors to compile (and sign) binaries on the basis of our source releases. 
+
+Whatever modifications you may wish to make to _your_ client should work just fine, just as long as you don't break the communication with the server. Make sure you keep backups somewhere, and always remember : modding is not merely tolerated in Eulora, but outright encouraged. If you make something cool show it to us, we'll most likely help you spread the word - and there might even be a job offer waiting for you. If you feel like taking a first step, the text you're now reading probably resides on your HDD in the /data/help.xml file. If you modify that file and restart your game, you should see here whatever you wish to see here. Give it a spin, it's fun!
+  Usage: /fish
+This committment to freedom goes a lot further than merely not being batshit-insane when it comes to modding, unlike pretty much every other publisher out there. We don't censor words. You can, as far as the game is concerned, be as much of an asshole as you can possibly stand. You probably won't make too many friends that way - but then again Eulora does not require you to make friends. You can play and will be able to play and enjoy playing it forever without the undue pressure to "form groups", "parties" and so on. In any case, there are no GMs, no bans, none of that crap. Hopefully the game can stay that way.
+
+The committment to freedom does not go as far as releasing the art, however. You may be able to obtain a limited license to reuse some copywrighted material, but please ask before you do. This includes any graphics, sound files, any text and storyline elements that we own and so on. We certainly don't intend to hassle people doing reasonable things - such as posting screenshots of their own play on their own blogs, running a free wiki or forum, etc. We certainly won't stand for abusive or dilutive use of our art in a commercial setting however.
+
+The committment to freedom also does not go as far as releasing the server software. As this is not nor will ever be distributed, it is our estimation that we remain within the limits of the original GPL by keeping it private. Legal considerations aside, it is simply not feasible to make a good game in the sense Eulora is a good game with "open books", so to speak. Secrecy as to the exact mechanics of the game are half the fun of trying to reverse engineer the lot in the first place.
+
+Finally, Eulora is not free as in free beer. Eulora is intended to cost the average player something in the neighbourhood of ten dollars a month, or about ten cents an hour, whichever comes out less. Note that due to the inherent fluctuations implicit in a Bitcoin Based Game Economy (BBGE), every player's individual results may diverge significantly, either in the positive or the negative, from that average. 
+      </content>
+    </Contents>
+    </topic>
+  </branch>
+
+  <branch name="Game Mechanics">
+    <Contents>
+      <content type="text">Some basic points about gameplay.
+
+      <topic name="Character and Stats">
+        <Contents>
+          <content type="text">Every character's general state of well being is described by six independent vital statistics. These are : Hit Points (HP), Blood Points (BP), Mana Points (MP), Spirit Points (SP), Physical and Mental Stamina (PS and MS). Characters generally have a little less BP than HP, and a little less SP than MP. HP is a general indication of the structure of the player's body so to speak, and crushing damage tends to reduce it particularly. BP on the contrary is more a description of their blood and metabolic health - puncture wounds drain BP particularly, as do most diseases and poisons. Mana is the substance of magic. It is used up casting most spells - but then again it is also the easiest to replenish, and most competent mages manage to expand their native mana pools considerably. Spirit Points are a more elusive, mystical quality of the character's health. Extremely difficult to recover, they are drained by many unnatural presences and assorted evils.
+
+Every character's innate abilities are described by a set of twelve attributes, broadly grouped in four categories. These are : the Force Attributes (STRength, ENDurance, andCONstitution) ; the Mind Attributes (INTelligence, WISdom and INSight) ; the Change Attributes (AGIlity, DEXterity and COOrdination) and the Discipline Attributes (ATTention, FOCus and PATience). As you might imagine, a brawler character would most benefit from good FA, a mage mostly needs high MA, and a crafter or gatherer primarily benefit from good DA with secondary CA or MA respectively.
+
+The abilities are fixed at birth, as a complex interaction of many subtle factors. The game does allow for modifiers to these innate abilities, but they are late, rare, expensive and therefore quite possibly not cost-effective. In general you are well advised to try out your character. Like a human child, each character has fields he excels at and fields in which he's marginal, or even horrible. Give yourself time to discover these for your own character, nurture its strengths, allow it to grow into an extension of yourself.
+
+Every character's acquired abilities are described by a whole list of skills. In order to acquire a new skill you will have to find an item that bestows it. Some of these can be found with the NPC vendors, but some exist only as very rare loots. It is altogether improbable that at any point in the game any one player has actually seen all the skills available. 
+
+Skills can be trained, in exchange for money, provided your character has acquired enough experience for the new level. Higher skill levels increase a player's performance in related fields. Experience is acquired by simply playing the game - whenever you do something you get a little experience.
+	  </content>
+        </Contents>
+      </topic>
+
+
+      <topic name="Death and Marriage">
+        <Contents>
+          <content type="text">Every character's lifespan is limited. In Earth time a full life should last about two years, give or take, after which the character will expire naturally. There do exist in-game means to extend or even remove this limit, but they are extremely rare, extremely expensive and not without significant implications. Dead characters - whether they died in combat or of old age - can not usually be revived. You should in consequence plan around this limitation. Do not expect any of your characters to live forever, but instead embrace change, and take pleasure in tracing your lineage through their descendants.
+
+Generally, every character is expected to get married (which means - to someone of the opposite sex!) and produce offspring. Once a character dies, either in battle or in their own bed, you will be able to select one of their children to continue the family name. For this reason you wish as many children as possible, and from a valuable, well chosen mate. This, incidentally, means that Eulora is rife with sexual slavery - and no, we don't see anything wrong with that. On the contrary.
+	  </content>
+        </Contents>
+      </topic>
+
+      <topic name="Eulora Economy">
+        <Contents>
+          <content type="text">Eulora runs a BBGE (Bitcoin Based Game Economy), which means that every coin in game is backed by a satoshi, and vice-versa. Whenever you expend game money through whatever means, such as tools decaying, or craft materials being used up, that value does not simply "go away". Instead, the server adds it to a pool. Conversely, when you loot or craft an item, the server doesn't merely create the item out of thin air - its value is substracted from a pool. 
+
+The general likeliness of finding a loot - and especially the very good loots, those known as HoF (Hall of Fame) - depends greatly on a character's skill, attributes, tools and materials used, as compared to everyone else. Consequently, if you are ahead of the curve you should, on average, make a profit on your activity, whereas if you're behind the curve you should, on average, make a loss. These averages spin over very many counts, however, and so very rich finds by complete noobs are not at all unheard of. 
+
+The relative rarity of items found in game also plays a significant role. Suppose you spend 100 coins mining. If you find 105 coins worth of stuff, you are clearly ahead, and can repeat the process. If you find only 82 coins worth of stuff, you are clearly operating at a loss. Except, of course, if the particular item you found 82 coins' worth is actually rare, and players customarily pay say 180% nominal value to get their hands on it. In that case your 82 coins of nominal loot actually result in over 140 coins in trade, putting you significantly ahead of the other example.
+
+The interplay of many diverse economic factors with the human element ensures that Eulora has no ready stable solution, and that as the other players act you will confront a constantly changing, complex reality. One can certainly make money playing Eulora, and one can certainly lose money playing Eulora. Due to the lurking temptation ("maybe the next one is the big one!") you are probably well advised to set clear limits for yourself and then stick to them. We will not involve ourselves in managing your life for you - irrespective of what you, or your local judge may think on this topic.
+
+	  </content>
+        </Contents>
+      </topic>
+
+      <topic name="Exchanging Eulora Coins For Bitcoin">
+        <Contents>
+          <content type="text">You may acquire game currency directly from Minigame in exchange for Bitcoin, at the fixed rate of one coin for each satoshi. You may also turn in your Eulora money to Minigame in exchange for Bitcoin, at the same rate. 
+
+Note that we will not honor requests for withdrawal in excess of 10% of your total played value. So for example, if you buy 100 coins, go exploring, find 90 coins' worth of stuff, go exploring again, find 110 coins' worth of stuff, go exploring again and find 100 coins' worth of stuff after which you wish to cash out, we will not honor this request in excess of 30 coins (100+90+110 = 300, 10% of which = 30). Bear this limitation in mind when depositing, and do not attempt to treat Eulora like a quick visit to the Casino for a few rolls. It's not intended to work that way.
+
+We will also not honor requests for either withdrawal or deposit worth less than 1 BTC (100`000`000 in game coins). 
+
+	  </content>
+        </Contents>
+      </topic>
+
+
+      </content>
+    </Contents>
+  </branch>
+
+    <branch name="Interface">
+      <Contents>
+        <content type="text">Eulora is very close in spirit to an old mud. There's a lot of CLI-ish behaviour available if you're willing to type the occasional slash.</content>
+      </Contents>
+      <branch name="Alliance">
+        <Contents><content type="text">Note that Alliances are not actually implemented yet. Nor are guilds, for that matter.</content></Contents>
+        <topic name="/allianceinvite">
+          <Contents>
+            <content type="text">Invite other guilds to your alliance. Only the leader of the guild that leads the alliance can do this.
+Usage: /allianceinvite [guild-leader]
+(Invites the guild of [guild-leader] to the alliance.)</content>
+          </Contents>
+        </topic>
+        <topic name="/allianceleader">
+          <Contents>
+            <content type="text">Hand over the leadership of the alliance to another guild. Only the current leader of the alliance can do this.
+
+Usage: /allianceleader [guild-name]
+(Makes the guild with the name [guild-name] the leader of the alliance.)</content>
+          </Contents>
+        </topic>
+        <topic name="/allianceleave">
+          <Contents>
+            <content type="text">This command allows your guild to leave an alliance. Only the guild leader can do this.
+
+Usage: /allianceleave
+(Your guild leaves the alliance.)</content>
+          </Contents>
+        </topic>
+        <topic name="/allianceremove">
+          <Contents>
+            <content type="text">Remove guilds from your alliance. Only the leader of the alliance can do this.
+
+Usage: /allianceremove [guild-name]
+(Removes the guild with the name [guild-name] from the alliance.)</content>
+          </Contents>
+        </topic>
+        <topic name="/endalliance">
+          <Contents>
+            <content type="text">Disband the current alliance. Only the leader of the alliance can do this.
+
+Usage: /endalliance
+(Disbands the current alliance.)</content>
+          </Contents>
+        </topic>
+        <topic name="/newalliance">
+          <Contents>
+            <content type="text">Create a new alliance.
+
+Usage: /newalliance [alliance_name]
+(Creates an alliance with the name [alliance_name].)</content>
+          </Contents>
+        </topic>
+      </branch>
+      <branch name="Chat">
+        <topic name="/alliance">
+          <Contents>
+            <content type="text">Send messages to the alliance chat channel. Your current guild must be member of an alliance to use this command.
+  
+  Usage:  /alliance [message]
+  (Sends {message] to the alliance chat channel. Can be combined with /me or /my.)</content>
+          </Contents>
+        </topic>
+        <topic name="/away">
+          <Contents>
+            <content type="text">Allows you to specify a reply message for every tell you get. 
+
+Usage: /away [message]
+(Send specified message to every player sending you a tell.)
+
+/away off
+(Turn the away-message off. No automatic replies will be sent anymore.)</content>
+          </Contents>
+        </topic>
+        <topic name="/auction">
+          <Contents>
+            <content type="text">Send messages to the auction chat tab
+
+Usage: /auction [message]
+(Writes [message] to the auction chat tab. Can be combined with /me and /my.)</content>
+          </Contents>
+        </topic>
+        <topic name="/clear">
+          <Contents>
+            <content type="text">Clear the history of the chat window. Includes all tabs.
+  
+  Usage: /clear</content>
+          </Contents>
+        </topic>
+        <branch name="/emote">
+          <Contents>
+            <content type="text">Control fine behaviour of your character. Note that most of these aren't currently supported for Boxy, their only result being output to the chat window.
+
+Usage: /emote
+(writes a list of all possible emotes in the system chat tab)
+
+/emote [emote-name]
+(Note that the emote differs if you currently have a target selected. With a selected target the emote is usually directed at that target. 
+
+Available options : agree, angry, beckon, beg, blush, bored, bow, catchbreath, charge, cheer, clap, cold, confused, cough, cry, curious, curse, dance, disappointed, drink, drunk, duck, excited, fear, flee, followme, glare, greet, grin, hungry, impatient, kiss, kneel, laugh, listen, nod, panic, point, poke, ponder, pounce, pout, pray, ready, roar, shrug, shy, sigh, sleep, smile, salute, sorry, surprised, stare, taunt, thank, volunteer, wave, work, wink, yawn, flee, divide, work.
+
+In many cases you can omit the "emote" and just use the emote directly - /beg etc.)
+	</content>
+          </Contents>
+
+        </branch>
+        <topic name="/group">
+          <Contents>
+            <content type="text">Write messages to the group chat tab if you are member of a group.
+
+Usage: /group [message]
+(Writes [message] to the group chat tab. Can be combined with /me or /my.)</content>
+          </Contents>
+        </topic>
+        <topic name="/guild">
+          <Contents>
+            <content type="text">Send messages to your guild mates in the guild chat.
+  
+Usage:  /guild [message]
+(Writes [message] to the guild chat tab. Can be combined with /me or /my.)</content>
+          </Contents>
+        </topic>
+        <topic name="/ignore">
+          <Contents>
+            <content type="text">Manage your ignore list. If you put someone on your ignore list you won't see any chat text from them.
+
+Usage: /ignore [character-name] add
+(Adds the character [character-name] to your ignore list.)
+
+/ignore [character-name] remove
+(Removes the character [character-name] from your ignore list.)
+
+/ignore [character-name]
+(Toggle : adds the character [character-name] to your ignore list if they aren't on it already, otherwise removes them from the list.)</content>
+          </Contents>
+        </topic>
+          <topic name="/join">
+          <Contents>
+            <content type="text">Join arbitrary chat channels. The text of these channels is displayed in the Chat-tab of your chat-window.
+
+Usage: /join [channel-name]
+(Joins the channel with the name [channel-name]. If no such channel exists it is created. If you have joined more than one chat channels you can prepend the channel number [/1, /2.. /n] to your text to have it sent to the corresponding channel.)</content>
+          </Contents>
+        </topic>
+        <topic name="/leave">
+          <Contents>
+            <content type="text">Leave chat-channels.
+  
+Usage:  /leave [channel-number]
+(Leaves the channel specified by the number [channel-number].)</content>
+          </Contents>
+        </topic>
+        <topic name="/me">
+          <Contents>
+            <content type="text">Write self-defined text only emotes for your character. The starting /me will be replaced with your character's forename. The message is sent to the currently selected chat tab. This command can be combined with all commands that specify a chat tab, like /shout, /say, /auction etc.
+
+Usage: /me [message]
+(Writes out an emote defined by [message] starting with your character's forename to the currently selected chat tab.)</content>
+          </Contents>
+        </topic>
+        <topic name="/my">
+          <Contents>
+            <content type="text">Used to construct possessive emotes. The /my is replaced with "[charname]'s". The message is sent to the currently selected chat tab. This command can be combined with all commands that specify a chat tab, like /shout, /say, /auction etc.
+
+Usage: /my [message]
+(Writes out an emote starting with "[charname]'s")</content>
+          </Contents>
+        </topic>
+        <topic name="/mypet">
+          <Contents>
+            <content type="text">Describe actions of your pet. The /mypet symbol is replaced with the name of your pet.
+  
+Usage:/mypet [message]
+(Sends a message to the main chat tab starting with the name of your pet.)</content>
+          </Contents>
+        </topic>
+        <topic name="/say">
+          <Contents>
+            <content type="text">Send to main chat tab, with the normal hearing-range.
+
+Usage:/say [message]
+(Writes [message] to the main chat tab. Can be combined with /me or /my.)</content>
+          </Contents>
+        </topic>
+        <topic name="/shout">
+          <Contents>
+            <content type="text">This command allows you to shout in the main chat tab making it possible to others further away to hear you. Probably not meant for normal conversations.
+
+Usage:/shout [message]
+(Shouts [message] in the main chat tab. Can be combined with /me or /my.)</content>
+          </Contents>
+        </topic>
+        <topic name="/tell">
+          <Contents>
+            <content type="text">Send tells to another player.
+  
+Usage: /tell [char-name] [message]
+(Sends [char-name] the text [message]. Can be combines with /me or /my.)</content>
+          </Contents>
+        </topic>
+        <topic name="/tellnpc">
+          <Contents>
+            <content type="text">Communicate with NPCs in the NPC chat tab. Probably easier to just select them.
+  
+Usage: /tellnpc [message]
+(Sends the currently selected NPC the text [message] in the NPC chat tab.)</content>
+          </Contents>
+        </topic>
+      </branch>
+      <branch name="Combat">
+<Contents>
+            <content type="text"> Note that fighting is not yet released.
+</content>
+          </Contents>
+        <topic name="/assist">
+          <Contents>
+            <content type="text">Target what another player is targetting.
+
+Usage: /assist [Char-name]
+(Makes the target of the specified character your own target. If no name was specified the currently targetted player is used. This work only for characters either in your guild or your current group and is a great aid for scripting.)</content>
+          </Contents>
+        </topic>
+        <topic name="/attack">
+          <Contents>
+            <content type="text">Attacks the current target.
+
+Usage: /attack [Attack-stance]
+(Attacks your current target. Possible stances are: bloody, aggressive, normal, defensive and fullydefensive. If no stance is given normal is used as a default.)
+</content>
+          </Contents>
+        </topic>
+        <topic name="/cast">
+          <Contents>
+            <content type="text">Command for casting magic spells.
+
+Usage: /cast [power] [spellname]
+(Casts the spell specified by [spellname]. [power] is a value between 1 and 100 which defines the strength of the spell. If [power] is not given the value of the slider of the info window is used as a default.)</content>
+          </Contents>
+        </topic>
+        <topic name="/challenge">
+          <Contents>
+            <content type="text">Command to send a challenge to another player.
+
+Usage: /challenge
+(Challenges the currently targeted character to a duel. The system chat tab will indicate if the other player accepted or rejected the challenge.)</content>
+          </Contents>
+        </topic>
+        <topic name="/loot">
+          <Contents>
+            <content type="text">This plants a field of strawberries. No wait, wrong one. This is actually the command to bake a batch of double mint triple raisin champagne-and-roquefort cookies. Hm. No, that's not right either. Well... I give up. Nobody knows what this one does. It's undocumented, okay ?!
+  
+Usage:  /loot [roll] [all|money|items [categories]]
+(Attempts to loot targeted NPC, taking specified goods. If no arguments are provided, a loot window will show up. Absolutely splendid for scripting.)
+  
+  /loot
+  (Opens the loot window of the current target.)
+  
+  /loot money
+  (Loots all the copper. If you're in a group, the copper will be shared.)
+  
+  /loot [roll] items [categories]
+  (Loots money and items with specified categories (e.g. "weapons, gems"). If categories are left out, all items will be looted. If you add the optional "roll" before "items", all specifed items will be rolled.)
+  
+  /loot [roll] all
+  (Loots money and all items. If you're in a group, money will be shared and items are either attempted to be taken or rolled, if you add the optional "roll" before "all".)</content>
+          </Contents>
+        </topic>
+        <topic name="/stopattack">
+          <Contents>
+            <content type="text">Stop your current attack. As if.
+
+Usage: /stopattack
+(Stops the current attack.)</content>
+          </Contents>
+        </topic>
+        <topic name="/target">
+          <Contents>
+            <content type="text">Select a target.
+  
+Usage:
+/target [Player-name]
+(Targets the player with the name [Player-name]. If no name is given you target your own character. Best way to heal.)
+
+/target next [category]
+(Makes the next target of type [category] your current target. Possible values for [category] are: npc, pc, item, any.
+
+/target prev [category]
+(Makes the previous target of type [category] your current target. Possible values for [category] are: npc, pc (Player Character), item, any.
+
+/target clear
+(Clears your current target.)</content>
+          </Contents>
+        </topic>
+        <topic name="/yield">
+          <Contents>
+            <content type="text">This command allows you to yield a duel.
+
+Usage: /yield
+(Surrenders to your opponent. Same as /say uncle, at least in spirit.)
+            </content>
+          </Contents>
+        </topic>
+      </branch>
+      <branch name="Crafting">
+        <topic name="/combine">
+          <Contents>
+            <content type="text">This command allows you to combine items in an container. The items must be already placed in the container and the container must be targeted. Depending on what you want to combine it might be necessary to have an appropriate tool equipped.
+  
+  Usage: /combine</content>
+          </Contents>
+        </topic>
+        <topic name="/construct">
+          <Contents>
+            <content type="text">Unclear yet what this will eventually do.</content>
+          </Contents>
+        </topic>
+        <topic name="/dig">
+          <Contents>
+            <content type="text">Dig up stones and various minerals, provided you have the proper skillset.
+
+Usage: /harvest
+(Harvests for plants at the current position of your character.)</content>
+          </Contents>
+        </topic>
+        <topic name="/explore">
+          <Contents>
+            <content type="text">Your character looks around for resources to gather. If you have a tool equipped, it will use that tool (which will decay). If you do not, it will use your hands (which will hurt you). You have a chance at finding something pretty much anywhere, but most of the better stuff is somewhat elusive. Note that you need the Gathering skill to use this.
+
+Usage: /explore
+(Harvests for whatever may be found at the current position of your character.)
+</content>
+          </Contents>
+        </topic>
+        <topic name="/fish">
+          <Contents>
+            <content type="text">Fish in rivers and lakes, provided you have the proper skillset.
+  
+Usage: /fish
+(Tries to catch a fish at the current position of your character.)
+</content>
+          </Contents>
+        </topic>
+        <topic name="/harvest">
+          <Contents>
+            <content type="text">Harvest plants, provided you have the proper skillset.
+
+Usage: /harvest
+(Harvests for plants at the current position of your character.)</content>
+          </Contents>
+        </topic>
+        <topic name="/repair">
+          <Contents>
+            <content type="text">Attempt to repair damaged weapons and armor. You need special skills and instruments to pull this one off.
+
+Usage: /repair [slot-name]
+(Repairs the item in the specified slot. If not slot if given the item in your right hand will be repaired. Values for [slot-name]: righthand, lefthand, helm, legs, boots, bracers, torso, gloves, neck, rightfinger, leftfinger, belt, arms, back.)
+</content>
+          </Contents>
+        </topic>
+        <topic name="/uncombine">
+          <Contents>
+            <content type="text">This shouldn't work, requires /untime and /deentropy to be implemented first.</content>
+          </Contents>
+        </topic>
+        <topic name="/use">
+          <Contents>
+            <content type="text">Use specified item.
+  
+Usage: /use [item-name]
+(Uses an item from your inventory with the name [item-name]. If [item-name] is not specified the currently selected item will be used.)</content>
+          </Contents>
+        </topic>
+      </branch>
+      <branch name="Group">
+        <topic name="/disband">
+          <Contents>
+            <content type="text">Disband a group. Only the leader of a group is able to do this.
+
+Usage: /disband
+(Disbands the current group.)</content>
+          </Contents>
+        </topic>
+        <topic name="/groupremove">
+          <Contents>
+            <content type="text">Remove characters from the group. Only the leader of a group is able to do this.
+  
+Usage: /groupremove [char-name]
+(Removes the character with the name [char-name] from the group.)</content>
+          </Contents>
+        </topic>
+        <topic name="/groupmembers">
+          <Contents>
+            <content type="text">List all members of your current group.
+
+Usage: /groupmembers
+(Prints the name of all members of your current group the the system chat tab.)</content>
+          </Contents>
+        </topic>
+        <topic name="/invite">
+          <Contents>
+            <content type="text">Invite other characters to your group. Only the group leader is able to invite new people.
+  
+Usage: /invite [char-name]
+(Invites the character with the name [char-name] to the group.)</content>
+          </Contents>
+        </topic>
+        <topic name="/leavegroup">
+          <Contents>
+            <content type="text">Leave a group.
+
+Usage: /leavegroup
+(Leaves your current group.)</content>
+          </Contents>
+        </topic>
+      </branch>
+      <branch name="Guild">
+        <topic name="/endguild">
+          <Contents>
+            <content type="text">Disband your current guild. Only the guild leader is able to do this.
+
+Usage: /endguild
+(Disbands the current guild.)</content>
+          </Contents>
+        </topic>
+        <topic name="/guildinfo">
+          <Contents>
+            <content type="text">Open the guild window.
+
+Usage: /guildinfo
+(Opens the guild window for your current guild. Only available of you currently are memeber of a guild.)</content>
+          </Contents>
+        </topic>
+        <topic name="/guildinvite">
+          <Contents>
+            <content type="text">Invite new members to your guild. Your guild rank must allow you to invite members for this to work.
+
+Usage: /guildinvite [char-name]
+(Invites the character with the name [char-name] to your guild.)</content>
+          </Contents>
+        </topic>
+        <topic name="/guildlevel">
+          <Contents>
+            <content type="text">Rename the various guild ranks.
+
+sage: /guildlevel [rank] [new-name]
+(Gives [rank] the new name [new-name]. [Rank] is a number from 1 to 9.)</content>
+          </Contents>
+        </topic>
+        <topic name="/guildmembers">
+          <Contents>
+            <content type="text">List all members of your guild.
+
+Usage: /guildmembers [rank]
+(List all members of your guild with the rank [rank] in the system chat tab. [rank] is a number from 1 to 9. If [rank] is not specified all members will be listed.)</content>
+          </Contents>
+        </topic>
+        <topic name="/guildmotd">
+          <Contents>
+            <content type="text">View or change the current MOTD of your guild. Only possible if the rights of your current guild rank allow it.
+
+Usage: /guildmotd [new-motd]
+(Sets the MOTD of your guild to [new-motd]. If no [new-motd] is given the old MOTD will be printed to the system chat tab.)</content>
+          </Contents>
+        </topic>
+        <topic name="/victorypoints">
+          <Contents>
+            <content type="text">Shows the Victory Points of your guild. You gain Victory Points whenever an enemy guild surrenders to your guild. (Not exactly implemented as of yet.)
+  
+Usage: /victorypoints
+(Prints your guild's Victory Points to the system chat tab.)</content>
+          </Contents>
+        </topic>
+        <topic name="/guildpromote">
+          <Contents>
+            <content type="text">Promote guild members. Your guild rank must allows you to promote others for this to work and you can only promote others to a rank lower than yours.
+  
+Usage: /guildpromote [char-name] [rank]
+(Promotes the character [char-name] to the rank [rank]. [rank] is a number from 1 to 9.)</content>
+          </Contents>
+        </topic>
+        <topic name="/guildremove">
+          <Contents>
+            <content type="text">Remove characters from the guild. Your guild rank must allow you to remove members for this to work.
+                
+Usage: /guildremove [char-name]
+(Removes the character with the name [char-name] from the guild.)</content>
+          </Contents>
+        </topic>
+        <topic name="/guildsecret">
+          <Contents><content type="text">Toggle whether your guild is secret or not. Your rank must allow you to edit the guild for this to work.
+  
+Usage: /guildsecret
+(Without any arguments the current status is printed to the system chat tab.)</content>
+  
+/guildsecret on
+(Makes your guild a secret guild.)
+  
+/guildsecret off
+(Makes your guild a public guild.)
+              </Contents>
+        </topic>
+        <topic name="/guildwar">
+          <Contents>
+            <content type="text">Ask another guild for a guild war. Only the leader of a guild is able to do this and only the leader of the other guild is able to accept.
+
+Usage: /guildwar [guild-name]
+(Challenges the guild [guild-name] to a guild war.)</content>
+          </Contents>
+        </topic>
+        <topic name="/guildweb">
+          <Contents>
+            <content type="text">Set the URL for your guild's webpage. Your current rank must allow you to edit the guild for this to work.
+                
+Usage: /guildweb [URL]
+(Sets the guild webpage to [URL].)</content>
+          </Contents>
+        </topic>
+        <topic name="/guildyield">
+          <Contents>
+            <content type="text">Yield to another guild in a guild war.
+
+Usage: /guildyield [guild-name]
+(Surrenders to the guild [guild-name].)</content>
+          </Contents>
+        </topic>
+        <topic name="/newguild">
+          <Contents>
+            <content type="text">Create a new guild.
+
+Usage: /newguild [guild-name]
+(Creates a new guild with the name [guild-name].)</content>
+          </Contents>
+        </topic>
+      </branch>
+      <branch name="Interaction">
+        <topic name="/bank">
+          <Contents>
+            <content type="text">Open the banking window at specific NPCs. A banker NPC must be targeted for this to work.
+
+Usage: /bank personal
+(Opens the personal banking window of your character. Here you can deposit and withdraw money belonging to your character as well as exchange coins.)
+
+/bank guild
+(This opens the banking window for your guild. Your guild must have granted you the rights to use their bank account in order for this to work.)
+</content>
+          </Contents>
+        </topic>
+        <topic name="/buy">
+          <Contents>
+            <content type="text">Open the merchant windows for a specific NPC. A merchant NPC must be selected in order for this to work.
+
+Usage: /buy
+(Opens the merchant window for the selected NPC in buy-mode.)</content>
+          </Contents>
+        </topic>
+        <topic name="/give">
+          <Contents>
+            <content type="text">Give items to other players or NPCs. Containers (like sacks) cannot be traded.
+  
+Usage: /give
+(Opens the trading window for the selected player or NPC.)
+  
+  </content>
+          </Contents>
+        </topic>
+        <topic name="/marriage">
+          <Contents>
+            <content type="text">This command will eventually allow you to force a NPC in the family way. Not yet functional.
+  
+</content>
+          </Contents>
+        </topic>
+        <topic name="/npcmenu">
+          <Contents>
+            <content type="text">Open the menu to talk with NPCs, if available. Not all NPCs have this menu available in all contexts. 
+
+Usage: /npcmenu
+(Opens the talk-menu for the currently selected NPC.)</content>
+          </Contents>
+        </topic>
+        <topic name="/sell">
+          <Contents>
+            <content type="text">Open the merchant windows for a specific NPC. A NPC buying items must be selected in order for this to work.
+
+Usage: /sell
+(Opens the merchant window for the selected NPC in sell-mode.)</content>
+          </Contents>
+        </topic>
+        <topic name="/storage">
+          <Contents>
+            <content type="text">Opens the storage window for the currently targetted NPC. Works only with NPCs that act as storage managers.
+  
+Usage: /storage
+(Opens the storage window for the selected NPC)</content>
+          </Contents>
+        </topic>
+        <topic name="/trade">
+          <Contents>
+            <content type="text">Start a trade with another player.
+  
+Usage: /trade
+(Asks the currently selected player for a trade and opens the trading window if the other player accepts.)</content>
+          </Contents>
+        </topic>
+        <topic name="/train">
+          <Contents>
+            <content type="text">Open the training window with a trainer.
+  
+Usage: /train
+(Opens the training window for the currently selected NPC. Only works if the NPC offers some training.)</content>
+          </Contents>
+        </topic>
+      </branch>
+      <branch name="Item">
+        <topic name="/dequip">
+          <Contents>
+            <content type="text">Unequip items.
+  
+Usage:/dequip [item-name]
+(Unequips the specified item. The item will be placed back in your inventory. If there are more than one items with this name equipped, the first found will be unequiped.)
+  
+/dequip [slot]
+(Unequips item from the specified slot. Possible values for [slot] are: righthand, lefthand, helm, legs, boots, bracers, torso, gloves, neck, rightfinger, leftfinger, belt, arms, back. The items will be places back in your inventory.)</content>
+          </Contents>
+        </topic>
+        <topic name="/drop">
+          <Contents>
+            <content type="text">Drop an item (or a stack of items of the same kind).
+  
+Usage: /drop [quantity] any noguard inplace [item-name]
+(This drops [quantity] amounts of the specified item. If no [quantity] is gives one item will be dropped. If [quantity] is "any" as many items as possible, up to a max of 65, are dropped. If "any" is added after the [quantity], items from containers like sacks are dropped also. By adding "noguard" everyone around can pickup the item (otherwise only you are able to pick it up). With "inplace" specified the items are dropped at your character position. Without "inplace" specified you must click around to drop the items.</content>
+          </Contents>
+        </topic>
+        <topic name="/equip">
+          <Contents>
+            <content type="text">Equip items from your inventory.
+  
+  Usage:
+  /equip [quantity] [item-name]
+  (Equips [quantity] amounts of an item with the name [item-name]. If no [quantity] is given one item will be equipped. If you have several items with the name [item-name] in your inventory the first found will be equipped. Items that can be eqiped in the hand-slots will be first equipped to the right hand if empty, then to the left hand if right empty.)
+  </content>
+          </Contents>
+        </topic>
+        <topic name="/pickup">
+          <Contents>
+            <content type="text">Pick up items. You can only take items which are not guarded by others (for now).
+
+Usage: /pickup
+(Takes the currently selected item.)</content>
+          </Contents>
+        </topic>
+        <topic name="/rotate">
+          <Contents>
+            <content type="text">This command allows you to rotate objects.
+
+Usage: /rotate [target] [x] [y] [z]
+(Rotates the specified target along the x, y and z axis. The angles must be given in degrees (360 degrees = full circle). If no target is specified the currently targeted object will be used)
+
+/rotate [target] [axis] [angle]
+(Rotates the specified target along one axis. Possible values for [axis] are: x, y, z. The angle must be given in degrees (360 degrees = full circle). If no target is specified the currently targeted object will be used.)
+</content>
+          </Contents>
+        </topic>
+        <topic name="/unguard">
+          <Contents>
+            <content type="text">Unguard items dropped by you. Once an item is unguarded it's not possible to guard it again without picking it up again, so be careful with this command if you're struggling with capacity limits.
+  
+Usage: /unguard
+(Unguards the selected item)
+  
+</content>
+          </Contents>
+        </topic>
+        <topic name="/write">
+          <Contents>
+            <content type="text">Open the bookswriting-window for a book.
+
+Usage: /write [item-name]
+(Opens the bookswriting window for the book with the name [item-name].
+
+/write [slot-name]
+(Opens the bookswriting window for the items equipped in [slot-name]. Possible slot names are: righthand, lefthand.)</content>
+          </Contents>
+        </topic>
+      </branch>
+      <branch name="Miscellanea">
+        <topic name="/admin">
+          <Contents>
+            <content type="text">This command lists the available admin commands for your account. As I assume your are no Dev this won't do anything for you.</content>
+          </Contents>
+        </topic>
+        <topic name="/brightness">
+          <Contents>
+            <content type="text">Change the brightness level.
+
+Usage: /brightness [&lt;value&gt;|increase|decrease|reset]
+
+Setting a brigness value between -1.0 and 3.0. You can do /brighness increase or decrease to change by 0.1 or reset to set back to 0.0. By default F10 will reset, F11 decrease and F12 increase brigness as well.</content>
+          </Contents>
+        </topic>
+        <topic name="/buddy">
+          <Contents>
+            <content type="text">Manage your buddy-list.
+
+Usage: /buddy [char-name] add
+Adds the specified character to your buddy list.
+
+/buddy [char-name] remove
+Removes the specified character from your buddy list.
+
+/buddy [char-name]
+Adds the specified character if he isn't on your list already, otherwise removes him.</content>
+          </Contents>
+        </topic>
+        <topic name="/confirm">
+          <Contents><content type="text">This command allows you to display a confirmation window and execute commands depending on the choice in that window.
+
+Usage: /confirm [message] [yes-command] [no-command]
+(Displays a confirmation window with the text [message] and a "yes" and "no" button. [yes-command] is executed if yes is clicked otherwise [no-command] gets executed.)</content>
+              </Contents>
+        </topic>
+        <topic name="/die">
+          <Contents>
+            <content type="text">This command will make your character die. Careful with that axe, Eugene.
+
+Usage: /die</content>
+          </Contents>
+        </topic>
+        <topic name="/echo">
+          <Contents>
+            <content type="text">Output to the system chat tab.
+
+Usage: /echo [message]
+(Writes message to the system chat tab.)</content>
+          </Contents>
+        </topic>
+        <topic name="/game">
+          <Contents>
+            <content type="text">This command allows you to play subgames in Eulora. Not actually implemented as of yet - but remember Heroes of Might and Magic's Arcomage ? Yeah...
+  
+Usage: /game
+(Starts a game session on the selected gameboard.)</content>
+          </Contents>
+        </topic>
+        <topic name="/graphicbug">
+          <Contents>
+            <content type="text">Write a bug-report for graphic errors which makes it easier for developers to identify your problem.
+
+Usage: /graphicbug
+(Writes a bug report to your harddisk.)</content>
+          </Contents>
+        </topic>
+        <topic name="/loadDesc">
+          <Contents>
+            <content type="text">Load a new description for your character from a file. The text files for the descriptions must be in the /descriptions folder but don't have to follow the [char-name]_description.txt format. Any filename will do here. 
+
+Be very careful using this - especially don't load random binary files from third parties. The Eulora client is written in C++, and that makes it incredibly slutty. If you limit yourself to plaintext files you created yourself you should be fine.
+
+Usage: /loadDesc [filename]
+(Loads the description from the file [filename] and sets it as your current description.)</content>
+          </Contents>
+        </topic>
+        <topic name="/motd">
+          <Contents>
+            <content type="text">Get the MOTD of the server.
+
+Usage: /motd
+(This will request the server's MOTD and write it to the system chat tab.)</content>
+          </Contents>
+        </topic>
+        <topic name="/picklock">
+          <Contents>
+            <content type="text">Try to pick locks off doors and chests. Not exactly implemented yet. Well not really. Actually maybe it's implemented a little. Or not. Your pick.
+  
+Usage: /picklock
+(Picks the lock of your current target. Maybe.)
+</content>
+          </Contents>
+        </topic>
+        <topic name="/ping">
+          <Contents>
+            <content type="text">Get the current ping rate of your connection.
+
+Usage: /ping
+(Writes the ping rate to the system chat tab.)</content>
+          </Contents>
+        </topic>
+        <topic name="/pos">
+          <Contents>
+            <content type="text">This command prints your current position and the map you are on at the moment. This is extremely useful for many things, such as creating mining maps. If you report a bug always make sure to include the output of /pos in your report so that the developers can easily find the place you're talking about.
+
+Usage: /pos
+(Prints the position and the map to the system chat tab.)</content>
+          </Contents>
+        </topic>
+        <topic name="/quit">
+          <Contents>
+            <content type="text">Leave Eulora. Similar to "sudo rm -rf /" in a terminal, only much sadder and more kittens get killed whenever you do it. Feelbad.jpg!
+
+Usage: /quit
+(Brings up a confirmation dialog to make sure you actually want to end the world forever. Don't worry, the "yes" button is not connected to anything. We think. In truth we couldn't yet find a tester willing to try this one. But it should be safe. Probably.)</content>
+          </Contents>
+        </topic>
+        <topic name="report">
+          <Contents>
+            <content type="text">Report players who don't follow the rules. The server and everyone else will happily ignore these, but if it makes you feel better...
+
+Usage: /report [playername]
+(Keeps log of the specified player. No notice is given to the player that his actions are going to be logged. Also a little yellow octopus is released on a blue ball somewhere.)
+</content>
+          </Contents>
+        </topic>
+        <topic name="/roll">
+          <Contents>
+            <content type="text">Roll a dice, with everyone in the vicinity seeing the outcome.
+
+Usage: /roll [times] [sides] [minvalue]
+(This will roll a die/some dice and print the outcome in base-system, visible for everyone near you. Using /roll without any parameter will lead to rolling one six-sided die. If you specify one number after /roll you will roll one die with as many sides as specified by that number. By giving two numbers after /roll your will roll as many dice as specified by the first number with as many sides as specified by the second number. By addend a third number to the command you will get also told how often you scored an result equal or larger to the last number.</content>
+          </Contents>
+        </topic>
+        <topic name="/screenshot">
+          <Contents>
+            <content type="text">Take a screenshot.
+
+Usage:
+/screenshot lossless nogui
+(takes a screenshot of your current screen. If "lossless" is used the image gets saved as a PNG file otherwise as a JPEG file. If "nogui" is given then the screenshot will be without the Graphical User Interface (chat window, menu-bar etc).)</content>
+          </Contents>
+        </topic>
+        <topic name="/setDesc">
+          <Contents>
+            <content type="text">Change the description of your character.
+
+Usage: /setDesc [new-desc]
+(Overwrites your old description and sets it to [new-desc]. Every "\n" in [new-desc] is replaced with a newline.)</content>
+          </Contents>
+        </topic>
+        <topic name="/show">
+          <Contents>
+            <content type="text">Open or close specific windows.
+  
+Usage:  /show [windowname]
+(Opens the window with the name [windowname]. If the window was already open it is closed. Possible values: activemagic, bag, buddy, chat, glyph, group, guild, help, info, inv, petition, quest, shortcut, skills, spells.)</content>
+          </Contents>
+        </topic>
+        <topic name="/sit">
+          <Contents>
+            <content type="text">If it fits...
+  
+Usage: /sit
+(Your character must sits.)</content>
+          </Contents>
+        </topic>
+        <topic name="/stand">
+          <Contents>
+            <content type="text">Something something right, something party.
+  
+Usage: /stand
+(Your character stands up, unless he's trying to carry too much. Packrats have no rights, they just have lots and lots of items.)</content>
+          </Contents>
+        </topic>
+        <topic name="/starttrading">
+          <Contents>
+            <content type="text">Undo the /stoptrading flag.
+
+Usage: /starttrading
+(Allows others to trade with you.)</content>
+          </Contents>
+        </topic>
+        <topic name="/stoptrading">
+          <Contents>
+            <content type="text">Prevent all other players from initiating a trade with you.
+
+Usage: /stoptrading
+(Blocks all incoming trades from other players.)</content>
+          </Contents>
+        </topic>
+        <topic name="/targetcontext">
+          <Contents>
+            <content type="text">This command opens the context-menu for the selected target.
+  
+Usage: /targetcontext
+(Opens the context menu for the selected target. This is the same menu you would get if your right-click the target)</content>
+          </Contents>
+        </topic>
+        <topic name="/targetinfo">
+          <Contents>
+            <content type="text">This command opens the details-window for the selected target.
+  
+Usage: /targetinfo
+(Opens the details-window with information about the selected player or NPC.)</content>
+          </Contents>
+        </topic>
+        <topic name="/tip">
+          <Contents>
+            <content type="text">This command requests a tip from the server.
+                
+Usage: /tip
+(Gets a tip from the server and writes it to the system chat tab.)</content>
+          </Contents>
+        </topic>
+        <topic name="/unstick">
+          <Contents>
+            <content type="text">This command might help you in case your character is stuck by moving your character back to a valid location.
+  
+Usage: /unstick
+(If possible moves your character back to a valid location. To use this command your character must be really stuck and not able to move anymore. Also this command needs you to not move at all for some seconds before you can use it.)</content>
+          </Contents>
+        </topic>
+        <topic name="/version">
+          <Contents>
+            <content type="text">This command prints out the current version of the Eulora client.
+
+Usage: /version
+(Writes the current version to the system chat tab.)</content>
+          </Contents>
+        </topic>
+        <topic name="/who">
+          <Contents>
+            <content type="text">List characters that are currently online.
+  
+Usage: /who [filter]
+(Lists characters whose name or whose guild contain the expression specified by [filter]. If no [filter] is given all online characters are listed up to a limit of 40 names.)</content>
+          </Contents>
+        </topic>
+      </branch>
+      <branch name="Pet">
+        <topic name="/mount">
+          <Contents>
+            <content type="text">Mount (in a most definitely nonsexual way) a domesticated animal (in the plainest sense of these terms). Not all available pets can be mounted... Please don't try sitting on any small rodents.
+
+Usage: /mount
+(Mounts the currently selected pet. You must be the owner of the pet for this to work.)</content>
+          </Contents>
+        </topic>
+        <topic name="/pet">
+          <Contents><content type="text">Main command to interact with your pets. For all the following commands [pet-name,] is either the name of your pet or its number followed by a comma. If no [petname,] is given the first found pet of the ones you have currently summoned is used. Do not forget to add the "," after the name or number of your pet. Use quotes for multiple names.
+
+Usage: /pet [pet-name,] assist</content>
+(This makes your pet assist you in combat by attacking your current target.)
+  
+/pet [pet-name,] attack 
+(Your pet will attack your current target.)
+  
+/pet [pet-name,] dismiss 
+(This dismisses your pet.)
+  
+/pet [pet-name,] follow
+(Your pet will follow you wherever you go)
+  
+/pet [pet-name,] name [new-name]
+(Renames your pet to [new-name].)
+
+/pet [pet-name,] guard
+(Your pet guards its current position.)
+
+/pet [pet-name,] stay
+(Your pet will stay at its current position and not follow you anymore.)
+
+/pet [pet-name,] summon
+(Summons your pet. You need to have the necessary item equipped for this to work.)
+
+/pet [pet-name,] target [target]
+(Sets the target of your pet. If no target is given the target of your character will be used. If [target] is "me" you pet wil target your character. Otherwise [target] is interpreted as the name of the target you want to set.
+              </Contents>
+        </topic>
+        <topic name="/unmount">
+          <Contents>
+            <content type="text">Unmount a pet.
+
+Usage: /unmount
+(Unmounts the root partition. You must be suid root for this to work.)</content>
+          </Contents>
+        </topic>
+      </branch>
+    </branch>
+
+</help>

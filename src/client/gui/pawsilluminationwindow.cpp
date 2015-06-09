@@ -1,7 +1,7 @@
 /*
  * pawsSketchWindow.cpp - Author: Keith Fulton
  *
- * Copyright (C) 2006 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2006 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -828,7 +828,7 @@ bool pawsSketchWindow::ParseLimits(const char *xmlstr)
     csRef<iDocumentSystem>  xml;
     xml =  csQueryRegistry<iDocumentSystem> ( psengine->GetObjectRegistry() );
     if (!xml)
-        xml = csPtr<iDocumentSystem>(new csTinyDocumentSystem);
+        xml.AttachNew(new csTinyDocumentSystem);
 
     csRef<iDocument> doc = xml->CreateDocument();
     const char* error = doc->Parse( xmlstr );
@@ -883,7 +883,7 @@ bool pawsSketchWindow::ParseSketch(const char *xmlstr, bool checklimits)
     csRef<iDocumentSystem>  xml;
     xml =  csQueryRegistry<iDocumentSystem> ( psengine->GetObjectRegistry() );
     if (!xml)
-        xml = csPtr<iDocumentSystem>(new csTinyDocumentSystem);
+        xml.AttachNew(new csTinyDocumentSystem);
 
     csRef<iDocument> doc = xml->CreateDocument();
     const char* error = doc->Parse( xmlstr );

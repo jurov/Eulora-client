@@ -1,7 +1,7 @@
 /*
 * pawsbankwindow.cpp - Author: Mike Gist
 *
-* Copyright (C) 2007 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+* Copyright (C) 2007 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
 *
 *
 * This program is free software; you can redistribute it and/or
@@ -64,83 +64,83 @@ bool pawsBankWindow::PostSetup()
     if(!adminWindow)
         return false;
 
-    circlesCanWithdraw = dynamic_cast <pawsTextBox*> (FindWidget("CirclesCanWithdraw"));
-    if(!circlesCanWithdraw)
+    bitcentsCanWithdraw = dynamic_cast <pawsTextBox*> (FindWidget("BITCentsCanWithdraw"));
+    if(!bitcentsCanWithdraw)
         return false;
-    octasCanWithdraw = dynamic_cast <pawsTextBox*> (FindWidget("OctasCanWithdraw"));
-    if(!octasCanWithdraw)
+    denariusCanWithdraw = dynamic_cast <pawsTextBox*> (FindWidget("DenariusCanWithdraw"));
+    if(!denariusCanWithdraw)
         return false;
-    hexasCanWithdraw = dynamic_cast <pawsTextBox*> (FindWidget("HexasCanWithdraw"));
-    if(!hexasCanWithdraw)
+    argentsCanWithdraw = dynamic_cast <pawsTextBox*> (FindWidget("ArgentsCanWithdraw"));
+    if(!argentsCanWithdraw)
         return false;
-    triasCanWithdraw = dynamic_cast <pawsTextBox*> (FindWidget("TriasCanWithdraw"));
-    if(!triasCanWithdraw)
+    coppersCanWithdraw = dynamic_cast <pawsTextBox*> (FindWidget("CoppersCanWithdraw"));
+    if(!coppersCanWithdraw)
         return false;
-    circlesCanDeposit = dynamic_cast <pawsTextBox*> (FindWidget("CirclesCanDeposit"));
-    if(!circlesCanDeposit)
+    bitcentsCanDeposit = dynamic_cast <pawsTextBox*> (FindWidget("BITCentsCanDeposit"));
+    if(!bitcentsCanDeposit)
         return false;
-    octasCanDeposit = dynamic_cast <pawsTextBox*> (FindWidget("OctasCanDeposit"));
-    if(!octasCanDeposit)
+    denariusCanDeposit = dynamic_cast <pawsTextBox*> (FindWidget("DenariusCanDeposit"));
+    if(!denariusCanDeposit)
         return false;
-    hexasCanDeposit = dynamic_cast <pawsTextBox*> (FindWidget("HexasCanDeposit"));
-    if(!hexasCanDeposit)
+    argentsCanDeposit = dynamic_cast <pawsTextBox*> (FindWidget("ArgentsCanDeposit"));
+    if(!argentsCanDeposit)
         return false;
-    triasCanDeposit = dynamic_cast <pawsTextBox*> (FindWidget("TriasCanDeposit"));
-    if(!triasCanDeposit)
+    coppersCanDeposit = dynamic_cast <pawsTextBox*> (FindWidget("CoppersCanDeposit"));
+    if(!coppersCanDeposit)
         return false;
-    circlesToWithdraw = dynamic_cast <pawsEditTextBox*> (FindWidget("CirclesToWithdraw"));
-    if(!circlesToWithdraw)
+    bitcentsToWithdraw = dynamic_cast <pawsEditTextBox*> (FindWidget("BITCentsToWithdraw"));
+    if(!bitcentsToWithdraw)
         return false;
-    circlesToWithdraw->SetText("0");
-    octasToWithdraw = dynamic_cast <pawsEditTextBox*> (FindWidget("OctasToWithdraw"));
-    if(!octasToWithdraw)
+    bitcentsToWithdraw->SetText("0");
+    denariusToWithdraw = dynamic_cast <pawsEditTextBox*> (FindWidget("DenariusToWithdraw"));
+    if(!denariusToWithdraw)
         return false;
-    octasToWithdraw->SetText("0");
-    hexasToWithdraw = dynamic_cast <pawsEditTextBox*> (FindWidget("HexasToWithdraw"));
-    if(!hexasToWithdraw)
+    denariusToWithdraw->SetText("0");
+    argentsToWithdraw = dynamic_cast <pawsEditTextBox*> (FindWidget("ArgentsToWithdraw"));
+    if(!argentsToWithdraw)
         return false;
-    hexasToWithdraw->SetText("0");
-    triasToWithdraw = dynamic_cast <pawsEditTextBox*> (FindWidget("TriasToWithdraw"));
-    if(!triasToWithdraw)
+    argentsToWithdraw->SetText("0");
+    coppersToWithdraw = dynamic_cast <pawsEditTextBox*> (FindWidget("CoppersToWithdraw"));
+    if(!coppersToWithdraw)
         return false;
-    triasToWithdraw->SetText("0");
-    circlesToDeposit = dynamic_cast <pawsEditTextBox*> (FindWidget("CirclesToDeposit"));
-    if(!circlesToDeposit)
+    coppersToWithdraw->SetText("0");
+    bitcentsToDeposit = dynamic_cast <pawsEditTextBox*> (FindWidget("BITCentsToDeposit"));
+    if(!bitcentsToDeposit)
         return false;
-    circlesToDeposit->SetText("0");
-    octasToDeposit = dynamic_cast <pawsEditTextBox*> (FindWidget("OctasToDeposit"));
-    if(!octasToDeposit)
+    bitcentsToDeposit->SetText("0");
+    denariusToDeposit = dynamic_cast <pawsEditTextBox*> (FindWidget("DenariusToDeposit"));
+    if(!denariusToDeposit)
         return false;
-    octasToDeposit->SetText("0");
-    hexasToDeposit = dynamic_cast <pawsEditTextBox*> (FindWidget("HexasToDeposit"));
-    if(!hexasToDeposit)
+    denariusToDeposit->SetText("0");
+    argentsToDeposit = dynamic_cast <pawsEditTextBox*> (FindWidget("ArgentsToDeposit"));
+    if(!argentsToDeposit)
         return false;
-    hexasToDeposit->SetText("0");
-    triasToDeposit = dynamic_cast <pawsEditTextBox*> (FindWidget("TriasToDeposit"));
-    if(!triasToDeposit)
+    argentsToDeposit->SetText("0");
+    coppersToDeposit = dynamic_cast <pawsEditTextBox*> (FindWidget("CoppersToDeposit"));
+    if(!coppersToDeposit)
         return false;
-    triasToDeposit->SetText("0");
-    circlesCanExchange = dynamic_cast <pawsTextBox*> (FindWidget("CirclesCanExchange"));
-    if(!circlesCanExchange)
+    coppersToDeposit->SetText("0");
+    bitcentsCanExchange = dynamic_cast <pawsTextBox*> (FindWidget("BITCentsCanExchange"));
+    if(!bitcentsCanExchange)
         return false;
-    octasCanExchange = dynamic_cast <pawsTextBox*> (FindWidget("OctasCanExchange"));
-    if(!octasCanExchange)
+    denariusCanExchange = dynamic_cast <pawsTextBox*> (FindWidget("DenariusCanExchange"));
+    if(!denariusCanExchange)
         return false;
-    hexasCanExchange = dynamic_cast <pawsTextBox*> (FindWidget("HexasCanExchange"));
-    if(!hexasCanExchange)
+    argentsCanExchange = dynamic_cast <pawsTextBox*> (FindWidget("ArgentsCanExchange"));
+    if(!argentsCanExchange)
         return false;
-    triasCanExchange = dynamic_cast <pawsTextBox*> (FindWidget("TriasCanExchange"));
-    if(!triasCanExchange)
+    coppersCanExchange = dynamic_cast <pawsTextBox*> (FindWidget("CoppersCanExchange"));
+    if(!coppersCanExchange)
         return false;
     coinsToExchange = dynamic_cast <pawsEditTextBox*> (FindWidget("CoinsToExchange"));
     if(!coinsToExchange)
         return false;
     coinsToExchange->SetText("0");
   
-    circles = (pawsRadioButton*)(FindWidget("Circles"));
-    octas = (pawsRadioButton*)(FindWidget("Octas"));
-    hexas = (pawsRadioButton*)(FindWidget("Hexas"));
-    trias = (pawsRadioButton*)(FindWidget("Trias"));
+    bitcents = (pawsRadioButton*)(FindWidget("BITCent"));
+    denarius = (pawsRadioButton*)(FindWidget("Denarius"));
+    argents = (pawsRadioButton*)(FindWidget("Argents"));
+    coppers = (pawsRadioButton*)(FindWidget("Coppers"));
 
     feeInfo = dynamic_cast <pawsTextBox*> (FindWidget("MoneyExchangeInfo"));
     if(!feeInfo)
@@ -169,31 +169,31 @@ void pawsBankWindow::HandleMessage( MsgEntry* me )
                     Show();
                 }
                 // Is there a better way to do this? Enlighten me.
-                csString circles;
-                csString octas;
-                csString hexas;
-                csString trias;
-                csString circlesBanked;
-                csString octasBanked;
-                csString hexasBanked;
-                csString triasBanked;
-                csString maxCircles;
-                csString maxOctas;
-                csString maxHexas;
-                csString maxTrias;
+                csString bitcents;
+                csString denarius;
+                csString argents;
+                csString coppers;
+                csString bitcentsBanked;
+                csString denariusBanked;
+                csString argentsBanked;
+                csString coppersBanked;
+                csString maxBITCents;
+                csString maxDenarius;
+                csString maxArgents;
+                csString maxCoppers;
                 csString fInfo;
-                circlesCanDeposit->SetText(circles.AppendFmt("%i", incoming.circles));
-                octasCanDeposit->SetText(octas.AppendFmt("%i", incoming.octas));
-                hexasCanDeposit->SetText(hexas.AppendFmt("%i", incoming.hexas));
-                triasCanDeposit->SetText(trias.AppendFmt("%i", incoming.trias));
-                circlesCanWithdraw->SetText(circlesBanked.AppendFmt("%i", incoming.circlesBanked));
-                octasCanWithdraw->SetText(octasBanked.AppendFmt("%i", incoming.octasBanked));
-                hexasCanWithdraw->SetText(hexasBanked.AppendFmt("%i", incoming.hexasBanked));
-                triasCanWithdraw->SetText(triasBanked.AppendFmt("%i", incoming.triasBanked));
-                circlesCanExchange->SetText(maxCircles.AppendFmt("%i", incoming.maxCircles));
-                octasCanExchange->SetText(maxOctas.AppendFmt("%i", incoming.maxOctas));
-                hexasCanExchange->SetText(maxHexas.AppendFmt("%i", incoming.maxHexas));
-                triasCanExchange->SetText(maxTrias.AppendFmt("%i", incoming.maxTrias));
+                bitcentsCanDeposit->SetText(bitcents.AppendFmt("%i", incoming.bitcents));
+                denariusCanDeposit->SetText(denarius.AppendFmt("%i", incoming.denarius));
+                argentsCanDeposit->SetText(argents.AppendFmt("%i", incoming.argents));
+                coppersCanDeposit->SetText(coppers.AppendFmt("%i", incoming.coppers));
+                bitcentsCanWithdraw->SetText(bitcentsBanked.AppendFmt("%i", incoming.bitcentsBanked));
+                denariusCanWithdraw->SetText(denariusBanked.AppendFmt("%i", incoming.denariusBanked));
+                argentsCanWithdraw->SetText(argentsBanked.AppendFmt("%i", incoming.argentsBanked));
+                coppersCanWithdraw->SetText(coppersBanked.AppendFmt("%i", incoming.coppersBanked));
+                bitcentsCanExchange->SetText(maxBITCents.AppendFmt("%i", incoming.maxBITCents));
+                denariusCanExchange->SetText(maxDenarius.AppendFmt("%i", incoming.maxDenarius));
+                argentsCanExchange->SetText(maxArgents.AppendFmt("%i", incoming.maxArgents));
+                coppersCanExchange->SetText(maxCoppers.AppendFmt("%i", incoming.maxCoppers));
                 feeInfo->SetText(fInfo.AppendFmt("Fee charged for your account level: %.2f%%", incoming.exchangeFee));
 
                 guild = incoming.guild;
@@ -225,56 +225,56 @@ bool pawsBankWindow::OnButtonPressed(int /*mouseButton*/, int /*keyModifier*/, p
 
     if(widget->GetID() == CIRCLESBUTTON)
     {
-        octas->SetState(false);
-        hexas->SetState(false);
-        trias->SetState(false);
+        denarius->SetState(false);
+        argents->SetState(false);
+        coppers->SetState(false);
     }
 
     if(widget->GetID() == OCTASBUTTON)
     {
-        circles->SetState(false);
-        hexas->SetState(false);
-        trias->SetState(false);
+        bitcents->SetState(false);
+        argents->SetState(false);
+        coppers->SetState(false);
     }
 
     if(widget->GetID() == HEXASBUTTON)
     {
-        circles->SetState(false);
-        octas->SetState(false);
-        trias->SetState(false);
+        bitcents->SetState(false);
+        denarius->SetState(false);
+        coppers->SetState(false);
     }
 
     if(widget->GetID() == TRIASBUTTON)
     {
-        circles->SetState(false);
-        octas->SetState(false);
-        hexas->SetState(false);
+        bitcents->SetState(false);
+        denarius->SetState(false);
+        argents->SetState(false);
     }
 
     if(widget->GetID() == WITHDRAW)
     {
         // Send request to server.
-        int circles = 0;
-        sscanf(circlesToWithdraw->GetText(), "%d", &circles);
+        int bitcents = 0;
+        sscanf(bitcentsToWithdraw->GetText(), "%d", &bitcents);
 
-        int octas = 0;
-        sscanf(octasToWithdraw->GetText(), "%d", &octas);
+        int denarius = 0;
+        sscanf(denariusToWithdraw->GetText(), "%d", &denarius);
 
-        int hexas = 0;
-        sscanf(hexasToWithdraw->GetText(), "%d", &hexas);
+        int argents = 0;
+        sscanf(argentsToWithdraw->GetText(), "%d", &argents);
 
-        int trias = 0;
-        sscanf(triasToWithdraw->GetText(), "%d", &trias);
+        int coppers = 0;
+        sscanf(coppersToWithdraw->GetText(), "%d", &coppers);
 
         psGUIBankingMessage outgoing(psGUIBankingMessage::WITHDRAWFUNDS,
-                                     guild, circles, octas, hexas, trias);
+                                     guild, bitcents, denarius, argents, coppers);
         outgoing.SendMessage();
 
         // Reset to 0.
-        circlesToWithdraw->SetText("0");
-        octasToWithdraw->SetText("0");
-        hexasToWithdraw->SetText("0");
-        triasToWithdraw->SetText("0");
+        bitcentsToWithdraw->SetText("0");
+        denariusToWithdraw->SetText("0");
+        argentsToWithdraw->SetText("0");
+        coppersToWithdraw->SetText("0");
 
         return true;
     }
@@ -282,28 +282,28 @@ bool pawsBankWindow::OnButtonPressed(int /*mouseButton*/, int /*keyModifier*/, p
     if(widget->GetID() == DEPOSIT)
     {
         // Send request to server.
-        int circles = 0;
-        sscanf(circlesToDeposit->GetText(), "%d", &circles);
+        int bitcents = 0;
+        sscanf(bitcentsToDeposit->GetText(), "%d", &bitcents);
 
-        int octas = 0;
-        sscanf(octasToDeposit->GetText(), "%d", &octas);
+        int denarius = 0;
+        sscanf(denariusToDeposit->GetText(), "%d", &denarius);
 
-        int hexas = 0;
-        sscanf(hexasToDeposit->GetText(), "%d", &hexas);
+        int argents = 0;
+        sscanf(argentsToDeposit->GetText(), "%d", &argents);
 
-        int trias = 0;
-        sscanf(triasToDeposit->GetText(), "%d", &trias);
+        int coppers = 0;
+        sscanf(coppersToDeposit->GetText(), "%d", &coppers);
 
 
         psGUIBankingMessage outgoing(psGUIBankingMessage::DEPOSITFUNDS,
-                                     guild, circles, octas, hexas, trias);
+                                     guild, bitcents, denarius, argents, coppers);
         outgoing.SendMessage();
 
         // Reset to 0.
-        circlesToDeposit->SetText("0");
-        octasToDeposit->SetText("0");
-        hexasToDeposit->SetText("0");
-        triasToDeposit->SetText("0");
+        bitcentsToDeposit->SetText("0");
+        denariusToDeposit->SetText("0");
+        argentsToDeposit->SetText("0");
+        coppersToDeposit->SetText("0");
 
         return true;
     }
@@ -315,25 +315,25 @@ bool pawsBankWindow::OnButtonPressed(int /*mouseButton*/, int /*keyModifier*/, p
         sscanf(coinsToExchange->GetText(), "%d", &coins);
 
         int coin = -1;
-        if(circles->GetState())
+        if(bitcents->GetState())
         {
             coin = 0;
-            circles->SetState(false);
+            bitcents->SetState(false);
         }
-        else if(octas->GetState())
+        else if(denarius->GetState())
         {
             coin = 1;
-            octas->SetState(false);
+            denarius->SetState(false);
         }
-        else if(hexas->GetState())
+        else if(argents->GetState())
         {
             coin = 2;
-            hexas->SetState(false);
+            argents->SetState(false);
         }
-        else if(trias->GetState())
+        else if(coppers->GetState())
         {
             coin = 3;
-            trias->SetState(false);
+            coppers->SetState(false);
         }
 
         if(coin != -1)

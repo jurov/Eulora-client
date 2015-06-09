@@ -1,7 +1,7 @@
 /*
  * Author: Andrew Craig
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -118,7 +118,7 @@ bool pawsGenericView::LoadMap( const char* map, const char* sector )
              return false;
     }
 
-    view = csPtr<iView> (new csView( engine, PawsManager::GetSingleton().GetGraphics3D() ));
+    view.AttachNew(new csView( engine, PawsManager::GetSingleton().GetGraphics3D() ));
     if (engine->GetCameraPositions()->GetCount() > 0)
     {
         iCameraPosition * cp = engine->GetCameraPositions()->Get(0);

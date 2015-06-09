@@ -1,7 +1,7 @@
 /*
- * pawscraft.h - Author: Andrew Craig <acraig@planshift.it> 
+ * pawscraft.h - Author: Andrew Craig <acraig@planeshift.it> 
  *
- * Copyright (C) 2003-2005 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003-2005 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or

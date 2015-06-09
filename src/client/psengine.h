@@ -1,7 +1,7 @@
 /*
  * psengine.h
  *
- * Copyright (C) 2001 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2001 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -441,13 +441,13 @@ public:
     }
     
     /**
-     * Confirmation settings for marriage proposals and duels are written to /planshift/userdata/options/confirmation.xml
+     * Confirmation settings for marriage proposals and duels are written to /planeshift/userdata/options/confirmation.xml
      * @brief Writes confirmation settings for duels and marriages
      */
     void WriteConfirmationSettings();
     
     /**
-     * Confirmation settings for marriage proposals and duels are read from /planshift/userdata/options/confirmation.xml
+     * Confirmation settings for marriage proposals and duels are read from /planeshift/userdata/options/confirmation.xml
      * @brief Loads confimration settings for duels and marriages
      * @return True on success, False otherwise
      */
@@ -635,10 +635,6 @@ private:
     /// Load the log report settings from the config file.
     void LoadLogSettings();
 
-    /** Load the chat widget which we will use from the chat options file.
-     *  @return A string containing the filename of the widget to load.
-     */
-    csString GetChatWindowWidget();
     /// queries all needed plugins
     bool QueryPlugins();
 
@@ -760,7 +756,7 @@ private:
     /// Whether sounds should be muted when the application loses focus.
     bool muteSoundsOnFocusLoss;
 
-    /// Define if the sound is on or off from ps client.cfg.
+    /// Define if the sound is on or off from psclient.cfg.
     bool soundOn;
 
     bool backgroundWorldLoading;

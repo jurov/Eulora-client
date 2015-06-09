@@ -1,7 +1,7 @@
 /*
 * pawsgmaction.h
 *
-* Copyright (C) 2005 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+* Copyright (C) 2005 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
 *
 * Credits : 
 *            Michael Cummings <cummings.michael@gmail.com>

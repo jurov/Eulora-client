@@ -1,7 +1,7 @@
 /*
  * pawsconfigmouse.cpp - Author: AndrewRobberts
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -45,7 +45,6 @@
 
 #define MOUSE_FILE         "/planeshift/userdata/options/mouse.xml"
 #define DEFAULT_MOUSE_FILE "/planeshift/data/options/mouse_def.xml"
-// vfs files? chetty
 
 //////////////////////////////////////////////////////////////////////
 //

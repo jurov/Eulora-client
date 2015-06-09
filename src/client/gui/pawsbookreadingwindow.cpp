@@ -1,7 +1,7 @@
 /*
  * pawsbookreadingwindow.cpp - Author: Daniel Fryer, based on code by Andrew Craig
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -172,7 +172,7 @@ void pawsBookReadingWindow::HandleMessage(MsgEntry* me)
             psMsgCraftingInfo mesg(me);
             csString text(mesg.craftInfo);
             text.ReplaceAll( "[[", "   With Higher " );
-            text.ReplaceAll( "]]   ", " skill you could: " );
+            text.ReplaceAll( "]]", " skill you could: " );
 
             if(text && descriptionCraft && descriptionCraftRight)
             {

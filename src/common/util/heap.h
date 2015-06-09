@@ -1,7 +1,7 @@
 /*
  * heap.h
  *
- * Copyright (C) 2005 Atomic Blue (info@planshift.it, http://www.planshift.it)
+ * Copyright (C) 2005 Atomic Blue (info@planeshift.it, http://www.planeshift.it)
  *
  * Credits : Andrew Dai
  *

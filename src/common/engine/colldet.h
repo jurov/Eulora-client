@@ -1,6 +1,6 @@
 /*
   Crystal Space Entity Layer
-  Copyright (C) 2001 PlanShift Team (info@planshift.it,
+  Copyright (C) 2001 PlaneShift Team (info@planeshift.it,
   Copyright (C) 2001-2003 by Jorrit Tyberghein
 
   This library is free software; you can redistribute it and/or
@@ -19,7 +19,7 @@
 */
 
 /*
- * This code is heavily based on pslinmove from the PlanShift project.
+ * This code is heavily based on pslinmove from the PlaneShift project.
  * Thanks a lot for making this!
  */
 

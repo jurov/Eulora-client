@@ -4,4 +4,4 @@ Plugin celgraph
        : celgraph.cpp celgraph.h
 ;
 ExternalLibs celgraph : CRYSTAL ;
-CompileGroups celgraph : euclient eunpcclient ;
+CompileGroups celgraph : euclient psnpcclient ;

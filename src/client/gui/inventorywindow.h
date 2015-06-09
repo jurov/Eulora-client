@@ -1,7 +1,7 @@
 /*
  * inventory.h - Author: Andrew Craig
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -46,7 +46,7 @@ class psCharAppearance;
 
 //---------------------------------------------------------------------------
 
-/** The is the main Inventory window for PlanShift. It handles all the player's
+/** The is the main Inventory window for PlaneShift. It handles all the player's
  * inventory and has a nice 3d model of the player to see what they looked like in
  * their equipment.
  */
@@ -66,16 +66,6 @@ public:
 
     /// Get a free slot
     pawsSlot* GetFreeSlot();
-
-    /**
-     * Update content of a container where a stack count has been taken.
-     *
-     * @param fromContainerID   The container ID of the container.
-     * @param fromSlotID        The slot ID in the container.
-     * @param fromStackCount    The old stack count of the given slot.
-     * @param takenStackCount   The number of items taken out of the slot.
-     */
-    void UpdateFromContainer(ContainerID fromContainerID, int fromSlotID, int fromStackCount, int takenStackCount);
 
     /** Equips an item into it's closest available slot.
      *  Will pick the first item of the given name in the bulk slots to try
@@ -121,7 +111,7 @@ protected:
     /// Total items to drop
     int maxDropCount;
 
-    pawsTextBox* trias;
+    pawsTextBox* coppers;
     pawsTextBox* weight;
 
     pawsMoney * money;

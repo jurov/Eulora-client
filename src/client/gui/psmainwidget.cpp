@@ -1,7 +1,7 @@
 /*
  * pawsmainwidget.cpp - Author: Andrew Craig
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -65,7 +65,7 @@
 #define DEFAULT_MSGCONFIG_FILE_NAME "/planeshift/data/options/screenmsg_def.xml"
 #define MSGCONFIG_FILE_NAME         "/planeshift/userdata/options/screenmsg.xml"
 #define FONT_SIZE                13  // Size for the font at 800x600
-// vfs files? chetty
+
 
 //////////////////////////////////////////////////////////////////////
 //                  entity types
@@ -242,7 +242,7 @@ bool psMainWidget::OnKeyDown( utf32_char keyCode, utf32_char key, int modifiers 
     //if we are using mouselook we don't want these to trigger or we would have some
     //funny effects (like being unable to get out of mouse look without exiting the
     //chat window targeting)
-    if(!psengine->GetCharControl()->GetMovementManager()->MouseLook())
+    if(!charctrl->GetMovementManager()->MouseLook())
     {
         if ( charctrl->MatchTrigger("Toggle chat",psControl::KEYBOARD,keyCode,modifiers) )
         {
@@ -311,7 +311,7 @@ bool psMainWidget::OnKeyDown( utf32_char keyCode, utf32_char key, int modifiers 
     if (charctrl->MatchTrigger("Toggle MouseLook", psControl::KEYBOARD, keyCode, modifiers) || 
     	charctrl->MatchTrigger("MouseLook", psControl::KEYBOARD, keyCode, modifiers))
     {
-        psengine->GetCharControl()->GetMovementManager()->MouseLookCanAct(true);
+        charctrl->GetMovementManager()->MouseLookCanAct(true);
     }
     
     return false;
@@ -319,7 +319,6 @@ bool psMainWidget::OnKeyDown( utf32_char keyCode, utf32_char key, int modifiers 
  }
  //If we return true, it will not parse the keycode to CharControl
  return true;
-    
 }
 
 bool psMainWidget::OnMouseDown( int button, int keyModifier, int x, int y )
@@ -332,6 +331,7 @@ bool psMainWidget::OnMouseDown( int button, int keyModifier, int x, int y )
     if( psengine->GetCelClient() && psengine->GetCelClient()->GetMainPlayer()
      && !psengine->GetCelClient()->GetMainPlayer()->IsAlive() )
     {
+//printf("mainwidget 334 dead");
         return false;
     }
 
@@ -490,8 +490,8 @@ bool psMainWidget::SetupMain()
     
     printf("Using fontsize %d for resolution %dx%d\n",(int)fontsize,screenFrame.Width(),screenFrame.Height());
 
-    mesgFont       = graphics2D->GetFontServer()->LoadFont("/this/data/ttf/LiberationSans-Regular.ttf",(int)fontsize);
-    mesgFirstFont  = graphics2D->GetFontServer()->LoadFont("/this/data/ttf/cupandtalon.ttf",(int)(fontsize*1.75));
+    mesgFont       = graphics2D->GetFontServer()->LoadFont("/this/data/ttf/reteprelieum.ttf",(int)fontsize);
+    mesgFirstFont  = graphics2D->GetFontServer()->LoadFont("/this/data/ttf/reteprelieum.ttf",(int)(fontsize*1.75));
 
     msgqueue->Subscribe(this, MSGTYPE_SYSTEM);
 

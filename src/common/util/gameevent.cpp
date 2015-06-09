@@ -1,7 +1,7 @@
 /*
  * gameevent.cpp
  *
- * Copyright (C) 2001 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2001 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -35,10 +35,12 @@ psGameEvent::psGameEvent(csTicks ticks,int offsetticks, const char* newType)
     if(ticks)
     {
         triggerticks = ticks + offsetticks;
+	//printf("event 38 ticks %d  offsetticks %d  triggerticks %d \n",ticks,offsetticks,triggerticks );
     }
     else
     {
         triggerticks = csGetTicks() + offsetticks;
+	//printf("event 43 ticks %d  offsetticks %d  triggerticks %d \n",ticks,offsetticks,triggerticks );
     }
 
     delayticks = offsetticks;
@@ -46,6 +48,7 @@ psGameEvent::psGameEvent(csTicks ticks,int offsetticks, const char* newType)
     type[31] = '\0';
     id =  CS::Threading::AtomicOperations::Increment(&nextid);
     valid = true;
+    //printf("event 51 delayticks %d   \n",delayticks );
 }
 
 psGameEvent::~psGameEvent()

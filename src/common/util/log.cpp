@@ -1,7 +1,7 @@
 /*
 * psplog.cpp -- Christophe Painchaud aka Atanor, DaSH <dash@ionblast.net>
 *
-* Copyright (C) 2001 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+* Copyright (C) 2001 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
 *
 *
 * This program is free software; you can redistribute it and/or
@@ -62,15 +62,16 @@ const char *flagnames[] = {
                         "LOG_SKILLXP",
                         "LOG_QUESTS",
                         "LOG_SCRIPT",
-                        "LOG_MARRIAGE",
+                        "LOG_RELATIONSHIPS",
                         "LOG_MESSAGES",
                         "LOG_CACHE",
                         "LOG_PETS",
                         "LOG_USER",
                         "LOG_LOOT",
                         "LOG_DUELS",
-                        "LOG_DRDATA"
-}; // End of flagnames logs settings chetty
+                        "LOG_DRDATA",
+                        "LOG_ACTIONLOCATION"
+}; // End of flagnames
 
 const char *flagsetting[] = {
                         "PlaneShift.Log.Any",
@@ -99,14 +100,15 @@ const char *flagsetting[] = {
                         "PlaneShift.Log.SkillXP",
                         "PlaneShift.Log.Quests",
                         "PlaneShift.Log.Script",
-                        "PlaneShift.Log.Marriage",
+                        "PlaneShift.Log.Relationships",
                         "PlaneShift.Log.Messages",
                         "PlaneShift.Log.Cache",
                         "PlaneShift.Log.Pets",
                         "PlaneShift.Log.User",
                         "PlaneShift.Log.Loot",
                         "PlaneShift.Log.Duels",
-                        "PlaneShift.Log.DRData"
+                        "PlaneShift.Log.DRData",
+                        "PlaneShift.Log.ActionLocation"
 }; // End of flagsettings
 
 bool DoLog(int severity, LOG_TYPES type, uint32 filter_id)

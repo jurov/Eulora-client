@@ -1,7 +1,7 @@
 /*
 * pawsconfigtooltips.cpp - Author: Neeno Pelero
 *
-* Copyright (C) 2011 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+* Copyright (C) 2011 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
 *
 *
 * This program is free software; you can redistribute it and/or
@@ -139,7 +139,8 @@ void pawsConfigTooltips::SaveSetting()
     csRef<iFile> file;
     file = psengine->GetVFS()->Open(CONFIG_TOOLTIPS_FILE_NAME,VFS_FILE_WRITE);
 
-    csRef<iDocumentSystem> docsys = csPtr<iDocumentSystem> (new csTinyDocumentSystem ());
+    csRef<iDocumentSystem> docsys;
+    docsys.AttachNew(new csTinyDocumentSystem ());
 
     csRef<iDocument> doc = docsys->CreateDocument();
     csRef<iDocumentNode> root, defaultRoot, TooltipsNode, showTooltipsNode, showBgColorNode, BgColorNode, FontColorNode, ShadowColorNode;

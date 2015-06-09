@@ -162,6 +162,7 @@ ModeHandler::~ModeHandler()
         msghandler->Unsubscribe(this,MSGTYPE_NEWSECTOR);
         msghandler->Unsubscribe(this,MSGTYPE_COMBATEVENT);
         msghandler->Unsubscribe(this,MSGTYPE_CACHEFILE);
+        msghandler->Unsubscribe(this,MSGTYPE_PLAYVOICE);
     }
     if(randomgen)
         delete randomgen;
@@ -177,6 +178,7 @@ bool ModeHandler::Initialize()
     msghandler->Subscribe(this,MSGTYPE_NEWSECTOR);
     msghandler->Subscribe(this,MSGTYPE_COMBATEVENT);
     msghandler->Subscribe(this,MSGTYPE_CACHEFILE);
+    msghandler->Subscribe(this,MSGTYPE_PLAYVOICE);
 
     // Light levels
     if(!LoadLightingLevels())
@@ -275,6 +277,7 @@ bool ModeHandler::LoadLightingLevels()
 
 void ModeHandler::SetEntity(GEMClientActor* ent)
 {
+//printf("setEnitiy - mode 280 \n");
     actorEntity = ent;
 }
 
@@ -317,8 +320,10 @@ LightingSetting* ModeHandler::FindLight(LightingSetting* light,int which)
 
 void ModeHandler::HandleMessage(MsgEntry* me)
 {
+
     switch(me->GetType())
     {
+//printf("handle message 323 message type  %u \n",me->GetType());
         case MSGTYPE_MODE:
             HandleModeMessage(me);
             return;
@@ -328,15 +333,21 @@ void ModeHandler::HandleMessage(MsgEntry* me)
             return;
 
         case MSGTYPE_NEWSECTOR:
+//printf("handle message 336 newsector  %u \n",me->GetType());
             HandleNewSectorMessage(me);
             return;
 
         case MSGTYPE_COMBATEVENT:
+//printf("handle message 340 combatevent  %u \n",me->GetType());
             HandleCombatEvent(me);
             return;
 
         case MSGTYPE_CACHEFILE:
             HandleCachedFile(me);
+            return;
+
+        case MSGTYPE_PLAYVOICE:
+            HandleVoiceFile(me);
             return;
     }
 }
@@ -353,6 +364,7 @@ void ModeHandler::HandleModeMessage(MsgEntry* me)
     }
 
     actor->SetMode(msg.mode);
+//printf("Set Mode 364 %u \n",msg.mode);
 
     // For the current player
     if(msg.actorID == celclient->GetMainPlayer()->GetEID())
@@ -392,12 +404,15 @@ void ModeHandler::SetModeSounds(uint8_t mode)
     {
         case psModeMessage::PEACE:
             psengine->GetSoundManager()->SetCombatStance(iSoundManager::PEACE);
+//printf("peace \n");
             break;
         case psModeMessage::COMBAT:
             psengine->GetSoundManager()->SetCombatStance(iSoundManager::COMBAT);
+//printf("combat \n");
             break;
         case psModeMessage::DEAD:
             psengine->GetSoundManager()->SetCombatStance(iSoundManager::DEAD);
+//printf("dead \n");
             break;
     }
 }
@@ -725,7 +740,7 @@ void ModeHandler::HandleNewSectorMessage(MsgEntry* me)
 
     // Create new portals
     iSector* sect = psengine->GetEngine()->FindSector(msg.newSector);
-    CreatePortalWeather(sect,0);
+//    CreatePortalWeather(sect,0);
 
     /*
      * Now update bg music if possible.  SoundManager will
@@ -1720,7 +1735,7 @@ void ModeHandler::HandleCombatEvent(MsgEntry* me)
 {
     psCombatEventMessage event(me);
 
-    //printf("Got Combat event...\n");
+    printf("Got Combat event... mode 1732\n");
     if(!psengine->IsGameLoaded())
         return; // Drop if we haven't loaded
 
@@ -2214,6 +2229,31 @@ void ModeHandler::SetCombatAnim(GEMClientActor* atObject, csStringID anim)
     }
 }
 //***********************************************8
+void ModeHandler::HandleVoiceFile(MsgEntry* me)
+{
+    psPlayVoiceMessage msg(me);
+
+    if(!msg.valid)
+    {
+        csPrintf("Voice File Message received was not valid!\n");
+        return;
+    }
+
+    if(psengine->GetSoundManager()->GetSndCtrl(iSoundManager::VOICE_SNDCTRL)->GetToggle() == true)
+    {
+        if(!vfs->Exists(msg.fname))
+        {
+            csPrintf(">>Voice file '%s' does not exist.\n", msg.fname.GetDataSafe());
+            return;
+        }
+
+        csPrintf(">>Playing voice file '%s'.\n", msg.fname.GetData());
+
+        psengine->GetSoundManager()->PushQueueItem(iSoundManager::VOICE_QUEUE, msg.fname.GetData());
+    }
+}
+
+//***********************************************
 void ModeHandler::HandleCachedFile(MsgEntry* me)
 {
     psCachedFileMessage msg(me);

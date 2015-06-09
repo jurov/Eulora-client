@@ -1,6 +1,6 @@
 /* * pawscharcreatemain.cpp - author: Andrew Craig
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -61,7 +61,8 @@ bool FilterName(const char* name);
 
 //////////////////////////////////////////////////////////////////////////////
 pawsCreationMain::pawsCreationMain()
-{
+{   
+//    printf("65 start main  \n ");
     createManager = psengine->GetCharManager()->GetCreation();
 
     psengine->GetMsgHandler()->Subscribe(this, MSGTYPE_CHAR_CREATE_CP);
@@ -88,6 +89,7 @@ pawsCreationMain::pawsCreationMain()
 
 void pawsCreationMain::Reset()
 {
+//    printf("92 reset   \n");
     createManager->SetGender( PSCHARACTER_GENDER_MALE );
     currentGender = PSCHARACTER_GENDER_MALE;
 
@@ -101,9 +103,27 @@ void pawsCreationMain::Reset()
     view->Clear();
 
     pawsRadioButtonGroup* raceBox = (pawsRadioButtonGroup*)FindWidget("RaceBox");
-    raceBox->TurnAllOff();
-    
+//    raceBox->TurnAllOff();
+//************
+pawsMultiLineTextBox* racedesc = (pawsMultiLineTextBox*)PawsManager::GetSingleton().FindWidget("race_description");
+        racedesc->SetText(  createManager->GetRaceDescription(1) );
+int id = 0;
+//printf("110 id   %d\n",id);
+//printf("111 currentGender  %d\n",currentGender);
+//createManager->SetRace( id );
+UpdateRace(id);
+    view = (pawsObjectView*)FindWidget("ModelView");
+// Store the factory name for the selected model.
+    factName = createManager->GetModelName( id, currentGender );
+//printf("116 id   %d\n",id);
+//printf("117 currentGender  %d\n",currentGender);
 
+
+    // Show the model for the selected race.
+    view->Show();
+    view->EnableMouseControl(true);
+
+//*****************
     pawsEditTextBox* firstname = (pawsEditTextBox*)FindWidget("charfirstnametext");
     firstname->SetText("");
     pawsEditTextBox* lastname = (pawsEditTextBox*)FindWidget("charlastnametext");
@@ -154,16 +174,17 @@ bool pawsCreationMain::PostSetup()
     femaleButton = (pawsButton*)FindWidget("FemaleButton");
     femaleButton->SetToggle(true);
 
-    GrayRaceButtons();
+//    GrayRaceButtons();
     GrayStyleButtons();
 
     createManager->GetTraitData();
-
+//printf("182  GetTraitData \n");
     return true;
 }
 
 void pawsCreationMain::ResetAllWindows()
-{
+{    
+//    printf("169 Reset All Windows \n");
     const char *names[] =
     {
         "CharBirth", "birth.xml",
@@ -193,12 +214,14 @@ void pawsCreationMain::ResetAllWindows()
 
 void pawsCreationMain::HandleMessage( MsgEntry* me )
 {
+//printf("218 HandleMessage  \n");
     switch ( me->GetType() )
     {
         case MSGTYPE_CHAR_CREATE_CP:
         {
             int race = me->GetInt32();
-
+//race ==0;
+//printf("225 race %d  \n",race);
             createManager->SetCurrentCP( createManager->GetRaceCP( race ) );
 
             UpdateCP();
@@ -207,6 +230,7 @@ void pawsCreationMain::HandleMessage( MsgEntry* me )
 
         case MSGTYPE_CHAR_CREATE_NAME:
         {
+//printf("234 CHAR_CREATE_NAME  \n");
             psNameCheckMessage msg;
             msg.FromServer(me);
             if (!msg.accepted)
@@ -224,7 +248,8 @@ void pawsCreationMain::HandleMessage( MsgEntry* me )
                     {
                         csString csfirstname = firstname->GetText();
                         csString cslastname = lastname->GetText();
-                                 
+//printf("252 first %s  \n",firstname->GetText()); 
+//printf("253 last %s  \n",lastname->GetText());                                
                         createManager->SetName( csfirstname + " " + cslastname);
 		    }
                     PawsManager::GetSingleton().FindWidget(newWindow)->Show();
@@ -406,8 +431,9 @@ void pawsCreationMain::ChangeFace( int newFace )
 
 void pawsCreationMain::GrayRaceButtons( )
 {
-    pawsRadioButtonGroup* raceBox = (pawsRadioButtonGroup*)FindWidget("RaceBox");
-    for (unsigned id = 0; id < 1; id++)
+// printf("413 GrayRace button  ");
+/*    pawsRadioButtonGroup* raceBox = (pawsRadioButtonGroup*)FindWidget("RaceBox");
+    for (unsigned id = 0; id < 12; id++)
     {
         pawsRadioButton* button = (pawsRadioButton*)raceBox->FindWidget(id);
         if (button == NULL)
@@ -416,7 +442,7 @@ void pawsCreationMain::GrayRaceButtons( )
             button->GetTextBox()->Grayed(true);
         else
             button->GetTextBox()->Grayed(false);
-    }
+    }*/
 }
 
 void pawsCreationMain::GrayStyleButtons( )
@@ -459,15 +485,17 @@ void pawsCreationMain::GrayStyleButtons( )
 
 void pawsCreationMain::SelectGender(int newGender)
 {
+//printf("489 SelectGender  \n");
     currentGender = newGender;
 
-    GrayRaceButtons();
+//    GrayRaceButtons();
     GrayStyleButtons();
 
     if( createManager->GetSelectedRace() == -1)
         return;
 
     int race = createManager->GetSelectedRace();
+//printf("499 GetSelectedRace() %d \n",race);
 
     while (!createManager->IsAvailable(race, currentGender))
     {
@@ -492,8 +520,9 @@ void pawsCreationMain::SelectGender(int newGender)
     }
 
     createManager->SetGender( currentGender );
-
+//printf("524 SetGender( currentGender ) %d \n",currentGender);
     // Trigger gender update
+//printf("526 UpdateRace(race) %d \n",race);
     UpdateRace(race);
 }
 
@@ -746,8 +775,9 @@ bool pawsCreationMain::OnButtonPressed(int /*mouseButton*/, int /*keyModifier*/,
     /////////////////////////////////////////////////////
     // RACE SELECTION BUTTONS
     /////////////////////////////////////////////////////
-    if ( widget->GetID() >= 0 && widget->GetID() <= 1 )
+    if ( widget->GetID() >= 0 && widget->GetID() <= 5 )
     {
+//printf("781 RaceSelectButtons  %d \n", widget->GetID());
         if (
             !createManager->IsAvailable(widget->GetID(),1) &&
             !createManager->IsAvailable(widget->GetID(),2)
@@ -756,13 +786,16 @@ bool pawsCreationMain::OnButtonPressed(int /*mouseButton*/, int /*keyModifier*/,
             PawsManager::GetSingleton().CreateWarningBox(PawsManager::GetSingleton().Translate(
                                                          "This race isn't implemented yet, sorry"));
             pawsRadioButtonGroup* raceBox = (pawsRadioButtonGroup*)FindWidget("RaceBox");
-
+//printf("790 lastRaceID  %d\n",lastRaceID);
             if ( lastRaceID != -1 )
             {
+                
                 csString raceActive;
                 raceActive.Format("race%d", lastRaceID );
                 if ( raceBox )
+//printf("797 lastRaceID  %d\n",lastRaceID);
                     raceBox->SetActive( raceActive );
+
             }
             else
             {
@@ -772,11 +805,13 @@ bool pawsCreationMain::OnButtonPressed(int /*mouseButton*/, int /*keyModifier*/,
 
             return true;
         }
-
+//printf("709 lastRaceID  %d\n",lastRaceID);
         if (lastRaceID == -1)
         {
             SelectGender(lastGender);
+//printf("789 select  %d\n",lastGender);
             currentGender = lastGender;
+//printf("791 current  %d\n",lastGender);
         }
 
         // If current gender isn't available, try every possible
@@ -793,8 +828,9 @@ bool pawsCreationMain::OnButtonPressed(int /*mouseButton*/, int /*keyModifier*/,
         pawsMultiLineTextBox* racedesc = (pawsMultiLineTextBox*)PawsManager::GetSingleton().FindWidget("race_description");
         racedesc->SetText(  createManager->GetRaceDescription( widget->GetID() ) );
 
-
+//printf("832 SetGender(currentGender)  %d\n",currentGender);
         createManager->SetGender(currentGender);
+//printf("834 UpdateRace(widget->GetID()  %d\n",widget->GetID());
         UpdateRace(widget->GetID());
         ResetAllWindows();
         return true;
@@ -863,6 +899,7 @@ bool pawsCreationMain::OnButtonPressed(int /*mouseButton*/, int /*keyModifier*/,
             help = "A first and last name are required. ";
             help += "You can use any alphabetic (A-Z) in your name, but no numbers. ";
             help += "Each name must be between 3 and 27 letters.\n";
+            
             
             PawsManager::GetSingleton().CreateWarningBox(PawsManager::GetSingleton().Translate(help));
             return true;
@@ -944,6 +981,9 @@ bool pawsCreationMain::OnButtonPressed(int /*mouseButton*/, int /*keyModifier*/,
             }
 
             // Set our choices in the creation manager
+//printf("989 SetChoices  ");
+//printf("990 currentGender %d \n  ",currentGender);
+
             createManager->SetCustomization( race->location[PSTRAIT_LOCATION_FACE][currentGender].GetSize()?race->location[PSTRAIT_LOCATION_FACE][currentGender][currentFaceChoice]->uid:0,
                                              race->location[PSTRAIT_LOCATION_HAIR_STYLE][currentGender].GetSize()?race->location[PSTRAIT_LOCATION_HAIR_STYLE][currentGender][activeHairStyle]->uid:0,
                                              race->location[PSTRAIT_LOCATION_BEARD_STYLE][currentGender].GetSize()?race->location[PSTRAIT_LOCATION_BEARD_STYLE][currentGender][currentBeardStyleChoice]->uid:0,
@@ -990,7 +1030,7 @@ void pawsCreationMain::UpdateRace(int id)
     loaded = false;
     int raceCP = createManager->GetRaceCP( id );
     lastRaceID = id;
-
+//printf("1014 lastRaceID  %d\n",lastRaceID);
     if ( raceCP != REQUESTING_CP && createManager->GetSelectedRace() != id )
     {
         // Reset CP only when changing the race
@@ -1000,14 +1040,24 @@ void pawsCreationMain::UpdateRace(int id)
 
     createManager->SetRace( id );
     race = createManager->GetRace(id);
+//printf("1056 get race by id   %d\n",id);
 
     currentGender = createManager->GetSelectedGender();
+//printf("1059 get currentgender by get selected   %d\n",currentGender);
 
     if ( lastGender != -1 )
     {
         currentGender = lastGender;
     }
-
+    if ( currentGender == 1 && id ==0)
+    {
+        //printf("1071 currentGender %d\n",currentGender);       
+        id = 1;
+        UpdateRace(id);
+        //printf("1073 id %d\n",id);
+       
+     }
+     
     createManager->SetGender( currentGender );
     lastGender = -1;
 

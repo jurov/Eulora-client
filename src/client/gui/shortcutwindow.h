@@ -1,8 +1,9 @@
 /*
 * shortcutwindow.h - Author: Andrew Dai
+* Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
 *
-* Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
-*
+* Revision Author: Joe Lyon
+* Copyright (C) 2013 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License
@@ -23,24 +24,33 @@
 //=============================================================================
 // Library Includes
 //=============================================================================
+// COMMON INCLUDES
+#include "net/messages.h"
+#include "net/clientmsghandler.h"
+#include "net/cmdhandler.h"
+
+// CLIENT INCLUDES
+#include "pscelclient.h"
+#include "../globals.h"
+#include "clientvitals.h"
+#include "psclientchar.h"
+
+// PAWS INCLUDES
 #include "gui/pawscontrolwindow.h"
 #include "gui/pawsconfigkeys.h"
+#include "paws/pawsprogressbar.h"
+#include "pawsscrollmenu.h"
+
 
 //=============================================================================
 // Forward Declarations
 //=============================================================================
 class pawsChatWindow;
-class pawsMessageTextBox;
-class pawsEditTextBox;
-class pawsMultilineEditTextBox;
-class pawsTextBox;
-class pawsScrollBar;
 
 //=============================================================================
 // Defines
 //=============================================================================
-#define NUM_SHORTCUTS    200
-
+#define NUM_SHORTCUTS    256
 
 //=============================================================================
 // Classes 
@@ -49,7 +59,7 @@ class pawsScrollBar;
 /**
  * 
  */
-class pawsShortcutWindow : public pawsControlledWindow, public pawsFingeringReceiver
+class pawsShortcutWindow : public pawsControlledWindow, public pawsFingeringReceiver, public psClientNetSubscriber
 {
 public:
     pawsShortcutWindow();
@@ -60,29 +70,45 @@ public:
     virtual bool PostSetup();
 
     bool OnMouseDown( int button, int modifiers, int x, int y );
-    // bool OnButtonPressed(int mouseButton, int keyModifier, pawsWidget* reporter);
+    bool OnButtonPressed(int mouseButton, int keyModifier, pawsWidget* reporter);
     bool OnButtonReleased(int mouseButton, int keyModifier, pawsWidget* reporter);
-    bool OnScroll( int direction, pawsScrollBar* widget );
+    bool OnScroll(int direction, pawsScrollBar* widget);
+
     void OnResize();
-    void StopResize();
     bool OnFingering(csString string, psControl::Device device, uint button, uint32 mods);
 
     /**
      * Execute a short cut script.
      *
-     * @param shortcutNum is the button number if local = true
-     *                    else it is the command in range from
-     *                    0 to MAX_SHORTCUT_SETS*10-1;
-     * @param local
+     * @param shortcutNum is the button ordinal number 
      */
-    void ExecuteCommand(int shortcutNum, bool local);
+    void ExecuteCommand(int shortcutNum );
     
-    const csString& GetCommandName(int shortcutNum, bool local);
+    /**
+     * Get the short cut script.
+     *
+     * @param shortcutNum is the button ordinal number 
+     */
+    const csString& GetCommandName(int shortcutNum );
+
+    /**
+     * Get the text of a buttons assigned shortcut key 
+     *
+     * @param shortcutNum is the button ordinal number
+     */
     csString GetTriggerText(int shortcutNum);
 
+    /**
+     * Load the commands, icon names and shortcut text keys
+    **/
     void LoadDefaultCommands();
     void LoadCommandsFile();
+    void LoadQuickbarFile();
     
+    void ResetEditWindow();
+
+    void Show();
+
 protected:
     /// chat window for easy access
     pawsChatWindow* chatWindow;
@@ -90,32 +116,10 @@ protected:
     void SaveCommands(void);
     CmdHandler *cmdsource;
 
-    /** Calculates common size of shortcuts buttons */
-    void CalcButtonSize();
-    
-    /** Calculates dimensions of shortcut button matrix */
-    void CalcMatrixSize(size_t & matrixWidth, size_t & matrixHeight);
-    
-    /** Calculates how many rows of buttons do we need if there 
-        is 'matrixWidth' number of buttons in each */
-    size_t CalcTotalRowsNeeded(size_t matrixWidth);
-    
-    /** Creates matrix of shortcut buttons (first deletes old one) */
-    void RebuildMatrix();
-    
-    /** Sets positions and sizes of buttons in the matrix */
-    void LayoutMatrix();
-    
-    /** Sets texts and IDs of buttons inside matrix according to current scroll position */
-    void UpdateMatrix();
-    
-    /** Sets window size that is ideal for current button matrix */
-    void SetWindowSizeToFitMatrix();
-    
-
-    // Simple string arrays holding the commands and command name
-    csString cmds[NUM_SHORTCUTS];
-    csString names[NUM_SHORTCUTS];
+    csArray<csString> cmds;
+    csArray<csString> names;
+    csArray<csString> toolTips;
+    csArray<csString> icon;
 
     csRef<iVFS> vfs;
     csRef<iDocumentSystem> xml;
@@ -131,20 +135,43 @@ protected:
 
     pawsTextBox* title;
 
-    // The button configuring widget
+    // Widget used to configure the shortcuts
     pawsWidget* subWidget;
 
-    // Current size of shortcut buttons
-    int buttonWidth, buttonHeight;
-    
-    // The matrix of buttons of visible shortcuts
-    csArray< csArray<pawsButton*> > matrix;
+    pawsScrollMenu* iconPalette;
+    pawsDnDButton*  iconDisplay;
+    int             iconDisplayID;
 
     csString buttonBackgroundImage;
 
-    int edit;
+    size_t edit;
+    pawsWidget *editedButton;
 
-    pawsScrollBar* scrollBar;
+    virtual void HandleMessage(MsgEntry *msg);
+
+private:
+    //status bars, optional;configured in XML
+    pawsProgressBar *main_hp;
+    pawsProgressBar *main_mana;
+    pawsProgressBar *phys_stamina;
+    pawsProgressBar *ment_stamina;
+    pawsScrollMenu  *MenuBar;
+
+    //custom controls, optional;configured in XML
+    pawsButton      *UpButton;
+    pawsButton      *DownButton;
+    pawsScrollBar   *iconScrollBar;
+
+    csArray<csString>    allIcons;
+    csArray<csString>    allNames; //not populated at this time...
+    csArray<csString>    stubArray;
+
+    size_t            position;
+    size_t            buttonWidth;
+    float             scrollSize;
+    int               EditMode;
 };
+
+
 CREATE_PAWS_FACTORY( pawsShortcutWindow );
 #endif

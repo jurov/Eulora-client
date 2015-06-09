@@ -1,7 +1,7 @@
 /*
  * pawsloginwindow.h - Author: Andrew Craig
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -42,7 +42,7 @@
 
 #define SERVER_LIST_FILE     "/planeshift/data/servers.xml"
 #define ASTERISKS            "********"
-// vfs? servers chetty
+
 #define CNF_REMEMBER_SERVER       "PlaneShift.Connection.RememberServer"
 #define CNF_REMEMBER_PASS         "PlaneShift.Connection.RememberPass"
 #define CNF_CONVERT_PASS          "PlaneShift.Connection.ConvertPass"

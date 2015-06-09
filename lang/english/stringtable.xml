@@ -22,6 +22,7 @@ Do you really wish to leave?" trans="" />
   <item orig="%s tells you: %s" trans="" />
   <item orig="/ 100" trans="" />
   <item orig="0" trans="" />
+  <item orig="0 Coppers" trans="" />
   <item orig="0 Trias" trans="" />
   <item orig="1" trans="" />
   <item orig="1 Tria" trans="" />
@@ -35,8 +36,6 @@ Do you really wish to leave?" trans="" />
   <item orig="&gt;" trans="" />
   <item orig="?" trans="" />
   <item orig="? Weight" trans="" />
-  <item orig="A first and last name are required. You can use any alphabetic (A-Z) in your name, but no numbers. Each name must be between 3 and 27 letters.
-" trans="" />
   <item orig="A full name is required, the first &amp; last name separated with a space. You can use any alphabetic (A-Z) in your name, but no numbers. Each name must be between 3 and 27 letters.
 The name should follow the rules here:
 http://www.planeshift.it/naming.html 
@@ -52,6 +51,7 @@ If your name is inappropriate, a Game Master (GM) will change it." trans="" />
   <item orig="Actions sounds" trans="" />
   <item orig="Active" trans="" />
   <item orig="Active Magic" trans="" />
+  <item orig="Active Magic Bar" trans="" />
   <item orig="Active Spells" trans="" />
   <item orig="Activity:" trans="" />
   <item orig="Actual FPS may vary." trans="" />
@@ -86,11 +86,13 @@ If your name is inappropriate, a Game Master (GM) will change it." trans="" />
   <item orig="Apply to all" trans="" />
   <item orig="Are you sure you want to create this Character?  " trans="" />
   <item orig="Are you sure you want to discard the selected quest?" trans="" />
-  <item orig="Are you sure you want to save?  " trans="" />
+  <item orig="Are you sure you want to save your character?" trans="" />
   <item orig="Are you sure you want to upload your character?" trans="" />
   <item orig="Are you sure you want to upload?  " trans="" />
   <item orig="Are you sure you want to upload?  You have 16 CP left." trans="" />
   <item orig="Are you sure you want to upload?  You have 2 CP left." trans="" />
+  <item orig="Argents" trans="" />
+  <item orig="Argents available to withdraw." trans="" />
   <item orig="Arms" trans="" />
   <item orig="Assemble Slot" trans="" />
   <item orig="Assigned GM:" trans="" />
@@ -107,6 +109,8 @@ If your name is inappropriate, a Game Master (GM) will change it." trans="" />
   <item orig="Autoexec" trans="" />
   <item orig="Available Events:" trans="" />
   <item orig="BIRTH" trans="" />
+  <item orig="BITCents" trans="" />
+  <item orig="BITCents available to withdraw." trans="" />
   <item orig="BPM" trans="" />
   <item orig="Back" trans="" />
   <item orig="Back_inv" trans="Back" />
@@ -120,6 +124,7 @@ If your name is inappropriate, a Game Master (GM) will change it." trans="" />
   <item orig="Belt" trans="" />
   <item orig="Birth" trans="" />
   <item orig="Birth Event:" trans="" />
+  <item orig="Blood" trans="" />
   <item orig="Bloody" trans="" />
   <item orig="Book Writing" trans="" />
   <item orig="Boots" trans="" />
@@ -165,10 +170,12 @@ If your name is inappropriate, a Game Master (GM) will change it." trans="" />
   <item orig="Choose Your Character" trans="" />
   <item orig="Choose your birthday:" trans="" />
   <item orig="Chose Color (c)" trans="" />
+  <item orig="Circles" trans="" />
   <item orig="Circles available to deposit." trans="" />
   <item orig="Circles available to withdraw." trans="" />
   <item orig="Claim" trans="" />
   <item orig="Clear" trans="" />
+  <item orig="Clear Icon" trans="" />
   <item orig="Click a character name below, then click Join. Or click New Character." trans="" />
   <item orig="Click to see Instructions" trans="" />
   <item orig="Close" trans="" />
@@ -184,6 +191,8 @@ If your name is inappropriate, a Game Master (GM) will change it." trans="" />
   <item orig="Combat music" trans="" />
   <item orig="Combine" trans="" />
   <item orig="Combine items in container" trans="" />
+  <item orig="Command(s) for all characters:" trans="" />
+  <item orig="Command(s) only for this character:" trans="" />
   <item orig="Communication" trans="" />
   <item orig="Communications" trans="" />
   <item orig="Completed" trans="" />
@@ -195,9 +204,14 @@ If your name is inappropriate, a Game Master (GM) will change it." trans="" />
   <item orig="Container" trans="" />
   <item orig="Controls" trans="" />
   <item orig="Convert password" trans="" />
+  <item orig="Copper:" trans="" />
+  <item orig="Coppers" trans="" />
+  <item orig="Coppers available to withdraw." trans="" />
+  <item orig="Coppers:" trans="" />
   <item orig="Couldn&apos;t resolve server hostname." trans="" />
   <item orig="Count" trans="" />
   <item orig="Count:" trans="" />
+  <item orig="Craft" trans="" />
   <item orig="Crafting" trans="" />
   <item orig="Create Icon (+)" trans="" />
   <item orig="Create Line (\)" trans="" />
@@ -223,6 +237,8 @@ If your name is inappropriate, a Game Master (GM) will change it." trans="" />
   <item orig="Delete Measure" trans="" />
   <item orig="Delete Selected (del)" trans="" />
   <item orig="Delete Selected Character" trans="" />
+  <item orig="Denarius" trans="" />
+  <item orig="Denarius available to withdraw." trans="" />
   <item orig="Deposit" trans="" />
   <item orig="Desc" trans="" />
   <item orig="DescOC" trans="" />
@@ -262,10 +278,14 @@ If your name is inappropriate, a Game Master (GM) will change it." trans="" />
   <item orig="Enable NPC_my" trans="" />
   <item orig="Enable NPC_narrate" trans="" />
   <item orig="Enable Shadows" trans="" />
+  <item orig="Enable Tooltips" trans="" />
   <item orig="Enable alliance" trans="" />
   <item orig="Enable auction" trans="" />
+  <item orig="Enable background color" trans="" />
+  <item orig="Enable execution of start-up scripts" trans="" />
   <item orig="Enable group" trans="" />
   <item orig="Enable guild" trans="" />
+  <item orig="Enable logging" trans="" />
   <item orig="Enable me" trans="" />
   <item orig="Enable my" trans="" />
   <item orig="Enable npcinternal" trans="" />
@@ -274,6 +294,7 @@ If your name is inappropriate, a Game Master (GM) will change it." trans="" />
   <item orig="Enable tell" trans="" />
   <item orig="Enable tellself" trans="" />
   <item orig="Enabled" trans="" />
+  <item orig="Enables the logging of the selected chat type" trans="" />
   <item orig="End Repeat" trans="" />
   <item orig="Ending" trans="" />
   <item orig="Enter" trans="" />
@@ -301,17 +322,25 @@ If your name is inappropriate, a Game Master (GM) will change it." trans="" />
   <item orig="Fade Speed:" trans="" />
   <item orig="Fading:" trans="" />
   <item orig="Failed" trans="" />
+  <item orig="Faith" trans="" />
+  <item orig="Faith Skill description:" trans="" />
+  <item orig="Faith Skills List:" trans="" />
   <item orig="Father Name:" trans="" />
   <item orig="Father:" trans="" />
+  <item orig="Fight" trans="" />
+  <item orig="Fight Skill description:" trans="" />
+  <item orig="Fight Skills" trans="" />
   <item orig="Filter" trans="" />
   <item orig="Filter incoming bad words" trans="" />
   <item orig="Filter outgoing bad words" trans="" />
   <item orig="First Name" trans="" />
   <item orig="First Person" trans="" />
   <item orig="First name is invalid" trans="" />
+  <item orig="First name must contain more than two letters and contain only alphabet letters" trans="" />
   <item orig="Firstname:" trans="" />
   <item orig="Flashing" trans="" />
   <item orig="Flat" trans="" />
+  <item orig="Font color" trans="" />
   <item orig="Free Movement" trans="" />
   <item orig="Free Rotation" trans="" />
   <item orig="Friends" trans="" />
@@ -324,6 +353,8 @@ If your name is inappropriate, a Game Master (GM) will change it." trans="" />
   <item orig="Game Board" trans="" />
   <item orig="Game Control" trans="" />
   <item orig="Game Master Options" trans="" />
+  <item orig="Gather" trans="" />
+  <item orig="Gather Skills List:" trans="" />
   <item orig="Gender:" trans="" />
   <item orig="General" trans="" />
   <item orig="Get Reward" trans="" />
@@ -373,6 +404,7 @@ If your name is inappropriate, a Game Master (GM) will change it." trans="" />
 To disable this feature delete everything in the window by using the Modify Description button." trans="
   
 " />
+  <item orig="Hexas" trans="" />
   <item orig="Hexas available to withdraw." trans="" />
   <item orig="Hi" trans="" />
   <item orig="Hide Toolbar/Change Style" trans="" />
@@ -419,6 +451,7 @@ To disable this feature delete everything in the window by using the Modify Desc
   <item orig="Last Name" trans="" />
   <item orig="Last online" trans="" />
   <item orig="Lastname:" trans="" />
+  <item orig="Lead" trans="" />
   <item orig="Leader" trans="" />
   <item orig="Leave" trans="" />
   <item orig="Left Finger" trans="" />
@@ -441,6 +474,8 @@ To disable this feature delete everything in the window by using the Modify Desc
   <item orig="Lockable" trans="" />
   <item orig="Locked" trans="" />
   <item orig="Lockpicking" trans="" />
+  <item orig="Log Bracket:" trans="" />
+  <item orig="Log Filename:" trans="" />
   <item orig="Log Out" trans="" />
   <item orig="Log the chat messages" trans="" />
   <item orig="Log the system messages" trans="" />
@@ -454,6 +489,7 @@ To disable this feature delete everything in the window by using the Modify Desc
   <item orig="M" trans="" />
   <item orig="M. Stamina" trans="" />
   <item orig="M. stamina" trans="" />
+  <item orig="M.Stamina" trans="" />
   <item orig="M:" trans="" />
   <item orig="Magic" trans="" />
   <item orig="Magic Skill description:" trans="" />
@@ -561,6 +597,7 @@ To disable this feature delete everything in the window by using the Modify Desc
   <item orig="Number of Siblings" trans="" />
   <item orig="OK" trans="" />
   <item orig="OOC" trans="" />
+  <item orig="Octas" trans="" />
   <item orig="Octas available to withdraw." trans="" />
   <item orig="Ok" trans="" />
   <item orig="Online" trans="" />
@@ -707,6 +744,7 @@ To disable this feature delete everything in the window by using the Modify Desc
   <item orig="Set" trans="" />
   <item orig="Setting Item" trans="" />
   <item orig="Settings" trans="" />
+  <item orig="Shadow color" trans="" />
   <item orig="Shadows" trans="" />
   <item orig="Sharp" trans="" />
   <item orig="Short Phrase Char Count" trans="" />
@@ -717,6 +755,12 @@ To disable this feature delete everything in the window by using the Modify Desc
   <item orig="Shout shadow colour" trans="" />
   <item orig="Shout text color" trans="" />
   <item orig="Shout text colour" trans="" />
+  <item orig="Show ACK Messages on screen" trans="" />
+  <item orig="Show Active Magic window" trans="" />
+  <item orig="Show Error Messages on screen" trans="" />
+  <item orig="Show Info Messages on screen" trans="" />
+  <item orig="Show OK Messages on screen" trans="" />
+  <item orig="Show Result Messages on screen" trans="" />
   <item orig="Show Toolbar" trans="" />
   <item orig="Show guild " trans="" />
   <item orig="Siblings" trans="" />
@@ -737,6 +781,7 @@ To disable this feature delete everything in the window by using the Modify Desc
   <item orig="Spell Power" trans="" />
   <item orig="Spell book" trans="" />
   <item orig="Spells" trans="" />
+  <item orig="Spirit" trans="" />
   <item orig="Stack Count" trans="" />
   <item orig="Start Personal Banking" trans="" />
   <item orig="Start Repeat" trans="" />
@@ -758,6 +803,7 @@ To disable this feature delete everything in the window by using the Modify Desc
   <item orig="System" trans="" />
   <item orig="System Base" trans="" />
   <item orig="System text color" trans="" />
+  <item orig="T" trans="" />
   <item orig="Tabs to show" trans="" />
   <item orig="Take All" trans="" />
   <item orig="Take and Stack All" trans="" />
@@ -782,10 +828,18 @@ To disable this feature delete everything in the window by using the Modify Desc
   <item orig="Tellself shadow colour" trans="" />
   <item orig="Tellself text colour" trans="" />
   <item orig="Testers" trans="" />
+  <item orig="The number of Argents that you may exchange." trans="" />
+  <item orig="The number of BITCents that you may exchange." trans="" />
+  <item orig="The number of BITCents you wish to withdraw." trans="" />
+  <item orig="The number of Coppers that you may exchange." trans="" />
+  <item orig="The number of Denarius that you may exchange." trans="" />
+  <item orig="The number of argents you wish to withdraw." trans="" />
   <item orig="The number of circles that you may exchange." trans="" />
   <item orig="The number of circles you wish to deposit." trans="" />
   <item orig="The number of circles you wish to withdraw." trans="" />
   <item orig="The number of coins you wish to exchange." trans="" />
+  <item orig="The number of coppers you wish to withdraw." trans="" />
+  <item orig="The number of denarius you wish to withdraw." trans="" />
   <item orig="The number of hexas that you may exchange." trans="" />
   <item orig="The number of hexas you wish to deposit." trans="" />
   <item orig="The number of hexas you wish to withdraw." trans="" />
@@ -837,10 +891,12 @@ To disable this feature delete everything in the window by using the Modify Desc
   <item orig="Use" trans="" />
   <item orig="Use Collision Detection" trans="" />
   <item orig="Use Equipped tool" trans="" />
+  <item orig="Use NPC Dialog" trans="" />
   <item orig="Use basic chat window (need reload)" trans="" />
   <item orig="Use simplified chat window" trans="" />
   <item orig="Use simplified chat window (need reload)" trans="" />
   <item orig="Use the container" trans="" />
+  <item orig="Utility" trans="" />
   <item orig="Various" trans="" />
   <item orig="Various Skill description:" trans="" />
   <item orig="Various Skills" trans="" />
@@ -858,6 +914,7 @@ To disable this feature delete everything in the window by using the Modify Desc
   <item orig="Voices Volume" trans="" />
   <item orig="Wait" trans="" />
   <item orig="Waiting on server data.." trans="" />
+  <item orig="Warning! this will PERMANENTLY DELETE your character.  Are you sure you want to continue?" trans="" />
   <item orig="Way" trans="" />
   <item orig="Weak Pickupable" trans="" />
   <item orig="Website:" trans="" />
@@ -881,6 +938,10 @@ To disable this feature delete everything in the window by using the Modify Desc
   <item orig="You are not in a guild.
 New guilds must have a minimum of 1 members, and the fee is 20000 trias. Beware that a guild will be automatically disbanded if it has less than 5 members for more than 5 minutes
 Do you wish to found a guild now?" trans="" />
+  <item orig="You can change the brightness/gamma of the game by pressing F11 to reduce the brightness, F12 to increase the brightness, and F10 to reset to default value." trans="" />
+  <item orig="You can change the language of PlaneShift to have the user interface displayed in your language. We support Cesky, Dutch, French, Italian, German, Romanian, Russian, Swedish, and more. Please note public dialogues in game between players should  be in English.
+
+Changing the language can be done ONLY in the Launcher. To do this you should close this client, and relaunch PlaneShift. In the Launcher you should change the &apos;Language&apos; dropdown." trans="" />
   <item orig="You can not ignore yourself." trans="" />
   <item orig="You cannot have a negative CP value." trans="" />
   <item orig="You currently have no petitions." trans="" />
@@ -917,8 +978,12 @@ Do you wish to found a guild now?" trans="" />
   <item orig="controls" trans="" />
   <item orig="details" trans="" />
   <item orig="disabled" trans="" />
+  <item orig="each values 1 Copper" trans="" />
   <item orig="each values 1 Tria" trans="" />
+  <item orig="each values 1,000,000 Coppers" trans="" />
   <item orig="each values 10 Tria" trans="" />
+  <item orig="each values 10,000 Coppers" trans="" />
+  <item orig="each values 100 Coppers" trans="" />
   <item orig="each values 250 Tria" trans="" />
   <item orig="each values 50 Tria" trans="" />
   <item orig="female " trans="" />

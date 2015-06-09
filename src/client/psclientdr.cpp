@@ -1,7 +1,7 @@
 /*
 * psclientdr.cpp by Matze Braun <MatzeBraun@gmx.de>
 *
-* Copyright (C) 2002 Atomic Blue (info@planshift.it, http://www.atomicblue.org) 
+* Copyright (C) 2002 Atomic Blue (info@planeshift.it, http://www.atomicblue.org) 
 *
 *
 * This program is free software; you can redistribute it and/or
@@ -209,7 +209,7 @@ void psClientDR::ResetMsgStrings()
 
 void psClientDR::HandleDeadReckon( MsgEntry* me )
 {
-    psDRMessage drmsg(me, ((psNetManager*)psengine->GetNetManager())->GetConnection()->GetAccessPointers() );
+    psDRMessage drmsg(me, psengine->GetNetManager()->GetConnection()->GetAccessPointers() );
     GEMClientActor* gemActor = (GEMClientActor*)celclient->FindObject( drmsg.entityid );
      
     if (!gemActor)
@@ -243,7 +243,7 @@ void psClientDR::HandleDeadReckon( MsgEntry* me )
 
 void psClientDR::HandleForcePosition(MsgEntry *me)
 {
-    psForcePositionMessage msg(me, ((psNetManager*)psengine->GetNetManager())->GetConnection()->GetAccessPointers());
+    psForcePositionMessage msg(me, psengine->GetNetManager()->GetConnection()->GetAccessPointers());
 
     if(last_sector != msg.sectorName)
     {
@@ -255,8 +255,7 @@ void psClientDR::HandleForcePosition(MsgEntry *me)
     else
     {
         psengine->GetZoneHandler()->HandleDelayAndAnim(msg.loadTime, msg.start, msg.dest, msg.backgroundname, msg.loadWidget);
-        psengine->GetZoneHandler()->LoadZone(msg.pos, msg.sectorName, msg.vel, true);
-        celclient->GetMainPlayer()->SetYRotation(msg.yrot);
+        psengine->GetZoneHandler()->LoadZone(msg.pos, msg.yrot, msg.sectorName, csVector3(0.0f, 0.0f, msg.vel), true);
     }
 }
 
@@ -273,6 +272,7 @@ void psClientDR::HandleStatsUpdate( MsgEntry* me )
     // Dirty short cut to allways display 0 HP when dead.
     if (!gemObject->IsAlive() && statdrmsg.hp)
     {
+//printf("clientdr 275 dead");
         Error1("Server report HP but object is not alive");
         statdrmsg.hp = 0;
         statdrmsg.hp_rate = 0;
@@ -393,8 +393,8 @@ void psClientDR::HandleStrings( MsgEntry* me )
         doc->Write(psengine->GetVFS(), "/planeshift/userdata/cache/commonstrings");
     }
 
-    ((psNetManager*)psengine->GetNetManager())->GetConnection()->SetMsgStrings(0, msgstrings);
-    ((psNetManager*)psengine->GetNetManager())->GetConnection()->SetEngine(psengine->GetEngine());
+    psengine->GetNetManager()->GetConnection()->SetMsgStrings(0, msgstrings);
+    psengine->GetNetManager()->GetConnection()->SetEngine(psengine->GetEngine());
     gotStrings = true;
 
     // Update status.

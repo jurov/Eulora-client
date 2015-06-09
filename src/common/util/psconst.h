@@ -1,8 +1,8 @@
 /*
  * psconst.h
  *
- * Copyright (C) 2003 PlanShift Team (info@planshift.it,
- * http://www.planshift.it)
+ * Copyright (C) 2003 PlaneShift Team (info@planeshift.it,
+ * http://www.planeshift.it)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,7 +58,7 @@ typedef uint32 InstanceID;
 #define ASSIST_MAX_DIST 25   ///< Maximum distance that the /assist command will work
 
 #define EXCHANGE_SLOT_COUNT         9
-#define INVENTORY_BULK_COUNT        32
+#define INVENTORY_BULK_COUNT        80
 #define INVENTORY_EQUIP_COUNT       16
 
 #define GLYPH_WAYS               6

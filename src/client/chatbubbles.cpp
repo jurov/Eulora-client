@@ -1,7 +1,7 @@
 /*
 * Author: Andrew Robberts
 *
-* Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+* Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
 *
 *
 * This program is free software; you can redistribute it and/or
@@ -49,7 +49,7 @@
 // Used to set default config files if the userdata ones are not found.
 #define DEFAULT_FILE  "/planeshift/data/options/chatbubbles_def.xml"
 #define USER_FILE     "/planeshift/userdata/options/chatbubbles.xml"
-// is this vfs? chetty
+
 psChatBubbles::psChatBubbles()
              : psengine(NULL)
 {
@@ -319,7 +319,8 @@ void psChatBubbles::HandleMessage(MsgEntry* msg, Client* /*client*/)
         BubbleChatType mixType;
         if(chatMsg.sText.StartsWith("/my")) //we have to add an 's
         {
-            firstName.Append("'s");
+            size_t len = firstName.Length() - 1;
+            firstName.Append(firstName.GetAt(len) == 's' ? "'" : "'s");
             subType = GetTemplate(CHATBUBBLE_MY);
         }
         else

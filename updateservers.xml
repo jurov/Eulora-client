@@ -1,0 +1,6 @@
+<mirrors>
+<!-- <mirror id="1" name="localhost" url="http://127.0.0.1/update/" repair="false" /> -->
+<mirror id="1" name="Eulora" url="http://minigame.bz/eulora/launcher/" repair="true"/>
+<mirror id="2" name="Eulora" url="http://minigame.bz/eulora/launcher/" repair="true"/>
+<!-- <server name="localhost" description="New User? See Mircea for login account" ip="localhost" port="13331" /> -->
+</mirrors>

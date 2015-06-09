@@ -1,7 +1,7 @@
 /*
  * pawsitemdescriptionwidow.cpp - Author: Andrew Craig
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -70,7 +70,7 @@ bool pawsItemDescriptionWindow::PostSetup()
 void pawsItemDescriptionWindow::HandleMessage( MsgEntry* me )
 {   
     Show();
-    psViewItemDescription mesg(me, ((psNetManager*)psengine->GetNetManager())->GetConnection()->GetAccessPointers());
+    psViewItemDescription mesg(me, psengine->GetNetManager()->GetConnection()->GetAccessPointers());
     description->SetText( mesg.itemDescription );
     csString nameStr;
     nameStr = mesg.itemName;

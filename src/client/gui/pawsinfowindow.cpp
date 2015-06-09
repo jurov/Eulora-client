@@ -1,7 +1,7 @@
 /*
  * pawsinfowindow.cpp - Author: Andrew Craig
  *
- * Copyright (C) 2003 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2003 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -76,7 +76,9 @@ bool pawsInfoWindow::PostSetup()
         return false;
 
     main_hp      = (pawsProgressBar*)FindWidget( "My HP" );
+    main_bp      = (pawsProgressBar*)FindWidget( "My BP" );
     main_mana    = (pawsProgressBar*)FindWidget( "My Mana" );
+    main_spirit    = (pawsProgressBar*)FindWidget( "My Spirit" );
     main_stamina[0] = (pawsProgressBar*)FindWidget( "My PysStamina" );
     main_stamina[1] = (pawsProgressBar*)FindWidget( "My MenStamina" );
     if ( !main_hp || !main_mana || !main_stamina[0] || !main_stamina[1] )
@@ -87,7 +89,9 @@ bool pawsInfoWindow::PostSetup()
         return false;
 
     main_hp->SetTotalValue(1);
+    main_bp->SetTotalValue(1);
     main_mana->SetTotalValue(1);
+    main_spirit->SetTotalValue(1);
     main_stamina[0]->SetTotalValue(1);
     main_stamina[1]->SetTotalValue(1);
     target_hp->SetTotalValue(1);

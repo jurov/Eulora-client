@@ -1,7 +1,7 @@
 /*
  * iscenemanipulate.h - Author: Mike Gist
  *
- * Copyright (C) 2009 Atomic Blue (info@planshift.it, http://www.atomicblue.org) 
+ * Copyright (C) 2009 Atomic Blue (info@planeshift.it, http://www.atomicblue.org) 
  *
  *
  * This program is free software; you can redistribute it and/or

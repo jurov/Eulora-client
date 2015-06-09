@@ -1,0 +1,43 @@
+<MAP_SOUNDS>
+    <SECTOR NAME="common">
+    <!-- Ylian -->
+    <ENTITY MESH="Ylian" MAX_RANGE="30.0">
+        <!-- Peace state -->
+     	<STATE ID="1" PROBABILITY="1.0" VOLUME="1.0" DELAY="10">
+     		<RESOURCE NAME="ylian_peace_v1" />
+     		<RESOURCE NAME="ylian_peace_v2" />
+     		<RESOURCE NAME="ylian_peace_v3" />
+     	</STATE>
+     	<!-- Charge -->
+     	<STATE ID="2" PROBABILITY="1.0" VOLUME="1.0" DELAY="10" FALLBACK_STATE="100" FALLBACK_PROBABILITY="1.0">
+     		<RESOURCE NAME="ylian_charge_v1" />
+     		<RESOURCE NAME="ylian_charge_v2" />
+     		<RESOURCE NAME="ylian_charge_v3" />
+     	</STATE>
+     	<!-- Dead state -->
+     	<STATE ID="5" PROBABILITY="1.0" VOLUME="1.0" FALLBACK_PROBABILITY="1.0">
+     		<RESOURCE NAME="ylian_die_v1" />
+     		<RESOURCE NAME="ylian_die_v2" />
+     		<RESOURCE NAME="ylian_die_v3" />
+     	</STATE>
+     	<!-- Combat state -->
+     	<STATE ID="100" PROBABILITY="1.0" VOLUME="1.0" DELAY="3">
+     		<RESOURCE NAME="ylian_combat_v1" />
+     		<RESOURCE NAME="ylian_combat_v2" />
+     		<RESOURCE NAME="ylian_combat_v3" />
+     	</STATE>
+        <!-- Walk state -->
+        <STATE ID="12" PROBABILITY="1.0" VOLUME="1.0" DELAY="10">
+     		<RESOURCE NAME="ylian_walk_v1" />
+     		<RESOURCE NAME="ylian_walk_v2" />
+     		<RESOURCE NAME="ylian_walk_v3" />
+     	</STATE>
+     	<!-- Run state -->
+     	<STATE ID="13" PROBABILITY="1.0" VOLUME="1.0" DELAY="5">
+     		<RESOURCE NAME="ylian_run_v1" />
+     		<RESOURCE NAME="ylian_run_v2" />
+     		<RESOURCE NAME="ylian_run_v3" />
+     	</STATE>
+    </ENTITY>
+    </SECTOR>
+</MAP_SOUNDS>

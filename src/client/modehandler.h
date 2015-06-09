@@ -1,7 +1,7 @@
 /*
  * modehandler.h    Keith Fulton <keith@paqrat.com>
  *
- * Copyright (C) 2001-2002 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2001-2002 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -192,6 +192,7 @@ protected:
     void HandleNewSectorMessage(MsgEntry* me);
     void HandleCombatEvent(MsgEntry* me);
 	void HandleCachedFile(MsgEntry* me);
+    void HandleVoiceFile(MsgEntry* me);
 
     bool ProcessLighting(LightingSetting *color, float pct);
     LightingSetting *FindLight(LightingSetting *light,int which);

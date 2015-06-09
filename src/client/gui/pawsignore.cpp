@@ -1,7 +1,7 @@
 /*
  * Author: Andrew Craig
  *
- * Copyright (C) 2004 Atomic Blue (info@planshift.it, http://www.atomicblue.org)
+ * Copyright (C) 2004 Atomic Blue (info@planeshift.it, http://www.atomicblue.org)
  *
  *
  * This program is free software; you can redistribute it and/or
@@ -144,7 +144,8 @@ bool pawsIgnoreWindow::LoadIgnoreList()
 void pawsIgnoreWindow::SaveIgnoreList()
 {
     csRef<iVFS> vfs =  csQueryRegistry<iVFS> (PawsManager::GetSingleton().GetObjectRegistry());
-    csRef<iDocumentSystem> xml = csPtr<iDocumentSystem>(new csTinyDocumentSystem);
+    csRef<iDocumentSystem> xml;
+    xml.AttachNew(new csTinyDocumentSystem);
 
     csRef<iDocument> doc = xml->CreateDocument();
     csRef<iDocumentNode> root = doc->CreateRoot();
