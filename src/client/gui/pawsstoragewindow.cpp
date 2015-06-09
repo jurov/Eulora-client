@@ -41,7 +41,7 @@
 #include "pawsstoragewindow.h"
 #include "inventorywindow.h"
 #include "pawsslot.h"
-
+#include "util/log.h"
 /////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////////////
@@ -252,10 +252,15 @@ void pawsStorageWindow::HandleStorage( const char* merchantData )
 
     pawsRadioButtonGroup* group = (pawsRadioButtonGroup*)FindWidget("WithdrawStore");
     if (withdraw)
+    {
         group->SetActive( "Withdraw" );
+        Notify1(LOG_USER, "STORAGE: Withdraw\n");
+    }
     else 
+    {
         group->SetActive( "Store" );
-        
+        Notify1(LOG_USER, "STORAGE: Store\n");
+    }    
 }
 
 
@@ -332,6 +337,7 @@ void pawsStorageWindow::HandleItems( const char* data )
         return;
     }
     csRef<iDocumentNodeIterator> iter = topNode->GetNodes();
+    Notify2(LOG_USER, "STORAGE_ITEMS: %s\n", data);
     
     while ( iter->HasNext() )
     {

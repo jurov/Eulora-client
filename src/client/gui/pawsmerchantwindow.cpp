@@ -42,6 +42,7 @@
 #include "pawsmerchantwindow.h"
 #include "inventorywindow.h"
 #include "pawsslot.h"
+#include "util/log.h"
 
 /////////////////////////////////////////////////////////////////////////////
 
@@ -256,15 +257,15 @@ void pawsMerchantWindow::HandleMerchant( const char* merchantData )
 
     pawsRadioButtonGroup* group = (pawsRadioButtonGroup*)FindWidget("BuySell");
     if ( buy )
-{
+    {
         group->SetActive( "Buy" );
-//printf("pawsMerchantWindow::BUY \n");
-}
+        Notify1(LOG_USER, "MERCHANT: Buy\n");
+    }
     else 
-{
+    {
         group->SetActive( "Sell" );
-//printf("pawsMerchantWindow::SELL \n");
-   }     
+        Notify1(LOG_USER, "MERCHANT: Sell\n");
+    }     
 }
 
 
@@ -319,7 +320,6 @@ void pawsMerchantWindow::HandleItems( const char* data )
     csRef<iDocumentSystem> xml =  csQueryRegistry<iDocumentSystem> (PawsManager::GetSingleton().GetObjectRegistry());
 
     csRef<iDocument> itemList  = xml->CreateDocument();
-
     const char* error = itemList->Parse( data );
     if ( error )
     {
@@ -340,7 +340,7 @@ void pawsMerchantWindow::HandleItems( const char* data )
         return;
     }
     csRef<iDocumentNodeIterator> iter = topNode->GetNodes();
-//printf("After error check %s", data);    
+    Notify2(LOG_USER, "MERCHANT_ITEMS: %s\n", data);
     while ( iter->HasNext() )
     {
         csRef<iDocumentNode> item = iter->Next();
