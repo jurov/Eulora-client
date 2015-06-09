@@ -5,8 +5,8 @@
  The name is derived from the elven nominative of the sea, and it came about through accident : when March Lord Lallfyn Edelyf discovered a rag tag band of vagabonds that had somehow entrenched themselves on the shore of Spellclam Bay, a few leagues from the Great Forest of Aele, he wanted to know who they were. Lord Mircea pointed at the misty expanse of the bay in a wide gesture, which prompted confused calls of 'Euloree ?!', ie 'The Sea ?!' from the elven party. The outsiders acclaimed, and so it was settled.
  They are a restless sort, bound to try everything and go everywhere, reasonably comfortable in all environments but not truely at home in any. Not truely at home anywhere at all."            
             basetexture="1.png" 
-            male="stonebm" 
-            female="stonebm" 
+            male="boy" 
+            female="cube" 
             male_available="yes" 
             female_available="yes">     
             
@@ -25,8 +25,8 @@ Abilities and fields of interest: The Enkidukai possess extraordinary acute sens
 Psychology: The Enkidukai race maintains its wild nature. They live in packs controlled by the male who is strongest and most skilful in combat. Each pack has a typical and easily recognizable look, mostly because of their habit in cutting or colouring fur in ritual or traditional ways. Enkidukai are always suspicious of strangers at the beginning, but once you gain their trust, they become faithful companions.
 Rules: Nothing Special for now."            
             basetexture="1.png" 
-            male="stonebm" 
-	    female="stonebm" 
+            male="boy" 
+	    female="cube" 
             male_available="yes" 
             female_available="yes">
 
@@ -40,8 +40,8 @@ Abilities and fields of interest: The Ynnwn possesses optimal physical and menta
 Psychological traits: Contrary to what people may think, the Ynnwn don't feel diminished by their half-breed status and they face life with a positive attitude. 
 Rules: Nothing Special for now."            
             basetexture="1.png" 
-            male="ynnwnm" 
-            female="fynnwn" 
+            male="boy" 
+            female="cube" 
             male_available="yes" 
             female_available="yes">    
 
@@ -56,8 +56,8 @@ Rules: Nothing Special for now."
 Psychology: The Ylians were the first men who saw the Blue Sun. They were proud of this peculiarity and, in the early days of the civilization, they invented the name Ylians to distinguish them from the other humans that arrived later. In spite of this, they are the most inclined to mix with other races, and have friendly relations with anyone. Thanks to this ability they often cover political roles. 
 Rules: Nothing Special for now."
             basetexture="1.png" 
-            male="ylianm" 
-            female="fynnwn" 
+            male="boy" 
+            female="cube" 
             male_available="yes"
             female_available="yes">
 
@@ -124,8 +124,8 @@ Abilities and fields of interest: Hammerwielders have a more natural affinity wi
 Psychology: You can find them easily in taverns, because they are strong drinkers. They usually behave in a cheerful and communicative way, much more then other Dwarves, but they can become noisy and boastful when sitting in big groups at the tavern.  If you hear someone using the phrase 'rough as a dwarf', you can be sure that he refers to a Hammerwielder. 
 Rules: Nothing Special for now."            
             basetexture="1.png" 
-            male="stonebm" 
-            female="stonebf" 
+            male="boy" 
+            female="cube" 
             male_available="yes" 
             female_available="yes">                
 
