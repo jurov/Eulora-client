@@ -29,6 +29,7 @@
 #include "util/skillcache.h"
 #include "util/strutil.h"
 #include "util/psxmlparser.h"
+#include "util/log.h"
 
 // PAWS INCLUDES
 #include "pawsskillwindow.h"
@@ -1056,7 +1057,8 @@ void pawsSkillWindow::HandleSkillCategory(pawsListBox* tabNameSkillList,
     }
     indicator->Set(x, R, Y, skillInfo->getKnowledgeCost(),
                    Z, skillInfo->getPracticeCost());
-//printf("1042 skill set indicate x %d R %d Y %d knowC %d Z %d practC %d \n",x, R, Y, skillInfo->getKnowledgeCost(), Z, skillInfo->getPracticeCost());
+    Notify8(LOG_USER, "SKILL: skillName:%s progrPoints:%d Rank:%d Knowledge:%d knowCost:%d Practice:%d practCost:%d \n",
+            skillName.GetData(), x, R, Y, skillInfo->getKnowledgeCost(), Z, skillInfo->getPracticeCost());
     if (flush)
     {
         unsortedSkills.Push(row);
