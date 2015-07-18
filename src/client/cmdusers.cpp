@@ -140,6 +140,8 @@ cmdsource->Subscribe("/bezzle",           this);
     cmdsource->Subscribe("/setdesc",       this); // set the description of a char
  
     cmdsource->Subscribe("/loaddesc",      this); // load a description for this char from a file
+
+    cmdsource->Subscribe("/pilot",         this);	//turn and point the character in the direction of the given pos (coordinates)
  
 }
 
@@ -222,7 +224,7 @@ psUserCommands::~psUserCommands()
 
     cmdsource->Unsubscribe("/loaddesc",              this);
 
-
+    cmdsource->Unsubscribe("/pilot",         this);
 
 
     // Unsubscribe emotes.
@@ -1110,6 +1112,24 @@ const char *psUserCommands::HandleCommand(const char *cmd)
             return "Character description loaded.";
         }
     }
+
+    else if(words[0] == "/pilot")	//point character in the direction of the given coordinates
+    	{
+    		if (words.GetCount() < 4)
+           		return "Usage: /pilot x y z";
+
+           	csVector3 currPos;
+           	csVector3 gotoPos = csVector3(words.GetFloat(1), words.GetFloat(2), words.GetFloat(3));
+           	float yRot;
+           	iSector *sector;
+           	psengine->GetCelClient()->GetMainPlayer()->GetLastPosition(currPos, yRot, sector);
+           	csVector3 diff = gotoPos - currPos;
+           	float targetYRot = atan2(-diff.x,-diff.z);
+
+           	psengine->GetCelClient()->GetMainPlayer()->Rotate(0, targetYRot, 0);
+
+           	return "autopilot done.";
+    	}
 
     else
     {
