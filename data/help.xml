@@ -890,6 +890,14 @@ Usage: /ping
 (Writes the ping rate to the system chat tab.)</content>
           </Contents>
         </topic>
+				<topic name="/pilot">
+					<Contents>
+						<content type="text">This command rotates and points your character in the direction of the coordinates you specify. Say you want to get to location 12.15 45.45 102.3. Simply type /pilot 12.15 45.45 102.3, watch your character turn and then go straight ahead. Occasionally you can check your position with /pos and then perhaps run another /pilot 12.15 45.45 102.3 if needed (especially if you had to change direction to avoid a big object or falling off the cliffs...).
+
+Usage: /pilot x y z
+						</content>
+					</Contents>
+				</topic>
         <topic name="/pos">
           <Contents>
             <content type="text">This command prints your current position and the map you are on at the moment. This is extremely useful for many things, such as creating mining maps. If you report a bug always make sure to include the output of /pos in your report so that the developers can easily find the place you're talking about.
