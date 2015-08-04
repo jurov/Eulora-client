@@ -59,6 +59,8 @@
 #include "pscharcontrol.h"
 #include "globals.h"
 #include "psclientchar.h"
+//craft bot include
+#include "craftbot.h"
 
 
 psUserCommands::psUserCommands(ClientMsgHandler* mh,CmdHandler *ch,iObjectRegistry* obj)
@@ -140,6 +142,8 @@ cmdsource->Subscribe("/bezzle",           this);
     cmdsource->Subscribe("/setdesc",       this); // set the description of a char
  
     cmdsource->Subscribe("/loaddesc",      this); // load a description for this char from a file
+    cmdsource->Subscribe("/pilot",         this);     //turn and point the character in the direction of the given pos (coordinates)
+    cmdsource->Subscribe("/craft",         this);     //crafting bot
  
 }
 
@@ -221,6 +225,8 @@ psUserCommands::~psUserCommands()
     cmdsource->Unsubscribe("/setdesc",               this);
 
     cmdsource->Unsubscribe("/loaddesc",              this);
+    cmdsource->Unsubscribe("/pilot",         this);
+    cmdsource->Unsubscribe("/craft",         this);
 
 
 
@@ -1109,6 +1115,46 @@ const char *psUserCommands::HandleCommand(const char *cmd)
 
             return "Character description loaded.";
         }
+    }
+
+    else if(words[0] == "/pilot")     //point character in the direction of the given coordinates
+      {
+              if (words.GetCount() < 4)
+                      return "Usage: /pilot x y z";
+
+              csVector3 currPos;
+              csVector3 gotoPos = csVector3(words.GetFloat(1), words.GetFloat(2), words.GetFloat(3));
+              float yRot;
+              iSector *sector;
+              psengine->GetCelClient()->GetMainPlayer()->GetLastPosition(currPos, yRot, sector);
+              csVector3 diff = gotoPos - currPos;
+              float targetYRot = atan2(-diff.x,-diff.z);
+
+              psengine->GetCelClient()->GetMainPlayer()->Rotate(0, targetYRot, 0);
+
+              return "autopilot done.";
+     }
+
+    else if(words[0] == "/craft")     //craft bot
+    {
+      if (words.GetCount() == 2)
+       {
+              craftBot* bot = (craftBot*) PawsManager::GetSingleton().FindWidget("CraftBotWidget");
+              if (bot)
+                      bot->StopWorking();
+              return "Craft bot stopped. (Usage: /craft quantity recipe_name)";
+      }
+      if (words.GetCount() < 3)
+          return "What do you want to craft? (Usage: /craft quantity recipe_name)";
+
+      craftBot* bot = (craftBot*) PawsManager::GetSingleton().FindWidget("CraftBotWidget");
+      if (bot)
+      {
+              if (bot->StartCraftRun(words.GetTail(2), words.GetInt(1)))
+              return "Crafting Bot started to work...";
+          else return "Craft bot couldn't start, check the log.";
+      }
+      else return "Craft Bot NOT found! Widget loading error perhaps?";
     }
 
     else
