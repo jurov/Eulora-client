@@ -1228,6 +1228,13 @@ inline void psEngine::UpdatePerFrame()
      */
 
     SoundManager->Update();
+    
+    /*
+     * Abominable hack to allow easy subscribing for frame events.
+     */
+    if(netmanager){
+      netmanager->GetCmdHandler()->Publish(csString("_frame_"));
+    }
 }
 
 // ----------------------------------------------------------------------------

@@ -28,7 +28,9 @@ public:
 
     //containers and world objects targeting/using/combining/opening/properties
     static bool Target(csString containerName);
+    static bool TargetEID(EID eid);
     static bool OpenTarget();
+    static bool OpenTargetEID(EID eid);
     static bool CombineContentsInTarget();
     static bool UseTarget();
     static bool TakeAllFromTarget();

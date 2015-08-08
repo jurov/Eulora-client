@@ -61,7 +61,9 @@
 #include "psclientchar.h"
 
  //craft bot include
- #include "craftbot.h"
+#include "craftbot.h"
+#include "minerbot.h"
+
 
 
 psUserCommands::psUserCommands(ClientMsgHandler* mh,CmdHandler *ch,iObjectRegistry* obj)
@@ -146,6 +148,10 @@ cmdsource->Subscribe("/bezzle",           this);
 
     cmdsource->Subscribe("/pilot",         this);	//turn and point the character in the direction of the given pos (coordinates)
     cmdsource->Subscribe("/craft",         this);	//crafting bot
+    minerBot *mb = new minerBot;
+    cmdsource->Subscribe("/mine",           mb);     //mining bot
+    cmdsource->Subscribe("_frame_",         mb);
+ 
 }
 
 psUserCommands::~psUserCommands()
@@ -229,6 +235,10 @@ psUserCommands::~psUserCommands()
 
     cmdsource->Unsubscribe("/pilot",         this);
     cmdsource->Unsubscribe("/craft",         this);
+    //cmdsource->Unsubscribe("/mine",         this);
+
+
+
 
     // Unsubscribe emotes.
     for(unsigned int i=0; i < emoteList.GetSize(); i++)

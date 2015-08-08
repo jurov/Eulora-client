@@ -131,6 +131,18 @@ GEMClientObject* worldHandler::FindItemInWorld(csString name)
     return bestObject;
 }
 
+bool worldHandler::TargetEID(EID eid)
+{
+      GEMClientObject * obj = psengine->GetCelClient()->FindObject(eid);
+      if(obj)
+      {
+        psengine->GetCharManager()->SetTarget(obj, "select");
+        return true;
+      }else{
+        return false;
+      }
+}
+
 bool worldHandler::Target(csString containerName)
 {
 	csString cmd = csString("/target ") + containerName;
@@ -155,16 +167,29 @@ bool worldHandler::OpenTarget()
 	return true;
 }
 
-int worldHandler::GetTargetID()
+bool worldHandler::OpenTargetEID(EID eid)
 {
-	GEMClientObject *object = NULL;
-	object = psengine->GetCharManager()->GetTarget();
+      GEMClientObject * obj = psengine->GetCelClient()->FindObject(eid);
+        if (obj == NULL)
+                return false;
 
-	if (!object)
-		return -1;
+        psViewItemDescription out(eid.Unbox(), -1);
+        out.SendMessage();
 
-	return object->GetEID().Unbox();
+        return true;
 }
+
+int worldHandler::GetTargetID()
+ {
+       GEMClientObject *object = NULL;
+       object = psengine->GetCharManager()->GetTarget();
+ 
+        if (!object)
+                return -1;
+ 
+        return object->GetEID().Unbox();
+ }
+
 bool worldHandler::CloseOpenWindow(csString windowName)
 {
 	csString cmd = csString("/show ") + windowName;
