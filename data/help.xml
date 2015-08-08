@@ -419,6 +419,13 @@ Usage: /yield
             <content type="text">Unclear yet what this will eventually do.</content>
           </Contents>
         </topic>
+        <topic name="/craft">
+        	<Contents>
+        		<content type="text">Use it and watch Foxy's bot do all the crafting work for you. You need to have the recipe in your inventory (or directly in your brain slot). Does NOT work with imprecise recipes (imprecise means "between 1 and 7" as opposed to precise "5"). It will first make any bundles of the desired item that you may have in your inventory. If needed, it will attempt to get ingredients from storage and to train when you level up (both of those features will work only if you are close enough to Heina Draggenfort). If you do NOT want training or getting items from storage, just set camp far away from Heina. Be warned that it doesn't know or care about quality of stuff: it will just grab the first things it needs and finds in inventory and/or storage! Note that you need to give it the name of the *recipe* of the item you want (case does not matter).
+  Usage: /craft count recipe_name   (example: /craft 10 slag recipe)
+  				</content> 
+        	</Contents>
+        </topic>
         <topic name="/dig">
           <Contents>
             <content type="text">Dig up stones and various minerals, provided you have the proper skillset.

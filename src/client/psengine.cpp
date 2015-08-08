@@ -207,6 +207,9 @@ if (!myref)                                                  \
 #include "gui/pawsmusicwindow.h"
 #include "gui/pawssheetline.h"
 
+//Needed for craftbot
+ #include "craftbot.h"
+
 
 // Needed for debugging
 csString psEngine::hwRenderer = "";
@@ -868,6 +871,9 @@ void psEngine::DeclareExtraFactories()
     RegisterFactory(pawsMusicWindowFactory);
     RegisterFactory(pawsSheetLineFactory);
     
+    //craft bot
+    RegisterFactory(craftBotFactory);
+
 }
 
 //-----------------------------------------------------------------------------
