@@ -1,0 +1,23 @@
+<widget_description>
+
+<widget name="CraftBotWidget" factory="craftBot" visible="no" savepositions="yes" movable="yes" resizable="no" style="New Standard GUI" >
+
+    <frame x="0" y="100" width="330" height="200" border="yes" />
+	<title resource="Scaling Title Bar" text="Foxy's Craft Bot" align="left" close_button="yes" />
+    
+    <widget name="CraftBotMainText" factory="pawsMessageTextBox" visible="no">
+                <frame x="20" y="25" width="290" height="180" border="no" />
+                <attachpoints>
+                    <attach point="ATTACH_RIGHT" />
+                    <attach point="ATTACH_TOP" />
+                    <attach point="ATTACH_LEFT" />
+                    <attach point="ATTACH_BOTTOM" />
+                </attachpoints>
+                <pawsScrollBar width="20" maxValue="1.0" />
+                 <subscriptions overwrite = "false" />
+            		 
+    </widget>
+
+</widget>
+
+</widget_description>
