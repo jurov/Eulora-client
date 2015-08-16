@@ -94,7 +94,7 @@ private:
     void HandlePersistItem(MsgEntry* message);
 
     //crafting steps
-    bool ReadRecipe();
+    //bool ReadRecipe();
     bool Explore();
     //bool GetStorageContents();
     bool GetIngredients();

@@ -47,6 +47,8 @@ const csString YOU_EXPLORE = csString("You start to explore");
 minerBot::minerBot()
 {
         markerId = 0;
+        scrollName = (const char*)NULL;
+        claimName = (const char*)NULL;
         state = INACTIVE;
         PostSetup();
         Debug1(LOG_USER,0,"MINER BOT init");
@@ -157,11 +159,11 @@ bool minerBot::tryAdvance()
   switch(state){
     case EXPLORING:
     {
-            Debug4(LOG_USER,0,"MINER BOT tryAdvance %d %s %s", markerId, scrollName.GetData(), claimName.GetData());
+            //Debug4(LOG_USER,0,"MINER BOT tryAdvance %d %s %s", markerId, scrollName.GetData(), claimName.GetData());
         if (markerId != 0 && !scrollName.IsEmpty() && !claimName.IsEmpty()) 
         {
           if(worldHandler::OpenTargetEID(markerId)){
-            Debug1(LOG_USER,0,"MINER BOT switch to retrieving");
+            Debug4(LOG_USER,0,"MINER BOT switch to retrieving %d %s %s", markerId, scrollName.GetData(), claimName.GetData());
           
             GoToNextState();
           }else{
@@ -173,7 +175,13 @@ bool minerBot::tryAdvance()
     case TO_CRAFT:
     {
             Debug1(LOG_USER,0,"MINER BOT tryAdvance TO_CRAFT");
-            if (worldHandler::UseTarget()){
+            bool res;
+            if (claimName.StartsWith("Tiny")){
+              res = worldHandler::UseTarget();
+            }else{
+              res = worldHandler::CombineContentsInTarget();
+            }
+            if (res){
               state = CRAFTING;
             }
     }
@@ -197,17 +205,20 @@ void minerBot::HandleSystem(MsgEntry* message)
                         csString thingName = text.Slice(start+1, end-start-1);
                         if (thingName != ITEM_KEY and thingName.EndsWith("Ennumeration")){
                           scrollName = thingName;
-                        Debug2(LOG_USER,0,"MINER BOT Got: %s", thingName.GetData());
+                          Debug2(LOG_USER,0,"MINER BOT Got: %s", thingName.GetData());
+                        }else{
+                          Debug2(LOG_USER,0,"MINER BOT msg Ignored: %s", text.GetData());
                         }
                         
                     } else if(text.StartsWith(PLACED_ITEM)){
                         size_t end = text.FindLast('!');
                         size_t start = PLACED_ITEM.Length();                                                                                                                                                                                                                                                                                                                                                                        
                         csString thingName = text.Slice(start+1, end-start-1);
-                        if (thingName.StartsWith("Tiny")){
+                        if (thingName.StartsWith("Tiny") || thingName.StartsWith("Small")){
                           claimName = thingName;
                           Debug2(LOG_USER,0,"MINER BOT Placed: %s", thingName.GetData());
                         }else{
+                          Debug2(LOG_USER,0,"MINER BOT item Ignored: %s", thingName.GetData());
                           WrapUp();
                         }
                         //GoToNextState();
@@ -274,11 +285,11 @@ void minerBot::GoToState(MINERBOT_STATES newState)
         state = BETWEEN_ACTIONS;
         switch (newState)
         {
-                case READING_RECIPE:
+/*                case READING_RECIPE:
                 {
                         ReadRecipe();
                         break;
-                }
+                }*/
                 case EXPLORING:
                 {
                         Explore();
@@ -322,8 +333,19 @@ bool minerBot::GetIngredients()
     }
     Debug1(LOG_USER,0,"MINER BOT Recipe equipped.");
 
-    csString itemName = csString("Little Bit O' Nothing");
-    int quantity = 1;
+    csString itemName;
+    int quantity = 0;
+    if(claimName.StartsWith("Tiny")){
+        itemName = csString("Little Bit O' Nothing");
+        quantity = 1;
+    }else if(claimName.StartsWith("Small")){
+        itemName = csString("Coarse Frangible Thread");
+        quantity = 7;
+    }else{
+        Notify1(LOG_USER, "MINER BOT: Unknown claim size");
+        WrapUp();
+        return false;
+    }
 
     //look first in inventory
     OutputMsg(itemName);
@@ -333,6 +355,7 @@ bool minerBot::GetIngredients()
     {
         Notify1(LOG_USER, "MINER BOT: Item not found in inventory");
         WrapUp();
+        return false;
     }
     
     Debug1(LOG_USER,0,"MINER BOT: Item found")
@@ -347,8 +370,8 @@ bool minerBot::GetIngredients()
 bool minerBot::WrapUp()
 {
         Notify1(LOG_USER, "MINER BOT: wrapping up\n");
-        claimName = 0;
-        scrollName = 0;
+        claimName = (const char*)NULL;
+        scrollName = (const char*)NULL;
         markerId = 0;
         state = INACTIVE;
 }
