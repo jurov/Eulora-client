@@ -35,7 +35,7 @@ struct iObjectRegistry;
  * @{ */
 
 #ifndef PS_VERSION
-#define PS_VERSION "0.1.0"
+#define PS_VERSION "0.1.1"
 #endif
 
 #ifndef APPNAME

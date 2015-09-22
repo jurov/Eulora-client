@@ -403,7 +403,7 @@ Copyright (C) 2010 Free Software Foundation, Inc.
 This config.status script is free software; the Free Software Foundation
 gives unlimited permission to copy, distribute and modify it."
 
-ac_pwd='/home/chet/eulora/clientprep2'
+ac_pwd='/home/chet/eulora/EuloraV0.1.1'
 srcdir='.'
 test -n "$AWK" || AWK=awk
 # The default lists apply if the user does not specify any file.
@@ -568,6 +568,9 @@ CRYSTAL.STATICDEPS ?= /home/chet/eulora/cs5/out/linux/debug/libs/crystalspace_st
 CRYSTAL.EXEC_PREFIX ?= /home/chet/eulora/cs5 ;
 CRYSTAL.TOOLS_PREFIX ?= /home/chet/eulora/cs5 ;
 CMD.RELAYTOOL ?= "/bin/bash /home/chet/eulora/cs5/bin/relaytool" ;
+LIBMYSQLCLIENT.AVAILABLE ?= yes ;
+LIBMYSQLCLIENT.CFLAGS ?= -I/usr/include/mysql ;
+LIBMYSQLCLIENT.LFLAGS ?= -L/usr/lib -lmysqlclient ;
 CURL.AVAILABLE ?= yes ;
 CURL.CFLAGS ?=  ;
 CURL.LFLAGS ?= -L/usr/lib/x86_64-linux-gnu -lcurl -Wl,-Bsymbolic-functions -Wl,-z,relro ;

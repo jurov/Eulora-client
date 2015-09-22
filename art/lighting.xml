@@ -78,5 +78,61 @@
  <color value="22" sector="Island" type="ambient" r="0.02" g="0.04" b="0.05" rain_r="0.12" rain_g="0.14" rain_b="0.15" />
  <color value="23" object="IslandSun" type="light" r="0" g="0" b="0" rain_r="0" rain_g="0" rain_b="0" />
  <color value="23" sector="Island" type="ambient" r="0.02" g="0.04" b="0.05" rain_r="0.12" rain_g="0.14" rain_b="0.15" />
+ 
+ 
+ 
+ <color value="0" object="GraveSun" type="light" r="0" g="0" b="0" rain_r="0" rain_g="0" rain_b="0" />
+ <color value="0" sector="GRAVEYARD" type="ambient" r="0.02" g="0.04" b="0.05" rain_r="0.12" rain_g="0.14" rain_b="0.15" />
+
+
+ <color value="1" object="GraveSun" type="light" r="0" g="0" b="0" rain_r="0" rain_g="0" rain_b="0" />
+ <color value="1" sector="GRAVEYARD" type="ambient" r="0.02" g="0.04" b="0.05" rain_r="0.12" rain_g="0.14" rain_b="0.15" />
+ <color value="2" object="GraveSun" type="light" r="0" g="0" b="0" rain_r="0" rain_g="0" rain_b="0" />
+ <color value="2" sector="Graveyard" type="ambient" r="0.02" g="0.04" b="0.05" rain_r="0.12" rain_g="0.14" rain_b="0.15" />
+ <color value="3" object="GraveSun" type="light" r="0" g="0" b="0" rain_r="0" rain_g="0" rain_b="0" />
+ <color value="3" sector="GRAVEYARD" type="ambient" r="0.02" g="0.04" b="0.05" rain_r="0.12" rain_g="0.14" rain_b="0.15" />
+ <color value="4" object="GraveSun" type="light" r="0" g="0" b="0" rain_r="0" rain_g="0" rain_b="0" />
+ <color value="4" sector="GRAVEYARD" type="ambient" r="0.02" g="0.04" b="0.05" rain_r="0.12" rain_g="0.14" rain_b="0.15" />
+ <color value="5" object="GraveSun" type="light" r="0" g="0" b="0" rain_r="0" rain_g="0" rain_b="0" />
+ <color value="5" sector="GRAVEYARD" type="ambient" r="0.02" g="0.04" b="0.05" rain_r="0.12" rain_g="0.14" rain_b="0.15" />
+
+
+ <color value="6" object="GraveSun" type="light" r="0.27" g="0.29" b="0.33" rain_r="0.27" rain_g="0.29" rain_b="0.33" />
+ <color value="6" sector="GRAVEYARD" type="ambient" r="0.15" g="0.16" b="0.17" rain_r="0.15" rain_g="0.16" rain_b="0.17" />
+ <color value="7" object="GraveSun" type="light" r="0.41" g="0.37" b="0.32" rain_r="0.41" rain_g="0.37" rain_b="0.32" />
+ <color value="7" sector="GRAVEYARD" type="ambient" r="0.17" g="0.18" b="0.19" rain_r="0.17" rain_g="0.18" rain_b="0.19" />
+ <color value="8" object="GraveSun" type="light" r="0.90" g="0.83" b="0.71" rain_r="0.90" rain_g="0.83" rain_b="0.71" />
+ <color value="8" sector="GRAVEYARD" type="ambient" r="0.20" g="0.21" b="0.22" rain_r="0.20" rain_g="0.21" rain_b="0.22" />
+ <color value="9" object="GraveSun" type="light" r="0.90" g="0.83" b="0.71" rain_r="0.90" rain_g="0.83" rain_b="0.71" />
+ <color value="9" sector="GRAVEYARD" type="ambient" r="0.20" g="0.21" b="0.22" rain_r="0.20" rain_g="0.21" rain_b="0.22" />
+ <color value="10" object="GraveSun" type="light" r="0.90" g="0.83" b="0.71" rain_r="0.90" rain_g="0.83" rain_b="0.71" />
+ <color value="10" sector="GRAVEYARD" type="ambient" r="0.20" g="0.21" b="0.22" rain_r="0.20" rain_g="0.21" rain_b="0.22" />
+ <color value="11" object="GraveSun" type="light" r="0.90" g="0.83" b="0.71" rain_r="0.90" rain_g="0.83" rain_b="0.71" />
+ <color value="11" sector="GRAVEYARD" type="ambient" r="0.20" g="0.21" b="0.22" rain_r="0.20" rain_g="0.21" rain_b="0.22" />
+ <color value="12" object="GraveSun" type="light" r="0.90" g="0.83" b="0.71" rain_r="0.90" rain_g="0.83" rain_b="0.71" />
+ <color value="12" sector="GRAVEYARD" type="ambient" r="0.20" g="0.21" b="0.22" rain_r="0.20" rain_g="0.21" rain_b="0.22" />
+ <color value="13" object="GraveSun" type="light" r="0.90" g="0.83" b="0.71" rain_r="0.90" rain_g="0.83" rain_b="0.71" />
+ <color value="13" sector="GRAVEYARD" type="ambient" r="0.20" g="0.21" b="0.22" rain_r="0.20" rain_g="0.21" rain_b="0.22" />
+ <color value="14" object="GraveSun" type="light" r="0.90" g="0.83" b="0.71" rain_r="0.90" rain_g="0.83" rain_b="0.71" />
+ <color value="14" sector="GRAVEYARD" type="ambient" r="0.20" g="0.21" b="0.22" rain_r="0.20" rain_g="0.21" rain_b="0.22" />
+ <color value="15" object="GraveSun" type="light" r="0.90" g="0.83" b="0.71" rain_r="0.90" rain_g="0.83" rain_b="0.71" />
+ <color value="15" sector="GRAVEYARD" type="ambient" r="0.20" g="0.21" b="0.22" rain_r="0.20" rain_g="0.21" rain_b="0.22" />
+ <color value="16" object="GraveSun" type="light" r="0.90" g="0.83" b="0.71" rain_r="0.90" rain_g="0.83" rain_b="0.71" />
+ <color value="16" sector="GRAVEYARD" type="ambient" r="0.20" g="0.21" b="0.22" rain_r="0.20" rain_g="0.21" rain_b="0.22" />
+ <color value="17" object="GraveSun" type="light" r="0.90" g="0.83" b="0.71" rain_r="0.90" rain_g="0.83" rain_b="0.71" />
+ <color value="17" sector="GRAVEYARD" type="ambient" r="0.20" g="0.21" b="0.22" rain_r="0.20" rain_g="0.21" rain_b="0.22" />
+ <color value="18" object="GraveSun" type="light" r="0.90" g="0.83" b="0.71" rain_r="0.90" rain_g="0.83" rain_b="0.71" />
+ <color value="18" sector="GRAVEYARD" type="ambient" r="0.20" g="0.21" b="0.22" rain_r="0.20" rain_g="0.21" rain_b="0.22" />
+ <color value="19" object="GraveSun" type="light" r="0.90" g="0.83" b="0.71" rain_r="0.90" rain_g="0.83" rain_b="0.71" />
+ <color value="19" sector="GRAVEYARD" type="ambient" r="0.20" g="0.21" b="0.22" rain_r="0.20" rain_g="0.21" rain_b="0.22" />
+ <color value="20" object="GraveSun" type="light" r="0.41" g="0.37" b="0.32" rain_r="0.41" rain_g="0.37" rain_b="0.32" />
+ <color value="20" sector="GRAVEYARD" type="ambient" r="0.17" g="0.18" b="0.19" rain_r="0.17" rain_g="0.18" rain_b="0.19" />
+
+ <color value="21" object="GraveSun" type="light" r="0.27" g="0.29" b="0.33" rain_r="0.27" rain_g="0.29" rain_b="0.33" />
+ <color value="21" sector="GRAVEYARD" type="ambient" r="0.15" g="0.16" b="0.17" rain_r="0.15" rain_g="0.16" rain_b="0.17" />
+ <color value="22" object="GraveSun" type="light" r="0" g="0" b="0" rain_r="0" rain_g="0" rain_b="0" />
+ <color value="22" sector="GRAVEYARD" type="ambient" r="0.02" g="0.04" b="0.05" rain_r="0.12" rain_g="0.14" rain_b="0.15" />
+ <color value="23" object="GraveSun" type="light" r="0" g="0" b="0" rain_r="0" rain_g="0" rain_b="0" />
+ <color value="23" sector="GRAVEYARD" type="ambient" r="0.02" g="0.04" b="0.05" rain_r="0.12" rain_g="0.14" rain_b="0.15" />
  </lighting>
 

@@ -67,12 +67,12 @@ class psSkillCacheItem {
          */
         psSkillCacheItem(int skillId,
                          unsigned int nameId,
-                         unsigned short R,
-                         unsigned short AS,
-                         unsigned short Y,
-                         unsigned short YC,
-                         unsigned short Z,
-                         unsigned short ZC,
+                         long long R,
+                         long long AS,
+                         long long Y,
+                         long long YC,
+                         long long Z,
+                         long long ZC,
                          unsigned short CAT,
                          bool stat = false);
 
@@ -82,12 +82,12 @@ class psSkillCacheItem {
           * The update() function updates the cache item and sets the modified state if
           * needed.
          */
-        void update(unsigned short R,
-                    unsigned short AS,
-                    unsigned short Y,
-                    unsigned short YC,
-                    unsigned short Z,
-                    unsigned short ZC);
+        void update(long long R,
+                    long long AS,
+                    long long Y,
+                    long long YC,
+                    long long Z,
+                    long long ZC);
 
         /**
          * Updates the cache item with values form another cache item
@@ -120,12 +120,12 @@ class psSkillCacheItem {
         int getSkillId() const { return skillId; }
         unsigned int getNameId() const { return nameId; }
         unsigned short getCategory() const { return category; }
-        unsigned short getRank() const { return rank; }
-        unsigned short getActualStat() const { return actualStat; }
-        unsigned short getKnowledge() const { return knowledge; }
-        unsigned short getKnowledgeCost() const { return knowledgeCost; }
-        unsigned short getPractice() const { return practice; }
-        unsigned short getPracticeCost() const { return practiceCost; }
+        long long getRank() const { return rank; }
+        long long getActualStat() const { return actualStat; }
+        long long getKnowledge() const { return knowledge; }
+        long long getKnowledgeCost() const { return knowledgeCost; }
+        long long getPractice() const { return practice; }
+        long long getPracticeCost() const { return practiceCost; }
 
     private:
         bool removed;
@@ -134,12 +134,12 @@ class psSkillCacheItem {
         unsigned int nameId;
         int skillId;
 
-        unsigned short rank;
-        unsigned short actualStat;
-        unsigned short knowledge;
-        unsigned short practice;
-        unsigned short knowledgeCost;
-        unsigned short practiceCost;
+        long long rank;
+        long long actualStat;
+        long long knowledge;
+        long long practice;
+        long long knowledgeCost;
+        long long practiceCost;
         unsigned short category;
         bool stat;
 
