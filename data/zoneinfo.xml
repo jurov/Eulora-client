@@ -89,6 +89,20 @@
     <region map="deathrealm" />
   </zone>
 
+<!-- death-realm -->
+  <zone sector="Graveyard" loadimage="Loading Background">
+    <region map="Graveyard" />
+  </zone>
+  <zone sector="DRexit" loadimage="Loading Death Realm Background">
+    <region map="deathrealm" />
+  </zone>
+  <zone sector="DRCitadel" loadimage="Loading Death Realm Background">
+    <region map="deathrealm" />
+  </zone>
+
+
+
+
   <!-- hydlaa -->
   <zone sector="hydlaa_plaza" loadimage="Loading Background">
     <region map="hydlaa_common" />

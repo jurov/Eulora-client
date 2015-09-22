@@ -157,23 +157,23 @@
             <text string="Amount to deposit" horizAdjust="CENTRE" />
         </widget>
 
-        <widget name="BITCentsToDeposit" factory="pawsEditTextBox" tooltip="The number of circles you wish to deposit." alwaysontop="true">
+        <widget name="BITCentsToDeposit" factory="pawsEditTextBox" tooltip="The number of BITCents you wish to deposit." alwaysontop="true">
              <frame x="45" y="245" width="30" height="15" border="no" />
         </widget>
 
-        <widget name="DenariusToDeposit" factory="pawsEditTextBox" tooltip="The number of octas you wish to deposit." alwaysontop="true">
+        <widget name="DenariusToDeposit" factory="pawsEditTextBox" tooltip="The number of Denarius you wish to deposit." alwaysontop="true">
              <frame x="85" y="245" width="30" height="15" border="no" />
         </widget>
 
-        <widget name="ArgentsToDeposit" factory="pawsEditTextBox" tooltip="The number of hexas you wish to deposit." alwaysontop="true">
+        <widget name="ArgentsToDeposit" factory="pawsEditTextBox" tooltip="The number of Argents you wish to deposit." alwaysontop="true">
              <frame x="125" y="245" width="30" height="15" border="no" />
         </widget>
 
-        <widget name="CoppersToDeposit" factory="pawsEditTextBox" tooltip="The number of trias you wish to deposit." alwaysontop="true">
+        <widget name="CoppersToDeposit" factory="pawsEditTextBox" tooltip="The number of Coppers you wish to deposit." alwaysontop="true">
              <frame x="165" y="245" width="30" height="15" border="no" />
         </widget>
 
-        <widget name="CirclesImage" factory="pawsWidget" tooltip="Circles available to deposit." >
+        <widget name="CirclesImage" factory="pawsWidget" tooltip="BITCents available to deposit." >
             <frame x="45" y="250" width="30" height="30" border="no" />
             <bgimage resource="MoneyCircles" />
         </widget>

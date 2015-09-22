@@ -426,7 +426,35 @@ public:
         current += sizeof(uint32_t);
 //printf ("427 current %zu \n", current);
     }
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+    void Add(const uint64_t s)
+    {
+        if (bytes == NULL)
+        {
+            Bug1("MsgEntry::Add(const uint64_t) bytes=NULL!\n");
+            CS_ASSERT(false);
+            return;
+        }
 
+        // If the message is in overrun state, don't add anymore, it's already invalid
+        if (overrun)
+            return;
+
+        // Not enough space left!  Don't overwrite the buffer.
+        //printf(" current %zu + sizeof(uint64_t) > bytes->GetSize() %zu \n",current,bytes->GetSize());
+        if (current + sizeof(uint64_t) > bytes->GetSize())
+        {
+            Bug3("MsgEntry::Add(const uint64_t) call for msgid=%u would overflow buffer! type = %u\n",msgid, bytes->type);
+            overrun=true;
+            return;
+        }
+
+        uint64_t *p = (uint64_t*) (bytes->payload+current);
+        *p = csLittleEndian::Convert(s);
+        current += sizeof(uint64_t);
+    }
+
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
       /// Add a pointer to the current psMessageBytes buffer. Pointers must never be sent over the network!
 
     void AddPointer(const uintptr_t i)
@@ -823,6 +851,28 @@ public:
         current += sizeof(uint32_t);
         return csLittleEndian::UInt32(*p);
     }
+//&&&&&&&&&&&&&&&&&&&&&&&&&
+/// Get an unsigned 4byte int from the current psMessageBytes buffer
+    uint64_t GetUInt64()
+    {
+        // If the message is in overrun state, we know we can't read anymore
+        if (overrun)
+            return 0;
+
+        if (current+sizeof(uint64_t) > bytes->GetSize())
+        {
+            Debug2(LOG_NET,0,"Message id %u would have read beyond end of buffer.\n",msgid);
+            overrun=true;
+            return 0;
+        }
+
+        uint64_t *p = (uint64_t *)(bytes->payload+current);
+        current += sizeof(uint64_t);
+        return csLittleEndian::UInt64(*p);
+    }
+
+
+//&&&&&&&&&&&&&&&&&&&&&&&&&
 
     /// Get a pointer from the current psMessageBytes buffer. Pointers must never be sent over the network!
     uintptr_t GetPointer()

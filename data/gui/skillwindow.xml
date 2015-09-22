@@ -223,9 +223,18 @@
             </attachpoints>
 
             <!-- Tabs -->
-            <widget name="Stats Button" factory="pawsButton" style="Standard Tab" id="1000" >
+         <!--   <widget name="Stats Button" factory="pawsButton" style="Standard Tab" id="1000" >
                 <frame x="15" y="3" width="55" height="28" />
                 <label text="Stats" />
+                <attachpoints>
+                    <attach point="PROPORTIONAL_RIGHT" />
+                    <attach point="ATTACH_LEFT" />
+                </attachpoints>
+            </widget>
+	    -->
+	    <widget name="Scho Button" factory="pawsButton" style="Standard Tab" id="1000" >
+                <frame x="15" y="3" width="55" height="28" />
+                <label text="Scholar" />
                 <attachpoints>
                     <attach point="PROPORTIONAL_RIGHT" />
                     <attach point="ATTACH_LEFT" />
@@ -302,7 +311,7 @@
 
 
 <!-- ********************************************************************* -->
-            <widget name="Stats" factory="pawsWidget" visible="no" id="1100">
+         <!--   <widget name="Stats" factory="pawsWidget" visible="no" id="1100">
                 <frame x="10" y="30" width="450" height="275" />
                 <attachpoints>
                     <attach point="ATTACH_RIGHT" />
@@ -312,7 +321,7 @@
                 </attachpoints>
 
                 <widget name="StatsSkillList" factory="pawsListBox"  >
-                   <!-- <frame x="10" y="0" width="330" height="250" border="no" /> -->
+                   
 <frame x="10" y="0" width="480" height="250" border="no" />
                     <columns height="17" headings="no" >
                         <column width="170" >
@@ -335,17 +344,57 @@
                     </columns>
                 </widget>
 
-<!--
-                <widget name="StatsDescription" factory="pawsMultiLineTextBox" >
-                    <frame x="10" y="260" width="330" height="100" border="no" />
-                </widget>
--->
+
 
                 <widget name="StatsDescription" factory="pawsMultiLineTextBox" >
                     <frame x="10" y="215" width="430" height="75" border="yes" />
                 </widget>
 
+            </widget> -->
+	    <!--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&-->
+	    
+	<widget name="Scholar Skills Panel" factory="pawsWidget" visible="no" id="1100">
+                <frame x="10" y="30" width="450" height="300" />
+                <attachpoints>
+                    <attach point="ATTACH_RIGHT" />
+                    <attach point="PROPORTIONAL_TOP" />
+                    <attach point="ATTACH_LEFT" />
+                    <attach point="PROPORTIONAL_BOTTOM" />
+                </attachpoints>
+
+                <widget name="SchoSkillList" factory="pawsListBox"  >
+                    <frame x="10" y="0" width="430" height="150" border="no" />
+                    <columns height="17" headings="no" >
+                        <column width="200" >
+                            <widget name="ScholarName" factory="pawsTextBox">
+                            </widget>
+                        </column>
+
+                        <column width="50" >
+                            <widget name="ScholarRank" factory="pawsTextBox">
+                            </widget>
+                        </column>
+<column width="90" >
+                            <widget name="ScholarIndCol" factory="pawsWidget">
+                                <widget name="SchoIndicator" factory="pawsSkillIndicator">
+                                    <frame x="5" y="2" width="80" height="12" border="no" />
+                                </widget>
+                            </widget>
+                        
+                        </column>
+                    </columns>
+                </widget>
+
+
+                <widget name="SchoDescription" factory="pawsMultiLineTextBox" >
+                    <frame x="10" y="160" width="430" height="130" border="no" />
+                </widget>
             </widget>
+<!-- ************* -->
+	    
+	    <!--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&-->
+	    
+	    
 <!-- ************* -->
  <widget name="Fight Skills Panel" factory="pawsWidget" visible="no" id="1108">
                 <frame x="10" y="30" width="450" height="300" />
@@ -359,7 +408,7 @@
                 <widget name="FightSkillList" factory="pawsListBox"  >
                     <frame x="10" y="0" width="430" height="150" border="no" />
                     <columns height="17" headings="no" >
-                        <column width="200" >
+                        <column width="160" >
                             <widget name="FightName" factory="pawsTextBox">
                             </widget>
                         </column>
@@ -368,10 +417,10 @@
                             <widget name="FightRank" factory="pawsTextBox">
                             </widget>
                         </column>
-<column width="90" >
+<column width="210" >
                             <widget name="FightIndCol" factory="pawsWidget">
                                 <widget name="FightIndicator" factory="pawsSkillIndicator">
-                                    <frame x="5" y="2" width="80" height="12" border="no" />
+                                    <frame x="5" y="2" width="200" height="12" border="no" />
                                 </widget>
                             </widget>
                         
@@ -398,7 +447,7 @@
                 <widget name="UtilitySkillList" factory="pawsListBox"  >
                     <frame x="10" y="0" width="430" height="150" border="no" />
                     <columns height="17" headings="no" >
-                        <column width="200" >
+                        <column width="160" >
                             <widget name="UtilityName" factory="pawsTextBox">
                             </widget>
                         </column>
@@ -407,10 +456,10 @@
                             <widget name="UtilityRank" factory="pawsTextBox">
                             </widget>
                          </column>
-                         <column width="90" >
+                         <column width="210" >
                             <widget name="UtilityIndCol" factory="pawsWidget">
                                 <widget name="UtilityIndicator" factory="pawsSkillIndicator">
-                                    <frame x="5" y="2" width="80" height="12" border="no" />
+                                    <frame x="5" y="2" width="200" height="12" border="no" />
                                 </widget>
                             </widget>
                         
@@ -437,7 +486,7 @@
                 <widget name="LeadSkillList" factory="pawsListBox"  >
                     <frame x="10" y="0" width="430" height="150" border="no" />
                     <columns height="17" headings="no" >
-                        <column width="200" >
+                        <column width="160" >
                             <widget name="LeadName" factory="pawsTextBox">
                             </widget>
                         </column>
@@ -446,10 +495,10 @@
                             <widget name="LeadRank" factory="pawsTextBox">
                             </widget>
                         </column>
- <column width="90" >
+ <column width="210" >
                             <widget name="LeadIndCol" factory="pawsWidget">
                                 <widget name="LeadIndicator" factory="pawsSkillIndicator">
-                                    <frame x="5" y="2" width="80" height="12" border="no" />
+                                    <frame x="5" y="2" width="200" height="12" border="no" />
                                 </widget>
                             </widget>
                         </column>
@@ -475,7 +524,7 @@
                 <widget name="GatherSkillList" factory="pawsListBox"  >
                     <frame x="10" y="0" width="430" height="150" border="no" />
                     <columns height="17" headings="no" >
-                        <column width="170" >
+                        <column width="160" >
                             <widget name="GatherSkill" factory="pawsTextBox">
                             </widget>
                         </column>
@@ -483,10 +532,10 @@
                             <widget name="GatherRank" factory="pawsTextBox">
                             </widget>
                         </column>
-                        <column width="90" >
+                        <column width="210" >
                             <widget name="GatherIndCol" factory="pawsWidget">
                                 <widget name="GatherIndicator" factory="pawsSkillIndicator">
-                                    <frame x="5" y="2" width="80" height="12" border="no" />
+                                    <frame x="5" y="2" width="200" height="12" border="no" />
                                 </widget>
                             </widget>
                         </column>
@@ -513,7 +562,7 @@
                 <widget name="MagicSkillList" factory="pawsListBox"  >
                     <frame x="10" y="0" width="430" height="150" border="no" />
                     <columns height="17" headings="no" >
-                        <column width="170" >
+                        <column width="160" >
                             <widget name="MagicSkill" factory="pawsTextBox">
                             </widget>
                         </column>
@@ -521,10 +570,10 @@
                             <widget name="MagicRank" factory="pawsTextBox">
                             </widget>
                         </column>
-                        <column width="90" >
+                        <column width="210" >
                             <widget name="MagicIndCol" factory="pawsWidget">
                                 <widget name="MagicIndicator" factory="pawsSkillIndicator">
-                                    <frame x="5" y="2" width="80" height="12" border="no" />
+                                    <frame x="5" y="2" width="200" height="12" border="no" />
                                 </widget>
                             </widget>
                         </column>
@@ -548,7 +597,7 @@
                 <widget name="CraftSkillList" factory="pawsListBox"  >
                     <frame x="10" y="0" width="430" height="150" border="no" />
                     <columns height="17" headings="no" >
-                        <column width="170" >
+                        <column width="160" >
                             <widget name="CraftSkill" factory="pawsTextBox">
                             </widget>
                         </column>
@@ -556,10 +605,10 @@
                             <widget name="CraftRank" factory="pawsTextBox">
                             </widget>
                         </column>
-                        <column width="90" >
+                        <column width="210" >
                             <widget name="CraftIndCol" factory="pawsWidget">
                                 <widget name="CraftIndicator" factory="pawsSkillIndicator">
-                                    <frame x="5" y="2" width="80" height="12" border="no" />
+                                    <frame x="5" y="2" width="200" height="12" border="no" />
                                 </widget>
                             </widget>
                         </column>
@@ -583,7 +632,7 @@
                 <widget name="FaithSkillList" factory="pawsListBox"  >
                     <frame x="10" y="0" width="430" height="150" border="no" />
                     <columns height="17" headings="no" >
-                        <column width="170" >
+                        <column width="160" >
                             <widget name="FaithSkill" factory="pawsTextBox">
                             </widget>
                         </column>
@@ -591,10 +640,10 @@
                             <widget name="FaithRank" factory="pawsTextBox">
                             </widget>
                         </column>
-                        <column width="90" >
+                        <column width="210" >
                             <widget name="FaithIndCol" factory="pawsWidget">
                                 <widget name="FaithIndicator" factory="pawsSkillIndicator">
-                                    <frame x="5" y="2" width="80" height="12" border="no" />
+                                    <frame x="5" y="2" width="200" height="12" border="no" />
                                 </widget>
                             </widget>
                         </column>

@@ -113,8 +113,9 @@ bool pawsSkillWindow::PostSetup()
 
     xml =  csQueryRegistry<iDocumentSystem > ( PawsManager::GetSingleton().GetObjectRegistry());
 
-    statsSkillList        = (pawsListBox*)FindWidget("StatsSkillList");
-    statsSkillDescription = (pawsMultiLineTextBox*)FindWidget("StatsDescription");
+
+    schoSkillList        = (pawsListBox*)FindWidget("SchoSkillList");
+    schoSkillDescription = (pawsMultiLineTextBox*)FindWidget("SchoDescription");
 
     fightSkillList        = (pawsListBox*)FindWidget("FightSkillList");
     fightSkillDescription = (pawsMultiLineTextBox*)FindWidget("FightDescription");
@@ -378,7 +379,7 @@ void pawsSkillWindow::Close()
     Hide();
 
 
-    statsSkillList->Clear();
+    schoSkillList->Clear();
     fightSkillList->Clear();
     gatherSkillList->Clear();
     craftSkillList->Clear();
@@ -449,9 +450,9 @@ void pawsSkillWindow::SelectSkill(int skill, int cat)
     //Let's see which category the skill belongs to
     switch(cat)
     {
-    case 0: //Stats
+        case 0: //scho
         {
-            statsSkillList->Select(unsortedSkills[skill]);
+            schoSkillList->Select(unsortedSkills[skill]);
             break;
         }
     case 1: //Combat skills
@@ -505,7 +506,8 @@ void pawsSkillWindow::HandleSkillList(psSkillCache *skills, int selectedNameId, 
     if (flush)
     {
         // Clear descriptions
-        statsSkillDescription->SetText("");
+
+    	schoSkillDescription->SetText("");
         fightSkillDescription->SetText("");
         utilitySkillDescription->SetText("");
         leadSkillDescription->SetText("");
@@ -516,7 +518,7 @@ void pawsSkillWindow::HandleSkillList(psSkillCache *skills, int selectedNameId, 
 
 
         // Clear everything on a flush
-        statsSkillList->Clear();
+    	schoSkillList->Clear();
         fightSkillList->Clear();
         utilitySkillList->Clear();
         leadSkillList->Clear();
@@ -545,11 +547,12 @@ void pawsSkillWindow::HandleSkillList(psSkillCache *skills, int selectedNameId, 
 
         if (flush || skills->isModified())
         {
-            switch (skill->getCategory())
+            switch (skill->getCategory()-1)
             {
+
                 case 0://Stats
                 {
-                    HandleSkillCategory(statsSkillList, "StatsIndicator", "Stats Button", skill, idx, flush);
+                    HandleSkillCategory(schoSkillList, "SchoIndicator", "Stats Button", skill, idx, flush);
                     break;
                 }
                 case 1://Combat skills
@@ -593,7 +596,7 @@ void pawsSkillWindow::HandleSkillList(psSkillCache *skills, int selectedNameId, 
     
     if (flush)
     {
-        statsSkillList->SetSortedColumn(0);
+    	schoSkillList->SetSortedColumn(0);
         fightSkillList->SetSortedColumn(0);
         utilitySkillList->SetSortedColumn(0);
         leadSkillList->SetSortedColumn(0);
@@ -679,7 +682,7 @@ void pawsSkillWindow::HandleSkillDescription( csString& description )
     {
         case 0://Stats
         {
-             statsSkillDescription->SetText(descStr);
+             schoSkillDescription->SetText(descStr);
              break;
         }
         case 1://Combat skills
@@ -883,7 +886,7 @@ void pawsSkillWindow::OnListAction( pawsListBox* widget, int status )
             {
                 case 0://Stats
                 {
-                    statsSkillDescription->SetText(desc->GetDescription());
+                    schoSkillDescription->SetText(desc->GetDescription());
                     break;
                 }
                 case 1://Combat skills
@@ -988,10 +991,10 @@ void pawsSkillWindow::HandleSkillCategory(pawsListBox* tabNameSkillList,
                                           psSkillCacheItem *skillInfo,
                                           int &idx, bool flush)
 {
-
-    int R = skillInfo->getRank();
-    int Y = skillInfo->getKnowledge();
-    int Z = skillInfo->getPractice();
+  
+    long long R = skillInfo->getRank();
+    long long Y = skillInfo->getKnowledge();
+    long long Z = skillInfo->getPractice();
 
      // filter out untrained skills FILTER
     if (filter  &&  R==0  &&  Y==0  &&  Z==0)
@@ -1161,9 +1164,9 @@ void pawsSkillIndicator::Draw()
     g2d->DrawLine(sf.xmin, sf.ymin, sf.xmin, sf.ymax, 0);
 }
 
-void pawsSkillIndicator::Set(unsigned int x, int rank, int y, int yCost, int z, int zCost)
+void pawsSkillIndicator::Set(long long  x, long long rank, long long y, long long yCost, long long z, long long zCost)
 {
-//printf("1145  rank %d ycost %d zcost %d \n",rank,  yCost,zCost);
+//printf("1145  set rank %lld ycost %lld zcost %lld \n",rank,  yCost,zCost);
     this->x = x;
     this->rank = rank;
     //clamp ycost so if someone overtrained (due to training before changes to the training cost)

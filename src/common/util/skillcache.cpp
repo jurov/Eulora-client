@@ -53,12 +53,12 @@ psSkillCacheItem::psSkillCacheItem(unsigned int nameId)
 
 psSkillCacheItem::psSkillCacheItem(int skillId,
                                    unsigned int nameId,
-                                   unsigned short R,
-                                   unsigned short AS,
-                                   unsigned short Y,
-                                   unsigned short YC,
-                                   unsigned short Z,
-                                   unsigned short ZC,
+                                   long long R,
+                                   long long AS,
+                                   long long Y,
+                                   long long YC,
+                                   long long Z,
+                                   long long ZC,
                                    unsigned short CAT,
                                    bool stat)
     : removed(false), modified(true)
@@ -95,12 +95,12 @@ unsigned short psSkillCacheItem::size() const
     }
 }
 
-void psSkillCacheItem::update(unsigned short R,
-                              unsigned short AS,
-                              unsigned short Y,
-                              unsigned short YC,
-                              unsigned short Z,
-                              unsigned short ZC)
+void psSkillCacheItem::update(long long R,
+                              long long AS,
+                              long long Y,
+                              long long YC,
+                              long long Z,
+                              long long ZC)
 {
     if (rank != R)
     {
@@ -191,13 +191,13 @@ void psSkillCacheItem::read(MsgEntry *msg)
         case psSkillCacheItem::UPDATE_OR_ADD:
 //printf(" skillcache 188 case  read \n");
             removed = false;
-            rank = msg->GetUInt16();
-            actualStat = msg->GetUInt16();
-            knowledge = msg->GetUInt16();
-            knowledgeCost = msg->GetUInt16();
-            practice = msg->GetUInt16();
-            practiceCost = msg->GetUInt16();
-            category = msg->GetUInt16();
+            rank = msg->GetUInt64();
+            actualStat = msg->GetUInt64();
+            knowledge = msg->GetUInt64();
+            knowledgeCost = msg->GetUInt64();
+            practice = msg->GetUInt64();
+            practiceCost = msg->GetUInt64();
+            category = msg->GetUInt64();
             stat = msg->GetBool();
 //printf(" 202 read skillcache rank %d, AS %d, prac %d, knw %d \n",rank,actualStat,practice,knowledge);
             break;
@@ -215,13 +215,13 @@ void psSkillCacheItem::write(MsgEntry *msg)
     {
         msg->Add((uint8_t)psSkillCacheItem::UPDATE_OR_ADD);
 //printf(" skillcache 188 case  WRITE \n");
-        msg->Add((uint16_t)rank);
-        msg->Add((uint16_t)actualStat);
-        msg->Add((uint16_t)knowledge);
-        msg->Add((uint16_t)knowledgeCost);
-        msg->Add((uint16_t)practice);
-        msg->Add((uint16_t)practiceCost);
-        msg->Add((uint16_t)category);
+        msg->Add((uint64_t)rank);
+        msg->Add((uint64_t)actualStat);
+        msg->Add((uint64_t)knowledge);
+        msg->Add((uint64_t)knowledgeCost);
+        msg->Add((uint64_t)practice);
+        msg->Add((uint64_t)practiceCost);
+        msg->Add((uint64_t)category);
         msg->Add(stat);
 //printf(" 226 write skillcache rank %d, AS %d, prac %d, knw %d \n",rank,actualStat,practice,knowledge);
     }
@@ -365,13 +365,13 @@ void psSkillCache::setProgressionPoints(unsigned int points)
 
 unsigned short psSkillCache::size() const
 {
-    unsigned short sz = sizeof(uint32_t) + sizeof(bool) + sizeof(uint16_t);
+    unsigned short sz = sizeof(uint64_t) + sizeof(bool) + sizeof(uint64_t);
     psSkillCacheIter p(skillCache);
     while (p.HasNext())
     {
         psSkillCacheItem *item = p.Next();
         if (item && item->isModified())
-            sz += item->size() + sizeof(uint32_t);
+            sz += item->size() + (7*sizeof(uint64_t));
     }
     return sz;
 }
@@ -468,16 +468,13 @@ csString psSkillCache::ToString() const
         }
         else
         {
-            result.AppendFmt("NID: %d Cat: %d R: %d AS: %d K: %d KC: %d P: %d PC: %d;",
+            result.AppendFmt("NID: %d Cat: %d R: %lld AS: %lld K: %lld KC: %lld P: %lld PC: %lld;",
                              item->getNameId(), item->getCategory(), item->getRank(),
                              item->getActualStat(), item->getKnowledge(),
                              item->getKnowledgeCost(), item->getPractice(),
                              item->getPracticeCost());
-printf("NID: %d Cat: %d R: %d AS: %d K: %d KC: %d P: %d PC: %d;",
-                             item->getNameId(), item->getCategory(), item->getRank(),
-                             item->getActualStat(), item->getKnowledge(),
-                             item->getKnowledgeCost(), item->getPractice(),
-                             item->getPracticeCost());
+
+                             
         }
 
         if (p.HasNext())

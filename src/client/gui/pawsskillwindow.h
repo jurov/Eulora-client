@@ -118,12 +118,13 @@ protected:
     /** This handles the skill list for each category */
     void HandleSkillCategory(pawsListBox* tabNameSkillList, const char* indWidget,
                              const char* tabName, psSkillCacheItem* skillInfo, int &idx, bool flush);
-
-    pawsListBox *statsSkillList, *gatherSkillList, *magicSkillList, *craftSkillList, *faithSkillList, *fightSkillList, *utilitySkillList, *leadSkillList;
-    pawsListBox *leadList;
+pawsListBox  *gatherSkillList, *magicSkillList, *craftSkillList, *faithSkillList, *fightSkillList, *utilitySkillList, *leadSkillList;
+    //pawsListBox *statsSkillList, *gatherSkillList, *magicSkillList, *craftSkillList, *faithSkillList, *fightSkillList, *utilitySkillList, *leadSkillList;
+    pawsListBox *leadList,*schoSkillList;
 
     pawsMultiLineTextBox *gatherSkillDescription, *magicSkillDescription, *craftSkillDescription, *fightSkillDescription, *utilitySkillDescription;
-    pawsMultiLineTextBox *faithSkillDescription, *statsSkillDescription, *leadSkillDescription;
+    //pawsMultiLineTextBox *faithSkillDescription, *statsSkillDescription, *leadSkillDescription,*schoSkillDescription;
+    pawsMultiLineTextBox *faithSkillDescription, *leadSkillDescription,*schoSkillDescription;
     pawsProgressBar *hpBar,*bpBar, *manaBar, *spiritBar,*pysStaminaBar, *menStaminaBar, *experienceBar;
     pawsTextBox *hpFrac,*bpFrac, *manaFrac, *spiritFrac,*pysStaminaFrac, *menStaminaFrac, *experiencePerc;
 
@@ -175,7 +176,7 @@ public:
     pawsSkillIndicator();
 
     void Draw();
-    void Set(unsigned int x, int rank, int y, int yCost, int z, int zCost);
+    void Set(long long x, long long rank, long long y, long long yCost, long long z, long long zCost);
 protected:
     /** @brief Calculates relative (to widget) horizontal coordinate of a point on the skill bar */
     unsigned int GetRelCoord(unsigned int pt);
@@ -184,7 +185,7 @@ protected:
                               int start_r, int start_g, int start_b);
 
     unsigned int x; ///< progression points
-    int rank, y, yCost, z, zCost; ///< Skill status
+    long long rank, y, yCost, z, zCost; ///< Skill status
 
     iGraphics2D * g2d;
 };

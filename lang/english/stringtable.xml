@@ -110,6 +110,7 @@ If your name is inappropriate, a Game Master (GM) will change it." trans="" />
   <item orig="Available Events:" trans="" />
   <item orig="BIRTH" trans="" />
   <item orig="BITCents" trans="" />
+  <item orig="BITCents available to deposit." trans="" />
   <item orig="BITCents available to withdraw." trans="" />
   <item orig="BPM" trans="" />
   <item orig="Back" trans="" />
@@ -271,6 +272,7 @@ If your name is inappropriate, a Game Master (GM) will change it." trans="" />
   <item orig="Edit Shortcut..." trans="" />
   <item orig="Edit level" trans="" />
   <item orig="Edit points" trans="" />
+  <item orig="Effects sounds" trans="" />
   <item orig="Eighth" trans="" />
   <item orig="Enable Chat Bubbles" trans="" />
   <item orig="Enable NPC" trans="" />
@@ -421,6 +423,7 @@ To disable this feature delete everything in the window by using the Modify Desc
   <item orig="Insert Note" trans="" />
   <item orig="Instance:" trans="" />
   <item orig="Instant Cast" trans="" />
+  <item orig="Instruments" trans="" />
   <item orig="Interface" trans="" />
   <item orig="Interface - Advanced" trans="" />
   <item orig="Interface Volume" trans="" />
@@ -731,6 +734,7 @@ To disable this feature delete everything in the window by using the Modify Desc
   <item orig="Say shadow colour" trans="" />
   <item orig="Say text colour" trans="" />
   <item orig="Scale Font:" trans="" />
+  <item orig="Scholar" trans="" />
   <item orig="Secret guild" trans="" />
   <item orig="Sector" trans="" />
   <item orig="Sector:" trans="" />
@@ -830,10 +834,14 @@ To disable this feature delete everything in the window by using the Modify Desc
   <item orig="Tellself text colour" trans="" />
   <item orig="Testers" trans="" />
   <item orig="The number of Argents that you may exchange." trans="" />
+  <item orig="The number of Argents you wish to deposit." trans="" />
   <item orig="The number of BITCents that you may exchange." trans="" />
+  <item orig="The number of BITCents you wish to deposit." trans="" />
   <item orig="The number of BITCents you wish to withdraw." trans="" />
   <item orig="The number of Coppers that you may exchange." trans="" />
+  <item orig="The number of Coppers you wish to deposit." trans="" />
   <item orig="The number of Denarius that you may exchange." trans="" />
+  <item orig="The number of Denarius you wish to deposit." trans="" />
   <item orig="The number of argents you wish to withdraw." trans="" />
   <item orig="The number of circles that you may exchange." trans="" />
   <item orig="The number of circles you wish to deposit." trans="" />

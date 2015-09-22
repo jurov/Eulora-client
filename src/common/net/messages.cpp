@@ -1619,7 +1619,7 @@ command == "build" ||
     }
 */
 //=================
- if(command == "use" || command == "explore" ||command == "build"||command == "bezzle")
+ if(command == "use" || command == "explore" ||command == "build"||command == "bezzle"||command == "lay")
     {
         return;
     }
@@ -4330,8 +4330,14 @@ psGUISkillMessage::psGUISkillMessage(MsgEntry* message)
         return;
 
     includeStats = message->GetBool(); //First added value indicates if we added stats or not
+
     command   = message->GetUInt8();
     commandData = message->GetStr();
+//printf(" base Command: %s(%d) \n", SkillCommandString[command], command);
+//printf("Data: '%s' \n", commandData.GetDataSafe());
+//printf("SkillCache: %s \n", skillCache.ToString().GetData());
+//printf("Str: %d End: %d Con: %d Int: %d Wis: %d Ins: %d Agi: %d Dex: %d Coo: %d Att: %d Foc: %d Pat: %d \n",
+//            strength, endurance, constitution, intelligence, wisdom, insight, agility, dexterity, coordination, attention, focus, patience);
     skillCache.read(message);
 
     if(includeStats)
@@ -4366,6 +4372,11 @@ psGUISkillMessage::psGUISkillMessage(MsgEntry* message)
         focusSkill = message->GetInt32();
         skillCat = message->GetInt32();
         trainingWindow = message->GetBool();
+//printf("include Command: %s(%d) \n", SkillCommandString[command], command);
+//printf("Data: '%s' \n", commandData.GetDataSafe());
+//printf("SkillCache: %s \n", skillCache.ToString().GetData());
+//printf("Str: %d End: %d Con: %d Int: %d Wis: %d Ins: %d Agi: %d Dex: %d Coo: %d Att: %d Foc: %d Pat: %d \n",
+ //           strength, endurance, constitution, intelligence, wisdom, insight, agility, dexterity, coordination, attention, focus, patience);
     }
     // Sets valid flag based on message overrun state
     valid=!(message->overrun);
@@ -4506,9 +4517,13 @@ psGUISkillsMessage::psGUISkillsMessage( uint32_t clientNum,
     msg->Add(command);
     msg->Add(commandData);
     if(skills)
-        skills->write(msg);
-
-
+{        skills->write(msg);
+//printf("Command: %s(%d) ", SkillCommandString[command], command);
+//printf("Data: '%s' ", commandData.GetDataSafe());
+//printf("SkillCache: %s ", skillCache.ToString().GetData());
+//printf("Str: %d End: %d Con: %d Int: %d Wis: %d Ins: %d Agi: %d Dex: %d Coo: %d Att: %d Foc: %d Pat: %d ",
+//            strength, endurance, constitution, intelligence, wisdom, insight, agility, dexterity, coordination, attention, focus, patience);
+}
 //********************
     else
         skillCache.write(msg);
@@ -4544,6 +4559,11 @@ psGUISkillsMessage::psGUISkillsMessage( uint32_t clientNum,
     msg->Add( selSkillCat );
     msg->Add( isTraining );
 //printf(" skills msg adds done \n");
+//printf("Command: %s(%d) ", SkillCommandString[command], command);
+//printf("Data: '%s' ", commandData.GetDataSafe());
+//printf("SkillCache: %s ", skillCache.ToString().GetData());
+//printf("Str: %d End: %d Con: %d Int: %d Wis: %d Ins: %d Agi: %d Dex: %d Coo: %d Att: %d Foc: %d Pat: %d ",
+//            strength, endurance, constitution, intelligence, wisdom, insight, agility, dexterity, coordination, attention, focus, patience);
     // Sets valid flag based on message overrun state
     valid=!(msg->overrun);
 }
@@ -4629,27 +4649,27 @@ csString psGUISkillsMessage::ToString(NetBase::AccessPointers* /*accessPointers*
 PSF_IMPLEMENT_MSG_FACTORY(psGUIBankingMessage, MSGTYPE_BANKING);
 
 psGUIBankingMessage::psGUIBankingMessage(uint32_t clientNum, uint8_t command, bool guild,
-        int bitcents, int denarius, int argents, int coppers,
-        int bitcentsBanked, int denariusBanked, int argentsBanked,
-        int coppersBanked, int maxBITCents, int maxDenarius, int maxArgents,
-        int maxCoppers, float exchangeFee, bool forceOpen)
+        uint64_t bitcents, uint64_t denarius, uint64_t argents, uint64_t coppers,
+        uint64_t bitcentsBanked, uint64_t denariusBanked, uint64_t argentsBanked,
+        uint64_t coppersBanked, uint64_t maxBITCents, uint64_t maxDenarius, uint64_t maxArgents,
+        uint64_t maxCoppers, float exchangeFee, bool forceOpen)
 {
     msg.AttachNew(new MsgEntry(sizeof(bool) +
                                sizeof(bool) +
                                sizeof(uint8_t) +
                                sizeof(bool) +
-                               sizeof(int) +
-                               sizeof(int) +
-                               sizeof(int) +
-                               sizeof(int) +
-                               sizeof(int) +
-                               sizeof(int) +
-                               sizeof(int) +
-                               sizeof(int) +
-                               sizeof(int) +
-                               sizeof(int) +
-                               sizeof(int) +
-                               sizeof(int) +
+                               sizeof(uint64_t) +
+                               sizeof(uint64_t) +
+                               sizeof(uint64_t) +
+                               sizeof(uint64_t) +
+                               sizeof(uint64_t) +
+                               sizeof(uint64_t) +
+                               sizeof(uint64_t) +
+                               sizeof(uint64_t) +
+                               sizeof(uint64_t) +
+                               sizeof(uint64_t) +
+                               sizeof(uint64_t) +
+                               sizeof(uint64_t) +
                                sizeof(float) +
                                sizeof(bool)));
 
@@ -4679,16 +4699,16 @@ psGUIBankingMessage::psGUIBankingMessage(uint32_t clientNum, uint8_t command, bo
 }
 
 psGUIBankingMessage::psGUIBankingMessage(uint8_t command, bool guild,
-        int bitcents, int denarius, int argents,int coppers)
+        uint64_t bitcents, uint64_t denarius, uint64_t argents,uint64_t coppers)
 {
     msg.AttachNew(new MsgEntry(sizeof(bool) +
                                sizeof(bool) +
                                sizeof(uint8_t) +
                                sizeof(bool) +
-                               sizeof(int) +
-                               sizeof(int) +
-                               sizeof(int) +
-                               sizeof(int)));
+                               sizeof(uint64_t) +
+                               sizeof(uint64_t) +
+                               sizeof(uint64_t) +
+                               sizeof(uint64_t)));
 
     msg->clientnum = 0;
     msg->SetType(MSGTYPE_BANKING);
@@ -4706,14 +4726,14 @@ psGUIBankingMessage::psGUIBankingMessage(uint8_t command, bool guild,
 }
 
 psGUIBankingMessage::psGUIBankingMessage(uint8_t command, bool guild,
-        int coins, int coin)
+        uint64_t coins, uint64_t coin)
 {
     msg.AttachNew(new MsgEntry(sizeof(bool) +
                                sizeof(bool) +
                                sizeof(uint8_t) +
                                sizeof(bool) +
-                               sizeof(int) +
-                               sizeof(int)));
+                               sizeof(uint64_t) +
+                               sizeof(uint64_t)));
 
     msg->clientnum = 0;
     msg->SetType(MSGTYPE_BANKING);
@@ -4740,27 +4760,27 @@ psGUIBankingMessage::psGUIBankingMessage(MsgEntry* message)
 
     if(sendingExchange)
     {
-        coins = message->GetInt32();
-        coin = message->GetInt32();
+        coins = message->GetUInt64();
+        coin = message->GetUInt64();
     }
     else
     {
-        bitcents = message->GetInt32();
-        denarius = message->GetInt32();
-        argents = message->GetInt32();
-        coppers = message->GetInt32();
+        bitcents = message->GetUInt64();
+        denarius = message->GetUInt64();
+        argents = message->GetUInt64();
+        coppers = message->GetUInt64();
     }
 
     if(sendingFull)
     {
-        bitcentsBanked = message->GetInt32();
-        denariusBanked = message->GetInt32();
-        argentsBanked = message->GetInt32();
-        coppersBanked = message->GetInt32();
-        maxBITCents = message->GetInt32();
-        maxDenarius = message->GetInt32();
-        maxArgents = message->GetInt32();
-        maxCoppers = message->GetInt32();
+        bitcentsBanked = message->GetUInt64();
+        denariusBanked = message->GetUInt64();
+        argentsBanked = message->GetUInt64();
+        coppersBanked = message->GetUInt64();
+        maxBITCents = message->GetUInt64();
+        maxDenarius = message->GetUInt64();
+        maxArgents = message->GetUInt64();
+        maxCoppers = message->GetUInt64();
         exchangeFee = message->GetFloat();
         openWindow = message->GetBool();
     }
@@ -4775,9 +4795,9 @@ csString psGUIBankingMessage::ToString(NetBase::AccessPointers* /*accessPointers
 
     msgtext.AppendFmt("Command: %d ", command);
     msgtext.AppendFmt("Guild Bank: %s", (guild ? "Yes" : "No"));
-    msgtext.AppendFmt("BITCents Banked: %i, DenariusBanked: %i, ArgentsBanked: %i, CoppersBanked: %i", bitcentsBanked, denariusBanked, argentsBanked, coppersBanked);
-    msgtext.AppendFmt("BITCents: %i, Denarius: %i, Argents: %i, Coppers: %i", bitcents, denarius, argents, coppers);
-    msgtext.AppendFmt("Max BITCents: %i, Max Denarius: %i, Max Argents: %i, Max Coppers: %i", maxBITCents, maxDenarius, maxArgents, maxCoppers);
+    msgtext.AppendFmt("BITCents Banked: %zu, DenariusBanked: %zu, ArgentsBanked: %zu, CoppersBanked: %zu", bitcentsBanked, denariusBanked, argentsBanked, coppersBanked);
+    msgtext.AppendFmt("BITCents: %zu, Denarius: %zu, Argents: %zu, Coppers: %zu", bitcents, denarius, argents, coppers);
+    msgtext.AppendFmt("Max BITCents: %zu, Max Denarius: %zu, Max Argents: %zu, Max Coppers: %zu", maxBITCents, maxDenarius, maxArgents, maxCoppers);
     msgtext.AppendFmt("Exchange Fee: %f%%", exchangeFee);
     msgtext.AppendFmt("Bank Window '%s'", (openWindow ? "open" : "closed"));
 

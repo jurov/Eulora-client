@@ -49,7 +49,8 @@ class csStringHashReversible;
 
 // This holds the version number of the network code, remember to increase
 // this each time you do an update which breaks compatibility
-#define PS_NETVERSION   0x00B9
+//#define PS_NETVERSION   0x00B9
+#define PS_NETVERSION   0x00B1
 // Remember to bump the version in pscssetup.h, as well.
 
 
@@ -3005,32 +3006,32 @@ public:
     psGUIBankingMessage(uint32_t clientNum,
                         uint8_t command,
                         bool guild,
-                        int bitcentsBanked,
-                        int denariusBanked,
-                        int argentsBanked,
-                        int coppersBanked,
-                        int bitcents,
-                        int denarius,
-                        int argents,
-                        int coppers,
-                        int maxBITCents,
-                        int maxDenarius,
-                        int maxArgents,
-                        int maxCoppers,
+                        uint64_t bitcentsBanked,
+                        uint64_t denariusBanked,
+                        uint64_t argentsBanked,
+                        uint64_t coppersBanked,
+                        uint64_t bitcents,
+                        uint64_t denarius,
+                        uint64_t argents,
+                        uint64_t coppers,
+                        uint64_t maxBITCents,
+                        uint64_t maxDenarius,
+                        uint64_t maxArgents,
+                        uint64_t maxCoppers,
                         float exchangeFee,
                         bool forceOpen);
 
     psGUIBankingMessage(uint8_t command,
                         bool guild,
-                        int bitcents,
-                        int denarius,
-                        int argents,
-                        int coppers);
+                        uint64_t bitcents,
+                        uint64_t denarius,
+                        uint64_t argents,
+                        uint64_t coppers);
 
     psGUIBankingMessage(uint8_t command,
                         bool guild,
-                        int coins,
-                        int coin);
+                        uint64_t coins,
+                        uint64_t coin);
 
     /// Crack this message off the network.
     psGUIBankingMessage(MsgEntry* message);
@@ -3047,20 +3048,20 @@ public:
 
     uint8_t command;
     bool guild;
-    int bitcentsBanked;
-    int denariusBanked;
-    int argentsBanked;
-    int coppersBanked;
-    int bitcents;
-    int denarius;
-    int argents;
-    int coppers;
-    int maxBITCents;
-    int maxDenarius;
-    int maxArgents;
-    int maxCoppers;
-    int coins;
-    int coin;
+    uint64_t bitcentsBanked;
+    uint64_t denariusBanked;
+    uint64_t argentsBanked;
+    uint64_t coppersBanked;
+    uint64_t bitcents;
+    uint64_t denarius;
+    uint64_t argents;
+    uint64_t coppers;
+    uint64_t maxBITCents;
+    uint64_t maxDenarius;
+    uint64_t maxArgents;
+    uint64_t maxCoppers;
+    uint64_t coins;
+    uint64_t coin;
     float exchangeFee;
     bool openWindow;
 
